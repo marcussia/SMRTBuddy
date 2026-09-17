@@ -1,0 +1,10 @@
+data/
+features/
+*.parquet
+*.xlsx
+__pycache__/
+.ipynb_checkpoints/
+.env
+.DS_Store
+*.csv
+!predictions/*.csv
