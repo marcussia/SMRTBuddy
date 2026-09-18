@@ -3,9 +3,6 @@
 **Team SMRTBuddy** · NEBULA X Problem Statement 2
 Repo: `github.com/marcussia/SMRTBuddy` · Demo: `[FILL: video link]`
 
-> **Editing notes, delete before submitting.**
-> The brief: *"If you claim a number anywhere — say how you arrived at it. A claim a judge cannot check does not score."* No unbacked numbers, no "significantly faster". Keep under ~1,200 words.
-
 ---
 
 ## 1. The persona we built for
