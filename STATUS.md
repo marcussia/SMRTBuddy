@@ -214,3 +214,54 @@ take_taxi / cancel_trip / leave_earlier, no errors.
 
 **Still stubbed:** POST /journeys/{id}/precheck (X-Stub: true), per instruction.
 Backend feature work STOPS here.
+
+---
+
+## 2026-09-19 ~03:30 — Fallback dashboard + graceful corridor errors
+
+**Why:** §3.2 audit showed two mandatory capabilities (GIS on OSM,
+visualisation) blocked on the not-yet-existing frontend. `dashboard/index.html`
+is INSURANCE, not the final UI (stated in the file header): plain HTML/CSS/JS,
+no build step, Leaflet + OSM tiles with ODbL attribution, served at `/app` or
+opened as a file. It draws the recommended route (solid), the disrupted section
+(red dashed), alternatives (dotted); shows action, headline, reason, live
+decide_by countdown, eta range, confidence, per-leg crowding badges, and
+data_status chips where FIXTURE sources are visibly labelled. Six scenario
+buttons run the real API flow (profiles → journey → ping for scenario 3 →
+advice). Phone-width (430px), 18px+ text, high contrast, no colour-only state
+(every badge carries text).
+
+**Out-of-corridor journeys now fail gracefully:** structured 422 naming the
+supported corridor, a suggested pair (Home (Bedok) → Singapore General
+Hospital), and the honest reason — we scoped to one verified corridor rather
+than fake unverified island-wide coverage.
+
+## Decisions recorded for WRITEUP.md
+
+**§2.5 data declaration (must appear in WRITEUP.md):** the backend stores, in
+process memory: user profiles (name, mobility constraints, locale, family
+links), journeys, and location pings; and on local disk: SOS audio blobs under
+`data/sos_audio/` (gitignored, never committed). Nothing leaves the machine the
+backend runs on; no analytics, no third parties. **There is currently no
+deletion policy or retention limit — a known limitation to state honestly**,
+with the obvious production fix (TTL on pings, user-triggered delete,
+encrypted-at-rest audio).
+
+**§2.6 underground behaviour (must appear in WRITEUP.md):** when the device
+has no signal, the cached route and the next instruction stay visible; live
+conditions freeze with a visible "last updated HH:MM" timestamp; stale data is
+never silently presented as current. (Frontend implements; the backend already
+timestamps every source via SourceResult.fetched_at.)
+
+**Dashboard verified in headless Chrome (CDP), not just written:** page served
+at /app; 6 scenario buttons; OSM tiles actually loaded with "© OpenStreetMap
+contributors" attribution control visible; scenario 3 clicked end to end →
+action badge REROUTE, "Get off at Bugis…" headline, live decide_by countdown
+("11m 56s left"), 6 polylines drawn incl. the red dashed affected segment,
+5 FIXTURE chips visible, crowd badges high/high/low; no horizontal scroll at
+390 px; phone-width screenshot captured. NOT yet tested on a real phone
+browser — the brief scores Ease of Use there; the real frontend still owns that.
+
+**Known gap (deliberate, small):** the fallback page does not render
+driver_card for take_taxi scenarios (the data is in the response; the real
+frontend must show it).

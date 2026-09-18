@@ -175,7 +175,20 @@ def create_journey(body: JourneyCreate) -> Journey:
         opts = plan_options(body.origin, body.destination, _now(),
                             profile.mobility, profile.locale)
     except ValueError as exc:
-        raise HTTPException(422, str(exc)) from exc
+        raise HTTPException(422, {
+            "error": "outside_demo_corridor",
+            "message": str(exc),
+            "supported_corridor": "Bedok – Outram Park (EWL), with the DTL/NEL "
+                                  "interchange alternatives via Bugis and "
+                                  "Chinatown, plus bus service 2",
+            "try": {"origin": "Home (Bedok)",
+                    "destination": "Singapore General Hospital"},
+            "why_limited": "We scoped routing to one verified corridor and "
+                           "checked every piece of it against real data, "
+                           "rather than pretend island-wide coverage we could "
+                           "not verify tonight. Unsupported journeys are "
+                           "refused honestly instead of guessed.",
+        }) from exc
     public = [o for o in opts if o.kind != "taxi"]
     if body.prefer_mode:
         preferred = [o for o in public if o.kind == body.prefer_mode]
@@ -341,6 +354,15 @@ def conditions(scenario: str | None = Query(default=None)) -> ConditionsResponse
     Each source's `status` says exactly where its data came from."""
     results = conditions_service.gather(scenario)
     return ConditionsResponse(sources=list(results.values()))
+
+
+@app.get("/app", include_in_schema=False)
+def dashboard():
+    """Fallback dashboard (dashboard/index.html) — insurance for §3.2.2/§3.2.3
+    while the real frontend is built. Plain static file, no build step."""
+    from fastapi.responses import FileResponse
+    from app.config import REPO_ROOT
+    return FileResponse(REPO_ROOT / "dashboard" / "index.html")
 
 
 @app.get("/health", response_model=Health)
