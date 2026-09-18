@@ -184,3 +184,33 @@ literal line codes only; lift outages (rule 2) still block the physical station.
 scenarios), reason/triggered_by/data_status ✓, frontend shapes ✓ (every
 endpoint live or honestly stubbed), README run instructions — NOT DONE yet
 (Block I), no fabricated transport data ✓.
+
+---
+
+## 2026-09-19 ~03:00 — README, station resolve, frontend contract (then STOP)
+
+**README.md** rewritten as the judge-facing run guide (deliverable #1) and
+**tested literally**: fresh `git clone` into scratchpad, new venv (machine
+default Python 3.14), `pip install -r requirements.txt`, `.env.example` copied
+with NO key, server started, README's demo block pasted verbatim → full
+scenario-3 advice with honest `unavailable` for keyless DataMall extras and
+`confidence: low`. Runs clean without a key; fixtures make all six scenarios
+work regardless.
+
+**/stations/resolve is REAL** (X-Stub removed): rapidfuzz WRatio over corridor
+stations + known places, top 3 with 0–100 scores, floor 40, never auto-picks
+("outrm park" → Outram Park 76.2; "xyzzy" → empty). Implausible
+origin/destination pairs are FLAGGED at journey creation with a clear 422
+(same resolved name, or endpoints < 500 m apart), never silently corrected.
+Bug found while testing: plan_options crashed (IndexError) when both endpoints
+resolved to the same station — fixed (single-station rail path → no rail leg).
+
+**FRONTEND_CONTRACT.md** written for the UI builder: conventions ([lat, lon]
+order, provenance-must-be-shown rule, polling, X-Stub meaning), every endpoint
+with request fields + optionality + a REAL captured response, and the six demo
+scenarios as paste-ready curl blocks — the blocks themselves were extracted
+from the doc and executed: actions came back proceed / reroute / reroute /
+take_taxi / cancel_trip / leave_earlier, no errors.
+
+**Still stubbed:** POST /journeys/{id}/precheck (X-Stub: true), per instruction.
+Backend feature work STOPS here.
