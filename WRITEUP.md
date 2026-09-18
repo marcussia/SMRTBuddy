@@ -16,7 +16,7 @@ In the chaos of a service disruption it is too much to ask her to take everythin
 What follows from that:
 
 - The app decides, she confirms. One recommended action, one sentence of reason, a deadline on it. Alternatives are there for transparency, not to push the choice back onto her.
-- Rerouting costs her more than it costs a fast commuter: unfamiliar stations, more walking, more chances to get lost. So when her route still works but is delayed, we recommend switching only if it saves more than 10 minutes at *her* walking speed — never because an alternative is marginally faster. (When a route is physically broken — closure, flood, dead lift — we reroute regardless; the threshold governs the judgement call, not the emergency.)
+- Rerouting costs her more than it costs a fast commuter: unfamiliar stations, more walking, more chances to get lost. So when her route still works but is delayed, we recommend switching only if it saves more than 10 minutes at *her* walking speed, never because an alternative is marginally faster. (When a route is physically broken: closure, flood, dead lift we reroute regardless; the threshold governs the judgement call, not the emergency.)
 - Some disruptions mean don't travel today. We say so. A flood at her destination returns `cancel_trip`, not a longer route.
 - Her family hears from us when the plan really changes: a reroute, a switch to taxi, a cancellation, an SOS, a wrong turn. Not for minor delays or crowding advice. Notification fatigue would make the real alerts worthless.
 
