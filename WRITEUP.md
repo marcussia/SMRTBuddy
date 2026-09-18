@@ -135,7 +135,7 @@ Required by Section 2.6 — the brief asks us to **state our choice**, and this 
 
 We would rather name these than have a judge find them.
 
-**One Corridor only.** Bedok to Outram Park plus two named places. Any other origin gets a structured message naming the supported corridor. We scoped deliberately rather than claim coverage we could not verify with real data.
+**One corridor only.** Bedok to Outram Park (with the DTL/NEL reroute via Bugis and Chinatown), plus two named places: **"Home (Bedok)"** and **"Singapore General Hospital"** — the two ends of Mdm Lim's journey in the brief. SGH is genuinely geocoded (one OSM Nominatim lookup, captured to `data/replay/` with provenance); "Home (Bedok)" is honestly a placeholder — the Bedok station centroid standing in for a home address, so the door-to-door walking leg is only fully real at the SGH end. Adding a place is a data change, not code — one geocode appended to `data/replay/places_geocoded.json` — and each corridor extension is a few verified station rows; we ran out of night, not of method. Any unsupported origin gets a structured message naming the corridor and a suggested pair. We scoped deliberately rather than claim coverage we could not verify with real data.
 
 **OpenStreetMap depth.** Walk legs are routed over OSM footways and the map renders OSM tiles with attribution — but we do not read the pedestrian detail the brief names (stairs, lifts, covered walkways, crossings) from OSM tags. This is the thinnest part of our OSM use and we know it.
 
