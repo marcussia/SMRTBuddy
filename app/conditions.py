@@ -9,6 +9,7 @@ from typing import Any
 
 from app.adapters import datamall, weather
 from app.adapters.base import fixture as fixture_result
+from app.adapters.base import live as live_result
 from app.adapters.base import unavailable
 from app.config import FIXTURES_DIR
 from app.models import SourceResult
@@ -25,6 +26,7 @@ SOURCES = [
     "crowd_density_forecast",
     "lift_maintenance",
     "flood_alerts",
+    "traffic_incidents",
     "taxi_availability",
     "taxi_stands",
 ]
@@ -40,7 +42,10 @@ def load_fixture(scenario: str) -> dict[str, Any] | None:
     return json.loads(path.read_text())
 
 
-def gather(scenario: str | None = None) -> dict[str, SourceResult]:
+def gather(scenario: str | None = None,
+           bus_stop_code: str | None = None) -> dict[str, SourceResult]:
+    """`bus_stop_code`: when the journey plan boards a bus, its stop's live
+    arrival/Load feed is gathered too (rule 6)."""
     overrides: dict[str, Any] = {}
     if scenario is not None:
         fx = load_fixture(scenario)
@@ -58,6 +63,16 @@ def gather(scenario: str | None = None) -> dict[str, SourceResult]:
             results[name] = weather.two_hour_forecast()
         else:
             results[name] = datamall.fetch_source(name, CORRIDOR_LINES)
+    if bus_stop_code:
+        name = "bus_arrival"
+        if name in overrides:
+            results[name] = fixture_result(name, overrides[name])
+        else:
+            try:
+                results[name] = live_result(name,
+                                            datamall.bus_arrival(bus_stop_code))
+            except Exception as exc:  # noqa: BLE001 — truthful unavailability
+                results[name] = unavailable(name, str(exc))
     return results
 
 

@@ -51,6 +51,16 @@ STRINGS: dict[str, dict[str, str]] = {
         "en": "The walkway is sheltered the whole way.",
         "zh": "沿途步道全程有遮盖。"},
     "landmark.none": {"en": "", "zh": ""},
+    # --- reroute summaries / short reasons ---
+    "summary.take_line": {
+        "en": "take the {line} line to {to}.",
+        "zh": "改乘{line}线前往{to}。"},
+    "summary.head_to": {
+        "en": "head to {to} instead.",
+        "zh": "请改前往{to}。"},
+    "short.flood": {
+        "en": "flash flooding on your route.",
+        "zh": "您的路线上出现淹水。"},
 }
 
 

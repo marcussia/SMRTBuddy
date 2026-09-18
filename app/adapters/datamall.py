@@ -51,6 +51,10 @@ def flood_alerts() -> Any:
     return _get("PubFloodAlerts")["value"]
 
 
+def traffic_incidents() -> Any:
+    return _get("TrafficIncidents")["value"]
+
+
 def taxi_availability() -> Any:
     return _get("Taxi-Availability")["value"]
 
@@ -68,6 +72,7 @@ def fetchers(lines: list[str]) -> dict[str, Any]:
         "crowd_density_forecast": lambda: crowd_density_forecast(lines),
         "lift_maintenance": lift_maintenance,
         "flood_alerts": flood_alerts,
+        "traffic_incidents": traffic_incidents,
         "taxi_availability": taxi_availability,
         "taxi_stands": taxi_stands,
     }

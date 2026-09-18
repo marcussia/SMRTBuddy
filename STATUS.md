@@ -120,3 +120,67 @@ render; unknown endpoints raise a clean error (no guessing).
   risk here, noted for WRITEUP.md limitations).
 - Fixture scenario 3 changed: closure is now EW13–EW16 (City Hall–Outram Park),
   keeping Bugis open so a rail reroute exists.
+
+---
+
+## 2026-09-19 ~02:30 — Blocks D, E, F done (one commit: the engine, its
+## service glue and the F endpoints landed intertwined; splitting would be fake)
+
+**Built:**
+- `app/engine/facts.py` — SourceResults -> typed Facts. Includes the canonical
+  line-code table (the STL/SLRT, CGL/EWL trap from the brief), CAP-style flood
+  parsing, forecast matching by 30-min time-of-day slot.
+- `app/engine/rules.py` — all nine §7.1 rules as named, docstringed functions,
+  ordered, first match wins; §7.2 wait-vs-reroute with T_wait/T_switch at HER
+  walking speed; §7.5 location-state contextualisation ("get off at Bugis…"
+  when on_train); §7.6 taxi-as-last-resort with bilingual driver card.
+- `app/service.py` — journey -> gather -> facts -> decide -> assemble; family
+  notification logging (§7.3); Q4 wrong-direction detector (3 divergent
+  accurate pings over ≥90 s, suppressed on poor accuracy / stationary).
+- `app/store.py` — in-memory profiles/journeys/pings/notifications/SOS.
+- Real endpoints now: profiles (+link), journeys (planned at creation, legs
+  scheduled back from arrive_by with 10-min margin), **advice (the core
+  endpoint)**, location ping (+wrong-direction), SOS two-step (+audio stored to
+  gitignored data/sos_audio/), GET /notifications, GET /profiles/{id}/location
+  (family-only, 403 otherwise). Added TrafficIncidents source (rule 8) and
+  on-demand BusArrival for the plan's board stop (rule 6).
+- STILL STUBBED (X-Stub: true): /stations/resolve, /journeys/{id}/precheck
+  (Block G, not started — per instruction to stop after F).
+
+**Verified (27-check HTTP suite against the running app):**
+- All six PRD §9 scenarios produce the intended action end to end THROUGH THE
+  REAL ENGINE: proceed / reroute-to-MRT (rain, bus swapped) / **on_train
+  disruption -> "Get off at Bugis, then take the Downtown line…" with
+  decide_by = Bugis arrival, family notified, 4-station affected_segment** /
+  wheelchair+lift-out -> taxi + EN/ZH driver card / flood -> cancel_trip /
+  crowding forecast -> leave_earlier (no notification — §7.3).
+- Same scenario, different location_state gives a different instruction
+  (no hardcoded demo responses; changing input changes output).
+- reason, triggered_by and truthful data_status on every response; fixtures
+  always labelled "fixture"; walk_routing provenance included.
+- Wrong-direction, SOS both steps, audio upload, notification log, family
+  location view, 403 for unlinked viewer, zh headlines.
+
+**Bug found & fixed during verification:** rule 3 initially expanded closed
+stations to whole physical interchanges, which wrongly killed the NEL side of
+Outram Park and pushed scenario 3 to taxi. A line closure now avoids the
+literal line codes only; lift outages (rule 2) still block the physical station.
+
+**Assumptions (new):**
+- ASSUMED_DISRUPTION_DELAY_MIN=20 when a used line reports Status 2 but her
+  stations stay open (feed has no delay-minutes field) — named constant,
+  stated in the reason text.
+- Station->forecast-area mapping in facts.py (Bedok/Geylang/Kallang/City/
+  Bukit Merah); island-wide rain = ≥15 areas reporting rain terms.
+- In transit without a location ping, the current station falls back to the
+  plan's first station (we do not guess a position).
+- Journey creation requires an existing commuter profile (404 otherwise).
+- reason is deliberately English-only (PRD: "plain English"); headline and
+  speech_text are localised (en/zh shipped; ms/ta = table additions).
+- prefer_mode added to JourneyCreate (provisional) so scenario 2 can start on
+  the bus she prefers; the weather rule then swaps it and says why.
+
+**Success-at-14:00 checklist (PRD §12):** advice endpoint ✓ (all six
+scenarios), reason/triggered_by/data_status ✓, frontend shapes ✓ (every
+endpoint live or honestly stubbed), README run instructions — NOT DONE yet
+(Block I), no fabricated transport data ✓.

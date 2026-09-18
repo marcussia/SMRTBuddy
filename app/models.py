@@ -112,6 +112,9 @@ class JourneyCreate(BaseModel):
     # feeds. Fixture-driven responses carry data_status = "fixture" — never
     # presented as live.
     scenario: str | None = None
+    # Optional mode preference for the initial plan (e.g. scenario 2 starts on
+    # the bus she prefers; the rain rule then swaps it). Provisional field.
+    prefer_mode: Literal["rail", "bus"] | None = None
 
 
 class Journey(BaseModel):

@@ -1,9 +1,8 @@
-"""SMRTBuddy backend — Block A skeleton (PRD.md §8).
+"""SMRTBuddy backend.
 
-EVERY ENDPOINT EXCEPT /health IS A STUB. Stubs return correctly-shaped
-responses so the frontend can build against them. They consult no data source,
-persist nothing, and their values are placeholders, not transport data. Every
-stub response carries the header `X-Stub: true`.
+Real (Blocks A–F): profiles, journeys, advice (the core endpoint), location
+pings, conditions, SOS, notifications. Still stubbed (Block G, header
+`X-Stub: true`): /stations/resolve, /journeys/{id}/precheck.
 """
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -12,6 +11,7 @@ from fastapi import FastAPI, File, HTTPException, Query, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import conditions as conditions_service
+from app import service, store
 from app.models import (
     Advice,
     AudioAck,
@@ -50,9 +50,9 @@ TIER1_SOURCES = [
 
 app = FastAPI(
     title="SMRTBuddy backend",
-    version="0.1.0-block-a",
-    description="Block A: every endpoint except /health is a stub "
-                "(response header `X-Stub: true`).",
+    version="0.6.0",
+    description="Blocks A–F are real. Still stubbed (X-Stub: true): "
+                "/stations/resolve, /journeys/{id}/precheck (Block G).",
 )
 
 app.add_middleware(
@@ -116,75 +116,109 @@ def _stub_profile(user_id: str) -> UserProfile:
 # --- Profiles ----------------------------------------------------------------
 
 @app.post("/profiles", response_model=UserProfile, status_code=201)
-def create_profile(profile: UserProfile, response: Response) -> UserProfile:
-    """STUB: validates and echoes the profile back. Not persisted (Block F)."""
-    _mark_stub(response)
+def create_profile(profile: UserProfile) -> UserProfile:
+    """REAL: stores the profile (in-memory, PRD §10)."""
+    store.profiles[profile.user_id] = profile
     return profile
 
 
 @app.get("/profiles/{user_id}", response_model=UserProfile)
-def get_profile(user_id: str, response: Response) -> UserProfile:
-    """STUB: returns a placeholder profile for any id (Block F)."""
-    _mark_stub(response)
-    return _stub_profile(user_id)
+def get_profile(user_id: str) -> UserProfile:
+    """REAL: returns the stored profile or 404."""
+    profile = store.profiles.get(user_id)
+    if profile is None:
+        raise HTTPException(404, f"no profile '{user_id}'")
+    return profile
 
 
 @app.post("/profiles/{user_id}/link", response_model=UserProfile)
-def link_profile(user_id: str, body: LinkRequest, response: Response) -> UserProfile:
-    """STUB: returns a placeholder profile showing the link. Not persisted (Block F)."""
-    _mark_stub(response)
-    profile = _stub_profile(user_id)
-    profile.linked_user_ids = [body.linked_user_id]
+def link_profile(user_id: str, body: LinkRequest) -> UserProfile:
+    """REAL: links an account (family <-> user). Both ids must exist."""
+    profile = store.profiles.get(user_id)
+    if profile is None:
+        raise HTTPException(404, f"no profile '{user_id}'")
+    if body.linked_user_id not in store.profiles:
+        raise HTTPException(404, f"no profile '{body.linked_user_id}'")
+    if body.linked_user_id not in profile.linked_user_ids:
+        profile.linked_user_ids.append(body.linked_user_id)
     return profile
 
 
 # --- Journeys ----------------------------------------------------------------
 
 @app.post("/journeys", response_model=Journey, status_code=201)
-def create_journey(body: JourneyCreate, response: Response) -> Journey:
-    """STUB: echoes the request with a new id and one placeholder leg (Block C)."""
-    _mark_stub(response)
-    return Journey(
-        journey_id=str(uuid.uuid4()),
-        user_id=body.user_id,
-        origin=body.origin,
-        destination=body.destination,
-        arrive_by=body.arrive_by,
-        legs=[_stub_leg()],
-    )
+def create_journey(body: JourneyCreate) -> Journey:
+    """REAL: plans the journey now (Block C planner) and stores it.
+    prefer_mode picks the bus option when the persona wants it; default is the
+    best mobility-viable public-transport option."""
+    profile = store.profiles.get(body.user_id)
+    if profile is None or profile.mobility is None:
+        raise HTTPException(404, f"no commuter profile '{body.user_id}' — "
+                            "create it first (role='user' with mobility)")
+    from datetime import timedelta
+    from app.routing.planner import plan_options
+    try:
+        opts = plan_options(body.origin, body.destination, _now(),
+                            profile.mobility, profile.locale)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    public = [o for o in opts if o.kind != "taxi"]
+    if body.prefer_mode:
+        preferred = [o for o in public if o.kind == body.prefer_mode]
+        public = preferred or public
+    if not public:
+        raise HTTPException(422, "no public-transport route found")
+    chosen = public[0]
+    # schedule the legs so the plan arrives before arrive_by
+    shift = (body.arrive_by - chosen.legs[-1].arrive
+             - timedelta(minutes=10))          # 10-min arrival margin
+    for leg in chosen.legs:
+        leg.depart += shift
+        leg.arrive += shift
+    journey = Journey(
+        journey_id=str(uuid.uuid4()), user_id=body.user_id,
+        origin=body.origin, destination=body.destination,
+        arrive_by=body.arrive_by, scenario=body.scenario,
+        location_state="at_home", legs=chosen.legs)
+    store.journeys[journey.journey_id] = journey
+    return journey
 
 
 @app.get("/journeys/{journey_id}", response_model=Journey)
-def get_journey(journey_id: str, response: Response) -> Journey:
-    """STUB: returns a placeholder journey for any id (Block C)."""
-    _mark_stub(response)
-    return Journey(
-        journey_id=journey_id,
-        user_id="STUB user",
-        origin="STUB origin",
-        destination="STUB destination",
-        arrive_by=_now(),
-        legs=[_stub_leg()],
-    )
+def get_journey(journey_id: str) -> Journey:
+    """REAL: the stored journey or 404."""
+    journey = store.journeys.get(journey_id)
+    if journey is None:
+        raise HTTPException(404, f"no journey '{journey_id}'")
+    return journey
 
 
 @app.get("/journeys/{journey_id}/advice", response_model=Advice)
-def get_advice(journey_id: str, response: Response) -> Advice:
-    """THE CORE ENDPOINT. STUB until the rules engine exists (Blocks D–E)."""
-    _mark_stub(response)
-    return _stub_advice()
+def get_advice(journey_id: str) -> Advice:
+    """THE CORE ENDPOINT (real): conditions -> facts -> ordered rules ->
+    one recommended action with reason, sources, deadline and alternatives."""
+    journey = store.journeys.get(journey_id)
+    if journey is None:
+        raise HTTPException(404, f"no journey '{journey_id}'")
+    profile = store.profiles.get(journey.user_id)
+    if profile is None:
+        raise HTTPException(404, f"journey's profile '{journey.user_id}' missing")
+    return service.compute_advice(journey, profile)
 
 
 @app.post("/journeys/{journey_id}/location", response_model=LocationAck)
-def post_location(journey_id: str, ping: LocationPing, response: Response) -> LocationAck:
-    """STUB: accepts a ping; not stored, wrong-direction not evaluated (Block F)."""
-    _mark_stub(response)
-    return LocationAck(
-        journey_id=journey_id,
-        received_at=_now(),
-        wrong_direction=False,
-        notify_family=False,
-    )
+def post_location(journey_id: str, ping: LocationPing) -> LocationAck:
+    """REAL: stores the ping, updates location_state if given, and runs
+    wrong-direction detection (Q4 parameters, Block F)."""
+    journey = store.journeys.get(journey_id)
+    if journey is None:
+        raise HTTPException(404, f"no journey '{journey_id}'")
+    store.pings.setdefault(journey_id, []).append(ping)
+    if ping.location_state:
+        journey.location_state = ping.location_state
+    wrong, notified = service.check_wrong_direction(journey)
+    return LocationAck(journey_id=journey_id, received_at=_now(),
+                       wrong_direction=wrong, notify_family=notified)
 
 
 @app.post("/journeys/{journey_id}/precheck", response_model=Advice)
@@ -197,24 +231,77 @@ def precheck(journey_id: str, response: Response) -> Advice:
 # --- SOS ---------------------------------------------------------------------
 
 @app.post("/sos", response_model=SOSResponse)
-def sos(body: SOSRequest, response: Response) -> SOSResponse:
-    """STUB: two-step confirmation shape only. Nobody is notified (Block F)."""
-    _mark_stub(response)
+def sos(body: SOSRequest) -> SOSResponse:
+    """REAL: two-step SOS. First call opens it (awaiting_confirmation); the
+    second call with confirm=true + sos_id confirms and notifies every linked
+    family account (logged, PRD §10 — no real push)."""
+    if body.user_id not in store.profiles:
+        raise HTTPException(404, f"no profile '{body.user_id}'")
     if not body.confirm:
-        return SOSResponse(sos_id=str(uuid.uuid4()), status="awaiting_confirmation")
+        rec = store.SOSRecord(sos_id=str(uuid.uuid4()), user_id=body.user_id,
+                              status="awaiting_confirmation", created_at=_now())
+        store.sos_records[rec.sos_id] = rec
+        return SOSResponse(sos_id=rec.sos_id, status=rec.status)
     if body.sos_id is None:
         raise HTTPException(status_code=422,
                             detail="confirm=true requires the sos_id from the first call")
-    return SOSResponse(sos_id=body.sos_id, status="confirmed")
+    rec = store.sos_records.get(body.sos_id)
+    if rec is None or rec.user_id != body.user_id:
+        raise HTTPException(404, f"no open SOS '{body.sos_id}' for this user")
+    rec.status = "confirmed"
+    rec.notified = store.notify_family(
+        body.user_id, "sos",
+        f"SOS from {store.profiles[body.user_id].name} — confirmed by the "
+        f"user. Latest known location is available via the app.")
+    return SOSResponse(sos_id=rec.sos_id, status=rec.status,
+                       notified_user_ids=rec.notified)
 
 
 @app.post("/sos/{sos_id}/audio", response_model=AudioAck)
-async def sos_audio(sos_id: str, response: Response,
-                    audio: UploadFile = File(...)) -> AudioAck:
-    """STUB: reads the upload to report its size; does not store it (Block F)."""
-    _mark_stub(response)
+async def sos_audio(sos_id: str, audio: UploadFile = File(...)) -> AudioAck:
+    """REAL: stores the audio blob against the SOS (no transcription, §3)."""
+    rec = store.sos_records.get(sos_id)
+    if rec is None:
+        raise HTTPException(404, f"no SOS '{sos_id}'")
     content = await audio.read()
-    return AudioAck(sos_id=sos_id, received_bytes=len(content), stored=False)
+    from app.config import REPO_ROOT
+    audio_dir = REPO_ROOT / "data" / "sos_audio"    # gitignored runtime data
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    path = audio_dir / f"{sos_id}.bin"
+    path.write_bytes(content)
+    rec.audio_path = str(path)
+    return AudioAck(sos_id=sos_id, received_bytes=len(content), stored=True)
+
+
+# --- Notifications & family location (Block F) --------------------------------
+
+@app.get("/notifications")
+def get_notifications(user_id: str = Query(...)) -> list[dict]:
+    """REAL: the notification log for one recipient (PRD §10: logged to a
+    table and exposed via API — no real SMS/push)."""
+    return [vars(n) for n in store.notifications if n.to_user_id == user_id]
+
+
+@app.get("/profiles/{user_id}/location")
+def get_latest_location(user_id: str, viewer_id: str = Query(...)) -> dict:
+    """REAL: latest position of a linked user, for family accounts (§3).
+    viewer must be the user themselves or a linked family account."""
+    if user_id not in store.profiles:
+        raise HTTPException(404, f"no profile '{user_id}'")
+    if viewer_id != user_id and viewer_id not in store.family_of(user_id):
+        raise HTTPException(403, "viewer is not linked family of this user")
+    latest, journey_id = None, None
+    for jid, journey in store.journeys.items():
+        if journey.user_id != user_id:
+            continue
+        ping = store.latest_ping(jid)
+        if ping and (latest is None or ping.recorded_at > latest.recorded_at):
+            latest, journey_id = ping, jid
+    if latest is None:
+        return {"user_id": user_id, "location": None,
+                "note": "no location pings recorded"}
+    return {"user_id": user_id, "journey_id": journey_id,
+            "location": latest.model_dump()}
 
 
 # --- Stations, conditions, health --------------------------------------------
