@@ -27,6 +27,7 @@ from app.models import (
     SOSRequest,
     SOSResponse,
     SourceResult,
+    StationCandidate,
     StationResolveResponse,
     UserProfile,
 )
@@ -156,6 +157,19 @@ def create_journey(body: JourneyCreate) -> Journey:
         raise HTTPException(404, f"no commuter profile '{body.user_id}' — "
                             "create it first (role='user' with mobility)")
     from datetime import timedelta
+    # implausible pair check: same place, same physical station, or a trip
+    # shorter than one walking leg — flagged, never silently "corrected".
+    from app.routing.planner import _resolve_endpoint
+    from app.routing.walk import _haversine_m
+    o_res, d_res = _resolve_endpoint(body.origin), _resolve_endpoint(body.destination)
+    if o_res and d_res:
+        if o_res[0] == d_res[0]:
+            raise HTTPException(422, f"origin and destination both resolve to "
+                                f"'{o_res[0]}' — check the journey")
+        if _haversine_m(o_res[1], d_res[1]) < 500:
+            raise HTTPException(422, f"origin '{o_res[0]}' and destination "
+                                f"'{d_res[0]}' are under 500 m apart — this "
+                                f"journey does not need transit; check the pair")
     from app.routing.planner import plan_options
     try:
         opts = plan_options(body.origin, body.destination, _now(),
@@ -307,11 +321,18 @@ def get_latest_location(user_id: str, viewer_id: str = Query(...)) -> dict:
 # --- Stations, conditions, health --------------------------------------------
 
 @app.get("/stations/resolve", response_model=StationResolveResponse)
-def resolve_station(response: Response,
-                    q: str = Query(..., min_length=1)) -> StationResolveResponse:
-    """STUB: no station data is loaded yet, so no candidates (Block G)."""
-    _mark_stub(response)
-    return StationResolveResponse(query=q, candidates=[])
+def resolve_station(q: str = Query(..., min_length=1)) -> StationResolveResponse:
+    """REAL: fuzzy match over corridor stations and known places (rapidfuzz
+    WRatio). Returns the top 3 with scores 0-100 — the CALLER picks; a strong
+    match is still only a candidate, never a silent auto-correct."""
+    from rapidfuzz import fuzz, process
+    from app.routing import stations as net
+    pool = sorted({s.name for s in net.BY_CODE.values()} | set(net.PLACES))
+    hits = process.extract(q, pool, scorer=fuzz.WRatio, limit=3)
+    return StationResolveResponse(
+        query=q,
+        candidates=[StationCandidate(name=name, score=round(score, 1))
+                    for name, score, _ in hits if score >= 40])
 
 
 @app.get("/conditions", response_model=ConditionsResponse)

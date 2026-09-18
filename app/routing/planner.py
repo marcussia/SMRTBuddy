@@ -208,6 +208,8 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
         o_station = _nearest_station(o_coord, avoid)
     d_station = _nearest_station(d_coord, avoid)
     path = rail_path(o_station.code, d_station.code, avoid)
+    if path and len(path) < 2:
+        path = None   # same station both ends: no rail leg to ride
     if path:
         legs: list[Leg] = []
         wsrc: set[str] = set()

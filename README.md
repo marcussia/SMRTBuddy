@@ -1,161 +1,169 @@
 # SMRTBuddy
 
-A smart commuter companion for Singapore — a mobile-first web app that tells a commuter
-*before they leave* that today is not an ordinary day, and what to do about it. Built for
-NEBULA X 2026, **Problem Statement 2**.
+A smart commuter companion for Singapore — built for NEBULA X 2026, **Problem
+Statement 2**. It plans a door-to-door journey for an accessibility-constrained
+commuter and, when something goes wrong mid-journey, **decides** what she should
+do — one recommended action, one sentence of reason, a deadline on it — and
+tells her family when it matters.
 
-- **Live app:** `<TBD>`
+- **Live app:** not required by the brief — judges run it from this README
 - **Demo video:** `<TBD>`
-- **Write-up:** [`WRITEUP.md`](WRITEUP.md) — `<TBD>`
+- **Write-up:** `WRITEUP.md` — `<TBD>`
+- **Frontend:** owned separately; it consumes this backend. The API contract is
+  in [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md).
 
-> **Status: not built.** This README describes the project we are building and records
-> the decisions still open. Nothing below is a claim about working software. Sections
-> marked `<TBD>` are unwritten, not undocumented.
+> **Status:** backend real through PRD Blocks A–F + station resolution.
+> `POST /journeys/{id}/precheck` is still a stub (marked `X-Stub: true`).
+> Build log with every assumption: [`STATUS.md`](STATUS.md).
 
-## The problem
+---
 
-Singapore's network works well on an ordinary day. The commuter's problem is the day that
-is not — a signalling fault at 08:15, an exit closed for works, a line at reduced
-frequency, a downpour that turns a 6-minute walk into a decision. Today the burden of
-reacting falls on the commuter: notice something is wrong, work out whether it affects
-them, decide what to do instead, and do it while standing on a platform.
+## Run it (clean machine)
 
-Most apps are reactive and generic. They tell everyone the same thing, after the fact.
-SMRTBuddy is meant to do the opposite: know enough about *this* commuter's routine to
-reach them before the problem does, and recommend an action rather than report a status.
+### Prerequisites
 
-## Who it's for
+- **Python 3.11+** (developed and tested on 3.13; 3.10 will not work)
+- `pip` (bundled with Python), internet access
+- An **LTA DataMall AccountKey** — free, register at
+  <https://datamall.lta.gov.sg> (the app starts without one, but every
+  DataMall source will honestly report `unavailable`; the six demo scenarios
+  work regardless because they run on labelled fixtures)
 
-`<TBD — persona not yet chosen>`
+### Install and run
 
-One persona, named and built for end to end. Candidates from the brief:
+```bash
+git clone https://github.com/marcussia/smrtbuddy.git
+cd smrtbuddy
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+cp .env.example .env          # then put your DataMall key in .env
+.venv/bin/uvicorn app.main:app --port 8000
+```
 
-| Persona | Journey | What they need |
-|---|---|---|
-| **Rachel** — fixed schedule | Tampines → Raffles Place, EWL, leaves 07:40 | Interrupted *only* when it matters, answered in one line. 5 min is noise; 15 min costs a meeting |
-| **Arjun** — multi-modal, flexible start | Punggol → one-north, cycles to LRT, sometimes buses | Crowding, sheltered routes, whether he can bring the bike. Will leave 20 min later to avoid a crush |
-| **Mdm Lim** — accessibility-constrained | Bedok → SGH, fortnightly | Lifts and sheltered walkways, no stairs, large text, whole trip planned in advance, day-before warning if a lift is out |
+Open <http://127.0.0.1:8000/docs> — interactive API docs for every endpoint.
+Health check: `curl http://127.0.0.1:8000/health` → `{"status":"ok"}`.
 
-## What it must do
+### Configuration
 
-Three capabilities are mandatory; missing any one caps that part of the score.
+`.env` at the repo root (never committed; `.env.example` lists the names):
 
-**1. Route planning.** Door to door including both walking legs — a route that starts and
-ends at a station is not a commuter's journey. Multi-modal where the persona needs it.
-Responsive to live conditions, and it must say **why** a recommendation changed. Timing
-with the uncertainty visible rather than hidden behind one confident number.
+| Variable | Purpose |
+|---|---|
+| `LTA_DATAMALL_KEY` | LTA DataMall AccountKey (free registration, link above) |
 
-**2. GIS on OpenStreetMap.** OSM is the required geospatial base — it carries the
-footways, crossings, stairs, lifts, covered walkways and cycle paths a road map does not.
+data.gov.sg weather and OSM foot routing need no key.
 
-**3. Visualisation.** The route on a map with the affected portion distinguished from the
-unaffected. The alternative shown against the original so the commuter can judge the
-trade-off. Crowding readable in one second. Delay cost obvious. Legible on a phone, in
-one hand, in sunlight.
+## What to try first — the demo journey
 
-## Architecture
+Mdm Lim (accessibility-constrained persona from the brief): Bedok →
+Singapore General Hospital, mid-journey EWL disruption while she is on the
+train. Paste these in order:
 
-`<TBD>`
+```bash
+BASE=http://127.0.0.1:8000
 
-Decisions not yet made: framework and hosting, routing engine (OSRM · GraphHopper ·
-Valhalla · OneMap), tile source, and how live feeds are cached.
+# 1. Her profile, her daughter's, and the link between them
+curl -s -X POST $BASE/profiles -H 'Content-Type: application/json' -d '{
+  "user_id": "mdm_lim", "role": "user", "name": "Mdm Lim", "locale": "en",
+  "mobility": {"can_use_stairs": false, "wheelchair": false,
+               "walking_speed_mps": 0.8, "max_walk_metres": 600}}'
+curl -s -X POST $BASE/profiles -H 'Content-Type: application/json' \
+  -d '{"user_id": "daughter", "role": "family", "name": "Hui Ling"}'
+curl -s -X POST $BASE/profiles/daughter/link \
+  -H 'Content-Type: application/json' -d '{"linked_user_id": "mdm_lim"}'
+
+# 2. The journey, on the disruption fixture (labelled test data — see below)
+JID=$(curl -s -X POST $BASE/journeys -H 'Content-Type: application/json' -d '{
+  "user_id": "mdm_lim", "origin": "Home (Bedok)",
+  "destination": "Singapore General Hospital",
+  "arrive_by": "2026-09-19T10:00:00+08:00",
+  "scenario": "disruption_on_train"}' | python3 -c 'import sys,json; print(json.load(sys.stdin)["journey_id"])')
+
+# 3. She is on the train, just past Paya Lebar
+curl -s -X POST $BASE/journeys/$JID/location -H 'Content-Type: application/json' -d '{
+  "lat": 1.3178, "lon": 103.8927, "accuracy_m": 25,
+  "recorded_at": "2026-09-19T08:40:00+08:00", "location_state": "on_train"}'
+
+# 4. THE CORE CALL — what should she do, right now?
+curl -s $BASE/journeys/$JID/advice | python3 -m json.tool
+```
+
+Expected: `action: "reroute"`, headline **"Get off at Bugis, then take the
+Downtown line…"**, a `decide_by` deadline (her arrival at Bugis), the closed
+stations in `affected_segment` for the map, `notify_family: true` (check
+`curl "$BASE/notifications?user_id=daughter"`), and a `data_status` block that
+says exactly which sources were fixture vs live.
+
+## The six demo scenarios
+
+Every scenario runs through the real rules engine on a **labelled fixture**
+(`data/fixtures/<name>.json`, each bannered `_fixture: true`; the API reports
+those sources as `"fixture"`, never as live — the feeds are quiet most days, so
+the brief explicitly allows labelled replay). Create the journey with the
+`scenario` field; omit it for live feeds. Ready-to-paste commands for all six
+are in [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md).
+
+| `scenario` | Expected advice |
+|---|---|
+| `clear_day` | `proceed` — no interruption, no family notification |
+| `rain` (create with `"prefer_mode": "bus"`) | `reroute` — bus swapped for MRT, shelter reasoning, road buffer |
+| `disruption_on_train` | `reroute` — alight guidance, deadline, family notified |
+| `lift_outage` (use a wheelchair profile) | `take_taxi` — with EN/中文 driver card |
+| `flood_destination` | `cancel_trip` — family notified |
+| `crowding_forecast` | `leave_earlier` — 20 min, deliberately no notification |
+
+## How it decides
+
+`GET /journeys/{id}/advice` runs: gather sources (truthful `live` / `cached` /
+`fixture` / `unavailable` per source) → typed facts → **nine ordered rules**
+(`app/engine/rules.py`, first match wins: safety stop, mobility block, broken
+route, wait-vs-reroute, platform crowding, bus crowding, weather, road
+conditions, default) → localised advice. Every response carries `reason` (plain
+English) and `triggered_by` (the exact sources) — a recommendation that cannot
+name its source is treated as a bug.
 
 ## Data sources
 
-| Source | Used for | Key needed |
+| Source | Used for | Key |
 |---|---|---|
-| **LTA DataMall** `TrainServiceAlerts` | Official structured disruption feed. Carries the *mitigation* too — `FreePublicBus` and `FreeMRTShuttle` name where free boarding and shuttles are active | Free `AccountKey` |
-| **DataMall** `PCDForecast` / `PCDRealTime` | Station crowding — forecast at 30-min intervals is what makes *proactive* advice possible; real-time refreshes every 10 min | Same key |
-| **DataMall** `v3/BusArrival` | Bus ETA plus `Load` (`SEA`/`SDA`/`LSD`), `Feature=WAB` for wheelchair-accessible, deck type | Same key |
-| **DataMall** `v2/FacilitiesMaintenance` | Lift outages per lift and the exit it serves | Same key |
-| **DataMall** `RoadWorks`, `PlannedBusRoutes` | The *planned* half of the brief — known in advance | Same key |
-| **DataMall** geospatial layers | `CoveredLinkWay`, `TrainStationExit`, `CyclingPath`, `Footpath` — authoritative where OSM is crowd-sourced | Same key |
-| **OpenStreetMap** | Required geospatial base; pedestrian and cycling detail | No |
-| **data.gov.sg** weather | 2-hour nowcast, 24-hour forecast, rainfall — the walking and cycling legs | No |
-| **OneMap** | Geocoding and its routing API | Free, registration |
+| LTA DataMall `TrainServiceAlerts` | disruptions + LTA's own mitigation (free bus/shuttle) | AccountKey |
+| DataMall `PCDRealTime` / `PCDForecast` | station crowding, now and forecast | AccountKey |
+| DataMall `v2/FacilitiesMaintenance` | lift outages per station | AccountKey |
+| DataMall `PubFloodAlerts`, `TrafficIncidents`, `v3/BusArrival`, `Taxi-Availability`, `TaxiStands` | floods, road incidents, bus loads, taxi supply | AccountKey |
+| data.gov.sg two-hour forecast | rain on the route | none |
+| **OpenStreetMap** (FOSSGIS foot-profile OSRM) | real pedestrian routing for every walk leg | none |
+| Organisers' station GeoJSON (this repo) | station geometry (WGS84, verified) | — |
+| DataMall BusRoutes/BusStops (captured) | the verified bus 2 alternative — `data/replay/` | — |
 
-**A trap to handle early:** line codes differ between endpoints — Sengkang LRT is `STL`
-in `TrainServiceAlerts` but `SLRT` in crowd density; Punggol is `PTL` vs `PLRT`; Circle
-Line Extension folds into `CCL` in one and is `CEL` in the other; Changi folds into `EWL`
-vs `CGL`. One canonical line table, everything mapped through it.
-
-## Running it
-
-`<TBD — nothing to run yet>`
-
-When there is, this section must carry, per the submission rules: **prerequisites**
-(runtime and version, package manager), **exact copy-pasteable install and run commands
-in order**, **configuration** (which variables, where to get the keys), and **what to
-click** — where the app opens and the one journey to try first. It will be tested by
-cloning into a fresh directory and following it literally, because judges run it on a
-clean machine and what does not run does not score.
-
-## Configuration
-
-An LTA DataMall `AccountKey` is required — free, from <https://datamall.lta.gov.sg>.
-OneMap needs free registration. The data.gov.sg weather endpoints need no key.
-
-**No credential is ever committed.** Keys go in an ignored `.env`; `.env.example` lists
-variable names only. `.env` is gitignored; `.env.example` lists `LTA_DATAMALL_KEY`.
-
-## Offline behaviour
-
-Underground there is no signal — a commuter between stations cannot fetch anything. The
-brief requires a stated choice here: cache the current journey, degrade gracefully, or
-say plainly that the data is stale. **Our choice: `<TBD>`**, to be recorded in
-`WRITEUP.md`.
+Line codes are canonicalised through one table (`app/engine/facts.py`) because
+the same line is coded differently across DataMall endpoints.
 
 ## Attribution
 
-Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors,
-licensed under the [ODbL](https://opendatacommons.org/licenses/odbl/). This attribution
-must appear wherever the app shows a map or anything derived from it — it is a licence
-condition, not a style preference.
+Map and routing data © [OpenStreetMap](https://www.openstreetmap.org/copyright)
+contributors, licensed under the [ODbL](https://opendatacommons.org/licenses/odbl/).
+This attribution must also appear wherever the frontend shows the map or
+anything derived from it — a licence condition, not a style point.
+Public transport data from [LTA DataMall](https://datamall.lta.gov.sg); weather
+from [data.gov.sg](https://data.gov.sg); geocoding by OSM Nominatim.
 
-Public transport data from [LTA DataMall](https://datamall.lta.gov.sg), weather from
-[data.gov.sg](https://data.gov.sg).
+## Honesty guarantees
 
-## How this is judged
+- **No fabricated transport data.** An unreachable API reports
+  `unavailable` with the error; fixtures are labelled `fixture` end to end.
+- **No silent auto-correction.** `GET /stations/resolve?q=` returns top-3
+  candidates with scores; implausible origin/destination pairs are rejected
+  with a clear 422, never "fixed".
+- Assumptions (timing constants, area mappings, the assumed delay when a line
+  reports Status 2) are named constants in `app/config.py` and listed in
+  [`STATUS.md`](STATUS.md).
 
-| Criterion | Weight | What it covers |
-|---|---|---|
-| Problem Fit | 40% | Would a real commuter be better off with this? Persona fit, proactivity, quality of the decision offered — plus anything beyond the brief |
-| Technical Execution | 35% | Routing reflecting live conditions on an OSM base, breadth and judgement of data, and whether it actually runs |
-| Ease of Use | 25% | Usable on a phone, one-handed. Interaction design, information hierarchy, accessibility |
+## Repo layout
 
-Scored 0–5 per criterion. Judges follow this README on a clean machine, open the app in a
-browser **on a real phone**, watch one real journey walked end to end, and ask us to
-defend one claim per criterion.
-
-Capped regardless of other merit: a feature shown but absent from the running system,
-mocked data presented as live, a claim a judge cannot verify, a committed credential, or
-OSM without attribution. Disruption replay and injected test data are fine **provided
-they are labelled as such** — the feeds are quiet most days, so the major-disruption path
-will need a labelled replay.
-
-## Deliverables
-
-- [ ] The app — runnable from this README on a clean machine, all three capabilities
-- [ ] `WRITEUP.md` at repository root — persona, architecture, assumptions, known limits;
-      any number says how we arrived at it
-- [ ] Demo recording — one real journey through one real disruption, phone screen, linked
-      here not committed
-- [ ] `.env.example` — variable names only
-- [ ] Tested by cloning fresh and following this README literally
-- [ ] Opened on a real phone browser, not devtools emulation
-
-## Open decisions
-
-1. **Persona** — the choice that drives everything else
-2. **Framework, hosting, routing engine, tile source**
-3. **Offline behaviour underground**
-4. **Which disruption the demo walks through**, and how the replay is labelled
-
-## Reference
-
-The brief lives in `NebulaX-Hackathon-ProblemStatement/PS2/` — `PS2_README.md` is
-authoritative (the `.docx` is a summary with outdated endpoint names), and
-`PS2/submission/README.md` has the packaging rules.
-
-Earlier PS3 train-condition-monitoring work is retained under `archive/ps3/` but is
-**not part of this submission**.
+```
+app/            backend (FastAPI): adapters, routing, engine, service, store
+data/fixtures/  labelled per-scenario test data (committed)
+data/replay/    captured real API data with provenance (committed)
+tools/          fixture generator
+archive/        earlier PS3 work — not part of this submission
+```
