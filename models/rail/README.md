@@ -253,7 +253,7 @@ Random Forest
 ┌────────┬────────┬─────────┐
 │ Normal │ Side I │ Side II │
 └────────┴────────┴─────────┘
-```
+
 high-level idea: 
 
 RAW SENSOR SIGNALS
@@ -275,6 +275,8 @@ learn many different decision rules"
 aggregate their predictions
        ↓
 Normal / Side I / Side II
+
+```
 
 ---
 
