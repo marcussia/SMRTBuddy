@@ -13,8 +13,6 @@ The question we kept coming back to: when something goes wrong mid-journey, what
 
 In the chaos of a service disruption it is too much to ask her to take everything in and work out a new route. Our app does that work for her. It reads her profile and mobility constraints, then tells her what to do next.
 
-`[FILL: 2-3 sentences. What specifically goes wrong for her that a normal route planner doesn't handle? A real observation from someone you know goes here.]`
-
 What follows from that:
 
 - The app decides, she confirms. One recommended action, one sentence of reason, a deadline on it. Alternatives are there for transparency, not to push the choice back onto her.
