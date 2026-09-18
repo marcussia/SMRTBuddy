@@ -60,19 +60,20 @@ def crowd_fc(station_levels: dict[str, str]) -> dict:
 
 TSA_NORMAL = {"Status": 1, "AffectedSegments": [], "Message": []}
 
-# Scenario 3: EWL down between Bugis (EW12) and Outram Park (EW16).
+# Scenario 3: EWL down between City Hall (EW13) and Outram Park (EW16);
+# Bugis (EW12) stays open, so the DTL/NEL reroute exists.
 TSA_DISRUPTED = {
     "Status": 2,
     "AffectedSegments": [{
         "Line": "EWL",
         "Direction": "Both",
-        "Stations": "EW12,EW13,EW14,EW15,EW16",
-        "FreePublicBus": "EW12,EW13,EW14,EW15,EW16",
-        "FreeMRTShuttle": "EW12,EW13,EW14,EW15,EW16",
+        "Stations": "EW13,EW14,EW15,EW16",
+        "FreePublicBus": "EW13,EW14,EW15,EW16",
+        "FreeMRTShuttle": "EW13,EW14,EW15,EW16",
         "MRTShuttleDirection": "Both",
     }],
     "Message": [{
-        "Content": "[FIXTURE] EWL: No train service between Bugis and Outram "
+        "Content": "[FIXTURE] EWL: No train service between City Hall and Outram "
                    "Park due to a signalling fault. Free bus rides and shuttle "
                    "services are available at designated stops.",
         "CreatedDate": "2026-09-19 08:05:00"}],
