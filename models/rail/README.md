@@ -254,6 +254,27 @@ Random Forest
 │ Normal │ Side I │ Side II │
 └────────┴────────┴─────────┘
 ```
+high-level idea: 
+
+RAW SENSOR SIGNALS
+       ↓
+699 measurements describing the signal
+       ↓
+SELECTOR RANDOM FOREST
+"Which measurements consistently help separate
+Normal / Side I / Side II?"
+       ↓
+TOP 100
+       ↓
+CLASSIFIER RANDOM FOREST
+"Using these 100 measurements,
+learn many different decision rules"
+       ↓
+750 DECISION TREES
+       ↓
+aggregate their predictions
+       ↓
+Normal / Side I / Side II
 
 ---
 
@@ -355,35 +376,108 @@ This indicates that many of the important feature families remain useful across 
 
 # Current Status
 
-Current Rail Pipeline v1:
+## Rail Pipeline v1 — Complete
+
+The Rail v1 modelling pipeline has now been completed.
+
+Validated performance:
 
 ```text
 Repeated-CV Macro F1 ≈ 0.742 ± 0.043
 ```
 
-The pipeline has been developed and validated using **only the 272 labelled training recordings**.
+The final production pipeline is:
 
-The official Test dataset has not been used for feature selection, model selection, hyperparameter tuning, or validation.
+```text
+Raw Rail CSV
+      ↓
+Extract 699 candidate features
+      ↓
+Select final top 100 features
+      ↓
+Random Forest
+      ↓
+Normal / Side I / Side II
+```
+
+Before final training, the cleaned production feature extractor was checked against the feature values used during model development:
+
+```text
+272 files checked
+699 features per file
+190,128 values compared
+0 mismatches
+```
+
+This confirms that the production pipeline reproduces the same feature extraction used during validation.
+
+The final Random Forest was then trained using **all 272 labelled training recordings**, including all available Side I and Side II fault examples.
+
+The final model and selected feature list are saved in:
+
+```text
+models/rail/artifacts/
+```
+
+The main files required to run the Rail pipeline are:
+
+```text
+models/rail/
+├── feature_extraction.py
+├── train.py
+├── predict.py
+├── verify_pipeline.py
+└── artifacts/
+    ├── rail_model.joblib
+    ├── selected_features.json
+    └── metadata.json
+```
+
+---
+
+# Held-Out Test Predictions
+
+The final Rail v1 model has also been run on all **68 provided held-out Test files**.
+
+The resulting predictions are:
+
+| Prediction | Count |
+|---|---:|
+| Normal | 58 |
+| Side I | 6 |
+| Side II | 4 |
+| **Total** | **68** |
+
+The submission-ready output has been generated as:
+
+```text
+predictions/rail_predictions.csv
+```
+
+with the required format:
+
+```text
+file_id,prediction
+```
+
+The Test labels are hidden by the organisers, so the final Test Macro F1 cannot be calculated locally.
+
+Importantly, the Test data was **not used for feature engineering, feature selection, model selection, hyperparameter tuning, or validation**. It was only passed through the final frozen model to generate the required predictions.
 
 ---
 
 # Next Steps
 
-When the Rail pipeline is finalised:
+**Rail v1 is ready for integration into the SMRTBuddy app and eventual submission.**
 
-1. Extract the complete final feature representation for all 272 labelled training files.
-2. Select the final top 100 features using the complete training dataset.
-3. Train the final Random Forest using all 272 labelled recordings.
-4. Save the selected feature list and trained model.
-5. Apply the exact same feature-extraction pipeline to the official Test files.
-6. Generate the required predictions:
+For now, the team can proceed with the other PS3 subsystem models.
+
+If time permits later, Rail can be revisited for further improvement. The main area to investigate would be **Side I classification**, since this remains the weakest and least stable class due to the very small number of Side I training examples.
+
+Any future Rail model should be compared against the current benchmark:
 
 ```text
-Normal
-Side I
-Side II
+Repeated-CV Macro F1 ≈ 0.742 ± 0.043
 ```
 
-7. Export the predictions in the required submission format.
-
-The hidden Test labels remain unseen; therefore the final Test Macro F1 will be determined by the challenge evaluator.
+Until a new approach shows a robust improvement over this benchmark, **Rail v1 remains the current submission model**.
