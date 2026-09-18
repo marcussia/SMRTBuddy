@@ -135,7 +135,7 @@ Required by Section 2.6 — the brief asks us to **state our choice**, and this 
 
 We would rather name these than have a judge find them.
 
-**Corridor only.** Bedok to Outram Park plus two named places. Any other origin gets a structured message naming the supported corridor. We scoped deliberately rather than claim coverage we could not verify with real data.
+**One Corridor only.** Bedok to Outram Park plus two named places. Any other origin gets a structured message naming the supported corridor. We scoped deliberately rather than claim coverage we could not verify with real data.
 
 **OpenStreetMap depth.** Walk legs are routed over OSM footways and the map renders OSM tiles with attribution — but we do not read the pedestrian detail the brief names (stairs, lifts, covered walkways, crossings) from OSM tags. This is the thinnest part of our OSM use and we know it.
 
