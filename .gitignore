@@ -1,10 +1,27 @@
-data/
-features/
+# Secrets — never committed. .env.example (names only) IS committed.
+.env
+
+# Real / large datasets stay out of the repo.
+data/*
+*.csv
 *.parquet
 *.xlsx
+
+# Fixture and replay data MUST ship: the brief requires the captured data that
+# reproduces a disruption a quiet feed will not show on judging day
+# (PS2/submission/README.md §5). Last match wins, so these re-include any file
+# type — CSV included — under these two folders.
+#   data/replay/    captured real API responses, replayed
+#   data/fixtures/  injected test data, labelled as such
+!data/replay/
+!data/replay/**
+!data/fixtures/
+!data/fixtures/**
+
+# PS3 archive is committed as-is (it was tracked before the move).
+!archive/ps3/**
+
 __pycache__/
+.venv/
 .ipynb_checkpoints/
-.env
 .DS_Store
-*.csv
-!predictions/*.csv

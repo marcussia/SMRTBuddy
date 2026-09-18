@@ -96,7 +96,7 @@ An LTA DataMall `AccountKey` is required — free, from <https://datamall.lta.go
 OneMap needs free registration. The data.gov.sg weather endpoints need no key.
 
 **No credential is ever committed.** Keys go in an ignored `.env`; `.env.example` lists
-variable names only. `.env` is already gitignored; `.env.example` is `<TBD>`.
+variable names only. `.env` is gitignored; `.env.example` lists `LTA_DATAMALL_KEY`.
 
 ## Offline behaviour
 
@@ -157,5 +157,5 @@ The brief lives in `NebulaX-Hackathon-ProblemStatement/PS2/` — `PS2_README.md`
 authoritative (the `.docx` is a summary with outdated endpoint names), and
 `PS2/submission/README.md` has the packaging rules.
 
-Earlier PS3 train-condition-monitoring work is retained under `models/` and
-`predictions/` but is **not part of this submission**.
+Earlier PS3 train-condition-monitoring work is retained under `archive/ps3/` but is
+**not part of this submission**.
