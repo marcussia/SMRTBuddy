@@ -1,126 +1,161 @@
-# SMRTBuddy — NEBULA X Problem Statement 3
+# SMRTBuddy
 
-Train condition monitoring across four independent subsystems — Door, ACV, Rail
-Corrugation and SHM. Each has its own sensor format, its own task type and its own
-disclosed scoring metric, and in service each is monitored by a different system.
-SMRTBuddy puts all four behind one interface: pick a subsystem, drop in a data file,
-read the result — no code, no per-subsystem tooling.
+A smart commuter companion for Singapore — a mobile-first web app that tells a commuter
+*before they leave* that today is not an ordinary day, and what to do about it. Built for
+NEBULA X 2026, **Problem Statement 2**.
 
 - **Live app:** `<TBD>`
 - **Demo video:** `<TBD>`
+- **Write-up:** [`WRITEUP.md`](WRITEUP.md) — `<TBD>`
 
-> **Status: scaffold.** The directory structure is in place; the models, scoring code
-> and dashboard are not yet implemented. Every result and model cell below is
-> deliberately blank until produced by a real run. Nothing here is a claimed outcome.
+> **Status: not built.** This README describes the project we are building and records
+> the decisions still open. Nothing below is a claim about working software. Sections
+> marked `<TBD>` are unwritten, not undocumented.
 
-## What it does
+## The problem
 
-Four models over four subsystems, one per subsystem, each trained and scored
-independently. A finding is never reported as a bare label. Every one carries three
-things:
+Singapore's network works well on an ordinary day. The commuter's problem is the day that
+is not — a signalling fault at 08:15, an exit closed for works, a line at reduced
+frequency, a downpour that turns a 6-minute walk into a decision. Today the burden of
+reacting falls on the commuter: notice something is wrong, work out whether it affects
+them, decide what to do instead, and do it while standing on a platform.
 
-- **What changed** — the signal and the window that drove the call, so a maintainer
-  sees the evidence rather than a verdict.
-- **How confident the model is** — reported alongside the prediction, not hidden
-  behind a threshold.
-- **Which confirmed historical fault it most resembles** — the nearest labelled case
-  from that subsystem's training data, so a new finding lands against a fault someone
-  has already diagnosed and fixed.
+Most apps are reactive and generic. They tell everyone the same thing, after the fact.
+SMRTBuddy is meant to do the opposite: know enough about *this* commuter's routine to
+reach them before the problem does, and recommend an action rather than report a status.
 
-## Results
+## Who it's for
 
-Scores come from held-out splits, computed with our own implementation of the
-disclosed metrics in `scoring/metrics.py` — not from the organisers' held-out set,
-which is never released. Subsystem, task and metric are as specified in the PS3 Info
-Kits; the score column stays empty until a real run fills it.
+`<TBD — persona not yet chosen>`
 
-| Subsystem | Task | Metric | Our score |
-|---|---|---|---|
-| Door | Temporal segment detection — find each open/close cycle in the continuous stream, classify Normal / Abnormal resistance | IoU-weighted F1 | |
-| ACV | Fault localisation — rank all cars from most to least likely to hold the refrigerant leak | Linear rank-decay score | |
-| Rail Corrugation | 3-class classification — Normal / Side I / Side II | Macro F1 | |
-| SHM | Regression — cumulative fatigue damage per file | `max(0, 1 − MAPE)` | |
+One persona, named and built for end to end. Candidates from the brief:
 
-## Model selection
+| Persona | Journey | What they need |
+|---|---|---|
+| **Rachel** — fixed schedule | Tampines → Raffles Place, EWL, leaves 07:40 | Interrupted *only* when it matters, answered in one line. 5 min is noise; 15 min costs a meeting |
+| **Arjun** — multi-modal, flexible start | Punggol → one-north, cycles to LRT, sometimes buses | Crowding, sheltered routes, whether he can bring the bike. Will leave 20 min later to avoid a crush |
+| **Mdm Lim** — accessibility-constrained | Bedok → SGH, fortnightly | Lifts and sheltered walkways, no stairs, large text, whole trip planned in advance, day-before warning if a lift is out |
 
-| Subsystem | Approach | Alternatives tried | Why this one |
-|---|---|---|---|
-| Door | | | |
-| ACV | | | |
-| Rail Corrugation | | | |
-| SHM | | | |
+## What it must do
 
-## Explainability
+Three capabilities are mandatory; missing any one caps that part of the score.
 
-The core mechanism is **nearest-labelled-case retrieval**. Alongside each prediction
-the app surfaces the most similar confirmed case from that subsystem's training
-labels — the Door segment, ACV case, rail recording or stress file the new input most
-closely resembles. A maintainer can then ask the useful question ("is this the same
-thing we saw in case 03?") instead of being handed an unexplained score.
+**1. Route planning.** Door to door including both walking legs — a route that starts and
+ends at a station is not a commuter's journey. Multi-modal where the persona needs it.
+Responsive to live conditions, and it must say **why** a recommendation changed. Timing
+with the uncertainty visible rather than hidden behind one confident number.
 
-**Severity classes are declared domain inputs, not model outputs.** The models predict
-only what each subsystem's task defines — a label, a ranking, a damage value. The
-severity class attached to a finding is a fixed, human-declared property of the
-subsystem, asserted in `scoring/severity.py` and never inferred, learned or varied by a
-model. This keeps the operational consequence of a finding traceable to a domain
-decision rather than to a model's confidence.
+**2. GIS on OpenStreetMap.** OSM is the required geospatial base — it carries the
+footways, crossings, stairs, lifts, covered walkways and cycle paths a road map does not.
 
-| Severity class | Subsystem(s) |
-|---|---|
-| Safety-critical | `<TBD>` |
-| Safety-relevant | `<TBD>` |
-| Availability | `<TBD>` |
-| Comfort | `<TBD>` |
+**3. Visualisation.** The route on a map with the affected portion distinguished from the
+unaffected. The alternative shown against the original so the commuter can judge the
+trade-off. Crowding readable in one second. Delay cost obvious. Legible on a phone, in
+one hand, in sunlight.
 
-## Fit with LTA condition monitoring
+## Architecture
 
-The Rail Reliability Taskforce's Annex D condition monitoring baseline names 22 assets
-across Trainway, Station and Train Health — doors and air-conditioning among them —
-each monitored by a different system, acquired at a different time, from a different
-manufacturer. That fragmentation is the practical obstacle: the data exists, but it
-arrives in as many formats and interfaces as there are suppliers. This app takes four
-such subsystems and presents them through one consistent interface, with the same
-interaction and the same shape of output for each.
+`<TBD>`
+
+Decisions not yet made: framework and hosting, routing engine (OSRM · GraphHopper ·
+Valhalla · OneMap), tile source, and how live feeds are cached.
+
+## Data sources
+
+| Source | Used for | Key needed |
+|---|---|---|
+| **LTA DataMall** `TrainServiceAlerts` | Official structured disruption feed. Carries the *mitigation* too — `FreePublicBus` and `FreeMRTShuttle` name where free boarding and shuttles are active | Free `AccountKey` |
+| **DataMall** `PCDForecast` / `PCDRealTime` | Station crowding — forecast at 30-min intervals is what makes *proactive* advice possible; real-time refreshes every 10 min | Same key |
+| **DataMall** `v3/BusArrival` | Bus ETA plus `Load` (`SEA`/`SDA`/`LSD`), `Feature=WAB` for wheelchair-accessible, deck type | Same key |
+| **DataMall** `v2/FacilitiesMaintenance` | Lift outages per lift and the exit it serves | Same key |
+| **DataMall** `RoadWorks`, `PlannedBusRoutes` | The *planned* half of the brief — known in advance | Same key |
+| **DataMall** geospatial layers | `CoveredLinkWay`, `TrainStationExit`, `CyclingPath`, `Footpath` — authoritative where OSM is crowd-sourced | Same key |
+| **OpenStreetMap** | Required geospatial base; pedestrian and cycling detail | No |
+| **data.gov.sg** weather | 2-hour nowcast, 24-hour forecast, rainfall — the walking and cycling legs | No |
+| **OneMap** | Geocoding and its routing API | Free, registration |
+
+**A trap to handle early:** line codes differ between endpoints — Sengkang LRT is `STL`
+in `TrainServiceAlerts` but `SLRT` in crowd density; Punggol is `PTL` vs `PLRT`; Circle
+Line Extension folds into `CCL` in one and is `CEL` in the other; Changi folds into `EWL`
+vs `CGL`. One canonical line table, everything mapped through it.
 
 ## Running it
 
-```bash
-pip install -r requirements.txt
-python scripts/package_submission.py
-```
+`<TBD — nothing to run yet>`
 
-`package_submission.py` is the single entry point that produces the prediction CSVs and
-packages them for submission. Both the script and `requirements.txt` are still to be
-written — the commands above are the intended interface, not a working pipeline.
+When there is, this section must carry, per the submission rules: **prerequisites**
+(runtime and version, package manager), **exact copy-pasteable install and run commands
+in order**, **configuration** (which variables, where to get the keys), and **what to
+click** — where the app opens and the one journey to try first. It will be tested by
+cloning into a fresh directory and following it literally, because judges run it on a
+clean machine and what does not run does not score.
 
-## Structure
+## Configuration
 
-| Path | Contents |
-|---|---|
-| `src/` | Per-subsystem model code — `door.py`, `acv.py`, `rail.py`, `shm.py`, over a shared `base.py` interface |
-| `scoring/` | Our implementation of the four disclosed metrics (`metrics.py`) and the declared severity mapping (`severity.py`) |
-| `scripts/` | Feature extraction and the submission packaging entry point |
-| `dashboard/` | The app a non-technical user actually touches |
-| `predictions/` | Generated `*_predictions.csv` outputs, the files judges score |
+An LTA DataMall `AccountKey` is required — free, from <https://datamall.lta.gov.sg>.
+OneMap needs free registration. The data.gov.sg weather endpoints need no key.
 
-`data/` and `features/` are gitignored — the PS3 datasets are ~6 GB and are not
-redistributed here.
+**No credential is ever committed.** Keys go in an ignored `.env`; `.env.example` lists
+variable names only. `.env` is already gitignored; `.env.example` is `<TBD>`.
 
-## Limitations
+## Offline behaviour
 
-These are properties of the provided data, and they bound what any model can claim:
+Underground there is no signal — a commuter between stations cannot fetch anything. The
+brief requires a stated choice here: cache the current journey, degrade gracefully, or
+say plainly that the data is stale. **Our choice: `<TBD>`**, to be recorded in
+`WRITEUP.md`.
 
-- **Rail Corrugation — 14 Side I training examples.** Against 234 Normal and 24 Side II
-  across 272 files. Macro F1 weights that 14-example class equally with the 234-example
-  one, so the headline figure is high variance: a handful of Side I calls swings it
-  substantially. A single held-out split does not establish a stable score.
-- **ACV — 6 labelled cases.** Six training files, one faulty car each, and a single
-  distributed test case. That is enough to develop a method against, not enough to
-  validate one with any confidence, and the reported score may rest on one file.
-- **SHM — no sampling rate, no S-N constants.** The files are single-column raw stress
-  series with no header, and neither the sampling frequency nor the S-N curve constants
-  (`m`, `C`) are published. Miner's rule cannot be applied analytically, so the damage
-  mapping is learned from the 64 training labels rather than computed. The score is also
-  MAPE-derived, which weights low-damage files hardest.
-- **No held-out organiser labels.** Every score we report is from our own splits. It is
-  an estimate of held-out performance, not a measurement of it.
+## Attribution
+
+Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors,
+licensed under the [ODbL](https://opendatacommons.org/licenses/odbl/). This attribution
+must appear wherever the app shows a map or anything derived from it — it is a licence
+condition, not a style preference.
+
+Public transport data from [LTA DataMall](https://datamall.lta.gov.sg), weather from
+[data.gov.sg](https://data.gov.sg).
+
+## How this is judged
+
+| Criterion | Weight | What it covers |
+|---|---|---|
+| Problem Fit | 40% | Would a real commuter be better off with this? Persona fit, proactivity, quality of the decision offered — plus anything beyond the brief |
+| Technical Execution | 35% | Routing reflecting live conditions on an OSM base, breadth and judgement of data, and whether it actually runs |
+| Ease of Use | 25% | Usable on a phone, one-handed. Interaction design, information hierarchy, accessibility |
+
+Scored 0–5 per criterion. Judges follow this README on a clean machine, open the app in a
+browser **on a real phone**, watch one real journey walked end to end, and ask us to
+defend one claim per criterion.
+
+Capped regardless of other merit: a feature shown but absent from the running system,
+mocked data presented as live, a claim a judge cannot verify, a committed credential, or
+OSM without attribution. Disruption replay and injected test data are fine **provided
+they are labelled as such** — the feeds are quiet most days, so the major-disruption path
+will need a labelled replay.
+
+## Deliverables
+
+- [ ] The app — runnable from this README on a clean machine, all three capabilities
+- [ ] `WRITEUP.md` at repository root — persona, architecture, assumptions, known limits;
+      any number says how we arrived at it
+- [ ] Demo recording — one real journey through one real disruption, phone screen, linked
+      here not committed
+- [ ] `.env.example` — variable names only
+- [ ] Tested by cloning fresh and following this README literally
+- [ ] Opened on a real phone browser, not devtools emulation
+
+## Open decisions
+
+1. **Persona** — the choice that drives everything else
+2. **Framework, hosting, routing engine, tile source**
+3. **Offline behaviour underground**
+4. **Which disruption the demo walks through**, and how the replay is labelled
+
+## Reference
+
+The brief lives in `NebulaX-Hackathon-ProblemStatement/PS2/` — `PS2_README.md` is
+authoritative (the `.docx` is a summary with outdated endpoint names), and
+`PS2/submission/README.md` has the packaging rules.
+
+Earlier PS3 train-condition-monitoring work is retained under `models/` and
+`predictions/` but is **not part of this submission**.
