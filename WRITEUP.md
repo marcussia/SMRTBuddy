@@ -64,7 +64,7 @@ Stack: Python 3.11+, FastAPI, Pydantic; Leaflet and OpenStreetMap tiles for the 
 |---|---|---|
 | DataMall `TrainServiceAlerts` | disruptions + LTA's own mitigation (free bus/shuttle) | Live |
 | DataMall `PCDRealTime` / `PCDForecast` | crowding now / forecast (the proactive half) | Live |
-| DataMall `v2/FacilitiesMaintenance` | lift outages per station — load-bearing for this persona | Live |
+| DataMall `v2/FacilitiesMaintenance` | lift outages per station (load-bearing for this persona) | Live |
 | DataMall `PubFloodAlerts`, `TrafficIncidents` | safety stop, road conditions | Live |
 | DataMall `v3/BusArrival` | bus load at the boarding stop, when the plan has a bus leg | Live |
 | DataMall `BusRoutes` + `BusStops` | one-time verified capture of the bus 2 corridor → `data/replay/` | Captured |
@@ -99,7 +99,7 @@ Our routing decisions are computed from live data. Our timing is not. Every tran
 | Bus stop-to-stop, incl. dwell | 1.8 min | Chosen as plausible, not measured |
 | Interchange transfer | 6.0 min | Fixed allowance, not modelled per station or walking speed |
 | Wait for next train | 4.0 min | Chosen as plausible, no headway data consulted |
-| Delay when a line reports Status 2 | 20 min | The feed reports status, not duration. A placeholder — see Section 7 |
+| Delay when a line reports Status 2 | 20 min | The feed reports status, not duration. A placeholder; see Section 7 |
 | Walking speed | 0.8 m/s, configurable | Common figure for reduced-mobility adults; we cite no study and did not measure it |
 | Max walk distance | 400 m, or 200 m for wheelchair | Chosen as plausible |
 | Reroute benefit threshold | 10 min | Product judgement, not derived |
@@ -127,7 +127,7 @@ We do not transcribe SOS audio. GPS pings never leave the machine except as posi
 
 ## 6. Underground behaviour
 
-Required by Section 2.6, which asks us to state our choice. It is this: when connectivity drops, the cached route and the next instruction stay visible; live conditions freeze with a visible "last updated" timestamp; stale data is never presented as current. The backend already timestamps every source (`fetched_at`) to support this. The offline view itself is not yet implemented — it belongs to the real frontend, and the fallback dashboard does not handle it.
+Required by Section 2.6, which asks us to state our choice. It is this: when connectivity drops, the cached route and the next instruction stay visible; live conditions freeze with a visible "last updated" timestamp; stale data is never presented as current. The backend already timestamps every source (`fetched_at`) to support this. The offline view itself is not yet implemented. It belongs to the real frontend, and the fallback dashboard does not handle it.
 
 ---
 
@@ -158,7 +158,7 @@ We would rather name these than have a judge find them.
 ## 8. What we would do next
 
 1. Read lift, stair and covered-walkway tags from OSM, so step-free and sheltered routing comes from real tags instead of our defaults.
-2. Learn disruption duration from historical incidents (the SG MRT archive the brief points at) instead of the 20-minute placeholder — the brief's own suggested AI direction.
+2. Learn disruption duration from historical incidents (the SG MRT archive the brief points at) instead of the 20-minute placeholder (the brief's own suggested AI direction).
 3. Expand beyond the demo corridor, verifying each route against real data the way bus 2 was verified.
 4. Retention policy and encryption for SOS audio; TTL on location pings.
 
