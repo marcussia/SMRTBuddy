@@ -26,8 +26,15 @@ class SourceResult(BaseModel):
 class MobilityProfile(BaseModel):
     can_use_stairs: bool
     wheelchair: bool
-    walking_speed_mps: float = 0.8      # PRD.md §11 Q2 is still open
-    max_walk_metres: int = 400
+    walking_speed_mps: float = 0.8      # Q2: configurable, default 0.8
+    max_walk_metres: int = 400          # Q2: wheelchair default is 200
+
+    @model_validator(mode="after")
+    def _wheelchair_walk_default(self) -> "MobilityProfile":
+        # Q2: wheelchair defaults to 200 m unless explicitly set.
+        if self.wheelchair and "max_walk_metres" not in self.model_fields_set:
+            self.max_walk_metres = 200
+        return self
 
 
 class UserProfile(BaseModel):
@@ -57,6 +64,8 @@ class Leg(BaseModel):
     i18n_key: str
     shelter: Literal["covered", "partial", "exposed"]
     step_free: bool
+    geometry: list[tuple[float, float]] = []   # WGS84 (lat, lon) polyline
+    crowding: Literal["low", "medium", "high"] | None = None
 
 
 class Advice(BaseModel):
@@ -72,6 +81,20 @@ class Advice(BaseModel):
     notify_family: bool
     data_status: dict[str, str]
     legs: list[Leg] = []
+    # The part of the ORIGINAL route the disruption hits, for map highlight.
+    affected_segment: list[tuple[float, float]] | None = None
+    # Other viable routes — transparency, secondary to the recommendation.
+    alternatives: list[list[Leg]] = []
+    # PRD §3/§7.6: returned with take_taxi. Optional model addition recorded
+    # in STATUS.md (PRD names driver_card but defines no model for it).
+    driver_card: "DriverCard | None" = None
+
+
+class DriverCard(BaseModel):
+    """Shown to a taxi driver: destination in English + Chinese, arrive-by."""
+    destination_en: str
+    destination_zh: str
+    arrive_by: datetime
 
 
 # --- API request/response models (PROVISIONAL — not defined in PRD.md) -------
@@ -82,9 +105,13 @@ LocationState = Literal["at_home", "walking", "on_bus", "on_train", "on_platform
 
 class JourneyCreate(BaseModel):
     user_id: str
-    origin: str               # free text for now; format depends on §11 Q1
+    origin: str               # station/place name within the demo corridor
     destination: str
     arrive_by: datetime
+    # Selects a labelled fixture set from data/fixtures/ (PRD §9). None = live
+    # feeds. Fixture-driven responses carry data_status = "fixture" — never
+    # presented as live.
+    scenario: str | None = None
 
 
 class Journey(BaseModel):
@@ -93,6 +120,7 @@ class Journey(BaseModel):
     origin: str
     destination: str
     arrive_by: datetime
+    scenario: str | None = None
     location_state: LocationState = "at_home"
     legs: list[Leg] = []
 

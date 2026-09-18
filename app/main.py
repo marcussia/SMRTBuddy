@@ -11,6 +11,7 @@ from datetime import datetime, timedelta, timezone
 from fastapi import FastAPI, File, HTTPException, Query, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
+from app import conditions as conditions_service
 from app.models import (
     Advice,
     AudioAck,
@@ -36,7 +37,7 @@ STUB_HEADER = "X-Stub"
 STUB_REASON = ("STUB: not implemented yet (see PRD.md §8). "
                "No transport data was consulted.")
 
-# Tier 1 sources from PRD.md §5. Names are placeholders until Block B.
+# Kept for reference by older stubs; the real list lives in app/conditions.py.
 TIER1_SOURCES = [
     "train_service_alerts",
     "weather",
@@ -227,14 +228,11 @@ def resolve_station(response: Response,
 
 
 @app.get("/conditions", response_model=ConditionsResponse)
-def conditions(response: Response) -> ConditionsResponse:
-    """STUB: every Tier 1 source reports `unavailable` until Block B."""
-    _mark_stub(response)
-    now = _now()
-    return ConditionsResponse(sources=[
-        SourceResult(name=name, status="unavailable", fetched_at=now, data=None)
-        for name in TIER1_SOURCES
-    ])
+def conditions(scenario: str | None = Query(default=None)) -> ConditionsResponse:
+    """REAL (Block B): live feeds, or the labelled fixture set for `scenario`.
+    Each source's `status` says exactly where its data came from."""
+    results = conditions_service.gather(scenario)
+    return ConditionsResponse(sources=list(results.values()))
 
 
 @app.get("/health", response_model=Health)
