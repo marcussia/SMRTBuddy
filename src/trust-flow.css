@@ -9,4 +9,12 @@
 .progress-row>span:before{right:auto;width:var(--progress,75%)}.progress-row i{left:var(--progress,75%)}.guide-screen .floating-sos{top:auto;bottom:min(65.5%,610px);transform:translateY(-14px)}.guide-photo.route-visual{object-position:center}.multi-step-sheet{height:610px;padding-top:25px}.multi-step-sheet h1{margin:19px 0 8px;font-size:39px}.multi-step-sheet .instruction{font-size:21px;line-height:1.25}.multi-step-sheet .distance{margin:13px 0 7px}.multi-step-sheet .distance strong{font-size:32px}.sharing-status{min-height:54px;display:grid;grid-template-columns:28px 1fr;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--green)}.sharing-status span{display:flex;flex-direction:column}.sharing-status strong{font-size:15px}.sharing-status small{color:var(--slate);font-size:12px}.multi-step-sheet .guide-actions{margin:9px 0;grid-template-columns:1.25fr 1fr}.multi-step-sheet .guide-actions button{min-height:53px;font-size:16px}.multi-step-sheet>.primary-button{min-height:55px;font-size:18px}.locale-ta .language-sheet h1{font-size:35px;line-height:1.12}.locale-ta .language-sheet .helper{font-size:17px}.locale-ta .multi-step-sheet h1{margin-top:13px;font-size:27px;line-height:1.25}.locale-ta .multi-step-sheet .instruction{font-size:17px;line-height:1.4}.locale-ta .multi-step-sheet .distance{margin:6px 0}.locale-ta .multi-step-sheet .guide-actions{grid-template-columns:1fr 1fr}.locale-ta .multi-step-sheet .guide-actions button{font-size:14px}.locale-ms .language-sheet h1{font-size:39px;line-height:1.05}.locale-ms .multi-step-sheet h1{font-size:31px}.locale-ms .multi-step-sheet .instruction{font-size:19px}.locale-zh .multi-step-sheet h1{font-size:36px}.locale-zh .multi-step-sheet .instruction{font-size:20px}
 
 @media(max-width:800px){.multi-step-sheet{height:min(65.5%,610px)}.guide-screen{overflow:hidden}}
+
+/* Tamil has longer letter clusters; keep the welcome heading inside the sheet. */
+.locale-ta .language-sheet h1{
+  font-size:31px;
+  line-height:1.18;
+  letter-spacing:-.015em;
+  overflow-wrap:anywhere;
+}
 @media(max-width:380px){.sharing-heading{padding-top:28px}.sharing-heading h1{font-size:38px}.multi-step-sheet{left:12px;padding-right:18px;padding-left:22px}.multi-step-sheet h1{font-size:34px}.multi-step-sheet .instruction{font-size:19px}}
