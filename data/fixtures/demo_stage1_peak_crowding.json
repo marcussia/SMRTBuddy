@@ -1,0 +1,731 @@
+{
+ "_fixture": true,
+ "_comment": "FIXTURE \u2014 injected test data for the demo, labelled per PS2 brief \u00a72.6. Not real transport data. Shapes mirror the live APIs.",
+ "scenario": "demo_stage1_peak_crowding",
+ "sources": {
+  "train_service_alerts": {
+   "Status": 1,
+   "AffectedSegments": [],
+   "Message": []
+  },
+  "weather": {
+   "items": [
+    {
+     "update_timestamp": "2026-09-19T08:00:00+08:00",
+     "timestamp": "2026-09-19T08:00:00+08:00",
+     "valid_period": {
+      "start": "2026-09-19T08:00:00+08:00",
+      "end": "2026-09-19T10:00:00+08:00",
+      "text": "8.00 am to 10.00 am"
+     },
+     "forecasts": [
+      {
+       "area": "Bedok",
+       "forecast": "Partly Cloudy (Day)"
+      },
+      {
+       "area": "Geylang",
+       "forecast": "Partly Cloudy (Day)"
+      },
+      {
+       "area": "Kallang",
+       "forecast": "Partly Cloudy (Day)"
+      },
+      {
+       "area": "City",
+       "forecast": "Partly Cloudy (Day)"
+      },
+      {
+       "area": "Bukit Merah",
+       "forecast": "Partly Cloudy (Day)"
+      },
+      {
+       "area": "Queenstown",
+       "forecast": "Partly Cloudy (Day)"
+      }
+     ]
+    }
+   ]
+  },
+  "crowd_density_realtime": {
+   "EWL": [
+    {
+     "Station": "EW1",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW2",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW3",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW4",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW5",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "h"
+    },
+    {
+     "Station": "EW6",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW7",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW8",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW9",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW10",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW11",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW12",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW13",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW14",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW15",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW16",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW17",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW18",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW19",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW20",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW21",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW22",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW23",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW24",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW25",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW26",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW27",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW28",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW29",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW30",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW31",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW32",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "EW33",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    }
+   ],
+   "DTL": [
+    {
+     "Station": "DT1",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT2",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT3",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT4",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT5",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT6",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT7",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT8",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT9",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT10",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT11",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT12",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT13",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT14",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT15",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT16",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT17",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT18",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT19",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT20",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT21",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT22",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT23",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT24",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT25",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT26",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT27",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT28",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT29",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT30",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT31",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT32",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT33",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT34",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "DT35",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    }
+   ],
+   "NEL": [
+    {
+     "Station": "NE1",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE2",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE3",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE4",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE5",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE6",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE7",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE8",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE9",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE10",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE11",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE12",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE13",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE14",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE15",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE16",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    },
+    {
+     "Station": "NE17",
+     "StartTime": "2026-09-19T08:00:00+08:00",
+     "EndTime": "2026-09-19T08:10:00+08:00",
+     "CrowdLevel": "m"
+    }
+   ]
+  },
+  "crowd_density_forecast": {
+   "EWL": [
+    {
+     "Date": "2026-09-19T00:00:00+08:00",
+     "Stations": [
+      {
+       "Station": "EW5",
+       "Interval": [
+        {
+         "Start": "2026-09-19T06:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T06:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T07:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T07:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T08:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T08:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T09:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T09:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T10:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T10:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T11:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T11:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T12:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T12:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T13:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T13:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T14:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T14:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T15:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T15:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T16:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T16:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T17:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T17:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T18:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T18:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T19:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T19:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T20:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T20:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T21:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T21:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T22:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T22:30:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T23:00:00+08:00",
+         "CrowdLevel": "h"
+        },
+        {
+         "Start": "2026-09-19T23:30:00+08:00",
+         "CrowdLevel": "h"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "DTL": [],
+   "NEL": []
+  },
+  "lift_maintenance": [],
+  "flood_alerts": []
+ }
+}

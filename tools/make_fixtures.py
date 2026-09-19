@@ -149,6 +149,84 @@ SCENARIOS: dict[str, dict] = {
 }
 
 
+
+# --- The three-stage demo (one journey, escalating events) ---------------------
+# Stage 2/3 message text is modelled on the REAL TrainServiceAlerts pattern
+# observed live on 2026-09-19: "05:00-BP-Planned Service Adjustments. Bukit
+# Panjang LRT will be closed on 20 Sep and 27 Sep 2026 (Sundays) to facilitate
+# renewal works..." — same voice, our corridor, clearly labelled [FIXTURE].
+
+PLANNED_CLOSURE_MSG = (
+    "[FIXTURE] 05:00-EW-Planned Service Adjustments. East West Line: no train "
+    "service between City Hall and Outram Park (City Hall, Raffles Place, "
+    "Tanjong Pagar, Outram Park) on 19 and 20 Sep 2026 (Fri and Sat) to "
+    "facilitate track renewal works. Free regular bus services are available "
+    "at designated stops between affected stations. NEL and TEL platforms at "
+    "Outram Park remain open.")
+
+TSA_PLANNED_CLOSURE = {
+    "Status": 2,
+    "AffectedSegments": [{
+        "Line": "EWL", "Direction": "Both",
+        "Stations": "EW13,EW14,EW15,EW16",
+        "FreePublicBus": "EW13,EW14,EW15,EW16",
+        "FreeMRTShuttle": "",
+        "MRTShuttleDirection": "",
+    }],
+    "Message": [{"Content": PLANNED_CLOSURE_MSG,
+                 "CreatedDate": "2026-09-17 05:00:00"}],
+}
+
+BREAKDOWN_MSG = (
+    "[FIXTURE] 09:12-DT-Downtown Line: no train service between Downtown and "
+    "Chinatown (Downtown, Telok Ayer, Chinatown) due to a train fault. Free "
+    "regular bus services are available at designated stops. The East West "
+    "Line closure between City Hall and Outram Park for track renewal works "
+    "remains in effect.")
+
+TSA_BREAKDOWN = {
+    "Status": 2,
+    "AffectedSegments": [
+        TSA_PLANNED_CLOSURE["AffectedSegments"][0],
+        {"Line": "DTL", "Direction": "Both",
+         "Stations": "DT17,DT18,DT19",
+         "FreePublicBus": "DT17,DT18,DT19",
+         "FreeMRTShuttle": "",
+         "MRTShuttleDirection": ""},
+    ],
+    "Message": [
+        {"Content": BREAKDOWN_MSG, "CreatedDate": "2026-09-19 09:12:00"},
+        TSA_PLANNED_CLOSURE["Message"][0],
+    ],
+}
+
+SCENARIOS["demo_stage1_peak_crowding"] = {
+    # Peak hour before she leaves: Bedok forecast AND current band h.
+    "train_service_alerts": TSA_NORMAL,
+    "weather": weather("Partly Cloudy (Day)"),
+    "crowd_density_realtime": crowd_rt({"EW5": "h"}, default="m"),
+    "crowd_density_forecast": crowd_fc({"EW5": "h"}),
+    "lift_maintenance": [],
+    "flood_alerts": [],
+}
+SCENARIOS["demo_stage2_planned_closure"] = {
+    # The planned city-segment closure is now in effect; she is on the train.
+    "train_service_alerts": TSA_PLANNED_CLOSURE,
+    "weather": weather("Partly Cloudy (Day)"),
+    "crowd_density_realtime": crowd_rt({"EW5": "h"}, default="m"),
+    "lift_maintenance": [],
+    "flood_alerts": [],
+}
+SCENARIOS["demo_stage3_breakdown"] = {
+    # Mid-detour on the DTL: train fault ahead, EWL closure still in effect.
+    "train_service_alerts": TSA_BREAKDOWN,
+    "weather": weather("Partly Cloudy (Day)"),
+    "crowd_density_realtime": crowd_rt({"EW5": "h"}, default="m"),
+    "lift_maintenance": [],
+    "flood_alerts": [],
+}
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, sources in SCENARIOS.items():
