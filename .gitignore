@@ -3,9 +3,9 @@
 .env.*
 !.env.example
 
-# Frontend dependencies and generated output.
+# Frontend dependencies. dist/ IS committed so a judge runs the app
+# without npm; rebuild with `npm run build`.
 node_modules/
-dist/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts

@@ -1,6 +1,6 @@
 ---
 name: Commuter Companion
-description: Calm, landmark-led wayfinding for an older Singapore commuter.
+description: Calm, landmark-led wayfinding for an accessibility-constrained Singapore commuter.
 colors:
   direction-navy: "#0d2136"
   warm-paper: "#f5f1e8"
@@ -75,7 +75,7 @@ components:
 
 Only the Step 6 landmark-guidance composition is currently locked. Apply its principles to proposed screens, but do not treat any other screen structure as approved until the static HTML/CSS review is complete.
 
-The interface combines the authority of Singapore transit wayfinding with the warmth and pace needed by an older traveller. A real landmark image leads whenever recognition is more useful than a map; the interface beneath it behaves like a carefully typeset instruction sheet. The result is calm, direct and recognisable rather than decorative or futuristic.
+The interface combines the authority of Singapore transit wayfinding with the warmth and pace an accessibility-constrained traveller needs. A real landmark image leads whenever recognition is more useful than a map; the interface beneath it behaves like a carefully typeset instruction sheet. The result is calm, direct and recognisable rather than decorative or futuristic.
 
 Every screen should answer one question first: “What should Mdm Lim do next?” Status, route mechanics and secondary choices support that instruction instead of competing with it. The product uses strong typography, large controls and visible confirmation while avoiding the card-heavy appearance of generic generated interfaces.
 

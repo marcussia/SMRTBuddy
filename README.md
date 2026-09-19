@@ -8,13 +8,15 @@ tells her family when it matters.
 
 - **Live app:** not required by the brief — judges run it from this README
 - **Demo video:** `<TBD>`
-- **Write-up:** `WRITEUP.md` — `<TBD>`
-- **Frontend:** owned separately; it consumes this backend. The API contract is
-  in [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md).
+- **Write-up:** [`WRITEUP.md`](WRITEUP.md)
+- **API contract:** [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md)
 
-> **Status:** backend real through PRD Blocks A–F + station resolution.
+> **Status:** backend real through PRD Blocks A–F + station resolution;
 > `POST /journeys/{id}/precheck` is still a stub (marked `X-Stub: true`).
-> Build log with every assumption: [`STATUS.md`](STATUS.md).
+> The frontend at `/ui` is wired to the live API for the demo flow (plan →
+> advice → guidance → wrong-way → SOS, plus the six labelled replay
+> scenarios); screens showing design-only content carry a visible
+> "Design preview" label. Build log with every assumption: [`STATUS.md`](STATUS.md).
 
 ---
 
@@ -40,8 +42,21 @@ cp .env.example .env          # then put your DataMall key in .env
 .venv/bin/uvicorn app.main:app --port 8000
 ```
 
-Open <http://127.0.0.1:8000/docs> — interactive API docs for every endpoint.
+Then open, on a phone browser on the same network or on the machine itself:
+
+- **<http://127.0.0.1:8000/ui/>** — the app (prebuilt frontend, committed in
+  `dist/`; no npm needed). Tap through: language → profile → "I am travelling"
+  → Show my journey. Use the REPLAY DATA chips to flip between the six
+  labelled scenarios — the same journey gets a different recommendation each
+  time, live from the engine.
+- <http://127.0.0.1:8000/app> — the plain fallback view (Leaflet map, same API)
+- <http://127.0.0.1:8000/docs> — interactive API docs
+
 Health check: `curl http://127.0.0.1:8000/health` → `{"status":"ok"}`.
+
+**Rebuilding the frontend** (only needed if you change `src/`): Node 20+, then
+`npm install && npm run build` — the output in `dist/` is what `/ui` serves.
+Dependencies are pinned to exact versions.
 
 ### Configuration
 

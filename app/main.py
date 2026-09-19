@@ -356,6 +356,14 @@ def conditions(scenario: str | None = Query(default=None)) -> ConditionsResponse
     return ConditionsResponse(sources=list(results.values()))
 
 
+# The real frontend (Vite build, committed in dist/) is served at /ui so a
+# judge runs ONE command. Rebuild with `npm run build`.
+from fastapi.staticfiles import StaticFiles
+from app.config import REPO_ROOT as _ROOT
+if (_ROOT / "dist" / "index.html").exists():
+    app.mount("/ui", StaticFiles(directory=_ROOT / "dist", html=True), name="ui")
+
+
 @app.get("/app", include_in_schema=False)
 def dashboard():
     """Fallback dashboard (dashboard/index.html) — insurance for §3.2.2/§3.2.3

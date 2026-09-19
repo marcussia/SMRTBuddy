@@ -12,7 +12,7 @@ Delegated by the user: React + Vite + TypeScript, structured as an installable, 
 
 ## Users
 
-The primary user is Mdm Lim, an older, accessibility-constrained occasional traveller who journeys from Bedok to Singapore General Hospital for fortnightly appointments. She walks slowly, avoids stairs, depends on lifts and sheltered paths, and should not need to improvise a reroute while already in transit.
+The primary user is Mdm Lim, an accessibility-constrained occasional traveller who journeys from Bedok to Singapore General Hospital for fortnightly appointments. She walks slowly, avoids stairs, depends on lifts and sheltered paths, and should not need to improvise a reroute while already in transit.
 
 A secondary user is a trusted family member who wants consent-based awareness of Mdm Lim's active journey, meaningful route changes, persistent wrong-direction events, and genuine requests for help.
 
@@ -112,6 +112,6 @@ Pre-trip route checks occur before these eight live journey steps. When the trav
 
 ## Accessibility & Inclusion
 
-The product is designed around an older traveller with reduced walking speed and possible mobility constraints rather than treating accessibility as an optional mode. It must support large text, large touch targets, clear hierarchy, strong contrast, slow spoken guidance, plain language, multilingual content, stairs and wheelchair preferences, lift- and exit-aware routing, sheltered paths, and adequate time to understand and act.
+The product is designed around a traveller with reduced walking speed and possible mobility constraints rather than treating accessibility as an optional mode. It must support large text, large touch targets, clear hierarchy, strong contrast, slow spoken guidance, plain language, multilingual content, stairs and wheelchair preferences, lift- and exit-aware routing, sheltered paths, and adequate time to understand and act.
 
 Critical meaning must never depend on colour alone. Text alternatives must accompany images; visual instructions must accompany audio; controls must retain browser zoom and work with assistive technology. Motion should be restrained and respect reduced-motion settings. The eventual interface should be evaluated for WCAG 2.2 AA conformance, including reflow, zoom, focus visibility, contrast, target size, error prevention, and accessible authentication.
