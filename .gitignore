@@ -1,16 +1,36 @@
+# Secrets — never committed. .env.example (names only) IS committed.
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and generated output.
 node_modules/
 dist/
-.DS_Store
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
 
-# Local Codex and design-working files
+# Local Codex and design-working files.
 .agents/
 .codex/
 .impeccable/
 
-# Local environment files
-.env
-.env.*
-!.env.example
+# Real / large datasets stay out of the repo.
+data/*
+*.csv
+*.parquet
+*.xlsx
+
+# Fixture and replay data must ship for reproducible demo scenarios.
+!data/replay/
+!data/replay/**
+!data/fixtures/
+!data/fixtures/**
+
+# PS3 archive is committed as-is.
+!archive/ps3/**
+
+__pycache__/
+.venv/
+.ipynb_checkpoints/
+.DS_Store

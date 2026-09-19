@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+  FALLBACK DASHBOARD — NOT THE FINAL UI.
+  Insurance for the two mandatory capabilities blocked on the real frontend
+  (PS2 brief §3.2.2 GIS on OSM, §3.2.3 Visualisation). Plain HTML/CSS/JS by
+  design: no framework, no build step. Open this file directly in a browser,
+  or let the backend serve it at /app.
+  If opened as a file://, it talks to http://127.0.0.1:8000 (override with
+  ?api=http://host:port). Map tiles and Leaflet come from the network.
+  Map data © OpenStreetMap contributors (ODbL).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMRTBuddy</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  :root {
+    --ink: #111; --paper: #fff; --line: #d0d0d0;
+    --ok: #0a6b28; --warn: #8a5a00; --bad: #a11212; --accent: #0a4faa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px; line-height: 1.45;
+  }
+  #wrap { max-width: 430px; margin: 0 auto; padding: 12px; }
+  h1 { font-size: 22px; margin: 4px 0 10px; }
+  #scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  #scenarios button {
+    font-size: 16px; font-weight: 600; padding: 12px 8px; min-height: 52px;
+    border: 2px solid var(--ink); border-radius: 10px; background: var(--paper);
+    color: var(--ink); cursor: pointer; text-align: left;
+  }
+  #scenarios button:active, #scenarios button[aria-pressed="true"] {
+    background: var(--ink); color: var(--paper);
+  }
+  #map { height: 300px; margin: 12px 0; border: 2px solid var(--ink);
+         border-radius: 10px; }
+  #advice { border: 2px solid var(--ink); border-radius: 10px; padding: 12px; }
+  #headline { font-size: 24px; font-weight: 800; margin: 0 0 6px; }
+  .action { display: inline-block; font-size: 15px; font-weight: 800;
+            letter-spacing: .04em; padding: 3px 10px; border-radius: 8px;
+            border: 2px solid; margin-bottom: 8px; text-transform: uppercase; }
+  .action.proceed       { color: var(--ok);   border-color: var(--ok); }
+  .action.wait          { color: var(--warn); border-color: var(--warn); }
+  .action.leave_earlier { color: var(--warn); border-color: var(--warn); }
+  .action.reroute       { color: var(--accent); border-color: var(--accent); }
+  .action.take_taxi     { color: var(--accent); border-color: var(--accent); }
+  .action.cancel_trip   { color: var(--bad);  border-color: var(--bad); }
+  #reason { margin: 6px 0; }
+  .meta { font-size: 16px; margin: 4px 0; }
+  .meta b { font-weight: 700; }
+  #legs { list-style: none; padding: 0; margin: 10px 0 0; }
+  #legs li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; }
+  .crowd { font-weight: 800; padding: 1px 8px; border-radius: 8px;
+           border: 2px solid; font-size: 13px; }
+  .crowd.low    { color: var(--ok); border-color: var(--ok); }
+  .crowd.medium { color: var(--warn); border-color: var(--warn); }
+  .crowd.high   { color: var(--bad); border-color: var(--bad); }
+  #status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { font-size: 13px; font-weight: 700; padding: 3px 8px;
+          border-radius: 8px; border: 2px solid; }
+  .chip.live        { color: var(--ok); border-color: var(--ok); }
+  .chip.fixture     { color: var(--warn); border-color: var(--warn);
+                      background: #fff4dd; }
+  .chip.cached      { color: var(--accent); border-color: var(--accent); }
+  .chip.unavailable { color: #555; border-color: #888; text-decoration: line-through; }
+  .chip.estimate    { color: var(--warn); border-color: var(--warn); }
+  #note { font-size: 14px; color: #333; margin-top: 10px; }
+  #err { color: var(--bad); font-weight: 700; white-space: pre-wrap; }
+  .legend { font-size: 14px; margin: 4px 0 0; }
+  .sw { display: inline-block; width: 22px; height: 0; border-top: 5px solid;
+        vertical-align: middle; margin-right: 4px; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>SMRTBuddy <span style="font-weight:400;font-size:15px">(fallback view — demo scenarios)</span></h1>
+
+  <div id="scenarios" role="group" aria-label="Demo scenarios"></div>
+
+  <div id="map" aria-label="Journey map"></div>
+  <p class="legend">
+    <span class="sw" style="border-color:#0a4faa"></span>recommended route
+    <span class="sw" style="border-color:#a11212;border-top-style:dashed"></span>disrupted section
+    <span class="sw" style="border-color:#666;border-top-style:dotted"></span>alternative
+  </p>
+
+  <div id="advice" aria-live="polite">
+    <p id="err"></p>
+    <span id="action" class="action" hidden></span>
+    <p id="headline"></p>
+    <p id="reason"></p>
+    <p class="meta" id="eta"></p>
+    <p class="meta" id="decideby"></p>
+    <p class="meta" id="confidence"></p>
+    <ul id="legs"></ul>
+    <div id="status"></div>
+    <p id="note">Data provenance is shown per source above. Anything marked
+       <b>FIXTURE</b> is labelled test data (the brief's allowed replay), never
+       live. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+"use strict";
+const API = new URLSearchParams(location.search).get("api")
+         || (location.protocol === "file:" ? "http://127.0.0.1:8000" : "");
+
+const SCENARIOS = [
+  { id: "clear_day",           label: "1 · Clear day" },
+  { id: "rain",                label: "2 · Heavy rain", prefer: "bus" },
+  { id: "disruption_on_train", label: "3 · Disruption (on train)",
+    ping: { lat: 1.3178, lon: 103.8927, accuracy_m: 25,
+            recorded_at: "2026-09-19T08:40:00+08:00", location_state: "on_train" } },
+  { id: "lift_outage",         label: "4 · Lift out (wheelchair)", user: "wc_user" },
+  { id: "flood_destination",   label: "5 · Flood at destination" },
+  { id: "crowding_forecast",   label: "6 · Crowding forecast" },
+];
+
+const map = L.map("map").setView([1.30, 103.885], 12);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+let layers = L.layerGroup().addTo(map);
+let countdown = null;
+
+async function api(method, path, body) {
+  const r = await fetch(API + path, {
+    method, headers: { "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error((data && data.detail) || (method + " " + path + " -> " + r.status));
+  return data;
+}
+
+async function ensureProfiles() {
+  await api("POST", "/profiles", {
+    user_id: "mdm_lim", role: "user", name: "Mdm Lim", locale: "en",
+    mobility: { can_use_stairs: false, wheelchair: false,
+                walking_speed_mps: 0.8, max_walk_metres: 600 } });
+  await api("POST", "/profiles", { user_id: "daughter", role: "family", name: "Hui Ling" });
+  await api("POST", "/profiles/daughter/link", { linked_user_id: "mdm_lim" });
+  await api("POST", "/profiles", {
+    user_id: "wc_user", role: "user", name: "Mr Tan",
+    mobility: { can_use_stairs: false, wheelchair: true } });
+  await api("POST", "/profiles/daughter/link", { linked_user_id: "wc_user" });
+}
+
+function el(id) { return document.getElementById(id); }
+function fmtTime(iso) {
+  return iso ? new Date(iso).toLocaleTimeString("en-SG",
+    { hour: "2-digit", minute: "2-digit" }) : "";
+}
+
+function drawLegs(legs, style) {
+  const pts = [];
+  for (const leg of legs || []) {
+    if (!leg.geometry || leg.geometry.length < 2) continue;
+    L.polyline(leg.geometry, style).addTo(layers);
+    pts.push(...leg.geometry);
+  }
+  return pts;
+}
+
+function render(a) {
+  layers.clearLayers();
+  if (countdown) { clearInterval(countdown); countdown = null; }
+
+  // routes: recommendation solid blue, alternatives dotted grey,
+  // disrupted section dashed red ON TOP
+  const pts = drawLegs(a.legs, { color: "#0a4faa", weight: 6, opacity: 0.9 });
+  for (const alt of a.alternatives || [])
+    pts.push(...drawLegs(alt, { color: "#666", weight: 4, dashArray: "2 8" }));
+  if (a.affected_segment && a.affected_segment.length >= 2) {
+    L.polyline(a.affected_segment,
+      { color: "#a11212", weight: 8, dashArray: "10 8" }).addTo(layers);
+    pts.push(...a.affected_segment);
+  }
+  if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.15));
+
+  const act = el("action");
+  act.hidden = false;
+  act.className = "action " + a.action;
+  act.textContent = a.action.replace("_", " ");
+  el("headline").textContent = a.headline;
+  el("reason").textContent = "Why: " + a.reason;
+  el("eta").innerHTML = "<b>Arrive:</b> " + fmtTime(a.eta_range[0]) +
+                        "–" + fmtTime(a.eta_range[1]);
+  el("confidence").innerHTML = "<b>Confidence:</b> " + a.confidence;
+
+  const dbEl = el("decideby");
+  if (a.decide_by) {
+    const tick = () => {
+      const s = Math.round((new Date(a.decide_by) - Date.now()) / 1000);
+      dbEl.innerHTML = "<b>Decide by:</b> " + fmtTime(a.decide_by) +
+        (s > 0 ? " (" + Math.floor(s / 60) + "m " + (s % 60) + "s left)"
+               : " (passed — refresh advice)");
+    };
+    tick(); countdown = setInterval(tick, 1000);
+  } else dbEl.textContent = "";
+
+  el("legs").innerHTML = (a.legs || []).map(l =>
+    "<li><b>" + l.mode.toUpperCase() + "</b> " + fmtTime(l.depart) + "–" +
+    fmtTime(l.arrive) + " · " + l.from_name + " → " + l.to_name +
+    (l.crowding ? ' <span class="crowd ' + l.crowding + '">crowd: ' +
+                  l.crowding + "</span>" : "") +
+    "<br>" + l.instruction + "</li>").join("");
+
+  el("status").innerHTML = Object.entries(a.data_status).map(([k, v]) => {
+    const cls = v.startsWith("estimate") ? "estimate" : v.split(" ")[0];
+    return '<span class="chip ' + cls + '">' + k + ": " + v.toUpperCase() + "</span>";
+  }).join("");
+}
+
+async function runScenario(sc, btn) {
+  document.querySelectorAll("#scenarios button")
+          .forEach(b => b.setAttribute("aria-pressed", b === btn));
+  el("err").textContent = "";
+  el("headline").textContent = "Loading " + sc.id + "…";
+  try {
+    await ensureProfiles();
+    const body = {
+      user_id: sc.user || "mdm_lim", origin: "Home (Bedok)",
+      destination: "Singapore General Hospital",
+      arrive_by: "2026-09-19T10:00:00+08:00", scenario: sc.id };
+    if (sc.prefer) body.prefer_mode = sc.prefer;
+    const j = await api("POST", "/journeys", body);
+    if (sc.ping) await api("POST", "/journeys/" + j.journey_id + "/location", sc.ping);
+    render(await api("GET", "/journeys/" + j.journey_id + "/advice"));
+  } catch (e) {
+    el("headline").textContent = "";
+    el("err").textContent = "Could not load scenario.\n" + e.message +
+      (API ? "\nBackend: " + API : "");
+  }
+}
+
+const grid = el("scenarios");
+for (const sc of SCENARIOS) {
+  const b = document.createElement("button");
+  b.textContent = sc.label;
+  b.addEventListener("click", () => runScenario(sc, b));
+  grid.appendChild(b);
+}
+</script>
+</body>
+</html>

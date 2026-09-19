@@ -1,0 +1,246 @@
+{
+ "_provenance": "Captured live from LTA DataMall BusRoutes + BusStops on 2026-09-19 (AccountKey required; endpoints paged 500/row). REPLAY DATA \u2014 real data, captured, not live.",
+ "service": "2",
+ "direction": 1,
+ "board": {
+  "code": "84039",
+  "name": "Bedok Stn Exit A"
+ },
+ "alight": {
+  "code": "05039",
+  "name": "New Bridge Ctr"
+ },
+ "stops": [
+  {
+   "seq": 33,
+   "code": "84039",
+   "name": "Bedok Stn Exit A",
+   "lat": 1.32353645344906,
+   "lon": 103.92886300203479
+  },
+  {
+   "seq": 34,
+   "code": "84029",
+   "name": "Opp Blk 32",
+   "lat": 1.32295305994698,
+   "lon": 103.92517704260585
+  },
+  {
+   "seq": 35,
+   "code": "84019",
+   "name": "Opp Chai Chee Ind Pk",
+   "lat": 1.32221972730517,
+   "lon": 103.92262015530929
+  },
+  {
+   "seq": 36,
+   "code": "83099",
+   "name": "Aft Perpetual Succour Ch",
+   "lat": 1.32076378388187,
+   "lon": 103.91810427638708
+  },
+  {
+   "seq": 37,
+   "code": "83079",
+   "name": "Bef Siglap Plain",
+   "lat": 1.31976833302337,
+   "lon": 103.91505416701378
+  },
+  {
+   "seq": 38,
+   "code": "83059",
+   "name": "Mjd Kassim",
+   "lat": 1.31888900641724,
+   "lon": 103.91222670426201
+  },
+  {
+   "seq": 39,
+   "code": "83049",
+   "name": "Bef Lor 110 Changi",
+   "lat": 1.318489754773,
+   "lon": 103.91002178191968
+  },
+  {
+   "seq": 40,
+   "code": "83029",
+   "name": "Aft Kg Eunos",
+   "lat": 1.31774429797349,
+   "lon": 103.90635251996308
+  },
+  {
+   "seq": 41,
+   "code": "82069",
+   "name": "Aft Lor 106 Changi",
+   "lat": 1.31709537499354,
+   "lon": 103.90295147896967
+  },
+  {
+   "seq": 42,
+   "code": "82049",
+   "name": "Joo Chiat Cplx",
+   "lat": 1.31634170548514,
+   "lon": 103.89891621295058
+  },
+  {
+   "seq": 43,
+   "code": "82029",
+   "name": "Blk 14 Mkt/FC",
+   "lat": 1.31569833821527,
+   "lon": 103.89559528546464
+  },
+  {
+   "seq": 44,
+   "code": "82109",
+   "name": "City Plaza",
+   "lat": 1.3151892235607,
+   "lon": 103.89331774481381
+  },
+  {
+   "seq": 45,
+   "code": "81069",
+   "name": "Opp Lor 39 Geylang",
+   "lat": 1.314729,
+   "lon": 103.89069
+  },
+  {
+   "seq": 46,
+   "code": "81049",
+   "name": "Aft Lor 34 Geylang",
+   "lat": 1.314075556,
+   "lon": 103.8873525
+  },
+  {
+   "seq": 47,
+   "code": "81029",
+   "name": "Aft Lor 28 Geylang",
+   "lat": 1.313616389,
+   "lon": 103.8849306
+  },
+  {
+   "seq": 48,
+   "code": "80089",
+   "name": "Bef Lor 18 Geylang",
+   "lat": 1.31275356421909,
+   "lon": 103.88079905478979
+  },
+  {
+   "seq": 49,
+   "code": "80069",
+   "name": "Opp Mohd Salleh Mque",
+   "lat": 1.31214703288286,
+   "lon": 103.87715016317217
+  },
+  {
+   "seq": 50,
+   "code": "80049",
+   "name": "Aft Sims Way",
+   "lat": 1.31077707819718,
+   "lon": 103.87363663982293
+  },
+  {
+   "seq": 51,
+   "code": "80039",
+   "name": "Opp Lor 1 Geylang Ter",
+   "lat": 1.30992336177794,
+   "lon": 103.87144344651483
+  },
+  {
+   "seq": 52,
+   "code": "80029",
+   "name": "Bef Kg Bugis",
+   "lat": 1.3094187398083,
+   "lon": 103.86753497349068
+  },
+  {
+   "seq": 53,
+   "code": "01319",
+   "name": "Lavender Stn Exit A/ICA",
+   "lat": 1.30757426746418,
+   "lon": 103.86325596123476
+  },
+  {
+   "seq": 54,
+   "code": "01219",
+   "name": "Blk 461",
+   "lat": 1.30526598535719,
+   "lon": 103.86072019914616
+  },
+  {
+   "seq": 55,
+   "code": "01129",
+   "name": "Bef Jln Pisang",
+   "lat": 1.30350269187301,
+   "lon": 103.85864530718491
+  },
+  {
+   "seq": 56,
+   "code": "01059",
+   "name": "Bugis Stn Exit B",
+   "lat": 1.30075679526626,
+   "lon": 103.85611040457583
+  },
+  {
+   "seq": 57,
+   "code": "01119",
+   "name": "Aft Bugis Stn Exit C",
+   "lat": 1.2996041093804,
+   "lon": 103.85512934079571
+  },
+  {
+   "seq": 58,
+   "code": "01019",
+   "name": "Bras Basah Cplx",
+   "lat": 1.29698951191332,
+   "lon": 103.85302201172507
+  },
+  {
+   "seq": 59,
+   "code": "04159",
+   "name": "Aft CHIJMES",
+   "lat": 1.29489484954945,
+   "lon": 103.85108138663934
+  },
+  {
+   "seq": 60,
+   "code": "04149",
+   "name": "Grand Pk City Hall",
+   "lat": 1.29276132399953,
+   "lon": 103.84983741344308
+  },
+  {
+   "seq": 61,
+   "code": "04229",
+   "name": "High St Ctr",
+   "lat": 1.29044830830726,
+   "lon": 103.84875123545265
+  },
+  {
+   "seq": 62,
+   "code": "04239",
+   "name": "Opp Clarke Quay Stn",
+   "lat": 1.28882717929599,
+   "lon": 103.8474938118651
+  },
+  {
+   "seq": 63,
+   "code": "05059",
+   "name": "Hong Lim Pk",
+   "lat": 1.28676420118491,
+   "lon": 103.84575036447065
+  },
+  {
+   "seq": 64,
+   "code": "05049",
+   "name": "Chinatown Stn Exit E",
+   "lat": 1.28531114761754,
+   "lon": 103.84455070696784
+  },
+  {
+   "seq": 65,
+   "code": "05039",
+   "name": "New Bridge Ctr",
+   "lat": 1.28293819129834,
+   "lon": 103.84254276754574
+  }
+ ]
+}

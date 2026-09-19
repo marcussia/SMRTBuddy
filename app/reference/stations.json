@@ -1,0 +1,120 @@
+{
+ "source": "PS2/data/AmendmenttoMP2014RailStation.geojson (WGS84, verified)",
+ "method": "mean of exterior-ring vertices of the station footprint polygon",
+ "stations": {
+  "TANAH MERAH": {
+   "lat": 1.327312,
+   "lon": 103.946843,
+   "geojson_name": "TANAH MERAH INTERCHANGE",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "BEDOK": {
+   "lat": 1.323999,
+   "lon": 103.930214,
+   "geojson_name": "BEDOK",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "KEMBANGAN": {
+   "lat": 1.321103,
+   "lon": 103.912907,
+   "geojson_name": "KEMBANGAN",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "EUNOS": {
+   "lat": 1.31985,
+   "lon": 103.903488,
+   "geojson_name": "EUNOS",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "PAYA LEBAR": {
+   "lat": 1.317585,
+   "lon": 103.892281,
+   "geojson_name": "PAYA LEBAR INTERCHANGE",
+   "grnd_level": "UNDERGROUND"
+  },
+  "ALJUNIED": {
+   "lat": 1.316405,
+   "lon": 103.882998,
+   "geojson_name": "ALJUNIED",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "KALLANG": {
+   "lat": 1.311421,
+   "lon": 103.871426,
+   "geojson_name": "KALLANG",
+   "grnd_level": "ABOVEGROUND"
+  },
+  "LAVENDER": {
+   "lat": 1.307285,
+   "lon": 103.862874,
+   "geojson_name": "LAVENDER",
+   "grnd_level": "UNDERGROUND"
+  },
+  "BUGIS": {
+   "lat": 1.300433,
+   "lon": 103.855685,
+   "geojson_name": "BUGIS MRT STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "CITY HALL": {
+   "lat": 1.292985,
+   "lon": 103.852666,
+   "geojson_name": "CITY HALL MRT STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "RAFFLES PLACE": {
+   "lat": 1.283455,
+   "lon": 103.851393,
+   "geojson_name": "RAFFLES PLACE INTERCHANGE",
+   "grnd_level": "UNDERGROUND"
+  },
+  "TANJONG PAGAR": {
+   "lat": 1.276832,
+   "lon": 103.846613,
+   "geojson_name": "TANJONG PAGAR MRT STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "OUTRAM PARK": {
+   "lat": 1.280066,
+   "lon": 103.83949,
+   "geojson_name": "OUTRAM PARK INTERCHANGE",
+   "grnd_level": "UNDERGROUND"
+  },
+  "PROMENADE": {
+   "lat": 1.293224,
+   "lon": 103.860733,
+   "geojson_name": "PROMENADE",
+   "grnd_level": "UNDERGROUND"
+  },
+  "BAYFRONT": {
+   "lat": 1.281812,
+   "lon": 103.859152,
+   "geojson_name": "BAYFRONT STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "TELOK AYER": {
+   "lat": 1.282343,
+   "lon": 103.848329,
+   "geojson_name": "TELOK AYER STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "CHINATOWN": {
+   "lat": 1.284491,
+   "lon": 103.843457,
+   "geojson_name": "CHINATOWN",
+   "grnd_level": "UNDERGROUND"
+  },
+  "CLARKE QUAY": {
+   "lat": 1.288124,
+   "lon": 103.846413,
+   "geojson_name": "CLARKE QUAY MRT STATION",
+   "grnd_level": "UNDERGROUND"
+  },
+  "DHOBY GHAUT": {
+   "lat": 1.299864,
+   "lon": 103.845582,
+   "geojson_name": "DHOBY GHAUT INTERCHANGE",
+   "grnd_level": "UNDERGROUND"
+  }
+ }
+}

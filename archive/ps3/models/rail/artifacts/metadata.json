@@ -1,0 +1,14 @@
+{
+  "training_samples": 272,
+  "candidate_features": 699,
+  "selected_features": 100,
+  "model": "RandomForestClassifier",
+  "n_estimators": 750,
+  "min_samples_leaf": 1,
+  "max_features": 0.5,
+  "class_weight": "balanced",
+  "random_state": 42,
+  "validated_macro_f1_mean": 0.7423,
+  "validated_macro_f1_std": 0.0428,
+  "validation_method": "Repeated stratified 5-fold CV across 5 seeds"
+}

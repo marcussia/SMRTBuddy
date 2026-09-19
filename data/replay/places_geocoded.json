@@ -1,0 +1,8 @@
+{
+ "_provenance": "Geocoded once via OSM Nominatim (nominatim.openstreetmap.org) on 2026-09-19, type=hospital result. REPLAY DATA — real, captured. © OpenStreetMap contributors (ODbL).",
+ "places": {
+  "Singapore General Hospital": {"lat": 1.2794489, "lon": 103.8362739},
+  "Home (Bedok)": {"lat": 1.323999, "lon": 103.930214,
+                   "_note": "demo home placeholder = Bedok station centroid from repo GeoJSON; the demo journey starts at the station"}
+ }
+}
