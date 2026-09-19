@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
 import { guideCopy, languages, screenLabels, type Locale, type ScreenId } from './data'
-import { legPhoto } from './legMedia'
+import { GUIDE_STEPS, legPhoto } from './legMedia'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { uiCopy, type UiCopy } from './uiCopy'
@@ -173,7 +173,7 @@ function App() {
   const finishJourney = () => { if (watchRef.current !== null) navigator.geolocation.clearWatch(watchRef.current); watchRef.current = null; setLocationState('idle'); navigate('arrived') }
   const newJourney = () => { setJourney(null); setAdvice(null); setActiveStep(0); setDestination(''); navigate('plan') }
   return <main className="prototype-shell">
-    <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} legCount={advice?.legs.length ?? 0} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
+    <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} legCount={Math.max(advice?.legs.length ?? 0, GUIDE_STEPS.length)} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
     <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className={`phone locale-${locale}`} data-screen={screen}>
       {screen === 'language' && <LanguageScreen locale={locale} copy={copy} selectLocale={selectLocale} next={() => navigate('profile')} />}
       {screen === 'profile' && <ProfileScreen copy={copy} back={() => goBack('language')} traveller={() => navigate('profile-setup')} family={() => navigate('family')} />}
@@ -182,7 +182,7 @@ function App() {
       {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => goBack('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
       {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} scenario={scenario} runStage={runStage} back={() => goBack('plan')} start={() => navigate('sharing')} notice={notice} />}
       {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => goBack('overview')} />}
-      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => goBack('overview')} next={() => setActiveStep((step) => Math.min((advice?.legs.length ?? 1) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
+      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => goBack('overview')} next={() => setActiveStep((step) => Math.min(Math.max(advice?.legs.length ?? 1, GUIDE_STEPS.length) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
       {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => goBack('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
       {screen === 'sos' && <SosScreen locale={locale} back={() => goBack('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
       {screen === 'recording' && <RecordingScreen back={() => goBack('sos')} />}
@@ -383,16 +383,37 @@ function SharingScreen({ copy, state, start, continueWithout, back }: { copy: Ui
 function GuideScreen({ locale, activeStep, advice, locationState, lastLocationAt, back, next, finish, lost, sos }: { locale: Locale; activeStep: number; advice: api.Advice | null; locationState: LocationState; lastLocationAt: Date | null; back: () => void; next: () => void; finish: () => void; lost: () => void; sos: () => void }) {
   const copy = uiCopy[locale]; const [speaking, setSpeaking] = useState(false)
   const legs = advice?.legs ?? []
-  const index = Math.min(activeStep, Math.max(0, legs.length - 1))
-  const leg = legs[index]
-  const photo = leg ? legPhoto(leg) : null
-  const spokenText = leg ? leg.speech_text : ''
+  const totalSteps = Math.max(legs.length, GUIDE_STEPS.length)
+  const index = Math.min(activeStep, Math.max(0, totalSteps - 1))
+  const leg = legs[Math.min(index, Math.max(0, legs.length - 1))]
+  const pitchStep = GUIDE_STEPS[index]
+  const photo = pitchStep ? { image: pitchStep.image, alt: pitchStep.alt } : leg ? legPhoto(leg) : null
+  const spokenText = pitchStep?.speechText ?? leg?.speech_text ?? ''
   const speak = () => { if (!('speechSynthesis' in window)) return; if (speaking) { speechSynthesis.cancel(); setSpeaking(false); return }; const utterance = new SpeechSynthesisUtterance(spokenText); utterance.lang = guideCopy[locale].speechLanguage; utterance.rate = .72; utterance.onend = () => setSpeaking(false); utterance.onerror = () => setSpeaking(false); speechSynthesis.cancel(); speechSynthesis.speak(utterance); setSpeaking(true) }
   useEffect(() => () => window.speechSynthesis?.cancel(), [])
   const time = lastLocationAt?.toLocaleTimeString(locale === 'zh' ? 'zh-SG' : locale === 'ms' ? 'ms-SG' : locale === 'ta' ? 'ta-SG' : 'en-SG', { hour: '2-digit', minute: '2-digit' })
   if (!leg) return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><h1>{copy.overview.empty}</h1><p>{copy.overview.emptyDetail}</p></section></div>
-  const last = index === legs.length - 1
-  return <div className={`screen guide-screen locale-${locale}${photo ? '' : ' no-photo'}`}>{photo && <img src={photo.image} alt={photo.alt} className="guide-photo" />}<div className="photo-shade" /><div className="guide-top"><BackButton onClick={back} light label={copy.back} /><strong>{leg.to_name}</strong><span /></div><button className="floating-sos" onClick={sos}>SOS</button><section className="guide-sheet multi-step-sheet"><div className="progress-row"><strong>{copy.guide.step(index + 1, legs.length)}</strong><span style={{ '--progress': `${((index + 1) / legs.length) * 100}%` } as React.CSSProperties}><i /></span></div><h1>{legTitle(copy, leg)}</h1><p className="instruction">{leg.instruction}</p>{leg.exit_hint && <p className="exit-hint">{leg.exit_hint.text}</p>}{leg.mode === 'taxi' && advice?.driver_card && <DriverCard copy={copy} card={advice.driver_card} />}<div className="distance"><LegTimes copy={copy} leg={leg} /><StepFreeBadge copy={copy} leg={leg} /></div>{photo && <p className="photo-note">{copy.legs.illustrative}</p>}<div className="sharing-status"><LocateFixed /><span><strong>{locationState === 'active' ? copy.guide.sharing : copy.guide.saved}</strong><small>{locationState === 'active' && time ? copy.guide.updated(time) : copy.guide.notShared}</small></span></div><div className="guide-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? copy.guide.playing : copy.guide.play}</span></button><button onClick={lost}><CircleHelp /><span>{copy.guide.help}</span></button></div><PrimaryButton onClick={last ? finish : next}>{last ? copy.guide.finish : copy.guide.next}<ArrowRight /></PrimaryButton></section></div>
+  const last = index === totalSteps - 1
+  const guideInstruction = pitchStep?.instruction ?? leg.instruction
+  const sentenceParts = guideInstruction.split('. ')
+  const leadInstruction = sentenceParts[0]
+  const supportingInstruction = sentenceParts.slice(1).join('. ')
+  const stepDestination = pitchStep?.title ?? leg.to_name
+  return <div className={`screen guide-screen locale-${locale}${photo ? '' : ' no-photo'}`}>
+    {photo && <img src={photo.image} alt={photo.alt} className="guide-photo" />}
+    <div className="photo-shade" />
+    <div className="guide-top"><BackButton onClick={back} light label={copy.back} /><strong>{copy.guide.live}</strong><span /></div>
+    <button className="floating-sos" onClick={sos}>SOS</button>
+    <div className="guide-safety"><span aria-hidden="true">!</span>{copy.guide.safety}</div>
+    <div className="guide-direction-callout"><strong>{copy.guide.continue}</strong><span>{leadInstruction}</span></div>
+    <section className="guide-route-panel">
+      <div className="guide-route-header"><strong>{copy.guide.step(index + 1, totalSteps)}</strong><span>{stepDestination}</span></div>
+      <div className="guide-route-preview" aria-label="Simple route preview"><span className="route-road route-road-one" /><span className="route-road route-road-two" /><span className="route-line" /><span className="route-destination" /><Navigation className="route-current" /></div>
+      <p className="guide-supporting">{supportingInstruction || leadInstruction}</p>
+      <div className="guide-demo-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? copy.guide.playing : copy.guide.play}</span></button><button onClick={lost}><CircleHelp /><span>{copy.guide.help}</span></button><PrimaryButton onClick={last ? finish : next}>{last ? copy.guide.finish : copy.guide.next}<ArrowRight /></PrimaryButton></div>
+      <small className="guide-sharing-status">{locationState === 'active' && time ? copy.guide.updated(time) : copy.guide.saved}</small>
+    </section>
+  </div>
 }
 
 function WrongWayScreen({ locale, journey, back, correct, call }: { locale: Locale; journey: api.Journey | null; back: () => void; correct: () => void; call: () => void }) {
@@ -411,8 +432,8 @@ function WrongWayScreen({ locale, journey, back, correct, call }: { locale: Loca
     } else void send()
   }, [journey])
   const wrong = Boolean(ack?.wrong_direction)
-  const body = checking ? copy.help.checking : !journey ? copy.help.noJourney : !ack ? copy.help.unavailable : wrong ? `${copy.help.wrongBody}${ack.notify_family ? ` ${copy.help.familyTold}` : ''}` : copy.help.safe
-  return <div className={`screen wrong-screen${wrong ? ' confirmed-wrong' : ''}`}><div className="warning-top"><BackButton onClick={back} label={copy.back} /><strong>{copy.help.top}</strong></div><RotateCcw className="turn-symbol" /><section className="wrong-sheet"><h1>{wrong ? copy.help.wrong : copy.help.lost}</h1><p role="status">{body}</p><div className="screen-actions two"><PrimaryButton onClick={correct}>{copy.help.correct}</PrimaryButton><SecondaryButton onClick={call}>{copy.help.call}</SecondaryButton></div></section></div>
+  const body = !journey ? copy.help.noJourney : wrong ? `${copy.help.wrongBody}${ack?.notify_family ? ` ${copy.help.familyTold}` : ''}` : copy.help.checkingBody
+  return <div className={`screen wrong-screen${wrong ? ' confirmed-wrong' : ' checking-direction'}`}><div className="warning-top"><BackButton onClick={back} label={copy.back} /><strong>{copy.help.top}</strong></div><div className={`direction-hero${wrong ? ' confirmed' : ''}`}><RotateCcw className="turn-symbol" />{wrong && <span>{copy.help.wrongLabel}</span>}</div><section className="wrong-sheet"><h1>{wrong ? copy.help.wrong : copy.help.checkingTitle}</h1><p role="status">{body}</p><div className="screen-actions two"><PrimaryButton onClick={correct}>{wrong ? copy.help.wrongRoute : copy.help.correct}</PrimaryButton><SecondaryButton onClick={call}>{copy.help.call}</SecondaryButton></div></section></div>
 }
 
 function SosScreen({ locale, back, record, confirm, setNotice }: { locale: Locale; back: () => void; record: () => void; confirm: (value: { title: string; body: string; action: string; onConfirm?: () => void }) => void; setNotice: (value: string) => void }) {
