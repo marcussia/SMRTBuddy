@@ -4,6 +4,10 @@
 Backend base URL: `http://127.0.0.1:8000` (or whatever port uvicorn was given).
 Interactive schema for everything below: `GET /docs` (Swagger UI).
 
+> **Schema change (19 Sep, later):** `LocationPing` gained optional `set_state`
+> (default false). Pings are transient unless it is true: the on-train scenario
+> ping must send it; the wrong-way check must not.
+>
 > **Schema change (19 Sep):** `Leg.step_free` is now the string enum above,
 > not a boolean. The captured examples below have been updated to match;
 > walk legs come back `"unverified"` until checked against real data.
@@ -444,9 +448,16 @@ Request:
   "lat": 1.3178, "lon": 103.8927,
   "accuracy_m": 25,                              // optional but needed for wrong-direction
   "recorded_at": "2026-09-19T08:40:00+08:00",
-  "location_state": "on_train"                   // optional: at_home | walking | on_bus | on_train | on_platform
+  "location_state": "on_train",                  // optional: at_home | walking | on_bus | on_train | on_platform
+  "set_state": true                              // optional, default false: see note below
 }
 ```
+
+A ping is transient by default: it records position and feeds
+wrong-direction detection, but does NOT change the journey's location
+context. Send `"set_state": true` only for a deliberate state change (she
+boarded the train). The wrong-way check must NOT set it, or it erases
+"on_train" and later advice loses the alight phrasing.
 
 Send `location_state` whenever the UI knows it — the SAME advice is worded
 differently per state (on_train → "get off at …"). Real response (200):
@@ -611,7 +622,7 @@ adv '{"user_id":"mdm_lim","origin":"Home (Bedok)","destination":"Singapore Gener
 
 # 3. THE DEMO: disruption while she is on the train -> "get off at Bugis..."
 adv '{"user_id":"mdm_lim","origin":"Home (Bedok)","destination":"Singapore General Hospital","arrive_by":"2026-09-19T10:00:00+08:00","scenario":"disruption_on_train"}' \
-    '{"lat":1.3178,"lon":103.8927,"accuracy_m":25,"recorded_at":"2026-09-19T08:40:00+08:00","location_state":"on_train"}'
+    '{"lat":1.3178,"lon":103.8927,"accuracy_m":25,"recorded_at":"2026-09-19T08:40:00+08:00","location_state":"on_train","set_state":true}'
 
 # 4. lift outage + wheelchair profile -> take_taxi with driver card
 adv '{"user_id":"wc_user","origin":"Home (Bedok)","destination":"Singapore General Hospital","arrive_by":"2026-09-19T10:00:00+08:00","scenario":"lift_outage"}'

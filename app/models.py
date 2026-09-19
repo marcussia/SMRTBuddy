@@ -144,6 +144,11 @@ class LocationPing(BaseModel):
     accuracy_m: float | None = None     # §7.4: suppress when accuracy is poor
     recorded_at: datetime
     location_state: LocationState | None = None
+    # A ping is TRANSIENT by default: it records where she was, and feeds
+    # wrong-direction detection, but does not rewrite the journey's location
+    # context (a wrong-way check must not erase "on_train"). Set true when the
+    # ping is also a deliberate state change.
+    set_state: bool = False
 
 
 class LocationAck(BaseModel):
