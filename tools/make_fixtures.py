@@ -159,7 +159,7 @@ SCENARIOS: dict[str, dict] = {
 PLANNED_CLOSURE_MSG = (
     "[FIXTURE] 05:00-EW-Planned Service Adjustments. East West Line: no train "
     "service between City Hall and Outram Park (City Hall, Raffles Place, "
-    "Tanjong Pagar, Outram Park) on 19 and 20 Sep 2026 (Fri and Sat) to "
+    "Tanjong Pagar, Outram Park) on 19 and 20 Sep 2026 (Sat and Sun) to "
     "facilitate track renewal works. Free regular bus services are available "
     "at designated stops between affected stations. NEL and TEL platforms at "
     "Outram Park remain open.")
