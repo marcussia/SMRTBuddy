@@ -50,9 +50,14 @@ The decision engine is the product. Nine rules run in order, first match wins:
 
 Every response is auditable. `reason` is plain English, `triggered_by` names the data sources that fired, and `data_status` says per source whether the data was live, a labelled fixture, or unavailable. An unreachable source is reported as unavailable, never papered over. If the engine cannot name the source behind a recommendation, that is a bug.
 
-`[FILL: one short paragraph on the real frontend once Germaine's is in. What it renders and how it reads the API.]`
+The frontend is a React app served as static files by the same FastAPI
+process, so a judge runs one command. It calls the API for journey planning,
+advice, location pings and SOS; the six replay scenarios can be switched from
+inside the app and re-request advice live. Screens outside that flow are
+labelled "design preview" on screen, and any advice built on fixture data
+carries a visible REPLAY tag.
 
-Until then, a fallback view ships at `/app` (plain HTML/JS, no build step). It puts Leaflet on OSM tiles with ODbL attribution, draws the recommended route solid, the disrupted section dashed red and alternatives dotted, and shows crowding as three-level text badges, a live decide-by countdown, and the per-source provenance chips. Fixtures are labelled on screen.
+A plainer fallback view also ships at `/app` (plain HTML/JS, no build step). It puts Leaflet on OSM tiles with ODbL attribution, draws the recommended route solid, the disrupted section dashed red and alternatives dotted, and shows crowding as three-level text badges, a live decide-by countdown, and the per-source provenance chips. Fixtures are labelled on screen.
 
 Stack: Python 3.11+, FastAPI, Pydantic; Leaflet and OpenStreetMap tiles for the map layer.
 
@@ -139,7 +144,12 @@ We would rather name these than have a judge find them.
 
 **OpenStreetMap depth.** Walk legs are routed over OSM footways and the map renders OSM tiles with attribution, but we do not read the pedestrian detail the brief names (stairs, lifts, covered walkways, crossings) from OSM tags. This is the thinnest part of our OSM use and we know it.
 
-**Step-free is asserted, not checked.** Walk legs are marked step-free by default. For this persona that is the wrong direction to be wrong in, and it is the first thing we would fix.
+**Step-free status is labelled, not fully known.** Walk legs are marked
+"unverified" rather than claimed step-free; a known lift outage downgrades the
+legs touching that station to "not step-free". Routing blocks only on
+not-step-free and allows unverified, because rejecting everything unverified
+would rule out all walking. Reading OSM stair and lift tags directly is the
+next step.
 
 **Timing is assumed, not measured** (Section 4), and `eta_range` is a fixed-width band, not historical variance.
 
@@ -151,7 +161,11 @@ We would rather name these than have a judge find them.
 
 **Still stubbed:** `POST /journeys/{id}/precheck` (marked `X-Stub: true`). The fallback view has not been opened on a real phone browser, only 390 px emulation, and the brief scores on a real phone. It also does not render the taxi driver card.
 
-`[FILL: anything the real frontend can't do yet. Naming it costs less than a judge finding it.]`
+**Some screens are design previews** — language selection, profile setup,
+family access and the recording screen — labelled as such in the interface.
+Voice input uses the browser's speech API, not our backend. Exit-level
+wayfinding on the guide screen ("Follow Exit 7", "28 m ahead") is marked
+illustrative because we have no exit-level data.
 
 ---
 
