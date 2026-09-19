@@ -1,0 +1,21 @@
+# Never ship secrets or local state into the build context.
+.env
+.env.*
+.venv/
+.git/
+node_modules/
+__pycache__/
+*.pyc
+dist/.vite/
+
+# Not needed at runtime (frontend is prebuilt into dist/).
+src/
+design/
+archive/
+tools/
+*.md
+package.json
+package-lock.json
+tsconfig*.json
+vite.config.*
+data/sos_audio/
