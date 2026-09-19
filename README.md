@@ -147,6 +147,7 @@ name its source is treated as a bug.
 | DataMall `PubFloodAlerts`, `TrafficIncidents`, `v3/BusArrival`, `Taxi-Availability`, `TaxiStands` | floods, road incidents, bus loads, taxi supply | AccountKey |
 | data.gov.sg two-hour forecast | rain on the route | none |
 | **OpenStreetMap** (FOSSGIS foot-profile OSRM) | real pedestrian routing for every walk leg | none |
+| **OSM Overpass** (captured) | steps, lifts and wheelchair tags for step-free status: `data/replay/` | none |
 | Organisers' station GeoJSON (this repo) | station geometry (WGS84, verified) | — |
 | DataMall BusRoutes/BusStops (captured) | the verified bus 2 alternative — `data/replay/` | — |
 

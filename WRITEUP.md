@@ -57,7 +57,7 @@ inside the app and re-request advice live. Screens outside that flow are
 labelled "design preview" on screen, and any advice built on fixture data
 carries a visible REPLAY tag.
 
-A plainer fallback view also ships at `/app` (plain HTML/JS, no build step). It puts Leaflet on OSM tiles with ODbL attribution, draws the recommended route solid, the disrupted section dashed red and alternatives dotted, and shows crowding as three-level text badges, a live decide-by countdown, and the per-source provenance chips. Fixtures are labelled on screen.
+A plainer fallback view also ships at `/app` (plain HTML/JS, no build step). It puts Leaflet on OSM tiles with ODbL attribution, draws the recommended route solid, the disrupted section dashed red and alternatives dotted, and shows crowding as three-level text badges, per-leg step-free status, a live decide-by countdown, and the per-source provenance chips. Fixtures are labelled on screen.
 
 Stack: Python 3.11+, FastAPI, Pydantic; Leaflet and OpenStreetMap tiles for the map layer.
 
@@ -75,6 +75,7 @@ Stack: Python 3.11+, FastAPI, Pydantic; Leaflet and OpenStreetMap tiles for the 
 | DataMall `BusRoutes` + `BusStops` | one-time verified capture of the bus 2 corridor → `data/replay/` | Captured |
 | data.gov.sg two-hour forecast | rain → prefer MRT, shelter, road buffers | Live |
 | OpenStreetMap (FOSSGIS foot-profile OSRM; Nominatim, one geocode) | walking legs, geocoding | Live |
+| OSM Overpass (steps, elevators, wheelchair tags) | step-free classification of walk legs, capture in `data/replay/` | Captured |
 | Station footprint GeoJSON | station positions | Repo file |
 | Scenario fixtures | the six demo scenarios | Labelled fixtures |
 
@@ -111,8 +112,10 @@ Our routing decisions are computed from live data. Our timing is not. Every tran
 | Wrong-direction trigger | 3 divergent pings over ≥90 s, good GPS only | Product judgement: false alarms to family are costly |
 | Crowd cutoff | DataMall's own `h` band | The `l`/`m`/`h` scale is the API's, verified live; picking `h` is our judgement |
 | Station → weather-area mapping | hand-made table | Our reading of a map, unverified |
+| Steps-proximity threshold | 3 m | Measured on this corridor. A 15 m radius produced false positives near the SGH campus, where routes pass stair entrances constantly without climbing them. Routes that actually traverse a steps way touch it at 0–1.2 m; routes that merely pass stay 4 m or more |
+| Verified-coverage bar | 60% of route length | Chosen as plausible, not derived |
 
-Walk legs are the only durations that come from real geometry. They are routed over OSM footways, so the distance is measured even though the speed is assumed. Every other threshold in the system (flood radii, matching distances, fuzzy floors, notification throttles) was chosen as a plausible value and is listed in `STATUS.md`.
+Walk legs are the only durations that come from real geometry. They are routed over OSM footways, so the distance is measured even though the speed is assumed. Nearly every other threshold in the system (flood radii, matching distances, fuzzy floors, notification throttles) was chosen as a plausible value and is listed in `STATUS.md`. The steps threshold above is the exception: that one we measured.
 
 ---
 
@@ -142,14 +145,25 @@ We would rather name these than have a judge find them.
 
 **One corridor only.** Bedok to Outram Park, plus two named places: "Home (Bedok)" and "Singapore General Hospital", the two ends of Mdm Lim's journey in the brief. SGH was geocoded once via OSM Nominatim and saved to `data/replay/`; "Home (Bedok)" is a placeholder pinned to the Bedok station centroid. Adding a place is one geocode in a data file, so the small corridor is a time limit, not a design limit. Any other origin gets a clear message naming what is supported. We scoped deliberately rather than claim coverage we could not verify with real data.
 
-**OpenStreetMap depth.** Walk legs are routed over OSM footways and the map renders OSM tiles with attribution, but we do not read the pedestrian detail the brief names (stairs, lifts, covered walkways, crossings) from OSM tags. This is the thinnest part of our OSM use and we know it.
+**OpenStreetMap: we read the tags, and OSM mostly does not know.** Walk legs
+are routed over OSM footways, the map renders OSM tiles with ODbL attribution,
+and we query OSM's pedestrian tags directly. One cached Overpass query returned
+284 elements within 600 m of Bedok station, Outram Park station and Singapore
+General Hospital: 164 steps ways, 11 elevators, 87 `wheelchair=yes`, 9
+`wheelchair=no`, 5 `wheelchair=limited`, and 16 subway entrances. The capture
+is in `data/replay/osm_accessibility_corridor.json` with its provenance and the
+query text.
 
-**Step-free status is labelled, not fully known.** Walk legs are marked
-"unverified" rather than claimed step-free; a known lift outage downgrades the
-legs touching that station to "not step-free". Routing blocks only on
-not-step-free and allows unverified, because rejecting everything unverified
-would rule out all walking. Reading OSM stair and lift tags directly is the
-next step.
+Applied to our four demo walk routes, that gives 0 verified, 1 not step-free,
+3 unverified. Zero verified is the honest result: OSM's `wheelchair=yes`
+coverage around SGH never reached our 60% threshold for any route. The one
+positive finding is real — the Chinatown to SGH walk runs along a steps way,
+with the nearest lift 480 m away.
+
+**Step-free status is declared, not asserted.** Walk legs are unverified
+unless OSM says otherwise. Known lift outages downgrade affected legs to
+not step-free. We block routing on not step-free but allow unverified,
+because rejecting everything unverified would rule out all walking.
 
 **Timing is assumed, not measured** (Section 4), and `eta_range` is a fixed-width band, not historical variance.
 
@@ -171,7 +185,7 @@ illustrative because we have no exit-level data.
 
 ## 8. What we would do next
 
-1. Read lift, stair and covered-walkway tags from OSM, so step-free and sheltered routing comes from real tags instead of our defaults.
+1. Extend the OSM accessibility capture beyond the demo corridor, add covered-walkway tags for sheltered routing, and contribute the missing `wheelchair` tags around SGH back to OSM. The gap we found is fixable at the source.
 2. Learn disruption duration from historical incidents (the SG MRT archive the brief points at) instead of the 20-minute placeholder (the brief's own suggested AI direction).
 3. Expand beyond the demo corridor, verifying each route against real data the way bus 2 was verified.
 4. Retention policy and encryption for SOS audio; TTL on location pings.
@@ -182,6 +196,6 @@ illustrative because we have no exit-level data.
 
 - LTA DataMall — accessed under its published API terms (guide v6.8 in the organisers' repo)
 - data.gov.sg — Singapore Open Data Licence
-- OpenStreetMap — © OpenStreetMap contributors, ODbL; rendered with attribution. Routing via FOSSGIS OSRM and one Nominatim geocode, under their usage policies, with an identifying User-Agent and cached responses
+- OpenStreetMap — © OpenStreetMap contributors, ODbL; rendered with attribution. Routing via FOSSGIS OSRM, one Nominatim geocode and one Overpass query for pedestrian tags, all under their usage policies, with an identifying User-Agent and cached responses
 - Station footprint GeoJSON — provided in the problem statement repository
 - Libraries: FastAPI, Pydantic, uvicorn, rapidfuzz (MIT/BSD); Leaflet (BSD-2)
