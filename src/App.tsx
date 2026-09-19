@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Accessibility, ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
 import { guideCopy, languages, screenLabels, type Locale, type ScreenId } from './data'
 import { legPhoto } from './legMedia'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import { uiCopy, type UiCopy } from './uiCopy'
 import * as api from './api'
 
@@ -19,7 +21,7 @@ function App() {
   const [notice, setNotice] = useState('')
   const [confirm, setConfirm] = useState<{ title: string; body: string; action: string; onConfirm?: () => void } | null>(null)
   // --- live journey state (wired to the backend; see src/api.ts) ---
-  const [scenario, setScenario] = useState<api.ScenarioId>('disruption_on_train')
+  const [scenario, setScenario] = useState<api.ScenarioId | api.StageId>('disruption_on_train')
   const [journey, setJourney] = useState<api.Journey | null>(null)
   const [advice, setAdvice] = useState<api.Advice | null>(null)
   const [corridor, setCorridor] = useState<api.CorridorHelp | null>(null)
@@ -34,7 +36,7 @@ function App() {
   const navigate = (next: ScreenId) => { setNotice(''); setConfirm(null); setScreen(next) }
   const selectLocale = (next: Locale) => setLocale(next)
 
-  const planJourney = async (dest: string, useScenario: api.ScenarioId = scenario) => {
+  const planJourney = async (dest: string, useScenario: api.ScenarioId | api.StageId = scenario) => {
     const target = dest.trim() || 'Singapore General Hospital'
     setBusy(true); setCorridor(null); setNotice('')
     try {
@@ -47,6 +49,17 @@ function App() {
       const help = api.corridorHelp(err)
       if (help) { setCorridor(help); navigate('plan') }
       else setNotice(err instanceof Error ? `Could not reach the journey service. ${err.message}` : 'Could not reach the journey service.')
+    } finally { setBusy(false) }
+  }
+
+  const runStage = async (stage: api.StageId) => {
+    setBusy(true); setNotice(''); setCorridor(null)
+    try {
+      const result = await api.runStage(stage)
+      setJourney(result.journey); setAdvice(result.advice); setScenario(stage); setActiveStep(0)
+      navigate('overview')
+    } catch (err) {
+      setNotice(err instanceof Error ? `Could not run the demo stage. ${err.message}` : 'Could not run the demo stage.')
     } finally { setBusy(false) }
   }
 
@@ -75,7 +88,7 @@ function App() {
       {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('plan')} family={() => navigate('family')} />}
       {screen === 'plan' && <PlanScreen copy={copy} destination={destination} setDestination={setDestination} back={() => navigate('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
       {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
-      {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
+      {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} scenario={scenario} runStage={runStage} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
       {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => navigate('overview')} />}
       {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => navigate('overview')} next={() => setActiveStep((step) => Math.min((advice?.legs.length ?? 1) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
       {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
@@ -162,6 +175,43 @@ function ListeningScreen({ locale, transcript, setTranscript, back, accept, busy
 }
 
 
+
+// OSM map of the advice: recommended route solid, alternatives dotted, the
+// disrupted segment dashed red. Everything drawn comes from the API response.
+function RouteMap({ advice }: { advice: api.Advice }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!ref.current) return
+    const map = L.map(ref.current, { scrollWheelZoom: false })
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map)
+    const pts: [number, number][] = []
+    for (const leg of advice.legs) if (leg.geometry.length > 1) { L.polyline(leg.geometry, { color: '#0a4faa', weight: 6, opacity: .9 }).addTo(map); pts.push(...leg.geometry) }
+    for (const alt of advice.alternatives) for (const leg of alt) if (leg.geometry.length > 1) { L.polyline(leg.geometry, { color: '#666', weight: 4, dashArray: '2 8' }).addTo(map); pts.push(...leg.geometry) }
+    if (advice.affected_segment && advice.affected_segment.length > 1) { L.polyline(advice.affected_segment, { color: '#a11212', weight: 8, dashArray: '10 8' }).addTo(map); pts.push(...advice.affected_segment) }
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.18))
+    return () => { map.remove() }
+  }, [advice])
+  return <div className="route-map" ref={ref} aria-label="Journey map" />
+}
+
+// The three-stage demo driver (FRONTEND_CONTRACT.md). Each control re-plans
+// the journey against a LABELLED replay fixture and shows whatever the engine
+// actually returns — nothing here writes expected outputs into the UI.
+function StageBar({ copy, active, busy, run }: { copy: UiCopy; active: string; busy: boolean; run: (stage: api.StageId) => void }) {
+  const labels: Record<api.StageId, string> = {
+    demo_stage1_peak_crowding: copy.stages.s1,
+    demo_stage2_planned_closure: copy.stages.s2,
+    demo_stage3_breakdown: copy.stages.s3,
+  }
+  return <div className="stage-bar" role="group" aria-label={copy.stages.title}>
+    <span className="stage-caption">{copy.stages.title} · {copy.overview.simulated}</span>
+    <div className="stage-chips">{api.STAGES.map((stage) => <button key={stage.id} disabled={busy} className={active === stage.id ? 'active' : ''} onClick={() => run(stage.id)}>{labels[stage.id]}</button>)}</div>
+  </div>
+}
+
 function StepFreeBadge({ copy, leg }: { copy: UiCopy; leg: api.Leg }) {
   return <span className={`stepfree-badge ${leg.step_free}`}>{copy.legs.stepFree[leg.step_free]}</span>
 }
@@ -191,11 +241,11 @@ function AdviceBanner({ locale, copy, advice }: { locale: Locale; copy: UiCopy; 
   </div>
 }
 
-function OverviewScreen({ locale, copy, advice, journey, busy, back, start, notice }: { locale: Locale; copy: UiCopy; advice: api.Advice | null; journey: api.Journey | null; busy: boolean; back: () => void; start: () => void; notice: string }) {
+function OverviewScreen({ locale, copy, advice, journey, busy, scenario, runStage, back, start, notice }: { locale: Locale; copy: UiCopy; advice: api.Advice | null; journey: api.Journey | null; busy: boolean; scenario: string; runStage: (stage: api.StageId) => void; back: () => void; start: () => void; notice: string }) {
   if (!advice || !journey) return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><h1>{busy ? copy.overview.planning : copy.overview.empty}</h1><p>{busy ? copy.overview.checking : copy.overview.emptyDetail}</p></section></div>
   const legs = advice.legs
   const total = Math.round((new Date(legs[legs.length - 1]?.arrive ?? journey.arrive_by).getTime() - new Date(legs[0]?.depart ?? journey.arrive_by).getTime()) / 60000)
-  return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{copy.overview.title(legs.length)}</h1><p>{copy.overview.about(total)}</p></section><div className="journey-badges"><span><LocateFixed /> {copy.overview.landmarks}</span></div><AdviceBanner locale={locale} copy={copy} advice={advice} /><ol className="journey-list photo-list">{legs.map((leg, index) => { const photo = legPhoto(leg); return <li key={index}>{photo && <span className="leg-photo"><img src={photo.image} alt={photo.alt} /><i>{copy.legs.illustrative}</i></span>}<b>{index + 1}</b><span><strong>{legTitle(copy, leg)}</strong><LegTimes copy={copy} leg={leg} /><small>{leg.instruction}</small><StepFreeBadge copy={copy} leg={leg} /></span></li> })}</ol>{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> {copy.overview.start}</PrimaryButton></div></div>
+  return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{copy.overview.title(legs.length)}</h1><p>{copy.overview.about(total)}</p></section><div className="journey-badges"><span><LocateFixed /> {copy.overview.landmarks}</span></div><AdviceBanner locale={locale} copy={copy} advice={advice} /><RouteMap advice={advice} /><StageBar copy={copy} active={scenario} busy={busy} run={runStage} /><ol className="journey-list photo-list">{legs.map((leg, index) => { const photo = legPhoto(leg); return <li key={index}>{photo && <span className="leg-photo"><img src={photo.image} alt={photo.alt} /><i>{copy.legs.illustrative}</i></span>}<b>{index + 1}</b><span><strong>{legTitle(copy, leg)}</strong><LegTimes copy={copy} leg={leg} /><small>{leg.instruction}</small><StepFreeBadge copy={copy} leg={leg} /></span></li> })}</ol>{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> {copy.overview.start}</PrimaryButton></div></div>
 }
 
 function SharingScreen({ copy, state, start, continueWithout, back }: { copy: UiCopy; state: LocationState; start: () => void; continueWithout: () => void; back: () => void }) {

@@ -137,7 +137,7 @@ function arriveBy(): string {
   return `${y}-${m}-${d}T10:00:00+08:00`
 }
 
-export async function createJourney(destination: string, scenario: ScenarioId): Promise<Journey> {
+export async function createJourney(destination: string, scenario: ScenarioId | StageId): Promise<Journey> {
   await ensureProfiles()
   const spec = SCENARIOS.find((s) => s.id === scenario)
   const body: Record<string, unknown> = {
@@ -147,9 +147,29 @@ export async function createJourney(destination: string, scenario: ScenarioId): 
   if (spec && 'preferMode' in spec) body.prefer_mode = spec.preferMode
   const journey = await call<Journey>('POST', '/journeys', body)
   if (spec && 'onTrain' in spec) {
-    await postLocation(journey.journey_id, 'on_train')
+    await postLocation(journey.journey_id, 'on_train', undefined, true)
   }
   return journey
+}
+
+
+// --- the three-stage demo (see FRONTEND_CONTRACT.md, "The three-stage demo").
+// One journey, escalating events; every stage runs through the real engine
+// from her pinged position. Fixtures are labelled; the UI shows the REPLAY tag.
+export const STAGES = [
+  { id: 'demo_stage1_peak_crowding', ping: null },
+  { id: 'demo_stage2_planned_closure',
+    ping: { lat: 1.317585, lon: 103.892281, accuracy_m: 25 } },  // Paya Lebar
+  { id: 'demo_stage3_breakdown',
+    ping: { lat: 1.281812, lon: 103.859152, accuracy_m: 25 } },  // Bayfront
+] as const
+export type StageId = (typeof STAGES)[number]['id']
+
+export async function runStage(stage: StageId): Promise<{ journey: Journey; advice: Advice }> {
+  const spec = STAGES.find((s) => s.id === stage)!
+  const journey = await createJourney('Singapore General Hospital', stage)
+  if (spec.ping) await postLocation(journey.journey_id, 'on_train', spec.ping, true)
+  return { journey, advice: await getAdvice(journey.journey_id) }
 }
 
 export function getAdvice(journeyId: string): Promise<Advice> {
@@ -158,10 +178,13 @@ export function getAdvice(journeyId: string): Promise<Advice> {
 
 export function postLocation(journeyId: string,
                              state: 'at_home' | 'walking' | 'on_bus' | 'on_train' | 'on_platform',
-                             coords?: { lat: number; lon: number; accuracy_m?: number }): Promise<LocationAck> {
+                             coords?: { lat: number; lon: number; accuracy_m?: number },
+                             setState = false): Promise<LocationAck> {
+  // Pings are transient unless setState is true (a deliberate state change,
+  // e.g. she boarded the train). See FRONTEND_CONTRACT.md.
   const p = coords ?? ON_TRAIN_PING
   return call('POST', `/journeys/${journeyId}/location`, {
-    ...p, recorded_at: new Date().toISOString(), location_state: state,
+    ...p, recorded_at: new Date().toISOString(), location_state: state, set_state: setState,
   })
 }
 
