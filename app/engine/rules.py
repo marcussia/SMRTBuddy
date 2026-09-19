@@ -558,8 +558,14 @@ def assemble(ctx: Context, decision: Decision,
         elif srcs:
             ds["walk_routing"] = "live"
 
-    unavailable = [n for n, s in ds.items() if s.startswith("unavailable")]
-    confidence = ("low" if unavailable or
+    # Confidence reflects only the sources this DECISION rests on
+    # (triggered_by) plus the walking-route provenance of the chosen option.
+    # An unused source being down is honestly visible in data_status but does
+    # not shake a decision that never consulted it.
+    relevant = set(decision.triggered_by)
+    unavailable_relevant = [n for n in relevant
+                            if ds.get(n, "").startswith("unavailable")]
+    confidence = ("low" if unavailable_relevant or
                   (decision.chosen and
                    "straightline_estimate" in decision.chosen.walk_sources)
                   else "high" if decision.action == "proceed" else "medium")
