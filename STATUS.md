@@ -265,3 +265,34 @@ browser — the brief scores Ease of Use there; the real frontend still owns tha
 **Known gap (deliberate, small):** the fallback page does not render
 driver_card for take_taxi scenarios (the data is in the response; the real
 frontend must show it).
+
+---
+
+## 2026-09-19 (day) — Frontend wired to the live API (commit `881182b`)
+
+Germaine's Vite/React frontend previously made zero API calls. Now:
+- deps pinned exactly (React 19.3.0, Vite 8.3.0, TS 7.0.2, lucide 1.47.0)
+- `src/api.ts`: single client, base = same origin (/ui) or VITE_API_BASE / ?api=
+- WIRED to the live backend: plan → POST /journeys; overview + guide →
+  GET advice (headline, reason, eta, decide_by, per-leg times/crowding);
+  wrong-way → real location-ping ack with an honest explanation of the
+  3-ping rule; SOS "Trusted family" → real two-step POST /sos (toast shows
+  who was notified). Scenario switcher on overview + guide: six chips under a
+  "REPLAY DATA — labelled test scenarios" caption; switching re-plans and
+  re-requests advice. Advice from fixtures carries an on-screen REPLAY tag.
+- Out-of-corridor 422 renders as a helpful card naming the corridor with a
+  one-tap suggested journey (no red error).
+- STILL STATIC, now visibly labelled "Design preview — not live data":
+  language, profile, recording (records locally, upload not wired), family,
+  family-journey. Exit-level wayfinding on the guide screen ("Follow Exit 7",
+  "28 m ahead") marked illustrative — no exit-level data in the backend.
+- dist/ committed and served by FastAPI at /ui (vite base './'); judge runs
+  one command, no npm. /app fallback kept.
+- DESIGN.md + PRODUCT.md reworded to accessibility-constrained (no age framing).
+
+**Verified twice in headless Chrome at 390 px** (dev tree AND a fresh keyless
+clone following README literally): language→plan→corridor help→suggested
+journey→real "Get off at Bugis…" advice with REPLAY tag→scenario switch to
+clear_day ("All clear") and flood ("Do not travel")→guide banner + illustrative
+note→wrong-way real ack→SOS two-step→"SOS sent. Notified: daughter." No
+horizontal scroll. Still not tested on a physical phone.
