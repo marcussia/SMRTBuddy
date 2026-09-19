@@ -385,3 +385,37 @@ pinged position, nothing scripted:
 - Frontend spec for the stages added to FRONTEND_CONTRACT.md.
 - Commits are LOCAL, not pushed: the stage-2 fixture message text is awaiting
   the user's plausibility check.
+
+---
+
+## 2026-09-19 (afternoon) — Frontend correctness pass (now owning src/)
+
+Merged codex/real-permissions-landmarks cleanly (their voice/permission work
+kept). Then, in order, each verified in headless Chrome + 6/6 + 3/3 after:
+1. `d26d3b1` routeSteps deleted — overview + guide render REAL API legs
+   (count, times, instructions, crowding, step-free badges). Invented exits
+   and distances removed (310 m contradicted our measured 548 m). Landmark
+   photos only where they match a real leg, labelled illustrative.
+2. `0ad0a64` three-stage driver in the React UI + Leaflet OSM map (pinned
+   1.9.4): legs solid, alternatives dotted, affected segment dashed red,
+   attribution shown; stages labelled "Simulated disruption for
+   demonstration". Verified: three distinct real advices. Also fixed the
+   scenario-3 ping to send set_state (on-train phrasing restored in /ui).
+3. `0865e7b` profile setup posts real MobilityProfile fields + locale from
+   the language picker. Verified end to end in zh: wheelchair + 400 m limit
+   flipped the disruption advice to a localised taxi recommendation. The
+   untruthful "Step-free route is on / sheltered paths preferred" strip is
+   gone.
+4. `68c2794` SOS "Call 995" now dials tel:995.
+5. `05e692c` prefers_shelter added for real (backend field + weather rule +
+   toggle): rain + exposed walk + preference → leave_earlier; same inputs
+   without preference → proceed. Verified both ways.
+dist/ rebuilt and committed; /ui now serves the wired UI.
+
+**Still hardcoded in the frontend (known, labelled or out of demo path):**
+family access/journey screens (labelled "Simulated family view"), recording
+upload (says so on screen), non-en advice banner shows a generic localized
+summary instead of the English reason (reason is en-only by design), pace
+choice maps to 0.8/1.4 m/s (stated parameter), landmark photos (labelled
+illustrative), Hui Ling naming, six-scenario chips no longer in the React UI
+(stages replaced them; the fallback dashboard still has all nine buttons).
