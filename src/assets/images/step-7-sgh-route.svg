@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Route from Outram Park Exit 7 to Singapore General Hospital</title>
+  <desc id="desc">A high-contrast wayfinding diagram showing Exit 7 connected to SGH by a sheltered path.</desc>
+  <rect width="1200" height="900" fill="#0d2136"/>
+  <path d="M130 615 C330 615 355 390 565 390 S800 610 1030 610" fill="none" stroke="#f5f1e8" stroke-width="118" stroke-linecap="round"/>
+  <path d="M130 615 C330 615 355 390 565 390 S800 610 1030 610" fill="none" stroke="#0f6f55" stroke-width="18" stroke-linecap="round" stroke-dasharray="2 42"/>
+  <g transform="translate(92 482)">
+    <rect width="220" height="220" rx="28" fill="#ffd400"/>
+    <text x="110" y="88" text-anchor="middle" fill="#0d2136" font-family="Arial, sans-serif" font-size="43" font-weight="700">EXIT</text>
+    <text x="110" y="172" text-anchor="middle" fill="#0d2136" font-family="Arial, sans-serif" font-size="88" font-weight="800">7</text>
+  </g>
+  <g transform="translate(874 462)">
+    <rect width="246" height="246" rx="28" fill="#fffdfa"/>
+    <path d="M68 74h110v106H68z" fill="#0f6f55"/>
+    <path d="M108 48h30v158h-30zM44 112h158v30H44z" fill="#fffdfa"/>
+    <text x="123" y="232" text-anchor="middle" fill="#0d2136" font-family="Arial, sans-serif" font-size="44" font-weight="800">SGH</text>
+  </g>
+  <g fill="#f5f1e8" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="600" y="105" font-size="58" font-weight="800">SHELTERED WALKWAY</text>
+    <text x="600" y="167" font-size="30">Follow the green SGH signs</text>
+  </g>
+  <path d="M560 334l78 56-78 56" fill="none" stroke="#ffd400" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

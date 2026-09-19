@@ -4,4 +4,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: './',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/profiles': 'http://127.0.0.1:8000',
+      '/journeys': 'http://127.0.0.1:8000',
+      '/sos': 'http://127.0.0.1:8000',
+      '/health': 'http://127.0.0.1:8000',
+    },
+  },
 })

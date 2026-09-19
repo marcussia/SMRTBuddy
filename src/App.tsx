@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { Accessibility, ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, Languages, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
+import { Accessibility, ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
 import { guideCopy, languages, screenLabels, type Locale, type ScreenId } from './data'
+import { routeSteps } from './routeSteps'
+import { uiCopy, type UiCopy } from './uiCopy'
 import * as api from './api'
-import exitPhoto from './assets/images/outram-exit-7.jpg'
 
 type SpeechEvent = { results: ArrayLike<{ 0: { transcript: string } }> }
-type Recognition = { lang: string; interimResults: boolean; continuous: boolean; onresult: ((event: SpeechEvent) => void) | null; onerror: (() => void) | null; onend: (() => void) | null; start: () => void; stop: () => void }
+type SpeechErrorEvent = { error?: string }
+type Recognition = { lang: string; interimResults: boolean; continuous: boolean; onresult: ((event: SpeechEvent) => void) | null; onerror: ((event: SpeechErrorEvent) => void) | null; onend: (() => void) | null; start: () => void; stop: () => void }
+type LocationState = 'idle' | 'requesting' | 'active' | 'denied' | 'timeout' | 'unavailable' | 'service-error'
 const storageKey = 'mdm-lim-locale'
 
 function App() {
   const [screen, setScreen] = useState<ScreenId>('language')
   const [locale, setLocale] = useState<Locale>(() => { const saved = localStorage.getItem(storageKey); return saved === 'zh' || saved === 'ms' || saved === 'ta' ? saved : 'en' })
   const [destination, setDestination] = useState('')
-  const [transcript, setTranscript] = useState('Singapore General Hospital')
+  const [transcript, setTranscript] = useState('')
   const [notice, setNotice] = useState('')
   const [confirm, setConfirm] = useState<{ title: string; body: string; action: string; onConfirm?: () => void } | null>(null)
   // --- live journey state (wired to the backend; see src/api.ts) ---
@@ -21,7 +24,13 @@ function App() {
   const [advice, setAdvice] = useState<api.Advice | null>(null)
   const [corridor, setCorridor] = useState<api.CorridorHelp | null>(null)
   const [busy, setBusy] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
+  const [locationState, setLocationState] = useState<LocationState>('idle')
+  const [lastLocationAt, setLastLocationAt] = useState<Date | null>(null)
+  const watchRef = useRef<number | null>(null)
+  const copy = uiCopy[locale]
   useEffect(() => localStorage.setItem(storageKey, locale), [locale])
+  useEffect(() => () => { if (watchRef.current !== null) navigator.geolocation.clearWatch(watchRef.current) }, [])
   const navigate = (next: ScreenId) => { setNotice(''); setConfirm(null); setScreen(next) }
   const selectLocale = (next: Locale) => setLocale(next)
 
@@ -41,136 +50,161 @@ function App() {
     } finally { setBusy(false) }
   }
 
-  const switchScenario = async (next: api.ScenarioId) => {
-    if (busy) return
-    await planJourney(journey?.destination ?? destination, next)
+  const startJourney = async () => {
+    if (!window.isSecureContext) { setLocationState('unavailable'); return }
+    if (!navigator.geolocation) { setLocationState('unavailable'); return }
+    setLocationState('requesting')
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      setLastLocationAt(new Date(position.timestamp))
+      try {
+        if (journey) await api.postLocation(journey.journey_id, 'walking', { lat: position.coords.latitude, lon: position.coords.longitude, accuracy_m: position.coords.accuracy })
+      } catch { setLocationState('service-error'); return }
+      setLocationState('active'); setActiveStep(0); navigate('guide')
+      watchRef.current = navigator.geolocation.watchPosition((next) => {
+        setLastLocationAt(new Date(next.timestamp))
+        if (journey) void api.postLocation(journey.journey_id, 'walking', { lat: next.coords.latitude, lon: next.coords.longitude, accuracy_m: next.coords.accuracy }).catch(() => setLocationState('service-error'))
+      }, () => setLocationState('denied'), { enableHighAccuracy: true, maximumAge: 15000, timeout: 10000 })
+    }, (error) => setLocationState(error.code === error.PERMISSION_DENIED ? 'denied' : error.code === error.TIMEOUT ? 'timeout' : 'unavailable'), { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 })
   }
-
-  const startJourney = () => {
-    if (!navigator.geolocation) { setNotice('Live location is unavailable. Cached directions will still work.'); window.setTimeout(() => navigate('guide'), 900); return }
-    setNotice('Checking location permission…')
-    navigator.geolocation.getCurrentPosition(() => navigate('guide'), () => { setNotice('Location was not shared. Continuing with cached directions.'); window.setTimeout(() => navigate('guide'), 1100) }, { enableHighAccuracy: true, timeout: 5000 })
-  }
+  const continueWithoutSharing = () => { setLocationState('idle'); setActiveStep(0); navigate('guide') }
+  const finishJourney = () => { if (watchRef.current !== null) navigator.geolocation.clearWatch(watchRef.current); watchRef.current = null; setLocationState('idle'); navigate('overview') }
   return <main className="prototype-shell">
-    <PrototypeNav screen={screen} locale={locale} navigate={navigate} selectLocale={selectLocale} />
-    <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className="phone" data-screen={screen}>
-      {screen === 'language' && <LanguageScreen locale={locale} selectLocale={selectLocale} next={() => navigate('profile')} />}
-      {screen === 'profile' && <ProfileScreen back={() => navigate('language')} traveller={() => navigate('plan')} family={() => navigate('family')} />}
-      {screen === 'plan' && <PlanScreen destination={destination} setDestination={setDestination} back={() => navigate('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
-      {screen === 'listening' && <ListeningScreen transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript || 'Singapore General Hospital'); navigate('recognised') }} notice={notice} setNotice={setNotice} />}
-      {screen === 'recognised' && <RecognisedScreen destination={destination || 'Singapore General Hospital'} back={() => navigate('plan')} busy={busy} next={() => { void planJourney(destination || 'Singapore General Hospital') }} />}
-      {screen === 'overview' && <OverviewScreen advice={advice} journey={journey} scenario={scenario} switchScenario={switchScenario} busy={busy} back={() => navigate('plan')} start={startJourney} notice={notice} />}
-      {screen === 'guide' && <GuideScreen locale={locale} selectLocale={selectLocale} advice={advice} scenario={scenario} switchScenario={switchScenario} busy={busy} back={() => navigate('overview')} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
-      {screen === 'wrong-way' && <WrongWayScreen journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => setConfirm({ title: 'Call trusted family?', body: 'A call will only begin after you confirm.', action: 'Call family' })} />}
-      {screen === 'sos' && <SosScreen back={() => navigate('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
+    <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
+    <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className={`phone locale-${locale}`} data-screen={screen}>
+      {screen === 'language' && <LanguageScreen locale={locale} copy={copy} selectLocale={selectLocale} next={() => navigate('profile')} />}
+      {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('plan')} family={() => navigate('family')} />}
+      {screen === 'plan' && <PlanScreen copy={copy} destination={destination} setDestination={setDestination} back={() => navigate('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
+      {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
+      {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
+      {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => navigate('overview')} />}
+      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} locationState={locationState} lastLocationAt={lastLocationAt} back={() => navigate('overview')} next={() => setActiveStep((step) => Math.min(7, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
+      {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
+      {screen === 'sos' && <SosScreen locale={locale} back={() => navigate('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
       {screen === 'recording' && <RecordingScreen back={() => navigate('sos')} />}
       {screen === 'family' && <FamilyAccessScreen back={() => navigate('profile')} next={() => navigate('family-journey')} />}
       {screen === 'family-journey' && <FamilyJourneyScreen back={() => navigate('family')} />}
       {notice && screen !== 'listening' && screen !== 'overview' && <div className="toast" role="status">{notice}</div>}
-      {confirm && <ConfirmSheet {...confirm} close={() => setConfirm(null)} />}
+      {confirm && <ConfirmSheet {...confirm} cancel={copy.cancel} close={() => setConfirm(null)} />}
     </div></section>
   </main>
 }
 
-function PrototypeNav({ screen, locale, navigate, selectLocale }: { screen: ScreenId; locale: Locale; navigate: (screen: ScreenId) => void; selectLocale: (locale: Locale) => void }) {
-  return <aside className="prototype-nav" aria-label="Pitch demo navigation"><div className="prototype-brand"><span className="signal-mark"><i /><i /><i /></span><div><strong>Mdm Lim</strong><span>Commuter companion</span></div></div><p className="prototype-note">Jump to any judging moment. This panel is hidden on phones.</p><nav>{screenLabels.map((item, index) => <div key={item.id}>{item.group !== screenLabels[index - 1]?.group && <span className="nav-group">{item.group}</span>}<button className={screen === item.id ? 'active' : ''} onClick={() => navigate(item.id)}><span>{item.label}</span><ChevronRight size={18} /></button></div>)}</nav><div className="nav-languages"><span className="nav-group">Step language</span><div>{languages.map((item) => <button key={item.id} className={locale === item.id ? 'active' : ''} onClick={() => { selectLocale(item.id); navigate('guide') }}>{item.code}</button>)}</div></div></aside>
+function PrototypeNav({ screen, locale, activeStep, navigate, selectLocale, setActiveStep }: { screen: ScreenId; locale: Locale; activeStep: number; navigate: (screen: ScreenId) => void; selectLocale: (locale: Locale) => void; setActiveStep: (step: number) => void }) {
+  return <aside className="prototype-nav" aria-label="Pitch demo navigation"><div className="prototype-brand"><span className="signal-mark"><i /><i /><i /></span><div><strong>Mdm Lim</strong><span>Commuter companion</span></div></div><p className="prototype-note">Jump to any judging moment. This panel is hidden on phones.</p><nav>{screenLabels.map((item, index) => <div key={item.id}>{item.group !== screenLabels[index - 1]?.group && <span className="nav-group">{item.group}</span>}<button className={screen === item.id ? 'active' : ''} onClick={() => navigate(item.id)}><span>{item.label}</span><ChevronRight size={18} /></button></div>)}</nav><span className="nav-group">Live step</span><div className="nav-step-grid">{routeSteps(locale).map((_, index) => <button key={index} className={screen === 'guide' && activeStep === index ? 'active' : ''} onClick={() => { setActiveStep(index); navigate('guide') }}>{index + 1}</button>)}</div><div className="nav-languages"><span className="nav-group">Step language</span><div>{languages.map((item) => <button key={item.id} className={locale === item.id ? 'active' : ''} onClick={() => selectLocale(item.id)}>{item.code}</button>)}</div></div></aside>
 }
 
-function BackButton({ onClick, light = false }: { onClick: () => void; light?: boolean }) { return <button className={`back-button${light ? ' light' : ''}`} onClick={onClick} aria-label="Go back"><ArrowLeft /></button> }
+function BackButton({ onClick, light = false, label = 'Go back' }: { onClick: () => void; light?: boolean; label?: string }) { return <button className={`back-button${light ? ' light' : ''}`} onClick={onClick} aria-label={label}><ArrowLeft /></button> }
 function TopBar({ title, back }: { title: string; back: () => void }) { return <header className="top-bar"><BackButton onClick={back} /><strong>{title}</strong><span /></header> }
 function PrimaryButton({ children, onClick, disabled = false }: { children: React.ReactNode; onClick?: () => void; disabled?: boolean }) { return <button className="primary-button" onClick={onClick} disabled={disabled}>{children}</button> }
 function SecondaryButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) { return <button className="secondary-button" onClick={onClick}>{children}</button> }
 
-// Visible label for screens whose content is design work, not live data (§3.2.4:
-// mocked data must never be presented as live).
-function PreviewBadge() { return <span className="preview-badge">Design preview — not live data</span> }
-
-// Scenario switcher: the six labelled replay/injected-data scenarios the brief
-// permits (§2.6). Switching re-plans the same journey and re-requests advice.
-function ScenarioBar({ scenario, switchScenario, busy }: { scenario: api.ScenarioId; switchScenario: (s: api.ScenarioId) => void; busy: boolean }) {
-  return <div className="scenario-bar" role="group" aria-label="Replay scenarios">
-    <span className="scenario-caption">REPLAY DATA — labelled test scenarios</span>
-    <div className="scenario-chips">{api.SCENARIOS.map((s) => <button key={s.id} disabled={busy} className={s.id === scenario ? 'active' : ''} onClick={() => switchScenario(s.id)}>{s.label}</button>)}</div>
-  </div>
+function LanguageScreen({ locale, copy, selectLocale, next }: { locale: Locale; copy: UiCopy; selectLocale: (locale: Locale) => void; next: () => void }) {
+  return <div className={`screen language-screen locale-${locale}`}><section className="language-sheet"><p className="welcome">{copy.language.welcome}</p><h1>{copy.language.title}</h1><p className="helper">{copy.language.helper}</p><div className="language-list" role="radiogroup" aria-label={copy.language.aria}>{languages.map((item) => <button key={item.id} className={locale === item.id ? 'selected' : ''} onClick={() => selectLocale(item.id)} role="radio" aria-checked={locale === item.id}><span>{item.label}</span><b>{item.code}</b></button>)}</div><PrimaryButton onClick={next}>{copy.language.continue}</PrimaryButton></section></div>
 }
 
-function LanguageScreen({ locale, selectLocale, next }: { locale: Locale; selectLocale: (locale: Locale) => void; next: () => void }) {
-  return <div className="screen language-screen"><section className="language-sheet"><p className="welcome">Welcome!</p><h1>Choose your language.</h1><p className="helper">You can change this at any time.</p><div className="language-list" role="radiogroup" aria-label="Choose your language">{languages.map((item) => <button key={item.id} className={locale === item.id ? 'selected' : ''} onClick={() => selectLocale(item.id)} role="radio" aria-checked={locale === item.id}><span>{item.label}</span><b>{item.code}</b></button>)}</div><PrimaryButton onClick={next}>Continue</PrimaryButton><PreviewBadge /></section></div>
-}
-
-function ProfileScreen({ back, traveller, family }: { back: () => void; traveller: () => void; family: () => void }) {
-  return <div className="screen paper-screen profile-screen"><TopBar title="Choose your profile" back={back} /><h1>Who is using this app?</h1><div className="role-list"><button onClick={traveller}><b>A</b><span><strong>I am travelling</strong><small>Plan and follow my own journey.</small></span><ArrowRight /></button><button onClick={family}><b>B</b><span><strong>I am family</strong><small>Follow journeys that are shared with me.</small></span><ArrowRight /></button></div><p className="consent-copy">Location will never be shared automatically without your permission.</p><PreviewBadge /></div>
+function ProfileScreen({ copy, back, traveller, family }: { copy: UiCopy; back: () => void; traveller: () => void; family: () => void }) {
+  return <div className="screen paper-screen profile-screen"><TopBar title={copy.profile.top} back={back} /><h1>{copy.profile.title}</h1><div className="role-list"><button onClick={traveller}><b>A</b><span><strong>{copy.profile.traveller}</strong><small>{copy.profile.travellerDetail}</small></span><ArrowRight /></button><button onClick={family}><b>B</b><span><strong>{copy.profile.family}</strong><small>{copy.profile.familyDetail}</small></span><ArrowRight /></button></div><p className="consent-copy">{copy.profile.consent}</p></div>
 }
 
 function PlaceField({ label, value, placeholder, icon, onChange, listen }: { label: string; value: string; placeholder?: string; icon: React.ReactNode; onChange?: (value: string) => void; listen: () => void }) {
   return <label className="place-field"><span>{label}</span><div>{icon}<input value={value} placeholder={placeholder} onChange={(event) => onChange?.(event.target.value)} readOnly={!onChange} /><button onClick={listen} type="button" aria-label={`Speak ${label.toLowerCase()} location`}><Mic /></button></div></label>
 }
-function AccessibleStrip() { return <div className="accessible-strip"><Accessibility /><span><strong>Accessible route is on</strong><small>Lifts and sheltered paths preferred</small></span></div> }
+function AccessibleStrip({ copy }: { copy: UiCopy }) { return <div className="accessible-strip"><Accessibility /><span><strong>{copy.plan.accessible}</strong><small>{copy.plan.accessibleDetail}</small></span></div> }
 
-function CorridorHelpCard({ help, tryCorridor }: { help: api.CorridorHelp; tryCorridor: () => void }) {
+function CorridorHelpCard({ copy, help, tryCorridor }: { copy: UiCopy; help: api.CorridorHelp; tryCorridor: () => void }) {
   return <div className="corridor-help" role="status">
-    <strong>That place isn’t covered yet.</strong>
-    <p>This prototype covers one corridor: {help.supported_corridor}.</p>
-    <p className="corridor-why">{help.why_limited}</p>
-    <PrimaryButton onClick={tryCorridor}>Try {help.try.origin} → {help.try.destination}</PrimaryButton>
+    <strong>{copy.plan.uncovered}</strong>
+    <p>{copy.plan.corridor} {help.supported_corridor}.</p>
+    <PrimaryButton onClick={tryCorridor}>{copy.plan.try}</PrimaryButton>
   </div>
 }
 
-function PlanScreen({ destination, setDestination, back, listen, next, busy, corridor, tryCorridor }: { destination: string; setDestination: (value: string) => void; back: () => void; listen: () => void; next: () => void; busy: boolean; corridor: api.CorridorHelp | null; tryCorridor: () => void }) {
-  return <div className="screen paper-screen plan-screen"><TopBar title="Plan a journey" back={back} /><section className="page-title"><h1>Where are you going?</h1><p>Speak or type a place.</p></section><div className="place-fields"><PlaceField label="From" value="Home in Bedok" icon={<Home />} listen={listen} /><PlaceField label="To" value={destination} placeholder="Enter a place" icon={<MapPin />} onChange={setDestination} listen={listen} /></div><AccessibleStrip />{corridor && <CorridorHelpCard help={corridor} tryCorridor={tryCorridor} />}<div className="screen-actions"><PrimaryButton onClick={next} disabled={busy}>{busy ? 'Planning…' : 'Show my journey'}</PrimaryButton></div></div>
+function PlanScreen({ copy, destination, setDestination, back, listen, next, busy, corridor, tryCorridor }: { copy: UiCopy; destination: string; setDestination: (value: string) => void; back: () => void; listen: () => void; next: () => void; busy: boolean; corridor: api.CorridorHelp | null; tryCorridor: () => void }) {
+  return <div className="screen paper-screen plan-screen"><TopBar title={copy.plan.top} back={back} /><section className="page-title"><h1>{copy.plan.title}</h1><p>{copy.plan.helper}</p></section><div className="place-fields"><PlaceField label={copy.plan.from} value={copy.plan.home} icon={<Home />} listen={listen} /><PlaceField label={copy.plan.to} value={destination} placeholder={copy.plan.placeholder} icon={<MapPin />} onChange={setDestination} listen={listen} /></div><AccessibleStrip copy={copy} />{corridor && <CorridorHelpCard copy={copy} help={corridor} tryCorridor={tryCorridor} />}<div className="screen-actions"><PrimaryButton onClick={next} disabled={busy}>{busy ? copy.plan.planning : copy.plan.show}</PrimaryButton></div></div>
 }
 
-function ListeningScreen({ transcript, setTranscript, back, accept, notice, setNotice }: { transcript: string; setTranscript: (value: string) => void; back: () => void; accept: () => void; notice: string; setNotice: (value: string) => void }) {
-  const recognitionRef = useRef<Recognition | null>(null); const [active, setActive] = useState(false)
-  useEffect(() => {
+function ListeningScreen({ locale, transcript, setTranscript, back, accept, busy }: { locale: Locale; transcript: string; setTranscript: (value: string) => void; back: () => void; accept: () => void; busy: boolean }) {
+  const copy = uiCopy[locale]
+  const [state, setState] = useState<'idle' | 'requesting' | 'listening' | 'heard' | 'denied' | 'unsupported' | 'no-speech' | 'error'>('idle')
+  const [level, setLevel] = useState(0)
+  const recognitionRef = useRef<Recognition | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
+  const frameRef = useRef<number | null>(null)
+  const stopMeter = () => {
+    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current)
+    frameRef.current = null; streamRef.current?.getTracks().forEach((track) => track.stop()); streamRef.current = null; setLevel(0)
+  }
+  useEffect(() => () => { recognitionRef.current?.stop(); stopMeter() }, [])
+  const begin = async () => {
+    setTranscript(''); setState('requesting')
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) { setState('unsupported'); return }
     const scope = window as unknown as { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition }
     const SpeechCtor = scope.SpeechRecognition ?? scope.webkitSpeechRecognition
-    if (!SpeechCtor) { setNotice('Live speech recognition is unavailable here. A demo transcript is ready to use.'); return }
-    const recognition = new SpeechCtor(); recognition.lang = 'en-SG'; recognition.interimResults = false; recognition.continuous = false
-    recognition.onresult = (event) => { const heard = event.results[0]?.[0]?.transcript; if (heard) setTranscript(heard); setNotice('Destination heard. Check it before continuing.') }
-    recognition.onerror = () => { setNotice('I could not hear that. You can use the demo destination or try again.'); setActive(false) }; recognition.onend = () => setActive(false); recognitionRef.current = recognition
-    try { recognition.start(); setActive(true) } catch { setNotice('Microphone is already active.') }
-    return () => recognition.stop()
-  }, [setNotice, setTranscript])
-  const retry = () => { try { recognitionRef.current?.start(); setActive(true); setNotice('Listening…') } catch { setNotice('Unable to restart the microphone. Use the current destination.') } }
-  return <div className="screen paper-screen listening-screen"><TopBar title="Voice destination" back={back} /><section className="listening-title"><h1>{active ? 'Listening…' : 'Check destination'}</h1><p>{active ? 'Say where you want to go.' : 'Use the destination below or try again.'}</p></section><div className="capture-card"><button className={`big-mic${active ? ' active' : ''}`} onClick={retry} aria-label="Listen again"><Mic /></button><span>I heard:</span><strong>{transcript}</strong></div><div className="privacy-strip"><ShieldCheck /><span>Microphone is active only while this screen is open.</span></div>{notice && <p className="inline-notice" role="status">{notice}</p>}<div className="screen-actions two"><PrimaryButton onClick={accept}>Use this destination</PrimaryButton><SecondaryButton onClick={back}>Cancel</SecondaryButton></div></div>
+    if (!SpeechCtor) { setState('unsupported'); return }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); streamRef.current = stream
+      const context = new AudioContext(); const analyser = context.createAnalyser(); analyser.fftSize = 256; context.createMediaStreamSource(stream).connect(analyser)
+      const samples = new Uint8Array(analyser.frequencyBinCount)
+      const meter = () => { analyser.getByteFrequencyData(samples); setLevel(Math.min(1, samples.reduce((sum, value) => sum + value, 0) / samples.length / 90)); frameRef.current = requestAnimationFrame(meter) }; meter()
+      const recognition = new SpeechCtor(); recognition.lang = guideCopy[locale].speechLanguage; recognition.interimResults = false; recognition.continuous = false
+      recognition.onresult = (event) => { const heard = event.results[0]?.[0]?.transcript?.trim() ?? ''; setTranscript(heard); setState(heard ? 'heard' : 'no-speech'); stopMeter(); void context.close() }
+      recognition.onerror = (event) => { setState(event.error === 'not-allowed' || event.error === 'service-not-allowed' ? 'denied' : event.error === 'no-speech' ? 'no-speech' : 'error'); stopMeter(); void context.close() }
+      recognition.onend = () => { setState((current) => current === 'listening' ? 'no-speech' : current); stopMeter(); void context.close() }
+      recognitionRef.current = recognition; recognition.start(); setState('listening')
+    } catch (error) {
+      const denied = error instanceof DOMException && (error.name === 'NotAllowedError' || error.name === 'SecurityError')
+      setState(denied ? 'denied' : 'error'); stopMeter()
+    }
+  }
+  const heading = state === 'listening' ? copy.voice.listening : state === 'heard' ? copy.voice.check : copy.voice.say
+  const message = state === 'idle' ? copy.voice.idle : state === 'requesting' ? copy.voice.requesting : state === 'listening' ? copy.voice.live : state === 'denied' ? copy.voice.denied : state === 'unsupported' ? copy.voice.unsupported : state === 'no-speech' ? copy.voice.noSpeech : state === 'error' ? copy.voice.error : copy.voice.confirm
+  return <div className={`screen paper-screen listening-screen locale-${locale}`}><TopBar title={copy.voice.top} back={back} /><section className="listening-title"><h1>{heading}</h1><p>{message}</p></section><div className="capture-card real-capture"><button className={`big-mic${state === 'listening' ? ' active' : ''}`} onClick={() => { void begin() }} disabled={state === 'requesting'} aria-label={state === 'listening' ? copy.voice.listening : copy.voice.tap}><Mic /></button><div className="voice-meter" aria-hidden="true">{[.55,.8,1,.7,.45].map((weight, index) => <i key={index} style={{ transform: `scaleY(${state === 'listening' ? Math.max(.15, level * weight) : .15})` }} />)}</div><span>{transcript ? copy.voice.heard : state === 'listening' ? copy.voice.micLive : copy.voice.nothing}</span><strong>{transcript || '—'}</strong></div><div className="privacy-strip"><ShieldCheck /><span>{copy.voice.privacy}</span></div><div className="screen-actions voice-actions"><PrimaryButton onClick={accept} disabled={!transcript || busy}>{busy ? copy.plan.planning : copy.voice.use}</PrimaryButton><SecondaryButton onClick={() => { void begin() }}>{state === 'idle' ? copy.voice.tap : copy.voice.retry}</SecondaryButton><button className="plain-action" onClick={back}>{copy.voice.type}</button></div></div>
 }
 
-function RecognisedScreen({ destination, back, next, busy }: { destination: string; back: () => void; next: () => void; busy: boolean }) {
-  return <div className="screen paper-screen plan-screen"><TopBar title="Plan a journey" back={back} /><section className="page-title"><h1>Where are you going?</h1><p className="success-text">Destination recognised!</p></section><div className="place-fields"><PlaceField label="From" value="Home in Bedok" icon={<Home />} listen={back} /><PlaceField label="To" value={destination} icon={<MapPin />} listen={back} /></div><AccessibleStrip /><div className="recognised-strip"><Check /><strong>Destination recognised</strong></div><div className="screen-actions"><PrimaryButton onClick={next} disabled={busy}>{busy ? 'Planning…' : 'Show my journey'}</PrimaryButton></div></div>
+const ACTION_LABEL: Record<Locale, Record<api.Advice['action'], string>> = {
+  en: { proceed: 'All clear', wait: 'Wait', reroute: 'Change of plan', leave_earlier: 'Leave earlier', take_taxi: 'Take a taxi', cancel_trip: 'Do not travel' },
+  zh: { proceed: '路线正常', wait: '请稍候', reroute: '路线已更改', leave_earlier: '请提前出发', take_taxi: '建议乘出租车', cancel_trip: '请勿出行' },
+  ms: { proceed: 'Laluan selamat', wait: 'Tunggu', reroute: 'Laluan berubah', leave_earlier: 'Keluar lebih awal', take_taxi: 'Naik teksi', cancel_trip: 'Jangan teruskan' },
+  ta: { proceed: 'பாதை சரியாக உள்ளது', wait: 'காத்திருக்கவும்', reroute: 'பாதை மாற்றப்பட்டது', leave_earlier: 'முன்னதாக புறப்படவும்', take_taxi: 'டாக்சியில் செல்லவும்', cancel_trip: 'பயணம் செய்ய வேண்டாம்' },
 }
+const ADVICE_SUMMARY: Record<Locale, string> = { en: 'Your journey has been updated for current travel conditions.', zh: '已根据当前交通情况更新您的行程。', ms: 'Perjalanan anda telah dikemas kini mengikut keadaan semasa.', ta: 'தற்போதைய பயண நிலைக்கு ஏற்ப உங்கள் பயணம் புதுப்பிக்கப்பட்டது.' }
 
-const MODE_LABEL: Record<api.Leg['mode'], string> = { walk: 'Walk', mrt: 'MRT', bus: 'Bus', taxi: 'Taxi' }
-const ACTION_LABEL: Record<api.Advice['action'], string> = { proceed: 'All clear', wait: 'Wait', reroute: 'Change of plan', leave_earlier: 'Leave earlier', take_taxi: 'Take a taxi', cancel_trip: 'Do not travel' }
-
-function AdviceBanner({ advice }: { advice: api.Advice }) {
+function AdviceBanner({ locale, copy, advice }: { locale: Locale; copy: UiCopy; advice: api.Advice }) {
+  const summary = advice.reason.split('. ')[0]
   return <div className={`advice-banner action-${advice.action}`} role="status">
-    <span className="advice-action">{ACTION_LABEL[advice.action]}</span>
-    <strong>{advice.headline}</strong>
-    <p>{advice.reason}</p>
-    <small>Arrive {api.fmtTime(advice.eta_range[0])}–{api.fmtTime(advice.eta_range[1])}
-      {advice.decide_by ? ` · decide by ${api.fmtTime(advice.decide_by)}` : ''} · confidence {advice.confidence}
-      {advice.notify_family ? ' · family notified' : ''}</small>
-    {api.anyFixture(advice) && <span className="replay-tag">REPLAY DATA — this disruption is a labelled fixture, not live</span>}
+    <span className="advice-action">{ACTION_LABEL[locale][advice.action]}</span>
+    <strong>{locale === 'en' ? advice.headline : ACTION_LABEL[locale][advice.action]}</strong>
+    <p>{locale === 'en' ? `${summary}${summary.endsWith('.') ? '' : '.'}` : ADVICE_SUMMARY[locale]}</p>
+    {locale === 'en' && <details><summary>{copy.overview.why}</summary><p>{advice.reason}</p><small>Arrive {api.fmtTime(advice.eta_range[0])}–{api.fmtTime(advice.eta_range[1])}</small></details>}
+    {api.anyFixture(advice) && <span className="replay-tag">{copy.overview.simulated}</span>}
   </div>
 }
 
-function OverviewScreen({ advice, journey, scenario, switchScenario, busy, back, start, notice }: { advice: api.Advice | null; journey: api.Journey | null; scenario: api.ScenarioId; switchScenario: (s: api.ScenarioId) => void; busy: boolean; back: () => void; start: () => void; notice: string }) {
-  if (!advice || !journey) return <div className="screen paper-screen overview-screen"><TopBar title="Your journey" back={back} /><section className="overview-heading"><h1>{busy ? 'Planning your journey…' : 'No journey yet'}</h1><p>{busy ? 'Checking live conditions.' : 'Plan a journey first.'}</p></section></div>
+function OverviewScreen({ locale, copy, advice, journey, busy, back, start, notice }: { locale: Locale; copy: UiCopy; advice: api.Advice | null; journey: api.Journey | null; busy: boolean; back: () => void; start: () => void; notice: string }) {
+  if (!advice || !journey) return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><h1>{busy ? copy.overview.planning : copy.overview.empty}</h1><p>{busy ? copy.overview.checking : copy.overview.emptyDetail}</p></section></div>
   const legs = advice.legs
   const total = Math.round((new Date(legs[legs.length - 1]?.arrive ?? journey.arrive_by).getTime() - new Date(legs[0]?.depart ?? journey.arrive_by).getTime()) / 60000)
-  return <div className="screen paper-screen overview-screen"><TopBar title="Your journey" back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{legs.length} step{legs.length === 1 ? '' : 's'}</h1><p>About {total} minutes at your walking pace, from live conditions.</p></section><div className="journey-badges"><span><Accessibility /> Step-free route</span><span><LocateFixed /> Walks on OSM footpaths</span></div><AdviceBanner advice={advice} /><ol className="journey-list">{legs.map((leg, index) => <li key={index}><b>{index + 1}</b><span><strong>{MODE_LABEL[leg.mode]}{leg.service ? ` ${leg.service}` : ''}: {leg.from_name} → {leg.to_name}</strong><small>{api.fmtTime(leg.depart)}–{api.fmtTime(leg.arrive)}{leg.crowding ? ` · crowd: ${leg.crowding}` : ''} · {leg.instruction}</small></span></li>)}</ol><ScenarioBar scenario={scenario} switchScenario={switchScenario} busy={busy} />{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> Start journey</PrimaryButton></div></div>
+  const steps = routeSteps(locale)
+  return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{copy.overview.title}</h1><p>{copy.overview.about(total)}</p></section><div className="journey-badges"><span><Accessibility /> {copy.overview.stepFree}</span><span><LocateFixed /> {copy.overview.landmarks}</span></div><AdviceBanner locale={locale} copy={copy} advice={advice} /><ol className="journey-list photo-list">{steps.map((step, index) => <li key={index}><img src={step.image} alt="" /><b>{index + 1}</b><span><strong>{step.title}</strong><small>{step.instruction}</small></span></li>)}</ol>{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> {copy.overview.start}</PrimaryButton></div></div>
 }
 
-function GuideScreen({ locale, selectLocale, advice, scenario, switchScenario, busy, back, lost, sos }: { locale: Locale; selectLocale: (locale: Locale) => void; advice: api.Advice | null; scenario: api.ScenarioId; switchScenario: (s: api.ScenarioId) => void; busy: boolean; back: () => void; lost: () => void; sos: () => void }) {
-  const copy = guideCopy[locale]; const [speaking, setSpeaking] = useState(false)
-  const spokenText = advice ? `${advice.speech_text}. ${advice.reason}` : `${copy.title}. ${copy.instruction}.`
-  const speak = () => { if (!('speechSynthesis' in window)) return; if (speaking) { speechSynthesis.cancel(); setSpeaking(false); return }; const utterance = new SpeechSynthesisUtterance(spokenText); utterance.lang = advice ? 'en-SG' : copy.speechLanguage; utterance.rate = .72; utterance.onend = () => setSpeaking(false); utterance.onerror = () => setSpeaking(false); speechSynthesis.cancel(); speechSynthesis.speak(utterance); setSpeaking(true) }
+function SharingScreen({ copy, state, start, continueWithout, back }: { copy: UiCopy; state: LocationState; start: () => void; continueWithout: () => void; back: () => void }) {
+  const failed = state === 'denied' || state === 'timeout' || state === 'unavailable' || state === 'service-error'
+  const message = state === 'requesting' ? copy.sharing.requesting : state === 'denied' ? copy.sharing.denied : state === 'timeout' ? copy.sharing.timeout : state === 'service-error' ? copy.sharing.service : state === 'unavailable' ? copy.sharing.unavailable : copy.sharing.idle
+  return <div className="screen paper-screen sharing-screen"><TopBar title={copy.sharing.top} back={back} /><section className="sharing-heading"><span><HeartHandshake /></span><h1>{copy.sharing.title}</h1><p>{message}</p></section><div className="sharing-details"><div><LocateFixed /><span><strong>{copy.sharing.location}</strong><small>{copy.sharing.locationDetail}</small></span></div><div><ShieldCheck /><span><strong>{copy.sharing.control}</strong><small>{copy.sharing.controlDetail}</small></span></div></div><div className="screen-actions two"><PrimaryButton onClick={start} disabled={state === 'requesting'}><LocateFixed />{state === 'requesting' ? copy.sharing.request : failed ? copy.sharing.retry : copy.sharing.start}</PrimaryButton><SecondaryButton onClick={continueWithout}>{copy.sharing.skip}</SecondaryButton></div></div>
+}
+
+function GuideScreen({ locale, activeStep, locationState, lastLocationAt, back, next, finish, lost, sos }: { locale: Locale; activeStep: number; locationState: LocationState; lastLocationAt: Date | null; back: () => void; next: () => void; finish: () => void; lost: () => void; sos: () => void }) {
+  const step = routeSteps(locale)[activeStep]; const copy = uiCopy[locale]; const [speaking, setSpeaking] = useState(false)
+  const spokenText = `${step.title}. ${step.instruction}. ${step.distance}.`
+  const speak = () => { if (!('speechSynthesis' in window)) return; if (speaking) { speechSynthesis.cancel(); setSpeaking(false); return }; const utterance = new SpeechSynthesisUtterance(spokenText); utterance.lang = guideCopy[locale].speechLanguage; utterance.rate = .72; utterance.onend = () => setSpeaking(false); utterance.onerror = () => setSpeaking(false); speechSynthesis.cancel(); speechSynthesis.speak(utterance); setSpeaking(true) }
   useEffect(() => () => window.speechSynthesis?.cancel(), [])
-  return <div className={`screen guide-screen locale-${locale}`}><img src={exitPhoto} alt="Illuminated yellow Exit 7 sign at Outram Park MRT" className="guide-photo" /><div className="photo-shade" /><div className="guide-top"><BackButton onClick={back} light /><strong>{advice ? 'Live guidance' : copy.station}</strong><label className="guide-language"><Languages /><select aria-label="Change language" value={locale} onChange={(event) => selectLocale(event.target.value as Locale)}>{languages.map((item) => <option key={item.id} value={item.id}>{item.code}</option>)}</select></label></div><button className="floating-sos" onClick={sos}>SOS</button><section className="guide-sheet">{advice ? <><AdviceBanner advice={advice} /><p className="illustrative-note">Station photo and exit-level wayfinding (“{copy.title}”, “{copy.distance} {copy.ahead}”) are illustrative — exit-level data is not in the backend yet.</p></> : <><div className="progress-row"><strong>{copy.step}</strong><span><i /></span></div><h1>{copy.title}</h1><p className="instruction">{copy.instruction}</p><div className="distance"><strong>{copy.distance}</strong><span>{copy.ahead}</span></div><p className="illustrative-note">Illustrative content — plan a journey to see live guidance.</p></>}<div className="guide-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? 'Playing…' : copy.hear}</span></button><button onClick={lost}><CircleHelp /><span>{copy.lost}</span></button></div><ScenarioBar scenario={scenario} switchScenario={switchScenario} busy={busy} /></section></div>
+  const time = lastLocationAt?.toLocaleTimeString(locale === 'zh' ? 'zh-SG' : locale === 'ms' ? 'ms-SG' : locale === 'ta' ? 'ta-SG' : 'en-SG', { hour: '2-digit', minute: '2-digit' })
+  return <div className={`screen guide-screen locale-${locale}`}><img src={step.image} alt={step.alt} className={`guide-photo${activeStep === 6 ? ' route-visual' : ''}`} /><div className="photo-shade" /><div className="guide-top"><BackButton onClick={back} light label={copy.back} /><strong>{step.place}</strong><span /></div><button className="floating-sos" onClick={sos}>SOS</button><section className="guide-sheet multi-step-sheet"><div className="progress-row"><strong>{copy.guide.step(activeStep + 1)}</strong><span style={{ '--progress': `${((activeStep + 1) / 8) * 100}%` } as React.CSSProperties}><i /></span></div><h1>{step.title}</h1><p className="instruction">{step.instruction}</p><div className="distance"><strong>{step.distance}</strong></div><div className="sharing-status"><LocateFixed /><span><strong>{locationState === 'active' ? copy.guide.sharing : copy.guide.saved}</strong><small>{locationState === 'active' && time ? copy.guide.updated(time) : copy.guide.notShared}</small></span></div><div className="guide-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? copy.guide.playing : copy.guide.play}</span></button><button onClick={lost}><CircleHelp /><span>{copy.guide.help}</span></button></div><PrimaryButton onClick={activeStep === 7 ? finish : next}>{activeStep === 7 ? copy.guide.finish : copy.guide.next}<ArrowRight /></PrimaryButton></section></div>
 }
 
-function WrongWayScreen({ journey, back, correct, call }: { journey: api.Journey | null; back: () => void; correct: () => void; call: () => void }) {
+function WrongWayScreen({ locale, journey, back, correct, call }: { locale: Locale; journey: api.Journey | null; back: () => void; correct: () => void; call: () => void }) {
+  const copy = uiCopy[locale]
   const [ack, setAck] = useState<api.LocationAck | null>(null)
   const [checking, setChecking] = useState(false)
   useEffect(() => {
@@ -184,21 +218,24 @@ function WrongWayScreen({ journey, back, correct, call }: { journey: api.Journey
         () => { void send() }, { timeout: 4000 })
     } else void send()
   }, [journey])
-  return <div className="screen wrong-screen"><div className="warning-top"><BackButton onClick={back} /><strong>Check your direction</strong></div><RotateCcw className="turn-symbol" /><section className="wrong-sheet"><h1>Feeling lost?</h1>{journey ? <p role="status">{checking ? 'Sending your position to the journey service…' : ack ? (ack.wrong_direction ? `The service confirms you are heading away from the route. ${ack.notify_family ? 'Your family has been told.' : ''}` : 'Position received. The service has not seen enough movement to confirm a wrong turn — it alerts only after several readings away from the route, so one odd GPS point never worries your family.') : 'Could not reach the journey service. Use the buttons below.'}</p> : <p>Plan a journey first so the service can check your position.</p>}<div className="screen-actions two"><PrimaryButton onClick={correct}>Show the correct direction</PrimaryButton><SecondaryButton onClick={call}>Call my family</SecondaryButton></div></section></div>
+  const wrong = Boolean(ack?.wrong_direction)
+  const body = checking ? copy.help.checking : !journey ? copy.help.noJourney : !ack ? copy.help.unavailable : wrong ? `${copy.help.wrongBody}${ack.notify_family ? ` ${copy.help.familyTold}` : ''}` : copy.help.safe
+  return <div className={`screen wrong-screen${wrong ? ' confirmed-wrong' : ''}`}><div className="warning-top"><BackButton onClick={back} label={copy.back} /><strong>{copy.help.top}</strong></div><RotateCcw className="turn-symbol" /><section className="wrong-sheet"><h1>{wrong ? copy.help.wrong : copy.help.lost}</h1><p role="status">{body}</p><div className="screen-actions two"><PrimaryButton onClick={correct}>{copy.help.correct}</PrimaryButton><SecondaryButton onClick={call}>{copy.help.call}</SecondaryButton></div></section></div>
 }
 
-function SosScreen({ back, record, confirm, setNotice }: { back: () => void; record: () => void; confirm: (value: { title: string; body: string; action: string; onConfirm?: () => void }) => void; setNotice: (value: string) => void }) {
+function SosScreen({ locale, back, record, confirm, setNotice }: { locale: Locale; back: () => void; record: () => void; confirm: (value: { title: string; body: string; action: string; onConfirm?: () => void }) => void; setNotice: (value: string) => void }) {
+  const copy = uiCopy[locale]
   const contactFamily = async () => {
     try {
       const opened = await api.sosOpen()
       confirm({
-        title: 'Alert trusted family?', body: 'Nothing has been sent yet. Your family is alerted only after you confirm.', action: 'Send SOS alert',
-        onConfirm: () => { void api.sosConfirm(opened.sos_id).then((done) => setNotice(done.notified_user_ids.length ? `SOS sent. Notified: ${done.notified_user_ids.join(', ')}.` : 'SOS confirmed, but no family account is linked.')).catch(() => setNotice('Could not send the SOS. Try again or call directly.')) },
+        title: copy.sos.sendTitle, body: copy.sos.sendBody, action: copy.sos.send,
+        onConfirm: () => { void api.sosConfirm(opened.sos_id).then((done) => setNotice(done.notified_user_ids.length ? 'Help request sent to Hui Ling.' : 'The request was confirmed, but Hui Ling is not linked yet.')).catch(() => setNotice('We could not send the request. Try again or call Hui Ling directly.')) },
       })
-    } catch { setNotice('Could not reach the SOS service. You can still call directly.') }
+    } catch { setNotice('We could not reach the help service. Try again or call Hui Ling directly.') }
   }
   const option = (icon: React.ReactNode, title: string, detail: string | undefined, onClick: () => void) => <button className="help-option" onClick={onClick}><span>{icon}</span><span><strong>{title}</strong>{detail && <small>{detail}</small>}</span><ChevronRight /></button>
-  return <div className="screen paper-screen sos-screen"><header className="simple-header"><BackButton onClick={back} /><strong>Get help</strong></header><span className="sos-mark">SOS</span><section className="sos-title"><h1>Who should we call?</h1><p>No call or recording has started.</p></section><div className="help-options">{option(<UserRound />, 'Trusted family', 'Sends a real alert via the app', () => { void contactFamily() })}{option(<Phone />, 'Emergency services', 'Use for immediate danger', () => confirm({ title: 'Call emergency services?', body: 'Call 995 only for an immediate emergency.', action: 'Call 995' }))}{option(<Mic />, 'Record an audio message', 'Optional; never starts automatically', record)}</div><p className="privacy-footer"><Check />Audio and location are shared only after confirmation.</p></div>
+  return <div className="screen paper-screen sos-screen"><header className="simple-header"><BackButton onClick={back} label={copy.back} /><strong>{copy.sos.top}</strong></header><span className="sos-mark">SOS</span><section className="sos-title"><h1>{copy.sos.title}</h1><p>{copy.sos.idle}</p></section><div className="help-options">{option(<UserRound />, copy.sos.family, copy.sos.familyDetail, () => { void contactFamily() })}{option(<Phone />, copy.sos.emergency, copy.sos.emergencyDetail, () => confirm({ title: copy.sos.emergencyTitle, body: copy.sos.emergencyBody, action: '995' }))}{option(<Mic />, copy.sos.record, copy.sos.recordDetail, record)}</div><p className="privacy-footer"><Check />{copy.sos.privacy}</p></div>
 }
 
 function RecordingScreen({ back }: { back: () => void }) {
@@ -207,20 +244,20 @@ function RecordingScreen({ back }: { back: () => void }) {
   useEffect(() => () => { if (audioUrl) URL.revokeObjectURL(audioUrl) }, [audioUrl])
   const start = async () => { try { const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); const next = new MediaRecorder(stream); chunks.current = []; next.ondataavailable = (event) => chunks.current.push(event.data); next.onstop = () => { setAudioUrl(URL.createObjectURL(new Blob(chunks.current, { type: next.mimeType }))); stream.getTracks().forEach((track) => track.stop()) }; next.start(); recorder.current = next; setSeconds(0); setRecording(true); setError('') } catch { setError('Microphone permission was not granted. You can go back without recording.') } }
   const stop = () => { recorder.current?.stop(); setRecording(false) }; const clear = () => { if (audioUrl) URL.revokeObjectURL(audioUrl); setAudioUrl(''); setSeconds(0) }
-  return <div className="screen paper-screen recording-screen"><TopBar title="Audio message" back={back} /><section><span className={`recording-orb${recording ? ' active' : ''}`}>{recording ? <Square /> : <Mic />}</span><h1>{recording ? 'Recording…' : audioUrl ? 'Message ready' : 'Record a short message'}</h1><p>{recording ? 'Tell your family what happened and where you are.' : 'Nothing is shared until you confirm.'}</p><strong className="recording-time">{String(Math.floor(seconds / 60)).padStart(2, '0')}:{String(seconds % 60).padStart(2, '0')}</strong></section>{error && <p className="recording-error" role="alert">{error}</p>}{audioUrl && <audio className="audio-player" controls src={audioUrl} />}<div className="screen-actions two">{recording ? <PrimaryButton onClick={stop}><Square /> Stop recording</PrimaryButton> : !audioUrl ? <PrimaryButton onClick={start}><Mic /> Start recording</PrimaryButton> : <><PrimaryButton onClick={() => setError('Recording stays on this device in the demo — upload is not wired yet.')}>Confirm message</PrimaryButton><SecondaryButton onClick={clear}><Trash2 /> Delete and try again</SecondaryButton></>}</div><PreviewBadge /></div>
+  return <div className="screen paper-screen recording-screen"><TopBar title="Audio message" back={back} /><section><span className={`recording-orb${recording ? ' active' : ''}`}>{recording ? <Square /> : <Mic />}</span><h1>{recording ? 'Recording…' : audioUrl ? 'Message ready' : 'Record a short message'}</h1><p>{recording ? 'Tell your family what happened and where you are.' : 'Nothing is shared until you confirm.'}</p><strong className="recording-time">{String(Math.floor(seconds / 60)).padStart(2, '0')}:{String(seconds % 60).padStart(2, '0')}</strong></section>{error && <p className="recording-error" role="alert">{error}</p>}{audioUrl && <audio className="audio-player" controls src={audioUrl} />}<div className="screen-actions two">{recording ? <PrimaryButton onClick={stop}><Square /> Stop recording</PrimaryButton> : !audioUrl ? <PrimaryButton onClick={start}><Mic /> Start recording</PrimaryButton> : <><PrimaryButton onClick={() => setError('Recording stays on this device in the demo — upload is not wired yet.')}>Confirm message</PrimaryButton><SecondaryButton onClick={clear}><Trash2 /> Delete and try again</SecondaryButton></>}</div></div>
 }
 
 function FamilyAccessScreen({ back, next }: { back: () => void; next: () => void }) {
   const [code, setCode] = useState('LIM-7284')
-  return <div className="screen paper-screen family-screen"><TopBar title="Family access" back={back} /><section className="family-intro"><span><HeartHandshake /></span><h1>Follow a shared journey.</h1><p>Mdm Lim must choose to share each active journey.</p></section><label className="code-field"><span>SHARING CODE</span><input value={code} onChange={(event) => setCode(event.target.value.toUpperCase())} /></label><div className="family-consent"><LockKeyhole /><span><strong>Consent comes first</strong><small>Location sharing ends when the journey ends.</small></span></div><div className="screen-actions"><PrimaryButton onClick={next}>Open demo journey</PrimaryButton></div><PreviewBadge /></div>
+  return <div className="screen paper-screen family-screen"><TopBar title="Family access" back={back} /><section className="family-intro"><span><HeartHandshake /></span><h1>Follow a shared journey.</h1><p>Mdm Lim must choose to share each active journey.</p></section><label className="code-field"><span>SHARING CODE</span><input value={code} onChange={(event) => setCode(event.target.value.toUpperCase())} /></label><div className="family-consent"><LockKeyhole /><span><strong>Consent comes first</strong><small>Location sharing ends when the journey ends.</small></span></div><div className="screen-actions"><PrimaryButton onClick={next}>Open demo journey</PrimaryButton></div></div>
 }
 
 function FamilyJourneyScreen({ back }: { back: () => void }) {
-  return <div className="screen paper-screen family-journey"><TopBar title="Mdm Lim’s journey" back={back} /><section className="family-status"><span className="live-dot"><i /> Journey active</span><h1>On the way to SGH</h1><p>Design preview — not live data</p></section><div className="current-step"><span>6</span><div><small>CURRENT STEP</small><strong>Following the lift signs</strong><p>Outram Park MRT</p></div></div><dl><div><dt>Expected arrival</dt><dd>About 24 minutes</dd></div><div><dt>Direction</dt><dd className="positive"><Check /> On the right path</dd></div><div><dt>Sharing</dt><dd>Until journey ends</dd></div></dl><div className="family-note"><ShieldCheck /><span>No help is needed right now. You’ll be alerted if Mdm Lim asks for help.</span></div><div className="screen-actions"><SecondaryButton onClick={back}>Stop viewing demo</SecondaryButton></div><PreviewBadge /></div>
+  return <div className="screen paper-screen family-journey"><TopBar title="Mdm Lim’s journey" back={back} /><section className="family-status"><span className="live-dot"><i /> Journey active</span><h1>On the way to SGH</h1><p>Simulated family view</p></section><div className="current-step"><span>6</span><div><small>CURRENT STEP</small><strong>Following the lift signs</strong><p>Outram Park MRT</p></div></div><dl><div><dt>Expected arrival</dt><dd>About 24 minutes</dd></div><div><dt>Direction</dt><dd className="positive"><Check /> On the right path</dd></div><div><dt>Sharing</dt><dd>Until journey ends</dd></div></dl><div className="family-note"><ShieldCheck /><span>No help is needed right now. You’ll be alerted if Mdm Lim asks for help.</span></div><div className="screen-actions"><SecondaryButton onClick={back}>Stop viewing demo</SecondaryButton></div></div>
 }
 
-function ConfirmSheet({ title, body, action, onConfirm, close }: { title: string; body: string; action: string; onConfirm?: () => void; close: () => void }) {
-  return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><button className="modal-backdrop" onClick={close} aria-label="Close confirmation" /><section><button className="modal-close" onClick={close} aria-label="Close"><X /></button><span className="modal-icon"><Phone /></span><h2 id="confirm-title">{title}</h2><p>{body}</p><button className="danger-button" onClick={() => { onConfirm?.(); close() }}>{action}</button><SecondaryButton onClick={close}>Cancel</SecondaryButton></section></div>
+function ConfirmSheet({ title, body, action, onConfirm, cancel, close }: { title: string; body: string; action: string; onConfirm?: () => void; cancel: string; close: () => void }) {
+  return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><button className="modal-backdrop" onClick={close} aria-label={cancel} /><section><button className="modal-close" onClick={close} aria-label={cancel}><X /></button><span className="modal-icon"><Phone /></span><h2 id="confirm-title">{title}</h2><p>{body}</p><button className="danger-button" onClick={() => { onConfirm?.(); close() }}>{action}</button><SecondaryButton onClick={close}>{cancel}</SecondaryButton></section></div>
 }
 
 export default App
