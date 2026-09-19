@@ -61,6 +61,12 @@
   .crowd.low    { color: var(--ok); border-color: var(--ok); }
   .crowd.medium { color: var(--warn); border-color: var(--warn); }
   .crowd.high   { color: var(--bad); border-color: var(--bad); }
+  .stepfree { font-weight: 700; padding: 1px 8px; border-radius: 8px;
+              border: 2px solid; font-size: 13px; margin-left: 4px; }
+  .stepfree.verified      { color: var(--ok); border-color: var(--ok); }
+  .stepfree.unverified    { color: var(--warn); border-color: var(--warn);
+                            background: #fff4dd; }
+  .stepfree.not_step_free { color: var(--bad); border-color: var(--bad); }
   #status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .chip { font-size: 13px; font-weight: 700; padding: 3px 8px;
           border-radius: 8px; border: 2px solid; }
@@ -208,11 +214,15 @@ function render(a) {
     tick(); countdown = setInterval(tick, 1000);
   } else dbEl.textContent = "";
 
+  const STEPFREE = { verified: "step-free", unverified: "step-free NOT verified",
+                     not_step_free: "NOT step-free" };
   el("legs").innerHTML = (a.legs || []).map(l =>
     "<li><b>" + l.mode.toUpperCase() + "</b> " + fmtTime(l.depart) + "–" +
     fmtTime(l.arrive) + " · " + l.from_name + " → " + l.to_name +
     (l.crowding ? ' <span class="crowd ' + l.crowding + '">crowd: ' +
                   l.crowding + "</span>" : "") +
+    ' <span class="stepfree ' + l.step_free + '">' +
+    (STEPFREE[l.step_free] || l.step_free) + "</span>" +
     "<br>" + l.instruction + "</li>").join("");
 
   el("status").innerHTML = Object.entries(a.data_status).map(([k, v]) => {

@@ -73,7 +73,10 @@ def _mobility_ok(opt: RouteOption, ctx: Context) -> bool:
         return True
     needs_step_free = mob.wheelchair or not mob.can_use_stairs
     for leg in opt.legs:
-        if needs_step_free and not leg.step_free:
+        # Only a known-bad leg blocks the route; "unverified" walks are allowed
+        # (rejecting them would leave no walking at all) but carry their status
+        # into the response so the UI shows the caveat.
+        if needs_step_free and leg.step_free == "not_step_free":
             return False
     walk_per_leg = [
         sum(F._haversine_m(a, b) for a, b in zip(L.geometry, L.geometry[1:]))
@@ -563,12 +566,18 @@ def assemble(ctx: Context, decision: Decision,
 
     # crowding painted onto legs (visualisation: readable in one second)
     level = {"l": "low", "m": "medium", "h": "high"}
+    lift_out_names = {net.BY_CODE[c].name for c in physical(set(ctx.facts.lift_out))
+                      if c in net.BY_CODE}
     for leg in legs:
         if leg.mode == "mrt":
             codes = [s.code for s in net.station_for(leg.from_name)]
             worst = max((ctx.facts.crowd.get(c, "l") for c in codes),
                         key=lambda v: "lmh".index(v), default="l")
             leg.crowding = level[worst]
+        # A known lift outage is the one step-free fact we HAVE: any leg
+        # touching that station is positively not step-free right now.
+        if leg.mode in ("mrt", "walk") and                 ({leg.from_name, leg.to_name} & lift_out_names):
+            leg.step_free = "not_step_free"
 
     affected = None
     if decision.affected_codes:

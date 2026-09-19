@@ -296,3 +296,27 @@ journey→real "Get off at Bugis…" advice with REPLAY tag→scenario switch to
 clear_day ("All clear") and flood ("Do not travel")→guide banner + illustrative
 note→wrong-way real ack→SOS two-step→"SOS sent. Notified: daughter." No
 horizontal scroll. Still not tested on a physical phone.
+
+---
+
+## 2026-09-19 (day) — Part A: step_free is a claim with provenance, not a bool
+
+`Leg.step_free` is now `"verified" | "unverified" | "not_step_free"`:
+- walk legs = "unverified" (OSM foot routing doesn't tell us a path avoids
+  steps; we no longer assert what nobody checked)
+- MRT = "verified" on the stated basis of LTA's barrier-free station programme;
+  bus = "verified" on the fleet-accessibility basis (per-vehicle WAB check is
+  future work); taxi = "verified" (door-to-door). Bases are in planner comments.
+- A known lift outage downgrades every leg touching that station to
+  "not_step_free" at advice assembly — the one step-free fact we DO have.
+  Verified: a can-use-stairs profile keeping Outram Park on scenario
+  lift_outage gets both touching legs downgraded.
+- Reroute constraint now blocks only on "not_step_free"; "unverified" is
+  allowed (labelling change, not a behaviour change) and surfaced.
+- Dashboard shows a per-leg badge ("step-free" / "step-free NOT verified" /
+  "NOT step-free") — verified rendering in headless Chrome.
+- FRONTEND_CONTRACT.md updated (field doc, changelog note, examples).
+  NOTE for frontend owner: src/api.ts still types step_free as boolean —
+  untouched per instruction (frontend work is separate); it doesn't render
+  the field, so nothing breaks, but the type should be updated.
+- All six scenarios re-run: 6/6 pass.

@@ -134,7 +134,9 @@ def _walk_leg(frm_name, frm, to_name, to, depart, profile, locale,
     leg = _mk("walk", frm_name, to_name, depart, minutes,
               "leg.walk.instruction", locale,
               # shelter "exposed" is conservative: no CoveredLinkWay data yet.
-              shelter="exposed", step_free=True, geometry=wr.geometry,
+              # step_free "unverified": OSM foot routing does not tell us the
+              # path avoids steps, and we do not assert what we have not checked.
+              shelter="exposed", step_free="unverified", geometry=wr.geometry,
               to=to_name, landmark=resolve(landmark_key, locale))
     return leg, wr.source
 
@@ -151,7 +153,10 @@ def _rail_legs(path: list[str], depart: datetime, locale: str) -> list[Leg]:
         frm, to = net.BY_CODE[run[0]], net.BY_CODE[run[-1]]
         leg = _mk("mrt", frm.name, to.name, t, minutes,
                   "leg.mrt.instruction", locale, svc=line,
-                  shelter="covered", step_free=True, geometry=_geom(run),
+                  # "verified" rests on LTA's barrier-free station programme
+                  # (every MRT station has lift access); a live lift outage
+                  # downgrades the leg to "not_step_free" in the engine.
+                  shelter="covered", step_free="verified", geometry=_geom(run),
                   line=LINE_NAMES[line].get(locale, LINE_NAMES[line]["en"]),
                   from_=frm.name, to=to.name, stops=stops,
                   direction=_direction(line, run[0], run[-1]))
@@ -253,7 +258,9 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
         bus = _mk("bus", board["name"], alight["name"], t,
                   BOARDING_WAIT_MIN + n_stops * BUS_HOP_MIN,
                   "leg.bus.instruction", locale, svc=b["service"],
-                  shelter="partial", step_free=True,
+                  # fleet-level basis (SG public buses are wheelchair-
+                  # accessible; per-vehicle WAB check is future work)
+                  shelter="partial", step_free="verified",
                   geometry=[(s["lat"], s["lon"]) for s in b["stops"]],
                   service=b["service"], from_=board["name"], to=alight["name"])
         legs.append(bus); t = bus.arrive
@@ -277,7 +284,7 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
     minutes = road_m / 1000 / TAXI_SPEED_KMH * 60 + 5  # +5 hail/board
     taxi = _mk("taxi", start_name, d_name, depart_at, minutes,
                "leg.taxi.instruction", locale,
-               shelter="covered", step_free=True,
+               shelter="covered", step_free="verified",  # door-to-door
                geometry=[start, d_coord], from_=start_name, to=d_name)
     options.append(RouteOption(
         kind="taxi", legs=[taxi], total_min=minutes, n_transfers=0, walk_m=0,

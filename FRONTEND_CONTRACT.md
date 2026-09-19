@@ -4,6 +4,10 @@
 Backend base URL: `http://127.0.0.1:8000` (or whatever port uvicorn was given).
 Interactive schema for everything below: `GET /docs` (Swagger UI).
 
+> **Schema change (19 Sep):** `Leg.step_free` is now the string enum above,
+> not a boolean. The captured examples below have been updated to match;
+> walk legs come back `"unverified"` until checked against real data.
+
 ## Conventions
 
 - All bodies are JSON. All datetimes are ISO 8601 **with timezone**
@@ -155,7 +159,7 @@ for readability; the API returns every point):
       "speech_text": "Take the East–West line from Bedok towards Tuas Link. Get off at Outram Park (11 stops).",
       "i18n_key": "leg.mrt.instruction",
       "shelter": "covered",
-      "step_free": true,
+      "step_free": "verified",
       "geometry": [
         [
           1.323999,
@@ -184,7 +188,7 @@ for readability; the API returns every point):
       "speech_text": "Walk to Singapore General Hospital. ",
       "i18n_key": "leg.walk.instruction",
       "shelter": "exposed",
-      "step_free": true,
+      "step_free": "unverified",
       "geometry": [
         [
           1.280047,
@@ -209,7 +213,10 @@ for readability; the API returns every point):
 `Leg` fields: `mode` (`walk|bus|mrt|taxi`), `from_name`, `to_name`,
 `service` (line code or bus number, null for walks), `depart`, `arrive`,
 `instruction` (localised, landmark-based), `speech_text` (for TTS),
-`i18n_key`, `shelter` (`covered|partial|exposed`), `step_free`,
+`i18n_key`, `shelter` (`covered|partial|exposed`),
+`step_free` (`"verified" | "unverified" | "not_step_free"` — a claim with
+provenance, not a boolean; SHOW `unverified` as a caveat and `not_step_free`
+as a warning — never render an unverified walk as step-free),
 `geometry` (`[lat, lon][]`), `crowding` (`low|medium|high` or null —
 populated on advice legs, null on journey creation).
 
@@ -259,7 +266,7 @@ and the EWL city stretch just closed):
       "speech_text": "Take the East–West line from Paya Lebar towards Tuas Link. Get off at Bugis (4 stops).",
       "i18n_key": "leg.mrt.instruction",
       "shelter": "covered",
-      "step_free": true,
+      "step_free": "verified",
       "geometry": [
         [
           1.317585,
@@ -288,7 +295,7 @@ and the EWL city stretch just closed):
       "speech_text": "Take the Downtown line from Bugis towards Expo. Get off at Chinatown (5 stops).",
       "i18n_key": "leg.mrt.instruction",
       "shelter": "covered",
-      "step_free": true,
+      "step_free": "verified",
       "geometry": [
         [
           1.300433,
@@ -317,7 +324,7 @@ and the EWL city stretch just closed):
       "speech_text": "Take the North East line from Chinatown towards HarbourFront. Get off at Outram Park (1 stops).",
       "i18n_key": "leg.mrt.instruction",
       "shelter": "covered",
-      "step_free": true,
+      "step_free": "verified",
       "geometry": [
         [
           1.284491,
@@ -341,7 +348,7 @@ and the EWL city stretch just closed):
       "speech_text": "Walk to Singapore General Hospital. ",
       "i18n_key": "leg.walk.instruction",
       "shelter": "exposed",
-      "step_free": true,
+      "step_free": "unverified",
       "geometry": [
         [
           1.280047,
@@ -388,7 +395,7 @@ and the EWL city stretch just closed):
         "speech_text": "Taxi from Paya Lebar to Singapore General Hospital. Show the driver the card on screen.",
         "i18n_key": "leg.taxi.instruction",
         "shelter": "covered",
-        "step_free": true,
+        "step_free": "verified",
         "geometry": [
           [
             1.317585,

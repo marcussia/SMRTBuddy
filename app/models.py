@@ -63,7 +63,13 @@ class Leg(BaseModel):
     speech_text: str          # short sentences for TTS
     i18n_key: str
     shelter: Literal["covered", "partial", "exposed"]
-    step_free: bool
+    # Step-free status is a CLAIM with provenance, not a boolean assertion:
+    #   "verified"      — we have a positive basis for it (see planner comments)
+    #   "unverified"    — nobody has checked; the UI must say so
+    #   "not_step_free" — positively known to have steps / no working lift
+    # For an accessibility-constrained commuter, a false "step-free" is the
+    # dangerous direction to be wrong in — so walks are never asserted.
+    step_free: Literal["verified", "unverified", "not_step_free"]
     geometry: list[tuple[float, float]] = []   # WGS84 (lat, lon) polyline
     crowding: Literal["low", "medium", "high"] | None = None
 
