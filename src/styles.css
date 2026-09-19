@@ -110,3 +110,19 @@ p.exit-hint{font-size:16px;margin:8px 0 0}
 .driver-card strong{display:block;font-family:"Noto Sans SC",sans-serif;font-size:34px;line-height:1.15}
 .driver-card em{display:block;font-style:normal;font-size:19px;font-weight:700;margin:4px 0 6px}
 .driver-card small{display:block;font-size:15px;font-weight:700}
+
+/* full-screen disruption alert */
+.alert-screen{display:flex;flex-direction:column;background:var(--paper,#f5f1e8)}
+.alert-band{background:var(--red,#b3261e);color:#fff;text-align:center;font-weight:800;font-size:18px;letter-spacing:.14em;text-transform:uppercase;padding:22px 16px 14px}
+.alert-body{padding:26px 28px 0}
+.alert-screen h1{font-size:42px;line-height:1.04;letter-spacing:-.02em;margin:0 0 14px}
+.alert-now{font-size:26px;font-weight:800;margin:0 0 8px}
+.alert-act{font-size:22px;font-weight:700;color:#31465a;margin:0 0 16px}
+.alert-specifics{display:flex;flex-direction:column;gap:8px}
+.alert-specifics span{background:#fff;border:2px solid var(--navy,#0d2136);border-radius:12px;padding:12px 14px;font-size:18px;font-weight:700}
+.alert-actions{margin-top:auto}
+.alert-why{margin-top:12px}
+.alert-why summary{font-size:17px;font-weight:700;color:#31465a;cursor:pointer;padding:8px 0}
+.alert-why p{font-size:15px;color:#31465a;line-height:1.4}
+.locale-zh .alert-screen h1,.locale-ms .alert-screen h1{font-size:36px}
+.locale-ta .alert-screen h1{font-size:30px;line-height:1.2}

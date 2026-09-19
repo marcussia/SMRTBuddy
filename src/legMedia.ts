@@ -5,7 +5,8 @@ import exitSeven from './assets/images/outram-exit-7.jpg'
 import sghEntrance from './assets/images/step-8-sgh-entrance.jpg'
 
 // Landmark photos are ILLUSTRATIVE ONLY and are shown only when they match a
-// real leg of the advice (the backend has no exit-level or photo data). Legs
+// real leg of the advice (the backend has no photo data; exit guidance comes
+// from exit_hint, which is real OSM data). Legs
 // with no matching landmark get no photo — never a wrong one.
 export function legPhoto(leg: Leg): { image: string; alt: string } | null {
   if (leg.mode === 'mrt' && leg.from_name === 'Bedok')

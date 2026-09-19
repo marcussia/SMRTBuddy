@@ -42,9 +42,10 @@ function App() {
     try {
       const created = await api.createJourney(target, useScenario)
       setJourney(created)
-      setAdvice(await api.getAdvice(created.journey_id))
+      const fresh = await api.getAdvice(created.journey_id)
+      setAdvice(fresh)
       setScenario(useScenario)
-      navigate('overview')
+      navigate(fresh.action === 'take_taxi' || fresh.action === 'cancel_trip' ? 'alert' : 'overview')
     } catch (err) {
       const help = api.corridorHelp(err)
       if (help) { setCorridor(help); navigate('plan') }
@@ -57,7 +58,7 @@ function App() {
     try {
       const result = await api.runStage(stage)
       setJourney(result.journey); setAdvice(result.advice); setScenario(stage); setActiveStep(0)
-      navigate('overview')
+      navigate(result.advice.action === 'take_taxi' || result.advice.action === 'cancel_trip' ? 'alert' : 'overview')
     } catch (err) {
       setNotice(err instanceof Error ? `Could not run the demo stage. ${err.message}` : 'Could not run the demo stage.')
     } finally { setBusy(false) }
@@ -96,6 +97,7 @@ function App() {
       {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
       {screen === 'sos' && <SosScreen locale={locale} back={() => navigate('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
       {screen === 'recording' && <RecordingScreen back={() => navigate('sos')} />}
+      {screen === 'alert' && <AlertScreen locale={locale} copy={copy} advice={advice} journey={journey} proceed={() => { setActiveStep(0); navigate(advice && advice.action === 'cancel_trip' ? 'overview' : 'guide') }} why={() => {}} />}
       {screen === 'arrived' && <ArrivedScreen copy={copy} locale={locale} journey={journey} again={newJourney} />}
       {screen === 'family' && <FamilyAccessScreen back={() => navigate('profile')} next={() => navigate('family-journey')} />}
       {screen === 'family-journey' && <FamilyJourneyScreen back={() => navigate('family')} />}
@@ -372,6 +374,63 @@ function DriverCard({ copy, card }: { copy: UiCopy; card: NonNullable<api.Advice
     <strong>{card.destination_zh}</strong>
     <em>{card.destination_en}</em>
     <small>{copy.taxi.arriveBy} {api.fmtTime(card.arrive_by)}</small>
+  </div>
+}
+
+
+// Full-screen disruption alert (take_taxi / cancel_trip): few words on screen,
+// the voice carries the detail. Every line is real API data — the trigger
+// source, her alight point, the exit_hint from captured OSM entrances, and
+// the taxi stand the engine chose from LTA TaxiStands. The REPLAY label and
+// full reason live inside "Why?".
+function alertParts(copy: UiCopy, advice: api.Advice, journey: api.Journey | null) {
+  const src = advice.triggered_by[0] ?? ''
+  const happened = src.includes('train') ? copy.alert.happened.train
+    : src.includes('flood') ? copy.alert.happened.flood
+    : src.includes('lift') ? copy.alert.happened.lift
+    : src.includes('weather') ? copy.alert.happened.weather
+    : src.includes('crowd') ? copy.alert.happened.crowd
+    : copy.alert.happened.default
+  const taxiLeg = advice.legs.find((l) => l.mode === 'taxi')
+  const riding = journey && ['on_train', 'on_bus', 'on_platform'].includes(journey.location_state)
+  const now = advice.action === 'cancel_trip' ? copy.alert.stay
+    : taxiLeg ? (riding ? copy.alert.getOff(taxiLeg.from_name) : copy.alert.goTo(taxiLeg.from_name)) : ''
+  const act = advice.action === 'cancel_trip' ? copy.alert.cancel
+    : copy.alert.taxiTo(journey?.destination ?? '')
+  const hint = taxiLeg?.exit_hint ?? null
+  const exitShort = hint ? copy.alert.exit[hint.wheelchair](hint.ref) : null
+  const stand = advice.taxi_stand ? copy.alert.stand(advice.taxi_stand.name, advice.taxi_stand.distance_m) : null
+  return { happened, now, act, exitShort, exitFull: hint?.text ?? null, stand }
+}
+
+function AlertScreen({ locale, copy, advice, journey, proceed }: { locale: Locale; copy: UiCopy; advice: api.Advice | null; journey: api.Journey | null; proceed: () => void; why: () => void }) {
+  const spokenRef = useRef('')
+  useEffect(() => {
+    if (!advice || !('speechSynthesis' in window)) return
+    const p = alertParts(copy, advice, journey)
+    const text = [p.happened, p.now, p.act, p.exitFull ?? p.exitShort, p.stand].filter(Boolean).join('. ')
+    if (spokenRef.current === text) return
+    spokenRef.current = text
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = guideCopy[locale].speechLanguage
+    utterance.rate = .68
+    speechSynthesis.cancel(); speechSynthesis.speak(utterance)
+    return () => speechSynthesis.cancel()
+  }, [advice, journey, copy, locale])
+  if (!advice) return null
+  const p = alertParts(copy, advice, journey)
+  return <div className={`screen alert-screen locale-${locale}`}>
+    <div className="alert-band" role="alert">{copy.alert.band}</div>
+    <div className="alert-body">
+      <h1>{p.happened}</h1>
+      {p.now && <p className="alert-now">{p.now}</p>}
+      <p className="alert-act">{p.act}</p>
+      {(p.exitShort || p.stand) && <div className="alert-specifics">{p.exitShort && <span>{p.exitShort}</span>}{p.stand && <span>{p.stand}</span>}</div>}
+    </div>
+    <div className="screen-actions alert-actions">
+      <PrimaryButton onClick={proceed}>{advice.action === 'cancel_trip' ? copy.alert.ok : copy.alert.cta}</PrimaryButton>
+      <details className="alert-why"><summary>{copy.alert.why}</summary><p>{advice.reason}</p>{api.anyFixture(advice) && <span className="replay-tag">{copy.overview.simulated}</span>}</details>
+    </div>
   </div>
 }
 

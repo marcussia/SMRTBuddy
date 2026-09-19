@@ -59,6 +59,7 @@ export type Advice = {
   affected_segment: [number, number][] | null
   alternatives: Leg[][]
   driver_card: { destination_en: string; destination_zh: string; arrive_by: string } | null
+  taxi_stand: { name: string; distance_m: number; barrier_free: boolean | null; lat: number; lon: number } | null
 }
 
 export type Journey = {
@@ -67,6 +68,7 @@ export type Journey = {
   destination: string
   arrive_by: string
   scenario: string | null
+  location_state: 'at_home' | 'walking' | 'on_bus' | 'on_train' | 'on_platform'
 }
 
 export type LocationAck = {
@@ -173,6 +175,7 @@ export async function createJourney(destination: string, scenario: ScenarioId | 
   const journey = await call<Journey>('POST', '/journeys', body)
   if (spec && 'onTrain' in spec) {
     await postLocation(journey.journey_id, 'on_train', undefined, true)
+    journey.location_state = 'on_train'   // mirrors the set_state ping just sent
   }
   return journey
 }
@@ -193,7 +196,10 @@ export type StageId = (typeof STAGES)[number]['id']
 export async function runStage(stage: StageId): Promise<{ journey: Journey; advice: Advice }> {
   const spec = STAGES.find((s) => s.id === stage)!
   const journey = await createJourney('Singapore General Hospital', stage)
-  if (spec.ping) await postLocation(journey.journey_id, 'on_train', spec.ping, true)
+  if (spec.ping) {
+    await postLocation(journey.journey_id, 'on_train', spec.ping, true)
+    journey.location_state = 'on_train'   // mirrors the set_state ping just sent
+  }
   return { journey, advice: await getAdvice(journey.journey_id) }
 }
 

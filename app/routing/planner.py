@@ -315,6 +315,25 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
                "leg.taxi.instruction", locale, speech_key="leg.taxi.speech",
                shelter="covered", step_free="verified",  # door-to-door
                geometry=[start, d_coord], from_=start_name, to=d_name)
+    # Exit hint for leaving the station she is at when the taxi is advised —
+    # start point only (the far endpoint must not attract an entrance).
+    if start_station_code:
+        from app.routing.accessibility import nearest_exit
+        needs_sf = profile.wheelchair or not profile.can_use_stairs
+        hint = nearest_exit([start, start], prefer_wheelchair=needs_sf)
+        if hint:
+            from app.models import ExitHint
+            if hint["nearer_ref"]:
+                text = resolve(f"exit.preferred.{hint['nearer_wheelchair']}",
+                               locale, ref=hint["ref"], other=hint["nearer_ref"])
+            else:
+                text = resolve(f"exit.nearest.{hint['wheelchair']}", locale,
+                               ref=hint["ref"])
+            taxi.exit_hint = ExitHint(station=start_name, ref=hint["ref"],
+                                      wheelchair=hint["wheelchair"],
+                                      nearer_ref=hint["nearer_ref"],
+                                      nearer_wheelchair=hint["nearer_wheelchair"],
+                                      text=text)
     options.append(RouteOption(
         kind="taxi", legs=[taxi], total_min=minutes, n_transfers=0, walk_m=0,
         driver_card=DriverCard(destination_en=d_name,

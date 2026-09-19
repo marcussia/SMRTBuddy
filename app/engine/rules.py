@@ -630,6 +630,31 @@ def assemble(ctx: Context, decision: Decision,
                if c in net.BY_CODE and net.BY_CODE[c].lat is not None]
         affected = pts if len(pts) >= 2 else None
 
+    # §7.6: with take_taxi, name the actual stand — nearest LTA TaxiStands
+    # entry to where the taxi leg starts. Only from real (live/fixture) data.
+    taxi_stand = None
+    if decision.action == "take_taxi" and decision.chosen \
+            and decision.chosen.legs and decision.chosen.legs[0].geometry:
+        ts = ctx.results.get("taxi_stands")
+        if ts is not None and ts.status != "unavailable" and isinstance(ts.data, list):
+            start = decision.chosen.legs[0].geometry[0]
+            best, best_d = None, 1e12
+            for row in ts.data:
+                lat, lon = row.get("Latitude"), row.get("Longitude")
+                if lat is None or lon is None:
+                    continue
+                d = F._haversine_m(start, (lat, lon))
+                if d < best_d:
+                    best, best_d = row, d
+            if best is not None:
+                from app.models import TaxiStandInfo
+                taxi_stand = TaxiStandInfo(
+                    name=str(best.get("Name", "Taxi stand")),
+                    distance_m=round(best_d),
+                    barrier_free=(str(best.get("Bfa", "")).lower() == "yes")
+                                 if best.get("Bfa") is not None else None,
+                    lat=best["Latitude"], lon=best["Longitude"])
+
     return Advice(
         action=decision.action,
         headline=headline,
@@ -647,4 +672,5 @@ def assemble(ctx: Context, decision: Decision,
         driver_card=(decision.chosen.driver_card
                      if decision.chosen and decision.action == "take_taxi"
                      else None),
+        taxi_stand=taxi_stand,
     )

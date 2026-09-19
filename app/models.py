@@ -55,6 +55,16 @@ class UserProfile(BaseModel):
         return self
 
 
+class TaxiStandInfo(BaseModel):
+    """The stand the engine chose: nearest LTA TaxiStands entry to the taxi
+    leg's start. Real data (live or fixture), never invented."""
+    name: str
+    distance_m: float
+    barrier_free: bool | None = None    # LTA's Bfa flag
+    lat: float
+    lon: float
+
+
 class ExitHint(BaseModel):
     """Nearest station exit to a walk leg, derived from captured OSM
     subway_entrance nodes (data/replay/osm_accessibility_corridor.json).
@@ -114,6 +124,8 @@ class Advice(BaseModel):
     # PRD §3/§7.6: returned with take_taxi. Optional model addition recorded
     # in STATUS.md (PRD names driver_card but defines no model for it).
     driver_card: "DriverCard | None" = None
+    # §7.6: the nearest stand from LTA TaxiStands data, with take_taxi only.
+    taxi_stand: "TaxiStandInfo | None" = None
 
 
 class DriverCard(BaseModel):

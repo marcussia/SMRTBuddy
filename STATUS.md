@@ -419,3 +419,32 @@ summary instead of the English reason (reason is en-only by design), pace
 choice maps to 0.8/1.4 m/s (stated parameter), landmark photos (labelled
 illustrative), Hui Ling naming, six-scenario chips no longer in the React UI
 (stages replaced them; the fallback dashboard still has all nine buttons).
+
+---
+
+## 2026-09-19 ~12:20 — Full-screen disruption alert (interrupt, not a paragraph)
+
+take_taxi and cancel_trip now take over the screen: red attention band, what
+happened (from triggered_by), what to do now ("Get off at Bayfront", from the
+taxi leg + her real location_state), the action, then the specifics — the
+exit_hint and the taxi stand. One big "Show me the way" button; the full
+reason, operator notice and REPLAY label live inside a collapsed "Why?".
+A calm voiceover (rate .68, four languages) speaks the full detail on entry.
+
+New real data behind it:
+- Capture v2: the Overpass query re-run with Bayfront and Paya Lebar anchors
+  added (487 elements; Bayfront has exits A–E, all wheelchair=yes in OSM).
+  Same file, provenance updated. Walk classifications unchanged.
+- Advice.taxi_stand: nearest LTA TaxiStands entry to the taxi leg's start
+  (stage 3: "Collyer Quay at OUE Bayfront", 726 m, Bfa yes). Real data only;
+  absent when the taxi_stands source is unavailable (e.g. keyless clone).
+  "Prefer higher supply" (PRD §7.6) is NOT implemented — nearest only,
+  a known simplification.
+- Taxi legs now carry exit_hint too (start point only), so the alert can say
+  "Exit A: step-free (OSM)" at Bayfront.
+- Frontend mirrors the on-train ping into journey.location_state so the alert
+  says "Get off at" rather than "Go to" when she is riding.
+- Stale comment in legMedia.ts fixed ("no exit-level data" predated ff20c84).
+Verified in headless Chrome: stage 3 -> alert with all parts real, Why?
+collapsed by default with REPLAY inside, CTA -> guide; stage 1 still lands on
+overview. 6/6 + 3/3 after.

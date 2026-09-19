@@ -1,6 +1,6 @@
 {
- "_provenance": "Captured once from Overpass on 2026-09-19 09:16 SGT (overpass-api.de 504'd; fetched from the public Kumi mirror if noted above). One query, identifying User-Agent, cached here per OSM usage policy. REPLAY DATA \u2014 real OSM data, captured, not live. \u00a9 OpenStreetMap contributors (ODbL).",
- "_query": "[out:json][timeout:45];\n(\nnode(around:600,1.323999,103.930214)[highway=steps];way(around:600,1.323999,103.930214)[highway=steps];node(around:600,1.280319,103.839459)[highway=steps];way(around:600,1.280319,103.839459)[highway=steps];node(around:600,1.2794489,103.8362739)[highway=steps];way(around:600,1.2794489,103.8362739)[highway=steps];\nnode(around:600,1.323999,103.930214)[highway=elevator];way(around:600,1.323999,103.930214)[highway=elevator];node(around:600,1.280319,103.839459)[highway=elevator];way(around:600,1.280319,103.839459)[highway=elevator];node(around:600,1.2794489,103.8362739)[highway=elevator];way(around:600,1.2794489,103.8362739)[highway=elevator];\nnode(around:600,1.323999,103.930214)[wheelchair];way(around:600,1.323999,103.930214)[wheelchair];node(around:600,1.280319,103.839459)[wheelchair];way(around:600,1.280319,103.839459)[wheelchair];node(around:600,1.2794489,103.8362739)[wheelchair];way(around:600,1.2794489,103.8362739)[wheelchair];\nnode(around:600,1.323999,103.930214)[railway=subway_entrance];way(around:600,1.323999,103.930214)[railway=subway_entrance];node(around:600,1.280319,103.839459)[railway=subway_entrance];way(around:600,1.280319,103.839459)[railway=subway_entrance];node(around:600,1.2794489,103.8362739)[railway=subway_entrance];way(around:600,1.2794489,103.8362739)[railway=subway_entrance];\n);\nout tags geom;",
+ "_provenance": "Captured from Overpass (overpass-api.de) on 2026-09-19 11:44 SGT. v2 of the corridor capture: adds Bayfront and Paya Lebar anchors to the original three (Bedok, Outram Park, SGH). One query, identifying User-Agent, cached per OSM usage policy. REPLAY DATA \u2014 real OSM data, captured, not live. \u00a9 OpenStreetMap contributors (ODbL).",
+ "_query": "[out:json][timeout:45];\n(\nnode(around:600,1.323999,103.930214)[highway=steps];way(around:600,1.323999,103.930214)[highway=steps];node(around:600,1.280319,103.839459)[highway=steps];way(around:600,1.280319,103.839459)[highway=steps];node(around:600,1.2794489,103.8362739)[highway=steps];way(around:600,1.2794489,103.8362739)[highway=steps];node(around:600,1.281812,103.859152)[highway=steps];way(around:600,1.281812,103.859152)[highway=steps];node(around:600,1.317585,103.892281)[highway=steps];way(around:600,1.317585,103.892281)[highway=steps];\nnode(around:600,1.323999,103.930214)[highway=elevator];way(around:600,1.323999,103.930214)[highway=elevator];node(around:600,1.280319,103.839459)[highway=elevator];way(around:600,1.280319,103.839459)[highway=elevator];node(around:600,1.2794489,103.8362739)[highway=elevator];way(around:600,1.2794489,103.8362739)[highway=elevator];node(around:600,1.281812,103.859152)[highway=elevator];way(around:600,1.281812,103.859152)[highway=elevator];node(around:600,1.317585,103.892281)[highway=elevator];way(around:600,1.317585,103.892281)[highway=elevator];\nnode(around:600,1.323999,103.930214)[wheelchair];way(around:600,1.323999,103.930214)[wheelchair];node(around:600,1.280319,103.839459)[wheelchair];way(around:600,1.280319,103.839459)[wheelchair];node(around:600,1.2794489,103.8362739)[wheelchair];way(around:600,1.2794489,103.8362739)[wheelchair];node(around:600,1.281812,103.859152)[wheelchair];way(around:600,1.281812,103.859152)[wheelchair];node(around:600,1.317585,103.892281)[wheelchair];way(around:600,1.317585,103.892281)[wheelchair];\nnode(around:600,1.323999,103.930214)[railway=subway_entrance];way(around:600,1.323999,103.930214)[railway=subway_entrance];node(around:600,1.280319,103.839459)[railway=subway_entrance];way(around:600,1.280319,103.839459)[railway=subway_entrance];node(around:600,1.2794489,103.8362739)[railway=subway_entrance];way(around:600,1.2794489,103.8362739)[railway=subway_entrance];node(around:600,1.281812,103.859152)[railway=subway_entrance];way(around:600,1.281812,103.859152)[railway=subway_entrance];node(around:600,1.317585,103.892281)[railway=subway_entrance];way(around:600,1.317585,103.892281)[railway=subway_entrance];\n);\nout tags geom;",
  "_radius_m": 600,
  "_anchors": {
   "bedok_stn": [
@@ -14,6 +14,14 @@
   "sgh": [
    1.2794489,
    103.8362739
+  ],
+  "bayfront_stn": [
+   1.281812,
+   103.859152
+  ],
+  "paya_lebar_stn": [
+   1.317585,
+   103.892281
   ]
  },
  "elements": [
@@ -69,6 +77,148 @@
   },
   {
    "type": "node",
+   "id": 410464255,
+   "lat": 1.3185242,
+   "lon": 103.8921644,
+   "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Paya Lebar Road",
+    "name": "Paya Lebar Station Exit B",
+    "public_transport": "platform",
+    "ref": "81111",
+    "route_ref": "24;28;43;43e;70;70A;70M;76;134;135;137;154;155",
+    "shelter": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464338,
+   "lat": 1.3156853,
+   "lon": 103.8955941,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "departures_board": "timetable",
+    "highway": "bus_stop",
+    "location": "Geylang Road",
+    "name": "Blk 14 Market/Food Centre",
+    "public_transport": "platform",
+    "ref": "82029",
+    "route_ref": "2;7;7A;13;21;24;26;28;30;51;67;76;154;155",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464339,
+   "lat": 1.3152114,
+   "lon": 103.8933389,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Geylang Road",
+    "name": "City Plaza",
+    "name:zh": "\u57ce\u5e02\u8cfc\u7269\u4e2d\u5fc3",
+    "public_transport": "platform",
+    "ref": "82109",
+    "route_ref": "2;7;7A;13;21;26;40;51;67;853M",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464344,
+   "lat": 1.3147182,
+   "lon": 103.8906481,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Geylang Road",
+    "name": "Opposite Lorong 39 Geylang",
+    "public_transport": "platform",
+    "ref": "81069",
+    "route_ref": "2;13;21;26;40;51;67;137;853M",
+    "shelter": "yes",
+    "source": "Kaart Ground Survey 2017",
+    "tactile_paving": "no",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464453,
+   "lat": 1.3143713,
+   "lon": 103.8919673,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Guillemard Road",
+    "name": "Grandlink Square",
+    "public_transport": "platform",
+    "ref": "81139",
+    "route_ref": "7;70;70M;197",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464459,
+   "lat": 1.3140244,
+   "lon": 103.8931882,
+   "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Guillemard Road",
+    "name": "Opposite City Plaza",
+    "public_transport": "platform",
+    "ref": "82231",
+    "route_ref": "197",
+    "shelter": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410464477,
+   "lat": 1.314292,
+   "lon": 103.8921887,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2026-02-03",
+    "highway": "bus_stop",
+    "location": "Guillemard Road",
+    "name": "Opposite Grandlink Square",
+    "public_transport": "platform",
+    "ref": "81131",
+    "route_ref": "7;7A;70;70A;70M",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 410467875,
    "lat": 1.3233425,
    "lon": 103.9250948,
@@ -105,6 +255,67 @@
     "public_transport": "platform",
     "ref": "84029",
     "route_ref": "2;7;7A;24;25;28;30;30e;32;33;33B;40;67;222;222B;229;401;854",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410470849,
+   "lat": 1.3184219,
+   "lon": 103.891701,
+   "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Paya Lebar Road",
+    "name": "Paya Lebar Station Exit C",
+    "public_transport": "platform",
+    "ref": "81119",
+    "route_ref": "24;28;43;43e;70;70M;76;134;135;137;154;155",
+    "shelter": "yes",
+    "source": "presential survey",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410475392,
+   "lat": 1.3174538,
+   "lon": 103.8953499,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2026-02-11",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Sims Avenue",
+    "name": "After Tanjong Katong Complex",
+    "public_transport": "platform",
+    "ref": "82011",
+    "route_ref": "2;2A;7;13;21;24;26;28;30;51;67;76;154;155",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410478275,
+   "lat": 1.3161765,
+   "lon": 103.8940837,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Tanjong Katong Road",
+    "name": "Tanjong Katong Complex",
+    "public_transport": "platform",
+    "ref": "82119",
+    "route_ref": "40;43;43e;134;135;197;853M",
     "shelter": "yes",
     "tactile_paving": "no",
     "wheelchair": "yes"
@@ -151,6 +362,27 @@
     "name": "Bedok Interchange Hawker Centre",
     "name:ms": "Pusat Penjaja Bedok Interchange",
     "name:zh": "\u52ff\u6d1b\u8f6c\u6362\u7ad9\u719f\u98df\u4e2d\u5fc3",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 967530660,
+   "lat": 1.2803633,
+   "lon": 103.8550835,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Marina Boulevard",
+    "name": "Marina Bay Financial Centre",
+    "public_transport": "platform",
+    "ref": "03391",
+    "route_ref": "97;97e;106;133;400;513;651;653;654;655;657;661;666;667;668;670;671;672;982E",
+    "shelter": "yes",
+    "tactile_paving": "yes",
     "wheelchair": "yes"
    }
   },
@@ -224,6 +456,165 @@
    "tags": {
     "name": "Ban Keng Florist & Trading",
     "shop": "florist",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1315968963,
+   "lat": 1.2849182,
+   "lon": 103.861157,
+   "tags": {
+    "level": "57",
+    "name": "SkyPark Observation Deck",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238017,
+   "lat": 1.2822628,
+   "lon": 103.859408,
+   "tags": {
+    "button_operated": "yes",
+    "crossing": "traffic_signals",
+    "highway": "crossing",
+    "tactile_paving": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238030,
+   "lat": 1.2823309,
+   "lon": 103.8592829,
+   "tags": {
+    "button_operated": "yes",
+    "crossing": "traffic_signals",
+    "highway": "crossing",
+    "tactile_paving": "yes",
+    "traffic_signals:sound": "yes",
+    "traffic_signals:vibration": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238031,
+   "lat": 1.2822439,
+   "lon": 103.8577541,
+   "tags": {
+    "amenity": "atm",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238038,
+   "lat": 1.2823733,
+   "lon": 103.8601269,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238048,
+   "lat": 1.2824834,
+   "lon": 103.8581227,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238051,
+   "lat": 1.2825865,
+   "lon": 103.8588957,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238055,
+   "lat": 1.2825877,
+   "lon": 103.8591808,
+   "tags": {
+    "amenity": "atm",
+    "brand": "DBS",
+    "brand:en": "DBS",
+    "brand:wikidata": "Q705417",
+    "cash_in": "no",
+    "level": "0",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238067,
+   "lat": 1.2830706,
+   "lon": 103.8593531,
+   "tags": {
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238074,
+   "lat": 1.2832448,
+   "lon": 103.8587705,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238077,
+   "lat": 1.2832639,
+   "lon": 103.8593282,
+   "tags": {
+    "amenity": "atm",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238085,
+   "lat": 1.2835545,
+   "lon": 103.8608744,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1832238162,
+   "lat": 1.2853719,
+   "lon": 103.8595789,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1833770002,
+   "lat": 1.2822174,
+   "lon": 103.8568534,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:street": "Olympic Walk",
+    "amenity": "ferry_terminal",
+    "ferry": "yes",
+    "name": "Singapore River Cruise",
+    "public_transport": "station",
     "wheelchair": "yes"
    }
   },
@@ -304,6 +695,53 @@
   },
   {
    "type": "node",
+   "id": 1840724036,
+   "lat": 1.2819091,
+   "lon": 103.8609956,
+   "tags": {
+    "level": "0",
+    "name": "Bayfront (CCL/DTL)",
+    "note": "no official letter i think",
+    "railway": "subway_entrance",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1840724037,
+   "lat": 1.2826499,
+   "lon": 103.8594809,
+   "tags": {
+    "level": "-1",
+    "name": "Bayfront (CCL/DTL) Exit D",
+    "railway": "subway_entrance",
+    "ref": "D",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1845246333,
+   "lat": 1.3160857,
+   "lon": 103.8938108,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Tanjong Katong Road",
+    "name": "Opposite Tanjong Katong Complex",
+    "public_transport": "platform",
+    "ref": "82111",
+    "route_ref": "30",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 1847853678,
    "lat": 1.3242208,
    "lon": 103.9299737,
@@ -319,6 +757,28 @@
     "public_transport": "platform",
     "ref": "84031",
     "route_ref": "2;2A;9;9A;24;25;28;31;35;35M;67;137;137A;222;222B",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1849631261,
+   "lat": 1.3163353,
+   "lon": 103.892194,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "level": "0",
+    "lit": "yes",
+    "location": "Paya Lebar Road",
+    "name": "Paya Lebar Station Exit D",
+    "public_transport": "platform",
+    "ref": "81129",
+    "route_ref": "24;28;43;43e;70;70M;76;134;135;154;155",
     "shelter": "yes",
     "tactile_paving": "no",
     "wheelchair": "yes"
@@ -342,6 +802,36 @@
     "route_ref": "2;4N;9;24;25;28;31;35;35M;67;137;222;222A;222B",
     "shelter": "yes",
     "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1932291027,
+   "lat": 1.3186022,
+   "lon": 103.8944483,
+   "tags": {
+    "air_conditioning": "yes",
+    "brand": "NTUC FairPrice",
+    "brand:wikidata": "Q6955519",
+    "name": "FairPrice",
+    "name:en": "FairPrice",
+    "name:zh": "\u804c\u603b\u5e73\u4ef7\u8d85\u5e02",
+    "shop": "supermarket",
+    "website": "https://www.fairprice.com.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2402427003,
+   "lat": 1.3182034,
+   "lon": 103.8922349,
+   "tags": {
+    "colour": "orange",
+    "name": "Paya Lebar (CCL)-Exit B",
+    "railway": "subway_entrance",
+    "ref": "B",
     "wheelchair": "yes"
    }
   },
@@ -390,6 +880,79 @@
     "railway": "subway_entrance",
     "ref": "A",
     "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3273154946,
+   "lat": 1.2841178,
+   "lon": 103.8589679,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3283101178,
+   "lat": 1.2827024,
+   "lon": 103.8599199,
+   "tags": {
+    "level": "0",
+    "name": "Bayfront (CCL/DTL) Exit B",
+    "railway": "subway_entrance",
+    "ref": "B",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3283101179,
+   "lat": 1.2829509,
+   "lon": 103.859326,
+   "tags": {
+    "level": "-1",
+    "name": "Bayfront (CCL/DTL) Exit C",
+    "railway": "subway_entrance",
+    "ref": "C",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3283101180,
+   "lat": 1.2814039,
+   "lon": 103.8585053,
+   "tags": {
+    "level": "-1",
+    "name": "Bayfront (CCL/DTL) Exit E",
+    "railway": "subway_entrance",
+    "ref": "E",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3390540476,
+   "lat": 1.2823291,
+   "lon": 103.8585262,
+   "tags": {
+    "amenity": "arts_centre",
+    "email": "sales@marinabaysands.com",
+    "name": "Marina Bay Sands Expo and Convention Centre",
+    "phone": "+65 6688 3000",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3390540477,
+   "lat": 1.2840238,
+   "lon": 103.859642,
+   "tags": {
+    "amenity": "casino",
+    "name": "Marina Bay Sands Casino",
+    "wheelchair": "no"
    }
   },
   {
@@ -528,6 +1091,18 @@
   },
   {
    "type": "node",
+   "id": 3800199596,
+   "lat": 1.3162879,
+   "lon": 103.8946123,
+   "tags": {
+    "amenity": "taxi",
+    "name": "Tanjong Katong Complex",
+    "ref": "I19",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
    "id": 3800199677,
    "lat": 1.2828867,
    "lon": 103.8440633,
@@ -536,6 +1111,125 @@
     "capacity": "1",
     "description": "Temple Street infront of Grand Court Restaurant",
     "ref": "D18",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3816468971,
+   "lat": 1.2801372,
+   "lon": 103.8543912,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:postcode": "018981",
+    "addr:street": "Marina Boulevard",
+    "amenity": "bar",
+    "level": "0",
+    "name": "Boulevard",
+    "opening_hours": "09:00-24:00, Sa closed, Su closed",
+    "phone": "+65 6634 8761",
+    "website": "https://www.boulevard.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3961906595,
+   "lat": 1.3142787,
+   "lon": 103.8887345,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "612/620",
+    "addr:postcode": "389551",
+    "addr:street": "Geylang Lorong 38",
+    "branch": "Geylang Lorong 38",
+    "brand": "NTUC FairPrice",
+    "brand:wikidata": "Q6955519",
+    "check_date": "2026-01-21",
+    "name": "FairPrice",
+    "name:en": "FairPrice",
+    "name:zh": "\u804c\u603b\u5e73\u4ef7\u8d85\u5e02",
+    "opening_hours": "24/7",
+    "shop": "supermarket",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3980055545,
+   "lat": 1.2858906,
+   "lon": 103.8602153,
+   "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "DC Comics Super Heroes Cafe",
+    "name:it": "Super Heroes",
+    "outdoor_seating": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3984443834,
+   "lat": 1.2773813,
+   "lon": 103.856289,
+   "tags": {
+    "crossing": "traffic_signals",
+    "highway": "crossing",
+    "tactile_paving": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3984443837,
+   "lat": 1.2774614,
+   "lon": 103.856171,
+   "tags": {
+    "crossing": "traffic_signals",
+    "highway": "crossing",
+    "tactile_paving": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3986226732,
+   "lat": 1.3181268,
+   "lon": 103.8916875,
+   "tags": {
+    "name": "Paya Lebar (CCL)-Exit  C",
+    "railway": "subway_entrance",
+    "ref": "C",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3986226733,
+   "lat": 1.3178521,
+   "lon": 103.8922981,
+   "tags": {
+    "name": "Paya Lebar (CCL)-Exit  F",
+    "note": "no official letter i think",
+    "railway": "subway_entrance",
+    "ref": "F",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3986234044,
+   "lat": 1.3164096,
+   "lon": 103.8920804,
+   "tags": {
+    "name": "Paya Lebar (CCL)-Exit  D",
+    "railway": "subway_entrance",
+    "ref": "D",
+    "source": "Kaart Ground Survey 2017",
     "wheelchair": "yes"
    }
   },
@@ -565,6 +1259,25 @@
     "name:en": "OCBC Bank",
     "name:zh": "\u534e\u4fa8\u94f6\u884c",
     "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4302903887,
+   "lat": 1.3149698,
+   "lon": 103.8910396,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "757",
+    "addr:postcode": "389659",
+    "addr:street": "Geylang Road",
+    "name": "Four Chain View Hotel",
+    "source": "Kaart Ground Survey 2017",
+    "tourism": "hotel",
+    "website": "www.fourchain.com.sg",
+    "wheelchair": "yes",
+    "wikidata": "Q115969276"
    }
   },
   {
@@ -610,6 +1323,56 @@
   },
   {
    "type": "node",
+   "id": 4448838790,
+   "lat": 1.3149206,
+   "lon": 103.8945139,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "11 #B1-36",
+    "addr:postcode": "437157",
+    "addr:street": "Tanjong Katong Road",
+    "addr:unit": "36",
+    "branch": "KINEX",
+    "brand": "Sheng Siong",
+    "brand:wikidata": "Q3481878",
+    "level": "-1",
+    "name": "Sheng Siong",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "self_checkout": "yes",
+    "shop": "supermarket",
+    "surveillance": "yes",
+    "website": "https://shengsiong.com.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4583483586,
+   "lat": 1.2803268,
+   "lon": 103.8543674,
+   "tags": {
+    "amenity": "cafe",
+    "level": "0",
+    "name": "Dimbulah",
+    "toilets:wheelchair": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4583483793,
+   "lat": 1.2807071,
+   "lon": 103.8539951,
+   "tags": {
+    "amenity": "restaurant",
+    "level": "-2",
+    "name": "The Soup Spoon",
+    "toilets:wheelchair": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 4629107275,
    "lat": 1.280495,
    "lon": 103.8447984,
@@ -634,6 +1397,35 @@
     "opening_hours": "Tu-Su 10:00-16:00",
     "outdoor_seating": "yes",
     "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4636128590,
+   "lat": 1.2841464,
+   "lon": 103.8590779,
+   "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Cut by Wolfgang Puck",
+    "name:en": "Cut by Wolfgang Puck",
+    "outdoor_seating": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4636135389,
+   "lat": 1.2824908,
+   "lon": 103.8576089,
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Bayfront Avenue",
+    "amenity": "restaurant",
+    "check_date": "2025-12-20",
+    "level": "-1;0",
+    "name": "Bread Street Kitchen Singapore",
     "wheelchair": "yes"
    }
   },
@@ -683,6 +1475,212 @@
   },
   {
    "type": "node",
+   "id": 4680993193,
+   "lat": 1.2848446,
+   "lon": 103.8599481,
+   "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "TWG Tea",
+    "name:en": "TWG Tea",
+    "outdoor_seating": "no",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689399252,
+   "lat": 1.3150929,
+   "lon": 103.8915556,
+   "tags": {
+    "addr:housenumber": "783",
+    "addr:postcode": "389672",
+    "addr:street": "Geylang Road",
+    "amenity": "restaurant",
+    "name": "Keng Wah Sung Cafe",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689443911,
+   "lat": 1.3149504,
+   "lon": 103.8909489,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "amenity": "restaurant",
+    "name": "Chicken Claypot House",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689443915,
+   "lat": 1.3148967,
+   "lon": 103.8902072,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "name": "Soon Lee Audio House",
+    "shop": "electronics",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689443920,
+   "lat": 1.3145205,
+   "lon": 103.888544,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Sin Huat Seafood Restaurant",
+    "outdoor_seating": "yes",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689590469,
+   "lat": 1.3159096,
+   "lon": 103.8970904,
+   "tags": {
+    "addr:street": "Changi Road",
+    "amenity": "restaurant",
+    "name": "Alwadi",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689609776,
+   "lat": 1.315193,
+   "lon": 103.8944083,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "11",
+    "addr:postcode": "437157",
+    "addr:street": "Tanjong Katong Road, #01-17/18/19",
+    "amenity": "cafe",
+    "brand": "Starbucks",
+    "brand:wikidata": "Q37158",
+    "brand:wikipedia": "en:Starbucks",
+    "cuisine": "coffee_shop",
+    "level": "0",
+    "name": "Starbucks",
+    "official_name": "Starbucks Coffee",
+    "outdoor_seating": "no",
+    "source": "Kaart Ground Survey 2017",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689609788,
+   "lat": 1.3147571,
+   "lon": 103.8911241,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "name": "RInnai",
+    "shop": "electronics",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689610590,
+   "lat": 1.3147407,
+   "lon": 103.8910426,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Nam Fung Dental Surgery",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689610591,
+   "lat": 1.3147383,
+   "lon": 103.8909841,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "brand": "7-Eleven",
+    "brand:wikidata": "Q259340",
+    "brand:wikipedia": "en:7-Eleven",
+    "name": "7-Eleven",
+    "name:zh": "7-11\u4fbf\u5229\u5e97",
+    "shop": "convenience",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689610595,
+   "lat": 1.3146347,
+   "lon": 103.8904818,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "amenity": "pub",
+    "name": "Club V2 Pub",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689622574,
+   "lat": 1.3145235,
+   "lon": 103.889916,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "662",
+    "addr:postcode": "389592",
+    "addr:street": "Geylang Road",
+    "amenity": "cafe",
+    "name": "Unicorn Kampung 1200",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4689622578,
+   "lat": 1.314464,
+   "lon": 103.8895954,
+   "tags": {
+    "addr:street": "Geylang Road",
+    "amenity": "restaurant",
+    "name": "SSS Wonton Noodles",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4696055721,
+   "lat": 1.3196263,
+   "lon": 103.8928117,
+   "tags": {
+    "addr:street": "Eunos Road 8",
+    "name": "Lifelong Learning Institute",
+    "office": "educational_institution",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 4697476922,
    "lat": 1.2773807,
    "lon": 103.8318569,
@@ -711,6 +1709,74 @@
   },
   {
    "type": "node",
+   "id": 4697770633,
+   "lat": 1.3184239,
+   "lon": 103.8925608,
+   "tags": {
+    "addr:street": "Paya Lebar Road",
+    "amenity": "fast_food",
+    "brand": "McDonald's",
+    "brand:en": "McDonald's",
+    "brand:wikidata": "Q38076",
+    "brand:wikipedia": "en:McDonald's",
+    "brand:zh": "\u9ea6\u5f53\u52b3",
+    "cuisine": "burger",
+    "name": "McDonald's",
+    "name:en": "McDonald's",
+    "name:zh": "\u9ea6\u5f53\u52b3",
+    "name:zh-Hans": "\u9ea6\u5f53\u52b3",
+    "source": "Kaart Ground Survey 2017",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4697770634,
+   "lat": 1.3189652,
+   "lon": 103.8924113,
+   "tags": {
+    "addr:street": "Paya Lebar Road",
+    "amenity": "fast_food",
+    "brand": "Burger King",
+    "brand:wikidata": "Q177054",
+    "brand:wikipedia": "en:Burger King",
+    "cuisine": "burger",
+    "name": "Burger King",
+    "name:en": "Burger King",
+    "name:zh": "\u6c49\u5821\u738b",
+    "source": "Kaart Ground Survey 2017",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869130668,
+   "lat": 1.3150981,
+   "lon": 103.8938376,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "City Plaza",
+    "addr:housenumber": "810",
+    "addr:postcode": "409286",
+    "addr:street": "Geylang Road",
+    "addr:unit": "#01-51/55",
+    "amenity": "atm",
+    "branch": "City Plaza",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "level": "0",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
    "id": 4869132421,
    "lat": 1.3246047,
    "lon": 103.9300235,
@@ -723,6 +1789,121 @@
     "addr:street": "Bedok North Drive",
     "amenity": "atm",
     "branch": "Bedok Bus Interchange",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869132423,
+   "lat": 1.2826842,
+   "lon": 103.8598035,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "11",
+    "addr:postcode": "018957",
+    "addr:street": "Bayfront Avenue",
+    "amenity": "atm",
+    "branch": "Bayfront MRT Station",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869133303,
+   "lat": 1.319072,
+   "lon": 103.892618,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "60",
+    "addr:postcode": "409051",
+    "addr:street": "Paya Lebar Road",
+    "addr:unit": "#01-45/46/52/53",
+    "amenity": "atm",
+    "branch": "Paya Lebar Square",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869133305,
+   "lat": 1.3181222,
+   "lon": 103.8926855,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "Paya Lebar MRT Station",
+    "addr:housenumber": "30",
+    "addr:postcode": "409006",
+    "addr:street": "Paya Lebar Road",
+    "amenity": "atm",
+    "branch": "Paya Lebar MRT Station",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869134140,
+   "lat": 1.3142539,
+   "lon": 103.8885738,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "612-620",
+    "addr:postcode": "389551",
+    "addr:street": "Geylang Road",
+    "amenity": "atm",
+    "branch": "Geylang Road - Fairprice",
+    "brand": "OCBC Bank",
+    "brand:en": "OCBC Bank",
+    "brand:wikidata": "Q2042423",
+    "brand:zh": "\u534e\u4fa8\u94f6\u884c",
+    "layer": "1",
+    "operator": "OCBC Bank",
+    "operator:wikidata": "Q2042423",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869134181,
+   "lat": 1.3151568,
+   "lon": 103.8935891,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "City Plaza",
+    "addr:housenumber": "810",
+    "addr:postcode": "409286",
+    "addr:street": "Geylang Road",
+    "addr:unit": "#01-00",
+    "amenity": "atm",
+    "branch": "City Plaza",
     "brand": "UOB",
     "brand:en": "UOB",
     "brand:wikidata": "Q2064074",
@@ -751,6 +1932,128 @@
     "brand:zh": "\u5927\u534e\u94f6\u884c",
     "operator": "UOB",
     "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4878043621,
+   "lat": 1.3151251,
+   "lon": 103.8936565,
+   "tags": {
+    "amenity": "bureau_de_change",
+    "description": "money changer & remittancd",
+    "level": "0",
+    "name": "Golden Horse Prize Enterprise",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5037812522,
+   "lat": 1.2843769,
+   "lon": 103.8590995,
+   "tags": {
+    "name": "Marina Bay Laser show viewpoint",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074474,
+   "lat": 1.3186699,
+   "lon": 103.8929154,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#01-87",
+    "addr:postcode": "409051",
+    "addr:street": "60 Paya Lebar Rd, Paya Lebar Square",
+    "amenity": "cafe",
+    "brand": "Ya Kun Kaya Toast",
+    "brand:wikidata": "Q8046237",
+    "brand:wikipedia": "en:Ya Kun Kaya Toast",
+    "cuisine": "coffee_shop",
+    "name": "Ya Kun Kaya Toast",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074476,
+   "lat": 1.3186856,
+   "lon": 103.8927877,
+   "tags": {
+    "amenity": "fast_food",
+    "brand": "Long John Silver's",
+    "brand:wikidata": "Q1535221",
+    "brand:wikipedia": "en:Long John Silver's",
+    "cuisine": "seafood",
+    "level": "0",
+    "name": "Long John Silver's",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074477,
+   "lat": 1.3188728,
+   "lon": 103.8936829,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Aston Specialties",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074478,
+   "lat": 1.3186388,
+   "lon": 103.8938222,
+   "tags": {
+    "amenity": "restaurant",
+    "level": "1",
+    "name": "Swensen's",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074479,
+   "lat": 1.3186183,
+   "lon": 103.8937265,
+   "tags": {
+    "amenity": "fast_food",
+    "brand": "Carl's Jr.",
+    "brand:wikidata": "Q1043486",
+    "brand:wikipedia": "en:Carl's Jr.",
+    "cuisine": "burger",
+    "level": "2",
+    "name": "Carl's Jr.",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5157074480,
+   "lat": 1.3188872,
+   "lon": 103.8939156,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#01-144/ 145",
+    "addr:postcode": "408600",
+    "addr:street": "10 Eunos Rd 8, Singapore Post Centre",
+    "amenity": "cafe",
+    "brand": "The Coffee Bean & Tea Leaf",
+    "brand:wikidata": "Q1141384",
+    "brand:wikipedia": "en:The Coffee Bean & Tea Leaf",
+    "cuisine": "coffee_shop",
+    "level": "0",
+    "name": "The Coffee Bean & Tea Leaf",
+    "takeaway": "yes",
     "wheelchair": "yes"
    }
   },
@@ -787,6 +2090,18 @@
   },
   {
    "type": "node",
+   "id": 5350977624,
+   "lat": 1.2840841,
+   "lon": 103.8584382,
+   "tags": {
+    "fee": "no",
+    "name": "Light Show Viewing Point",
+    "tourism": "viewpoint",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
    "id": 5404774847,
    "lat": 1.2834211,
    "lon": 103.8432546,
@@ -800,12 +2115,163 @@
   },
   {
    "type": "node",
+   "id": 5457541821,
+   "lat": 1.2819947,
+   "lon": 103.8642367,
+   "tags": {
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5503237747,
+   "lat": 1.2815343,
+   "lon": 103.8637537,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5565786521,
+   "lat": 1.2803715,
+   "lon": 103.8621513,
+   "tags": {
+    "artist_name": "Marc Quinn",
+    "artwork_type": "sculpture",
+    "material": "metal",
+    "name": "Planet",
+    "name:zh": "\u661f\u7403",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5586638523,
+   "lat": 1.280274,
+   "lon": 103.8542263,
+   "tags": {
+    "addr:floor": "33",
+    "addr:housenumber": "8",
+    "addr:postcode": "018981",
+    "addr:street": "Marina Boulevard",
+    "air_conditioning": "yes",
+    "amenity": "bar",
+    "brewery": "yes",
+    "check_date": "2025-05-17",
+    "level": "33",
+    "name": "LeVel33",
+    "opening_hours": "Mo-Su 12:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:nets": "yes",
+    "payment:visa": "yes",
+    "phone": "+65 6834 3133",
+    "toilets:wheelchair": "yes",
+    "website": "https://level33.com.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5599579424,
+   "lat": 1.3190779,
+   "lon": 103.892871,
+   "tags": {
+    "name": "Fun Tea",
+    "shop": "beverages",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5599585523,
+   "lat": 1.3188921,
+   "lon": 103.892937,
+   "tags": {
+    "amenity": "fast_food",
+    "brand": "Jollibee",
+    "brand:wikidata": "Q37614",
+    "brand:wikipedia": "en:Jollibee",
+    "cuisine": "burger",
+    "name": "Jollibee",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5629984689,
+   "lat": 1.2813782,
+   "lon": 103.8590115,
+   "tags": {
+    "level": "0",
+    "name": "Bayfront (CCL/DTL) Exit A",
+    "railway": "subway_entrance",
+    "ref": "A",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5647751955,
+   "lat": 1.2821068,
+   "lon": 103.8639782,
+   "tags": {
+    "description": "Free-to-public light and sound show every evening at the Supertree Grove",
+    "fee": "no",
+    "name": "Light Show: Garden Rhapsody",
+    "name:zh": "\u706f\u5149\u79c0",
+    "opening_hours": "Mo-Su 19:45-20:00, 20:45-21:00",
+    "tourism": "attraction",
+    "website": "https://m.gardensbythebay.com.sg/en/whats-on/calendar-of-events/garden-rhapsody-light-show.html",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 5721660225,
    "lat": 1.3271234,
    "lon": 103.9319684,
    "tags": {
     "access": "yes",
     "leisure": "playground",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5838717887,
+   "lat": 1.2826028,
+   "lon": 103.8601452,
+   "tags": {
+    "tourism": "hotel",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6089177013,
+   "lat": 1.2799229,
+   "lon": 103.8559583,
+   "tags": {
+    "access": "yes",
+    "leisure": "playground",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6089177317,
+   "lat": 1.2804535,
+   "lon": 103.8549898,
+   "tags": {
+    "tourism": "artwork",
     "wheelchair": "yes"
    }
   },
@@ -829,6 +2295,18 @@
   },
   {
    "type": "node",
+   "id": 6174380285,
+   "lat": 1.285792,
+   "lon": 103.8597962,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Sen of Japan",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 6187831294,
    "lat": 1.3259389,
    "lon": 103.9301524,
@@ -846,6 +2324,93 @@
   },
   {
    "type": "node",
+   "id": 6278002685,
+   "lat": 1.2821528,
+   "lon": 103.8545533,
+   "tags": {
+    "name:fr": "vue Marina Bay",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6378596170,
+   "lat": 1.3142539,
+   "lon": 103.8885738,
+   "tags": {
+    "amenity": "atm",
+    "drive_through": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6378596171,
+   "lat": 1.3142593,
+   "lon": 103.8885944,
+   "tags": {
+    "amenity": "atm",
+    "drive_through": "no",
+    "operator": "POSB",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6378596172,
+   "lat": 1.3142145,
+   "lon": 103.8892042,
+   "tags": {
+    "amenity": "atm",
+    "operator": "DBS",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6378596173,
+   "lat": 1.3147146,
+   "lon": 103.8896629,
+   "tags": {
+    "amenity": "restaurant",
+    "diet:vegetarian": "yes",
+    "name": "Mixed Rice",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6378596174,
+   "lat": 1.3142159,
+   "lon": 103.8883808,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "608",
+    "addr:postcode": "389547",
+    "addr:street": "Geylang Road",
+    "delivery": "yes",
+    "name": "Durian 36",
+    "opening_hours": "24/7",
+    "phone": "+65 9889 4906",
+    "shop": "greengrocer",
+    "website": "https://www.durian36.com/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6399967785,
+   "lat": 1.3185448,
+   "lon": 103.8915066,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "89.7 Supper Club",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
    "id": 6433352300,
    "lat": 1.279053,
    "lon": 103.8408499,
@@ -855,6 +2420,155 @@
     "cuisine": "seafood",
     "name": "Humpback",
     "opening_hours": "Mo-Sa 17:00-00:00; Su 11:00-15:00",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6446571418,
+   "lat": 1.2856951,
+   "lon": 103.8622437,
+   "tags": {
+    "artwork_type": "installation",
+    "image": "https://images.mapillary.com/iZX4u75TvoteMiT9yCcs0g/thumb-2048.jpg",
+    "mapillary": "1132524037265098",
+    "name": "Moongate",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6448634637,
+   "lat": 1.2824175,
+   "lon": 103.8618208,
+   "tags": {
+    "image": "https://images.mapillary.com/WGji0tHPJzPbMckq0DqrPQ/thumb-2048.jpg",
+    "mapillary": "1160863667769517",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6449190570,
+   "lat": 1.2846409,
+   "lon": 103.8586412,
+   "tags": {
+    "artwork_type": "installation",
+    "image": "https://images.mapillary.com/k35ZwUhBci_ULF0jT04NVg/thumb-2048.jpg",
+    "mapillary": "1181940332233836",
+    "material": "metal",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6449211277,
+   "lat": 1.282394,
+   "lon": 103.8634541,
+   "tags": {
+    "board_type": "nature",
+    "image": "https://images.mapillary.com/VoHBP9Xk15ZQ823iwznyWg/thumb-2048.jpg",
+    "information": "board",
+    "mapillary": "932365724267908",
+    "name": "Supertree Grove",
+    "name:zh": "\u64ce\u5929\u6811\u4e1b",
+    "tourism": "information",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6449716756,
+   "lat": 1.2866332,
+   "lon": 103.8603027,
+   "tags": {
+    "image": "https://images.mapillary.com/JUIDYW9eqi7atFB_oc3tKg/thumb-2048.jpg",
+    "mapillary": "333925221423131",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6475355494,
+   "lat": 1.2781114,
+   "lon": 103.8609839,
+   "tags": {
+    "image": "https://images.mapillary.com/HiSnyg3W__gWHf4HC2zxoA/thumb-2048.jpg",
+    "mapillary": "818092522463195",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6514811733,
+   "lat": 1.2802963,
+   "lon": 103.8540761,
+   "tags": {
+    "level": "-2",
+    "name": "Jasons Deli",
+    "shop": "deli",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6514811739,
+   "lat": 1.2797563,
+   "lon": 103.8552441,
+   "tags": {
+    "amenity": "restaurant",
+    "level": "0",
+    "name": "Harry's",
+    "outdoor_seating": "yes",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6514811740,
+   "lat": 1.2797709,
+   "lon": 103.8543731,
+   "tags": {
+    "artist_name": "Dame Elisabeth Frank",
+    "artwork_type": "sculpture",
+    "name": "Water Buffalos",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6514886215,
+   "lat": 1.2820768,
+   "lon": 103.8574136,
+   "tags": {
+    "amenity": "restaurant",
+    "check_date": "2025-12-19",
+    "cuisine": "burger",
+    "level": "0",
+    "microbrewery": "yes",
+    "name": "Black Tap Craft Burgers & Beers",
+    "phone": "+65 6688 9957",
+    "website": "https://www.marinabaysands.com/restaurants/black-tap.html/?utm_source=google&utm_medium=GMB&utm_campaign=black_tap_info_main",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6514886218,
+   "lat": 1.2826249,
+   "lon": 103.8578254,
+   "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "level": "-2",
+    "name": "Cedele",
+    "outdoor_seating": "no",
     "wheelchair": "no"
    }
   },
@@ -874,6 +2588,19 @@
   },
   {
    "type": "node",
+   "id": 6548876535,
+   "lat": 1.3181851,
+   "lon": 103.8925581,
+   "tags": {
+    "amenity": "atm",
+    "brand": "POSB",
+    "brand:wikidata": "Q7120030",
+    "operator": "POSB",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 6715392260,
    "lat": 1.3244043,
    "lon": 103.9288298,
@@ -884,6 +2611,81 @@
     "name": "Uniqlo",
     "name:zh": "\u4f18\u8863\u5e93",
     "shop": "clothes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6773743849,
+   "lat": 1.3172794,
+   "lon": 103.8931861,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "10",
+    "addr:postcode": "409057",
+    "addr:street": "Paya Lebar Road",
+    "addr:unit": "14",
+    "amenity": "cafe",
+    "brand": "Starbucks",
+    "brand:wikidata": "Q37158",
+    "brand:wikipedia": "en:Starbucks",
+    "cuisine": "coffee_shop",
+    "level": "0",
+    "name": "Starbucks",
+    "official_name": "Starbucks Coffee",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6786871620,
+   "lat": 1.2853436,
+   "lon": 103.859982,
+   "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "Jasons Deli",
+    "outdoor_seating": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6790063223,
+   "lat": 1.3177171,
+   "lon": 103.8930909,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "10",
+    "addr:postcode": "409057",
+    "addr:street": "Paya Lebar Road",
+    "addr:unit": "6-8",
+    "brand": "Cotton On",
+    "brand:wikidata": "Q5175717",
+    "level": "1",
+    "name": "Cotton On",
+    "shop": "clothes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6797836708,
+   "lat": 1.3173659,
+   "lon": 103.8930327,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "10",
+    "addr:postcode": "409057",
+    "addr:street": "Paya Lebar Road",
+    "addr:unit": "31",
+    "brand": "Bata",
+    "brand:wikidata": "Q688082",
+    "brand:wikipedia": "en:Bata (company)",
+    "level": "1",
+    "name": "Bata",
+    "shop": "shoes",
     "wheelchair": "yes"
    }
   },
@@ -927,6 +2729,25 @@
   },
   {
    "type": "node",
+   "id": 6798992190,
+   "lat": 1.3185526,
+   "lon": 103.8929138,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#01-89/90",
+    "addr:postcode": "409051",
+    "addr:street": "60 Paya Lebar Rd, Paya Lebar Square",
+    "amenity": "cafe",
+    "brand": "Toast Box",
+    "brand:wikidata": "Q100285490",
+    "cuisine": "coffee_shop",
+    "name": "Toast Box",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 6815742183,
    "lat": 1.3245238,
    "lon": 103.9290116,
@@ -941,6 +2762,125 @@
     "cuisine": "coffee_shop",
     "name": "Toast Box",
     "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6817747479,
+   "lat": 1.2814112,
+   "lon": 103.8643465,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cafe Coco",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6817747481,
+   "lat": 1.281379,
+   "lon": 103.8643528,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Hong Kong Sheng Kee Noodle House",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6819872136,
+   "lat": 1.3191162,
+   "lon": 103.8924825,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "60",
+    "addr:postcode": "409051",
+    "addr:street": "Paya Lebar Road",
+    "level": "-1",
+    "name": "Scarlett \u601d\u5bb6\u5ba2",
+    "shop": "supermarket",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6861924641,
+   "lat": 1.3154234,
+   "lon": 103.8956605,
+   "tags": {
+    "addr:housename": "Haig Road Good Centre",
+    "addr:housenumber": "14",
+    "addr:street": "Haig Road",
+    "addr:unit": "01-07",
+    "air_conditioning": "no",
+    "check_date": "2023-05-06",
+    "level": "0",
+    "name": "Traditional Haig Road Putu Piring",
+    "opening_hours": "Mo-Su 11:00-23:00",
+    "payment:cards": "no",
+    "payment:cash": "yes",
+    "payment:credit_cards": "no",
+    "payment:debit_cards": "no",
+    "payment:paynow": "yes",
+    "phone": "+65 9456 7573",
+    "shop": "pastry",
+    "start_date": "1985-01-09",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6907482685,
+   "lat": 1.2791391,
+   "lon": 103.8546055,
+   "tags": {
+    "addr:housenumber": "12",
+    "addr:postcode": "018982",
+    "amenity": "cafe",
+    "name": "The Sandwich Shop",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6929569049,
+   "lat": 1.2830817,
+   "lon": 103.8601403,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6929569061,
+   "lat": 1.2825019,
+   "lon": 103.8615847,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6938787927,
+   "lat": 1.2823255,
+   "lon": 103.8641652,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7046277685,
+   "lat": 1.2800822,
+   "lon": 103.8558035,
+   "tags": {
+    "artist_name": "Huang Yifan",
+    "artwork_type": "installation",
+    "name": "A World United",
+    "start_date": "2010-08-05",
+    "tourism": "artwork",
     "wheelchair": "yes"
    }
   },
@@ -973,6 +2913,58 @@
   },
   {
    "type": "node",
+   "id": 7125564915,
+   "lat": 1.3166221,
+   "lon": 103.8969889,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "408528",
+    "addr:street": "Engku Aman Turn",
+    "amenity": "community_centre",
+    "name": "Geylang Serai Community Club",
+    "name:zh": "\u82bd\u7b3c\u58eb\u4e43\u8054\u7edc\u6240",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7126026543,
+   "lat": 1.3154275,
+   "lon": 103.8954762,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "14",
+    "addr:postcode": "430014",
+    "addr:street": "Haig Road",
+    "air_conditioning": "no",
+    "amenity": "food_court",
+    "check_date": "2023-05-06",
+    "diet:halal": "yes",
+    "level": "0",
+    "name": "Haig Road Food Centre",
+    "name:ms": "Pusat Makanan Haig Road",
+    "name:zh": "\u6d77\u683c\u8def\u719f\u98df\u4e2d\u5fc3",
+    "shop": "hawker",
+    "smoking": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7126026560,
+   "lat": 1.3156004,
+   "lon": 103.8959818,
+   "tags": {
+    "name": "168 Fresh Fruits Trading",
+    "shop": "greengrocer",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
    "id": 7202567685,
    "lat": 1.3258831,
    "lon": 103.9301943,
@@ -981,6 +2973,18 @@
     "amenity": "restaurant",
     "name": "Happy Hawker",
     "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7314162589,
+   "lat": 1.3149175,
+   "lon": 103.8936043,
+   "tags": {
+    "addr:street": "#01-87B",
+    "name": "City Mahjong Centre",
+    "shop": "games",
+    "wheelchair": "limited"
    }
   },
   {
@@ -1049,6 +3053,104 @@
     "level": "1",
     "name": "Swensen's",
     "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7897079378,
+   "lat": 1.2791391,
+   "lon": 103.8546382,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "12",
+    "addr:postcode": "018982",
+    "addr:street": "Marina Boulevard",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "japanese;sushi;seafood",
+    "delivery": "yes",
+    "description": "Misaki offers cozy Japanese dining at the heart of Singapore's Downtown business district, featuring kaiseki-style omakase cuisine and new seasonal creations every month.",
+    "diet:non-vegetarian": "yes",
+    "email": "misaki.mbfc@gmail.com",
+    "image": "https://misakisg.com/wp-content/uploads/2020/06/misaki2.jpg",
+    "level": "2",
+    "name": "Misaki Japanese Restaurant",
+    "name:ja": "\u4e09\u5d0e",
+    "name:zh": "\u4e09\u5d0e",
+    "opening_hours": "Mo-Fr 11:30-15:00,18:00-22:00; Sa 18:00-22:00",
+    "phone": "+65 6443 1187",
+    "takeaway": "yes",
+    "website": "https://misakisg.com/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8037018319,
+   "lat": 1.2816581,
+   "lon": 103.8614181,
+   "tags": {
+    "amenity": "toilets",
+    "fee": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8037018320,
+   "lat": 1.2814446,
+   "lon": 103.8613199,
+   "tags": {
+    "amenity": "toilets",
+    "fee": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8037018321,
+   "lat": 1.280742,
+   "lon": 103.8605803,
+   "tags": {
+    "amenity": "toilets",
+    "fee": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8526972000,
+   "lat": 1.3182708,
+   "lon": 103.8932833,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "30",
+    "addr:postcode": "409006",
+    "addr:street": "Paya Lebar Road",
+    "addr:unit": "#01-11/12",
+    "brand": "Cheers",
+    "brand:wikidata": "Q64154066",
+    "level": "0",
+    "name": "Cheers",
+    "name:en": "Cheers",
+    "name:zh": "Cheers(\u96c0\u559c)\u4fbf\u5229\u5546\u5e97",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "shop": "convenience",
+    "website": "https://cheers.com.sg/",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8597539847,
+   "lat": 1.3178486,
+   "lon": 103.8933481,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Smol",
+    "outdoor_seating": "yes",
+    "takeaway": "yes",
+    "wheelchair": "limited"
    }
   },
   {
@@ -1171,6 +3273,20 @@
   },
   {
    "type": "node",
+   "id": 10242087199,
+   "lat": 1.3156562,
+   "lon": 103.8962235,
+   "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Haig Road",
+    "amenity": "food_court",
+    "check_date": "2022-12-02",
+    "diet:halal": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
    "id": 10278674828,
    "lat": 1.2844286,
    "lon": 103.842491,
@@ -1194,6 +3310,43 @@
     "start_date": "2022-12-05",
     "stroller": "yes",
     "toilets": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10804265707,
+   "lat": 1.315937,
+   "lon": 103.8973867,
+   "tags": {
+    "check_date": "2024-04-21",
+    "level": "0",
+    "name": "Chew Design",
+    "shop": "interior_decoration",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10806574824,
+   "lat": 1.2785384,
+   "lon": 103.8619634,
+   "tags": {
+    "access": "yes",
+    "defibrillator:location": "Outside male toilet",
+    "emergency": "defibrillator",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10807163416,
+   "lat": 1.2851622,
+   "lon": 103.8590854,
+   "tags": {
+    "defibrillator:location": "Inside mall, L1, next to elevator",
+    "emergency": "defibrillator",
+    "indoor": "yes",
     "wheelchair": "yes"
    }
   },
@@ -1311,6 +3464,53 @@
     "name:zh-Hant": "\u56db\u5ddd\u83dc\u9928",
     "outdoor_seating": "yes",
     "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11400457600,
+   "lat": 1.2824651,
+   "lon": 103.863464,
+   "tags": {
+    "highway": "elevator",
+    "ref": "C"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11482928213,
+   "lat": 1.2832891,
+   "lon": 103.857607,
+   "tags": {
+    "access": "yes",
+    "highway": "elevator",
+    "level": "-1;1",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12005122414,
+   "lat": 1.2801328,
+   "lon": 103.8541795,
+   "tags": {
+    "access": "customers",
+    "addr:city": "Singapore",
+    "addr:floor": "11",
+    "addr:housenumber": "8",
+    "addr:postcode": "018981",
+    "addr:street": "Marina Boulevard",
+    "branch": "MBFC Tower 1",
+    "brand": "The Executive Centre",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "level": "10",
+    "name": "The Executive Centre MBFC Tower 1",
+    "office": "coworking",
+    "opening_hours": "Mo-Fr 08:30-18:00; Sa-Su off",
+    "phone": "+65 6653 4688",
+    "website": "https://www.executivecentre.com/office-space/singapore-marina-bay-financial-centre/",
     "wheelchair": "yes"
    }
   },
@@ -1462,6 +3662,28 @@
   },
   {
    "type": "node",
+   "id": 13122104273,
+   "lat": 1.318197,
+   "lon": 103.8927994,
+   "tags": {
+    "name": "Paya Lebar (EW8)-Exit  A",
+    "railway": "subway_entrance",
+    "ref": "A"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13122104274,
+   "lat": 1.3178497,
+   "lon": 103.8928784,
+   "tags": {
+    "name": "Paya Lebar (EW8)-Exit  E",
+    "railway": "subway_entrance",
+    "ref": "E"
+   }
+  },
+  {
+   "type": "node",
    "id": 13800501480,
    "lat": 1.2811336,
    "lon": 103.8385006,
@@ -1556,6 +3778,483 @@
   },
   {
    "type": "way",
+   "id": 46919229,
+   "bounds": {
+    "minlat": 1.3157714,
+    "minlon": 103.8940056,
+    "maxlat": 1.3169781,
+    "maxlon": 103.8946719
+   },
+   "geometry": [
+    {
+     "lat": 1.3168193,
+     "lon": 103.8944188
+    },
+    {
+     "lat": 1.3167928,
+     "lon": 103.8944126
+    },
+    {
+     "lat": 1.3167604,
+     "lon": 103.8944566
+    },
+    {
+     "lat": 1.3167381,
+     "lon": 103.8944601
+    },
+    {
+     "lat": 1.3166993,
+     "lon": 103.8945384
+    },
+    {
+     "lat": 1.3162774,
+     "lon": 103.8946153
+    },
+    {
+     "lat": 1.3162666,
+     "lon": 103.8945568
+    },
+    {
+     "lat": 1.3161811,
+     "lon": 103.8945727
+    },
+    {
+     "lat": 1.3161919,
+     "lon": 103.8946309
+    },
+    {
+     "lat": 1.3160515,
+     "lon": 103.8946565
+    },
+    {
+     "lat": 1.3160395,
+     "lon": 103.8945915
+    },
+    {
+     "lat": 1.3159863,
+     "lon": 103.8945542
+    },
+    {
+     "lat": 1.3159749,
+     "lon": 103.8945626
+    },
+    {
+     "lat": 1.3159817,
+     "lon": 103.8945955
+    },
+    {
+     "lat": 1.3159742,
+     "lon": 103.8946282
+    },
+    {
+     "lat": 1.3159536,
+     "lon": 103.8946548
+    },
+    {
+     "lat": 1.3159238,
+     "lon": 103.8946703
+    },
+    {
+     "lat": 1.3158902,
+     "lon": 103.8946719
+    },
+    {
+     "lat": 1.3158591,
+     "lon": 103.8946593
+    },
+    {
+     "lat": 1.315836,
+     "lon": 103.8946348
+    },
+    {
+     "lat": 1.3158254,
+     "lon": 103.8946029
+    },
+    {
+     "lat": 1.315829,
+     "lon": 103.8945695
+    },
+    {
+     "lat": 1.3158463,
+     "lon": 103.8945407
+    },
+    {
+     "lat": 1.3158741,
+     "lon": 103.8945218
+    },
+    {
+     "lat": 1.3159072,
+     "lon": 103.8945162
+    },
+    {
+     "lat": 1.3159137,
+     "lon": 103.8945033
+    },
+    {
+     "lat": 1.315879,
+     "lon": 103.894479
+    },
+    {
+     "lat": 1.3158644,
+     "lon": 103.8943819
+    },
+    {
+     "lat": 1.3158859,
+     "lon": 103.8943535
+    },
+    {
+     "lat": 1.3158769,
+     "lon": 103.8943404
+    },
+    {
+     "lat": 1.3158428,
+     "lon": 103.8943444
+    },
+    {
+     "lat": 1.3158101,
+     "lon": 103.8943339
+    },
+    {
+     "lat": 1.3157847,
+     "lon": 103.8943107
+    },
+    {
+     "lat": 1.3157714,
+     "lon": 103.894279
+    },
+    {
+     "lat": 1.3157724,
+     "lon": 103.8942447
+    },
+    {
+     "lat": 1.3157877,
+     "lon": 103.8942139
+    },
+    {
+     "lat": 1.3158144,
+     "lon": 103.8941923
+    },
+    {
+     "lat": 1.3158477,
+     "lon": 103.8941837
+    },
+    {
+     "lat": 1.3158815,
+     "lon": 103.8941899
+    },
+    {
+     "lat": 1.3159097,
+     "lon": 103.8942096
+    },
+    {
+     "lat": 1.3159271,
+     "lon": 103.8942392
+    },
+    {
+     "lat": 1.3159306,
+     "lon": 103.8942734
+    },
+    {
+     "lat": 1.3159408,
+     "lon": 103.8942811
+    },
+    {
+     "lat": 1.3159829,
+     "lon": 103.8942255
+    },
+    {
+     "lat": 1.3166943,
+     "lon": 103.894099
+    },
+    {
+     "lat": 1.3167436,
+     "lon": 103.8941321
+    },
+    {
+     "lat": 1.3167625,
+     "lon": 103.8941151
+    },
+    {
+     "lat": 1.3167574,
+     "lon": 103.8940833
+    },
+    {
+     "lat": 1.316765,
+     "lon": 103.8940521
+    },
+    {
+     "lat": 1.3167841,
+     "lon": 103.8940263
+    },
+    {
+     "lat": 1.3168117,
+     "lon": 103.8940099
+    },
+    {
+     "lat": 1.3168435,
+     "lon": 103.8940056
+    },
+    {
+     "lat": 1.3168746,
+     "lon": 103.8940139
+    },
+    {
+     "lat": 1.3168999,
+     "lon": 103.8940337
+    },
+    {
+     "lat": 1.3169156,
+     "lon": 103.8940617
+    },
+    {
+     "lat": 1.3169192,
+     "lon": 103.8940936
+    },
+    {
+     "lat": 1.31691,
+     "lon": 103.8941245
+    },
+    {
+     "lat": 1.3168897,
+     "lon": 103.8941493
+    },
+    {
+     "lat": 1.3168613,
+     "lon": 103.8941643
+    },
+    {
+     "lat": 1.3168293,
+     "lon": 103.8941671
+    },
+    {
+     "lat": 1.3168196,
+     "lon": 103.8941831
+    },
+    {
+     "lat": 1.3168558,
+     "lon": 103.8942074
+    },
+    {
+     "lat": 1.316873,
+     "lon": 103.8943037
+    },
+    {
+     "lat": 1.3168526,
+     "lon": 103.8943314
+    },
+    {
+     "lat": 1.3168587,
+     "lon": 103.8943449
+    },
+    {
+     "lat": 1.3168911,
+     "lon": 103.8943345
+    },
+    {
+     "lat": 1.3169249,
+     "lon": 103.8943386
+    },
+    {
+     "lat": 1.3169539,
+     "lon": 103.8943565
+    },
+    {
+     "lat": 1.3169728,
+     "lon": 103.8943848
+    },
+    {
+     "lat": 1.3169781,
+     "lon": 103.8944184
+    },
+    {
+     "lat": 1.3169688,
+     "lon": 103.8944512
+    },
+    {
+     "lat": 1.3169467,
+     "lon": 103.8944771
+    },
+    {
+     "lat": 1.3169158,
+     "lon": 103.8944914
+    },
+    {
+     "lat": 1.3168818,
+     "lon": 103.8944915
+    },
+    {
+     "lat": 1.3168509,
+     "lon": 103.8944773
+    },
+    {
+     "lat": 1.3168287,
+     "lon": 103.8944515
+    },
+    {
+     "lat": 1.3168193,
+     "lon": 103.8944188
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "Tanjong Katong Complex",
+    "addr:housenumber": "845",
+    "addr:postcode": "400845",
+    "addr:street": "Geylang Road",
+    "building": "construction",
+    "building:levels": "4",
+    "construction": "retail",
+    "name": "Tanjong Katong Complex",
+    "note": "anonymous says popular among migrant workers Note 4121620",
+    "shop": "mall",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 46919233,
+   "bounds": {
+    "minlat": 1.314336,
+    "minlon": 103.8929682,
+    "maxlat": 1.3152102,
+    "maxlon": 103.8939247
+   },
+   "geometry": [
+    {
+     "lat": 1.3150113,
+     "lon": 103.8929774
+    },
+    {
+     "lat": 1.3150873,
+     "lon": 103.8932362
+    },
+    {
+     "lat": 1.3150593,
+     "lon": 103.8932444
+    },
+    {
+     "lat": 1.3150904,
+     "lon": 103.8933504
+    },
+    {
+     "lat": 1.3152102,
+     "lon": 103.8937586
+    },
+    {
+     "lat": 1.3151509,
+     "lon": 103.8938561
+    },
+    {
+     "lat": 1.3149198,
+     "lon": 103.8939247
+    },
+    {
+     "lat": 1.3148221,
+     "lon": 103.8938708
+    },
+    {
+     "lat": 1.3148091,
+     "lon": 103.8938265
+    },
+    {
+     "lat": 1.3145176,
+     "lon": 103.8939117
+    },
+    {
+     "lat": 1.3145063,
+     "lon": 103.8938829
+    },
+    {
+     "lat": 1.3144992,
+     "lon": 103.8938632
+    },
+    {
+     "lat": 1.3144781,
+     "lon": 103.893871
+    },
+    {
+     "lat": 1.3144655,
+     "lon": 103.8938609
+    },
+    {
+     "lat": 1.3144624,
+     "lon": 103.8938468
+    },
+    {
+     "lat": 1.3144695,
+     "lon": 103.8938373
+    },
+    {
+     "lat": 1.3145217,
+     "lon": 103.893822
+    },
+    {
+     "lat": 1.3144285,
+     "lon": 103.8935039
+    },
+    {
+     "lat": 1.3144387,
+     "lon": 103.8935009
+    },
+    {
+     "lat": 1.3144357,
+     "lon": 103.8934907
+    },
+    {
+     "lat": 1.3144059,
+     "lon": 103.8934995
+    },
+    {
+     "lat": 1.3143912,
+     "lon": 103.8934963
+    },
+    {
+     "lat": 1.3143873,
+     "lon": 103.8934775
+    },
+    {
+     "lat": 1.3143991,
+     "lon": 103.8934665
+    },
+    {
+     "lat": 1.3144469,
+     "lon": 103.8934534
+    },
+    {
+     "lat": 1.314336,
+     "lon": 103.893051
+    },
+    {
+     "lat": 1.3144086,
+     "lon": 103.8929682
+    },
+    {
+     "lat": 1.3146259,
+     "lon": 103.8929747
+    },
+    {
+     "lat": 1.3150113,
+     "lon": 103.8929774
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "810",
+    "addr:postcode": "409286",
+    "addr:street": "Geylang Road",
+    "building": "retail",
+    "building:levels": "5",
+    "height": "0",
+    "name": "City Plaza",
+    "name:zh": "\u57ce\u5e02\u8cfc\u7269\u4e2d\u5fc3",
+    "shop": "mall",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
    "id": 47298635,
    "bounds": {
     "minlat": 1.2812129,
@@ -1634,6 +4333,72 @@
   },
   {
    "type": "way",
+   "id": 116801907,
+   "bounds": {
+    "minlat": 1.279777,
+    "minlon": 103.8561482,
+    "maxlat": 1.2803682,
+    "maxlon": 103.8563831
+   },
+   "geometry": [
+    {
+     "lat": 1.2803682,
+     "lon": 103.8563394
+    },
+    {
+     "lat": 1.2800753,
+     "lon": 103.8561482
+    },
+    {
+     "lat": 1.2798707,
+     "lon": 103.8561862
+    },
+    {
+     "lat": 1.2798476,
+     "lon": 103.8561714
+    },
+    {
+     "lat": 1.279777,
+     "lon": 103.8561817
+    },
+    {
+     "lat": 1.2800927,
+     "lon": 103.8563742
+    },
+    {
+     "lat": 1.2801589,
+     "lon": 103.8563571
+    },
+    {
+     "lat": 1.2802001,
+     "lon": 103.8563831
+    },
+    {
+     "lat": 1.2803682,
+     "lon": 103.8563394
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "11",
+    "addr:postcode": "018940",
+    "addr:street": "Marina Boulevard",
+    "building": "yes",
+    "email": "museum@red-dot.sg",
+    "height": "9",
+    "internet_access": "wlan",
+    "name": "Red Dot Design Museum",
+    "name:zh": "\u7ea2\u70b9\u8bbe\u8ba1\u535a\u7269\u9986",
+    "opening_hours": "Mo-Fr 11:00-19:00; Sa-Su 10:00-19:00",
+    "phone": "+65 6514 0111",
+    "tourism": "museum",
+    "website": "https://www.museum.red-dot.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
    "id": 128869359,
    "bounds": {
     "minlat": 1.2843295,
@@ -1695,6 +4460,36 @@
     "highway": "steps",
     "lit": "yes",
     "surface": "paving_stones"
+   }
+  },
+  {
+   "type": "way",
+   "id": 149965111,
+   "bounds": {
+    "minlat": 1.2862128,
+    "minlon": 103.859859,
+    "maxlat": 1.286274,
+    "maxlon": 103.8602194
+   },
+   "geometry": [
+    {
+     "lat": 1.2862128,
+     "lon": 103.8602194
+    },
+    {
+     "lat": 1.286274,
+     "lon": 103.859859
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "40",
+    "surface": "paving_stones",
+    "tactile_paving": "no"
    }
   },
   {
@@ -1785,6 +4580,200 @@
    "tags": {
     "covered": "yes",
     "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 171979084,
+   "bounds": {
+    "minlat": 1.2808597,
+    "minlon": 103.8631063,
+    "maxlat": 1.2832737,
+    "maxlon": 103.8648979
+   },
+   "geometry": [
+    {
+     "lat": 1.2810899,
+     "lon": 103.8631114
+    },
+    {
+     "lat": 1.2809877,
+     "lon": 103.8631654
+    },
+    {
+     "lat": 1.2808597,
+     "lon": 103.863233
+    },
+    {
+     "lat": 1.280923,
+     "lon": 103.8634168
+    },
+    {
+     "lat": 1.2809312,
+     "lon": 103.8635853
+    },
+    {
+     "lat": 1.2809267,
+     "lon": 103.86383
+    },
+    {
+     "lat": 1.2809096,
+     "lon": 103.8640437
+    },
+    {
+     "lat": 1.280922,
+     "lon": 103.8641364
+    },
+    {
+     "lat": 1.2814326,
+     "lon": 103.8643895
+    },
+    {
+     "lat": 1.2817363,
+     "lon": 103.8646901
+    },
+    {
+     "lat": 1.2818283,
+     "lon": 103.8647521
+    },
+    {
+     "lat": 1.2822278,
+     "lon": 103.8646349
+    },
+    {
+     "lat": 1.2825523,
+     "lon": 103.8646263
+    },
+    {
+     "lat": 1.2829343,
+     "lon": 103.8647104
+    },
+    {
+     "lat": 1.2832388,
+     "lon": 103.8648979
+    },
+    {
+     "lat": 1.2832737,
+     "lon": 103.8648631
+    },
+    {
+     "lat": 1.2831564,
+     "lon": 103.8647271
+    },
+    {
+     "lat": 1.2830109,
+     "lon": 103.8645533
+    },
+    {
+     "lat": 1.2829212,
+     "lon": 103.864417
+    },
+    {
+     "lat": 1.282858,
+     "lon": 103.8642583
+    },
+    {
+     "lat": 1.2828401,
+     "lon": 103.8641434
+    },
+    {
+     "lat": 1.2828306,
+     "lon": 103.8640056
+    },
+    {
+     "lat": 1.2828412,
+     "lon": 103.8638891
+    },
+    {
+     "lat": 1.2828848,
+     "lon": 103.8637393
+    },
+    {
+     "lat": 1.2825372,
+     "lon": 103.8635799
+    },
+    {
+     "lat": 1.2823727,
+     "lon": 103.8634378
+    },
+    {
+     "lat": 1.2822567,
+     "lon": 103.8632498
+    },
+    {
+     "lat": 1.2821703,
+     "lon": 103.8631063
+    },
+    {
+     "lat": 1.2817586,
+     "lon": 103.8632578
+    },
+    {
+     "lat": 1.2815192,
+     "lon": 103.8632773
+    },
+    {
+     "lat": 1.2814194,
+     "lon": 103.8632588
+    },
+    {
+     "lat": 1.2813961,
+     "lon": 103.863254
+    },
+    {
+     "lat": 1.2813407,
+     "lon": 103.8632427
+    },
+    {
+     "lat": 1.2812203,
+     "lon": 103.8631978
+    },
+    {
+     "lat": 1.2810899,
+     "lon": 103.8631114
+    }
+   ],
+   "tags": {
+    "image": "https://images.mapillary.com/VoHBP9Xk15ZQ823iwznyWg/thumb-2048.jpg",
+    "leisure": "garden",
+    "mapillary": "932365724267908",
+    "name": "Supertree Grove",
+    "name:zh": "\u64ce\u5929\u6811\u4e1b",
+    "tourism": "attraction",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172206380,
+   "bounds": {
+    "minlat": 1.2847372,
+    "minlon": 103.8588177,
+    "maxlat": 1.2848136,
+    "maxlon": 103.8589634
+   },
+   "geometry": [
+    {
+     "lat": 1.2847372,
+     "lon": 103.8589634
+    },
+    {
+     "lat": 1.2848081,
+     "lon": 103.8588296
+    },
+    {
+     "lat": 1.2848136,
+     "lon": 103.8588177
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "surface": "paving_stones",
+    "tactile_paving": "no"
    }
   },
   {
@@ -1906,6 +4895,598 @@
   },
   {
    "type": "way",
+   "id": 172288945,
+   "bounds": {
+    "minlat": 1.2840572,
+    "minlon": 103.8631762,
+    "maxlat": 1.2844584,
+    "maxlon": 103.863815
+   },
+   "geometry": [
+    {
+     "lat": 1.2844285,
+     "lon": 103.8631762
+    },
+    {
+     "lat": 1.284256,
+     "lon": 103.8633364
+    },
+    {
+     "lat": 1.2841241,
+     "lon": 103.8635176
+    },
+    {
+     "lat": 1.284059,
+     "lon": 103.8636144
+    },
+    {
+     "lat": 1.2840572,
+     "lon": 103.863683
+    },
+    {
+     "lat": 1.284117,
+     "lon": 103.8637904
+    },
+    {
+     "lat": 1.284198,
+     "lon": 103.863815
+    },
+    {
+     "lat": 1.2842455,
+     "lon": 103.8638027
+    },
+    {
+     "lat": 1.2842965,
+     "lon": 103.863815
+    },
+    {
+     "lat": 1.2843651,
+     "lon": 103.8637939
+    },
+    {
+     "lat": 1.2844073,
+     "lon": 103.8637446
+    },
+    {
+     "lat": 1.2844478,
+     "lon": 103.8636619
+    },
+    {
+     "lat": 1.2844584,
+     "lon": 103.8635493
+    },
+    {
+     "lat": 1.2844584,
+     "lon": 103.8633962
+    },
+    {
+     "lat": 1.2844496,
+     "lon": 103.8632765
+    },
+    {
+     "lat": 1.2844285,
+     "lon": 103.8631762
+    }
+   ],
+   "tags": {
+    "name": "Silver Garden",
+    "name:zh": "\u94f6\u8272\u82b1\u56ed",
+    "tourism": "attraction",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172297205,
+   "bounds": {
+    "minlat": 1.2825745,
+    "minlon": 103.8644192,
+    "maxlat": 1.2828234,
+    "maxlon": 103.8645803
+   },
+   "geometry": [
+    {
+     "lat": 1.2825745,
+     "lon": 103.8644192
+    },
+    {
+     "lat": 1.2827049,
+     "lon": 103.8645194
+    },
+    {
+     "lat": 1.2828234,
+     "lon": 103.8645803
+    }
+   ],
+   "tags": {
+    "check_date:handrail": "2025-12-17",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "ramp": "no",
+    "step_count": "16",
+    "surface": "paving_stones",
+    "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172297216,
+   "bounds": {
+    "minlat": 1.2813665,
+    "minlon": 103.8628944,
+    "maxlat": 1.2813771,
+    "maxlon": 103.8631643
+   },
+   "geometry": [
+    {
+     "lat": 1.2813665,
+     "lon": 103.8631643
+    },
+    {
+     "lat": 1.2813771,
+     "lon": 103.8628944
+    }
+   ],
+   "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172297259,
+   "bounds": {
+    "minlat": 1.2813771,
+    "minlon": 103.8628944,
+    "maxlat": 1.2815125,
+    "maxlon": 103.8631469
+   },
+   "geometry": [
+    {
+     "lat": 1.2815125,
+     "lon": 103.8631469
+    },
+    {
+     "lat": 1.2813771,
+     "lon": 103.8628944
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172297273,
+   "bounds": {
+    "minlat": 1.2841474,
+    "minlon": 103.8633806,
+    "maxlat": 1.2842016,
+    "maxlon": 103.8634449
+   },
+   "geometry": [
+    {
+     "lat": 1.2841474,
+     "lon": 103.8633806
+    },
+    {
+     "lat": 1.2842016,
+     "lon": 103.8634449
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172297324,
+   "bounds": {
+    "minlat": 1.2830942,
+    "minlon": 103.8630263,
+    "maxlat": 1.2831667,
+    "maxlon": 103.86358
+   },
+   "geometry": [
+    {
+     "lat": 1.2831594,
+     "lon": 103.8630263
+    },
+    {
+     "lat": 1.2831667,
+     "lon": 103.8632652
+    },
+    {
+     "lat": 1.2831317,
+     "lon": 103.8634391
+    },
+    {
+     "lat": 1.2830942,
+     "lon": 103.86358
+    }
+   ],
+   "tags": {
+    "check_date:handrail": "2025-12-17",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "35",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172307481,
+   "bounds": {
+    "minlat": 1.2838248,
+    "minlon": 103.8585983,
+    "maxlat": 1.2840251,
+    "maxlon": 103.8587987
+   },
+   "geometry": [
+    {
+     "lat": 1.2840248,
+     "lon": 103.8586904
+    },
+    {
+     "lat": 1.2840251,
+     "lon": 103.8586986
+    },
+    {
+     "lat": 1.2840248,
+     "lon": 103.8587069
+    },
+    {
+     "lat": 1.2840237,
+     "lon": 103.8587152
+    },
+    {
+     "lat": 1.284022,
+     "lon": 103.8587234
+    },
+    {
+     "lat": 1.2840196,
+     "lon": 103.8587314
+    },
+    {
+     "lat": 1.2840165,
+     "lon": 103.8587392
+    },
+    {
+     "lat": 1.2840128,
+     "lon": 103.8587467
+    },
+    {
+     "lat": 1.2840085,
+     "lon": 103.8587538
+    },
+    {
+     "lat": 1.2840036,
+     "lon": 103.8587606
+    },
+    {
+     "lat": 1.2839981,
+     "lon": 103.8587669
+    },
+    {
+     "lat": 1.2839922,
+     "lon": 103.8587728
+    },
+    {
+     "lat": 1.2839857,
+     "lon": 103.8587782
+    },
+    {
+     "lat": 1.2839789,
+     "lon": 103.8587829
+    },
+    {
+     "lat": 1.2839717,
+     "lon": 103.8587871
+    },
+    {
+     "lat": 1.2839641,
+     "lon": 103.8587907
+    },
+    {
+     "lat": 1.2839563,
+     "lon": 103.8587937
+    },
+    {
+     "lat": 1.2839482,
+     "lon": 103.858796
+    },
+    {
+     "lat": 1.28394,
+     "lon": 103.8587976
+    },
+    {
+     "lat": 1.2839317,
+     "lon": 103.8587985
+    },
+    {
+     "lat": 1.2839234,
+     "lon": 103.8587987
+    },
+    {
+     "lat": 1.283915,
+     "lon": 103.8587982
+    },
+    {
+     "lat": 1.2839068,
+     "lon": 103.8587971
+    },
+    {
+     "lat": 1.2838986,
+     "lon": 103.8587952
+    },
+    {
+     "lat": 1.2838906,
+     "lon": 103.8587927
+    },
+    {
+     "lat": 1.2838829,
+     "lon": 103.8587895
+    },
+    {
+     "lat": 1.2838755,
+     "lon": 103.8587857
+    },
+    {
+     "lat": 1.2838684,
+     "lon": 103.8587812
+    },
+    {
+     "lat": 1.2838617,
+     "lon": 103.8587762
+    },
+    {
+     "lat": 1.2838554,
+     "lon": 103.8587707
+    },
+    {
+     "lat": 1.2838497,
+     "lon": 103.8587646
+    },
+    {
+     "lat": 1.2838444,
+     "lon": 103.8587581
+    },
+    {
+     "lat": 1.2838397,
+     "lon": 103.8587512
+    },
+    {
+     "lat": 1.2838356,
+     "lon": 103.8587439
+    },
+    {
+     "lat": 1.2838321,
+     "lon": 103.8587363
+    },
+    {
+     "lat": 1.2838293,
+     "lon": 103.8587285
+    },
+    {
+     "lat": 1.2838271,
+     "lon": 103.8587204
+    },
+    {
+     "lat": 1.2838257,
+     "lon": 103.8587122
+    },
+    {
+     "lat": 1.2838249,
+     "lon": 103.8587038
+    },
+    {
+     "lat": 1.2838248,
+     "lon": 103.8586955
+    },
+    {
+     "lat": 1.2838253,
+     "lon": 103.8586873
+    },
+    {
+     "lat": 1.2838266,
+     "lon": 103.8586792
+    },
+    {
+     "lat": 1.2838285,
+     "lon": 103.8586712
+    },
+    {
+     "lat": 1.2838311,
+     "lon": 103.8586634
+    },
+    {
+     "lat": 1.2838342,
+     "lon": 103.8586558
+    },
+    {
+     "lat": 1.283838,
+     "lon": 103.8586486
+    },
+    {
+     "lat": 1.2838424,
+     "lon": 103.8586416
+    },
+    {
+     "lat": 1.2838473,
+     "lon": 103.858635
+    },
+    {
+     "lat": 1.2838528,
+     "lon": 103.8586289
+    },
+    {
+     "lat": 1.2838587,
+     "lon": 103.8586232
+    },
+    {
+     "lat": 1.2838651,
+     "lon": 103.8586181
+    },
+    {
+     "lat": 1.2838719,
+     "lon": 103.8586134
+    },
+    {
+     "lat": 1.283879,
+     "lon": 103.8586094
+    },
+    {
+     "lat": 1.2838864,
+     "lon": 103.8586059
+    },
+    {
+     "lat": 1.2838941,
+     "lon": 103.8586031
+    },
+    {
+     "lat": 1.2839021,
+     "lon": 103.8586009
+    },
+    {
+     "lat": 1.2839101,
+     "lon": 103.8585993
+    },
+    {
+     "lat": 1.2839183,
+     "lon": 103.8585985
+    },
+    {
+     "lat": 1.2839265,
+     "lon": 103.8585983
+    },
+    {
+     "lat": 1.2839347,
+     "lon": 103.8585987
+    },
+    {
+     "lat": 1.2839428,
+     "lon": 103.8585998
+    },
+    {
+     "lat": 1.2839508,
+     "lon": 103.8586016
+    },
+    {
+     "lat": 1.2839586,
+     "lon": 103.8586041
+    },
+    {
+     "lat": 1.2839662,
+     "lon": 103.8586072
+    },
+    {
+     "lat": 1.2839736,
+     "lon": 103.8586108
+    },
+    {
+     "lat": 1.2839806,
+     "lon": 103.8586151
+    },
+    {
+     "lat": 1.2839872,
+     "lon": 103.85862
+    },
+    {
+     "lat": 1.2839934,
+     "lon": 103.8586253
+    },
+    {
+     "lat": 1.2839992,
+     "lon": 103.8586312
+    },
+    {
+     "lat": 1.2840044,
+     "lon": 103.8586375
+    },
+    {
+     "lat": 1.2840092,
+     "lon": 103.8586442
+    },
+    {
+     "lat": 1.2840133,
+     "lon": 103.8586513
+    },
+    {
+     "lat": 1.2840169,
+     "lon": 103.8586587
+    },
+    {
+     "lat": 1.2840198,
+     "lon": 103.8586663
+    },
+    {
+     "lat": 1.2840221,
+     "lon": 103.8586742
+    },
+    {
+     "lat": 1.2840238,
+     "lon": 103.8586822
+    },
+    {
+     "lat": 1.2840248,
+     "lon": 103.8586904
+    }
+   ],
+   "tags": {
+    "access": "permissive",
+    "amenity": "fountain",
+    "artist_name": "Ned Kahn",
+    "artwork_type": "architecture",
+    "covered": "no",
+    "image": "https://images.mapillary.com/KsiWGm5fmWrDLX_hYKf2ew/thumb-2048.jpg",
+    "mapillary": "467148234553050",
+    "name": "Rain Oculus",
+    "name:th": "\u0e40\u0e23\u0e19\u0e2d\u0e2d\u0e04\u0e04\u0e39\u0e23\u0e31\u0e2a",
+    "name:zh": "\u96e8\u773c",
+    "natural": "water",
+    "url": "https://www.youtube.com/watch?v=3RcU2lXomYM",
+    "waterway": "waterfall",
+    "website": "https://nedkahn.com/portfolio/rain-oculus/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172468366,
+   "bounds": {
+    "minlat": 1.2829446,
+    "minlon": 103.8643104,
+    "maxlat": 1.2832886,
+    "maxlon": 103.8643318
+   },
+   "geometry": [
+    {
+     "lat": 1.2829446,
+     "lon": 103.8643104
+    },
+    {
+     "lat": 1.2832886,
+     "lon": 103.8643318
+    }
+   ],
+   "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no"
+   }
+  },
+  {
+   "type": "way",
    "id": 184299949,
    "bounds": {
     "minlat": 1.2838639,
@@ -1983,6 +5564,338 @@
     "highway": "footway",
     "surface": "paved",
     "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 223674611,
+   "bounds": {
+    "minlat": 1.3150217,
+    "minlon": 103.8958229,
+    "maxlat": 1.3157291,
+    "maxlon": 103.896451
+   },
+   "geometry": [
+    {
+     "lat": 1.3156195,
+     "lon": 103.8958229
+    },
+    {
+     "lat": 1.3157291,
+     "lon": 103.896397
+    },
+    {
+     "lat": 1.3157043,
+     "lon": 103.8964018
+    },
+    {
+     "lat": 1.3157106,
+     "lon": 103.8964347
+    },
+    {
+     "lat": 1.3156251,
+     "lon": 103.896451
+    },
+    {
+     "lat": 1.3156109,
+     "lon": 103.8963765
+    },
+    {
+     "lat": 1.3155803,
+     "lon": 103.8963823
+    },
+    {
+     "lat": 1.3154997,
+     "lon": 103.89596
+    },
+    {
+     "lat": 1.3154519,
+     "lon": 103.8959691
+    },
+    {
+     "lat": 1.3154552,
+     "lon": 103.8959862
+    },
+    {
+     "lat": 1.3151363,
+     "lon": 103.8960471
+    },
+    {
+     "lat": 1.3151328,
+     "lon": 103.8960289
+    },
+    {
+     "lat": 1.315096,
+     "lon": 103.896036
+    },
+    {
+     "lat": 1.3151005,
+     "lon": 103.8960597
+    },
+    {
+     "lat": 1.3150491,
+     "lon": 103.8960695
+    },
+    {
+     "lat": 1.3150217,
+     "lon": 103.8959262
+    },
+    {
+     "lat": 1.3150785,
+     "lon": 103.8959153
+    },
+    {
+     "lat": 1.3150813,
+     "lon": 103.8959297
+    },
+    {
+     "lat": 1.3151039,
+     "lon": 103.8959254
+    },
+    {
+     "lat": 1.3150999,
+     "lon": 103.8959044
+    },
+    {
+     "lat": 1.3154314,
+     "lon": 103.8958411
+    },
+    {
+     "lat": 1.3154347,
+     "lon": 103.8958582
+    },
+    {
+     "lat": 1.3156195,
+     "lon": 103.8958229
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "12",
+    "addr:postcode": "430012",
+    "addr:street": "Haig Road",
+    "building": "commercial",
+    "building:levels": "2",
+    "commercial": "HDB",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "way",
+   "id": 229520231,
+   "bounds": {
+    "minlat": 1.3157021,
+    "minlon": 103.8956792,
+    "maxlat": 1.3157367,
+    "maxlon": 103.8958536
+   },
+   "geometry": [
+    {
+     "lat": 1.3157021,
+     "lon": 103.8956792
+    },
+    {
+     "lat": 1.3157367,
+     "lon": 103.8958536
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 229520232,
+   "bounds": {
+    "minlat": 1.3159394,
+    "minlon": 103.895813,
+    "maxlat": 1.3159409,
+    "maxlon": 103.8959522
+   },
+   "geometry": [
+    {
+     "lat": 1.3159394,
+     "lon": 103.8959522
+    },
+    {
+     "lat": 1.3159409,
+     "lon": 103.895813
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "surface": "concrete"
+   }
+  },
+  {
+   "type": "way",
+   "id": 244776199,
+   "bounds": {
+    "minlat": 1.2791629,
+    "minlon": 103.8561856,
+    "maxlat": 1.2802314,
+    "maxlon": 103.8573793
+   },
+   "geometry": [
+    {
+     "lat": 1.2796816,
+     "lon": 103.8561856
+    },
+    {
+     "lat": 1.2801568,
+     "lon": 103.8564888
+    },
+    {
+     "lat": 1.2801295,
+     "lon": 103.8565316
+    },
+    {
+     "lat": 1.2801329,
+     "lon": 103.8565758
+    },
+    {
+     "lat": 1.2802314,
+     "lon": 103.8566386
+    },
+    {
+     "lat": 1.279759,
+     "lon": 103.8573793
+    },
+    {
+     "lat": 1.2791629,
+     "lon": 103.856999
+    },
+    {
+     "lat": 1.2796816,
+     "lon": 103.8561856
+    }
+   ],
+   "tags": {
+    "access": "yes",
+    "amenity": "parking",
+    "fee": "yes",
+    "parking": "surface",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "way",
+   "id": 253929400,
+   "bounds": {
+    "minlat": 1.3133867,
+    "minlon": 103.8889426,
+    "maxlat": 1.3139644,
+    "maxlon": 103.8898235
+   },
+   "geometry": [
+    {
+     "lat": 1.3138108,
+     "lon": 103.8889426
+    },
+    {
+     "lat": 1.3138809,
+     "lon": 103.8893147
+    },
+    {
+     "lat": 1.3139059,
+     "lon": 103.889446
+    },
+    {
+     "lat": 1.3139304,
+     "lon": 103.8895768
+    },
+    {
+     "lat": 1.3139644,
+     "lon": 103.8897568
+    },
+    {
+     "lat": 1.313753,
+     "lon": 103.8897918
+    },
+    {
+     "lat": 1.313709,
+     "lon": 103.8897997
+    },
+    {
+     "lat": 1.3135887,
+     "lon": 103.8898208
+    },
+    {
+     "lat": 1.3135703,
+     "lon": 103.8898235
+    },
+    {
+     "lat": 1.3134567,
+     "lon": 103.8892393
+    },
+    {
+     "lat": 1.3134499,
+     "lon": 103.8892111
+    },
+    {
+     "lat": 1.3134464,
+     "lon": 103.8891981
+    },
+    {
+     "lat": 1.3134424,
+     "lon": 103.8891855
+    },
+    {
+     "lat": 1.3134375,
+     "lon": 103.8891725
+    },
+    {
+     "lat": 1.3134326,
+     "lon": 103.8891605
+    },
+    {
+     "lat": 1.3133867,
+     "lon": 103.8890166
+    },
+    {
+     "lat": 1.3134955,
+     "lon": 103.8889972
+    },
+    {
+     "lat": 1.3138108,
+     "lon": 103.8889426
+    }
+   ],
+   "tags": {
+    "leisure": "park",
+    "name": "Lorong 40 Geylang Playground",
+    "name:ms": "Taman Permainan Lorong 40 Geylang",
+    "name:zh": "\u82bd\u7b3c\u7f57\u5f0440\u6e38\u4e50\u573a",
+    "smoking": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 284558122,
+   "bounds": {
+    "minlat": 1.2849688,
+    "minlon": 103.8616271,
+    "maxlat": 1.2851263,
+    "maxlon": 103.8616363
+   },
+   "geometry": [
+    {
+     "lat": 1.2849688,
+     "lon": 103.8616271
+    },
+    {
+     "lat": 1.2851263,
+     "lon": 103.8616363
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
    }
   },
   {
@@ -2320,6 +6233,155 @@
   },
   {
    "type": "way",
+   "id": 314564061,
+   "bounds": {
+    "minlat": 1.2862003,
+    "minlon": 103.8602194,
+    "maxlat": 1.2862128,
+    "maxlon": 103.8605341
+   },
+   "geometry": [
+    {
+     "lat": 1.2862128,
+     "lon": 103.8602194
+    },
+    {
+     "lat": 1.2862003,
+     "lon": 103.8605341
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "50",
+    "surface": "paving_stones",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 334111739,
+   "bounds": {
+    "minlat": 1.3139232,
+    "minlon": 103.8943591,
+    "maxlat": 1.3153819,
+    "maxlon": 103.8952629
+   },
+   "geometry": [
+    {
+     "lat": 1.3140907,
+     "lon": 103.8943591
+    },
+    {
+     "lat": 1.3143572,
+     "lon": 103.8943594
+    },
+    {
+     "lat": 1.3152117,
+     "lon": 103.8943602
+    },
+    {
+     "lat": 1.3152204,
+     "lon": 103.8943632
+    },
+    {
+     "lat": 1.3152286,
+     "lon": 103.8943695
+    },
+    {
+     "lat": 1.3153698,
+     "lon": 103.8947131
+    },
+    {
+     "lat": 1.3153819,
+     "lon": 103.8947533
+    },
+    {
+     "lat": 1.3153604,
+     "lon": 103.8947761
+    },
+    {
+     "lat": 1.3144635,
+     "lon": 103.8951942
+    },
+    {
+     "lat": 1.314316,
+     "lon": 103.8952629
+    },
+    {
+     "lat": 1.3141779,
+     "lon": 103.8949773
+    },
+    {
+     "lat": 1.3140036,
+     "lon": 103.8950551
+    },
+    {
+     "lat": 1.3139352,
+     "lon": 103.8948928
+    },
+    {
+     "lat": 1.3139232,
+     "lon": 103.8945615
+    },
+    {
+     "lat": 1.3140867,
+     "lon": 103.8945562
+    },
+    {
+     "lat": 1.3140907,
+     "lon": 103.8943591
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "One KM Mall",
+    "addr:housenumber": "11",
+    "addr:postcode": "437157",
+    "addr:street": "Tanjong Katong Road",
+    "building": "commercial",
+    "building:colour": "#ded3c8",
+    "building:levels": "6",
+    "building:levels:underground": "1",
+    "building:material": "metal",
+    "name": "Kinex",
+    "note": "Formerly OneKM Shopping Mall",
+    "operator": "UOL Malls",
+    "shop": "mall",
+    "source": "Bing",
+    "website": "https://www.kinex.com.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 334113535,
+   "bounds": {
+    "minlat": 1.3157367,
+    "minlon": 103.8958536,
+    "maxlat": 1.3157678,
+    "maxlon": 103.8960116
+   },
+   "geometry": [
+    {
+     "lat": 1.3157367,
+     "lon": 103.8958536
+    },
+    {
+     "lat": 1.3157678,
+     "lon": 103.8960116
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
    "id": 340861415,
    "bounds": {
     "minlat": 1.2801241,
@@ -2464,6 +6526,96 @@
     "source": "https://www.facebook.com/EssenThePinnacle/",
     "start_date": "2009",
     "website": "https://www.facebook.com/EssenThePinnacle/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 395907258,
+   "bounds": {
+    "minlat": 1.2830582,
+    "minlon": 103.8593453,
+    "maxlat": 1.2831268,
+    "maxlon": 103.8594139
+   },
+   "geometry": [
+    {
+     "lat": 1.2830706,
+     "lon": 103.8593531
+    },
+    {
+     "lat": 1.283082,
+     "lon": 103.8593468
+    },
+    {
+     "lat": 1.2830948,
+     "lon": 103.8593453
+    },
+    {
+     "lat": 1.2831074,
+     "lon": 103.8593486
+    },
+    {
+     "lat": 1.2831178,
+     "lon": 103.8593564
+    },
+    {
+     "lat": 1.2831246,
+     "lon": 103.8593674
+    },
+    {
+     "lat": 1.2831268,
+     "lon": 103.8593803
+    },
+    {
+     "lat": 1.283124,
+     "lon": 103.859393
+    },
+    {
+     "lat": 1.2831167,
+     "lon": 103.8594038
+    },
+    {
+     "lat": 1.2831059,
+     "lon": 103.8594111
+    },
+    {
+     "lat": 1.2830931,
+     "lon": 103.8594139
+    },
+    {
+     "lat": 1.2830793,
+     "lon": 103.8594113
+    },
+    {
+     "lat": 1.2830677,
+     "lon": 103.8594034
+    },
+    {
+     "lat": 1.2830603,
+     "lon": 103.8593915
+    },
+    {
+     "lat": 1.2830582,
+     "lon": 103.8593776
+    },
+    {
+     "lat": 1.2830618,
+     "lon": 103.859364
+    },
+    {
+     "lat": 1.2830706,
+     "lon": 103.8593531
+    }
+   ],
+   "tags": {
+    "amenity": "toilets",
+    "building": "yes",
+    "changing_table": "yes",
+    "fee": "no",
+    "image": "https://images.mapillary.com/rdPgpMAlnMGysvkrXomtkQ/thumb-2048.jpg",
+    "landuse": "flowerbed",
+    "mapillary": "817343025867363",
     "wheelchair": "yes"
    }
   },
@@ -2859,6 +7011,111 @@
   },
   {
    "type": "way",
+   "id": 462914022,
+   "bounds": {
+    "minlat": 1.2806604,
+    "minlon": 103.8539582,
+    "maxlat": 1.2807408,
+    "maxlon": 103.8540111
+   },
+   "geometry": [
+    {
+     "lat": 1.2806604,
+     "lon": 103.8539582
+    },
+    {
+     "lat": 1.2807408,
+     "lon": 103.8540111
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "layer": "-1",
+    "lit": "yes",
+    "tunnel": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 463063314,
+   "bounds": {
+    "minlat": 1.3171445,
+    "minlon": 103.892449,
+    "maxlat": 1.3179197,
+    "maxlon": 103.893288
+   },
+   "geometry": [
+    {
+     "lat": 1.3172112,
+     "lon": 103.893288
+    },
+    {
+     "lat": 1.3171445,
+     "lon": 103.8927982
+    },
+    {
+     "lat": 1.31719,
+     "lon": 103.892792
+    },
+    {
+     "lat": 1.3171778,
+     "lon": 103.8926987
+    },
+    {
+     "lat": 1.3171567,
+     "lon": 103.8925473
+    },
+    {
+     "lat": 1.317809,
+     "lon": 103.892449
+    },
+    {
+     "lat": 1.3178401,
+     "lon": 103.8926725
+    },
+    {
+     "lat": 1.3178023,
+     "lon": 103.8926977
+    },
+    {
+     "lat": 1.3178621,
+     "lon": 103.8927875
+    },
+    {
+     "lat": 1.3179197,
+     "lon": 103.8931619
+    },
+    {
+     "lat": 1.3174341,
+     "lon": 103.8932507
+    },
+    {
+     "lat": 1.3172112,
+     "lon": 103.893288
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "10",
+    "addr:postcode": "409057",
+    "addr:street": "Paya Lebar Road",
+    "building": "retail",
+    "building:colour": "#8b6e44",
+    "building:levels": "13",
+    "height": "41",
+    "name": "Paya Lebar Quarter Retail Mall",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "phone": "+65 6955 8800",
+    "roof:colour": "#beb9bb",
+    "short_name": "PLQ Mall",
+    "start_date": "2019-10-24",
+    "website": "https://www.payalebarquarter.com/",
+    "wheelchair": "yes",
+    "wikidata": "Q72376074"
+   }
+  },
+  {
+   "type": "way",
    "id": 474480035,
    "bounds": {
     "minlat": 1.3214787,
@@ -2920,6 +7177,53 @@
    "tags": {
     "covered": "yes",
     "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 475170239,
+   "bounds": {
+    "minlat": 1.3141888,
+    "minlon": 103.8892077,
+    "maxlat": 1.3143235,
+    "maxlon": 103.8892988
+   },
+   "geometry": [
+    {
+     "lat": 1.3143128,
+     "lon": 103.8892077
+    },
+    {
+     "lat": 1.3143235,
+     "lon": 103.8892791
+    },
+    {
+     "lat": 1.3141994,
+     "lon": 103.8892988
+    },
+    {
+     "lat": 1.3141888,
+     "lon": 103.8892258
+    },
+    {
+     "lat": 1.3143128,
+     "lon": 103.8892077
+    }
+   ],
+   "tags": {
+    "addr:street": "Geylang Road",
+    "brand": "Cheers",
+    "brand:wikidata": "Q64154066",
+    "building": "yes",
+    "building:levels": "1",
+    "check_date": "2026-02-04",
+    "name": "Cheers",
+    "name:en": "Cheers",
+    "name:zh": "Cheers(\u96c0\u559c)\u4fbf\u5229\u5546\u5e97",
+    "opening_hours": "24/7",
+    "shop": "convenience",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "yes"
    }
   },
   {
@@ -3158,6 +7462,30 @@
   },
   {
    "type": "way",
+   "id": 546895516,
+   "bounds": {
+    "minlat": 1.31418,
+    "minlon": 103.8942472,
+    "maxlat": 1.3143229,
+    "maxlon": 103.8942479
+   },
+   "geometry": [
+    {
+     "lat": 1.3143229,
+     "lon": 103.8942472
+    },
+    {
+     "lat": 1.31418,
+     "lon": 103.8942479
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
    "id": 610397185,
    "bounds": {
     "minlat": 1.2753036,
@@ -3269,6 +7597,30 @@
     "lit": "yes",
     "surface": "concrete",
     "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 618575235,
+   "bounds": {
+    "minlat": 1.2854562,
+    "minlon": 103.8613054,
+    "maxlat": 1.2854567,
+    "maxlon": 103.8613435
+   },
+   "geometry": [
+    {
+     "lat": 1.2854567,
+     "lon": 103.8613054
+    },
+    {
+     "lat": 1.2854562,
+     "lon": 103.8613435
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
    }
   },
   {
@@ -4027,6 +8379,83 @@
   },
   {
    "type": "way",
+   "id": 679172825,
+   "bounds": {
+    "minlat": 1.3139098,
+    "minlon": 103.8896376,
+    "maxlat": 1.3139432,
+    "maxlon": 103.8896438
+   },
+   "geometry": [
+    {
+     "lat": 1.3139432,
+     "lon": 103.8896376
+    },
+    {
+     "lat": 1.3139098,
+     "lon": 103.8896438
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 687912603,
+   "bounds": {
+    "minlat": 1.2849015,
+    "minlon": 103.8585164,
+    "maxlat": 1.2849457,
+    "maxlon": 103.8585167
+   },
+   "geometry": [
+    {
+     "lat": 1.2849015,
+     "lon": 103.8585164
+    },
+    {
+     "lat": 1.2849457,
+     "lon": 103.8585167
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "14",
+    "surface": "metal_grid",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 687928337,
+   "bounds": {
+    "minlat": 1.2854285,
+    "minlon": 103.8616765,
+    "maxlat": 1.2854856,
+    "maxlon": 103.8616965
+   },
+   "geometry": [
+    {
+     "lat": 1.2854856,
+     "lon": 103.8616765
+    },
+    {
+     "lat": 1.2854285,
+     "lon": 103.8616965
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
    "id": 722105628,
    "bounds": {
     "minlat": 1.281765,
@@ -4089,6 +8518,32 @@
   },
   {
    "type": "way",
+   "id": 722861398,
+   "bounds": {
+    "minlat": 1.3163763,
+    "minlon": 103.8940236,
+    "maxlat": 1.3164616,
+    "maxlon": 103.894038
+   },
+   "geometry": [
+    {
+     "lat": 1.3164616,
+     "lon": 103.8940236
+    },
+    {
+     "lat": 1.3163763,
+     "lon": 103.894038
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "surface": "concrete"
+   }
+  },
+  {
+   "type": "way",
    "id": 739513986,
    "bounds": {
     "minlat": 1.2780043,
@@ -4130,6 +8585,33 @@
     "motor_vehicle": "private",
     "name": "Duxton Hill",
     "sidewalk": "both"
+   }
+  },
+  {
+   "type": "way",
+   "id": 740112298,
+   "bounds": {
+    "minlat": 1.2823962,
+    "minlon": 103.8615185,
+    "maxlat": 1.282409,
+    "maxlon": 103.8615408
+   },
+   "geometry": [
+    {
+     "lat": 1.2823962,
+     "lon": 103.8615408
+    },
+    {
+     "lat": 1.282409,
+     "lon": 103.8615185
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no"
    }
   },
   {
@@ -4445,6 +8927,201 @@
     "wheelchair": "yes",
     "wikidata": "Q3234439",
     "wikipedia": "en:Chinatown MRT station"
+   }
+  },
+  {
+   "type": "way",
+   "id": 743622459,
+   "bounds": {
+    "minlat": 1.2808913,
+    "minlon": 103.8583624,
+    "maxlat": 1.2843133,
+    "maxlon": 103.860999
+   },
+   "geometry": [
+    {
+     "lat": 1.2831239,
+     "lon": 103.859623
+    },
+    {
+     "lat": 1.2833053,
+     "lon": 103.8597547
+    },
+    {
+     "lat": 1.2836135,
+     "lon": 103.8599752
+    },
+    {
+     "lat": 1.2838945,
+     "lon": 103.8601378
+    },
+    {
+     "lat": 1.2840798,
+     "lon": 103.8602272
+    },
+    {
+     "lat": 1.2841583,
+     "lon": 103.8602673
+    },
+    {
+     "lat": 1.2842146,
+     "lon": 103.8603489
+    },
+    {
+     "lat": 1.2843133,
+     "lon": 103.8603276
+    },
+    {
+     "lat": 1.2841167,
+     "lon": 103.8606186
+    },
+    {
+     "lat": 1.2839324,
+     "lon": 103.8606018
+    },
+    {
+     "lat": 1.2834367,
+     "lon": 103.860369
+    },
+    {
+     "lat": 1.2833768,
+     "lon": 103.8603412
+    },
+    {
+     "lat": 1.2834454,
+     "lon": 103.8601935
+    },
+    {
+     "lat": 1.2825121,
+     "lon": 103.8596096
+    },
+    {
+     "lat": 1.2818388,
+     "lon": 103.8609367
+    },
+    {
+     "lat": 1.2818133,
+     "lon": 103.860999
+    },
+    {
+     "lat": 1.2816483,
+     "lon": 103.8609198
+    },
+    {
+     "lat": 1.282404,
+     "lon": 103.8594993
+    },
+    {
+     "lat": 1.2816143,
+     "lon": 103.8590071
+    },
+    {
+     "lat": 1.2815821,
+     "lon": 103.8590514
+    },
+    {
+     "lat": 1.2815392,
+     "lon": 103.8590232
+    },
+    {
+     "lat": 1.281507,
+     "lon": 103.8590742
+    },
+    {
+     "lat": 1.2814362,
+     "lon": 103.8590728
+    },
+    {
+     "lat": 1.2814755,
+     "lon": 103.8590123
+    },
+    {
+     "lat": 1.2814821,
+     "lon": 103.8590012
+    },
+    {
+     "lat": 1.2810169,
+     "lon": 103.8587026
+    },
+    {
+     "lat": 1.280971,
+     "lon": 103.8587742
+    },
+    {
+     "lat": 1.2809416,
+     "lon": 103.8587035
+    },
+    {
+     "lat": 1.2810013,
+     "lon": 103.8586157
+    },
+    {
+     "lat": 1.2808913,
+     "lon": 103.8585433
+    },
+    {
+     "lat": 1.2810303,
+     "lon": 103.8583624
+    },
+    {
+     "lat": 1.2815516,
+     "lon": 103.8587011
+    },
+    {
+     "lat": 1.2815712,
+     "lon": 103.8586614
+    },
+    {
+     "lat": 1.2825655,
+     "lon": 103.8592824
+    },
+    {
+     "lat": 1.2826291,
+     "lon": 103.859316
+    },
+    {
+     "lat": 1.2828215,
+     "lon": 103.8592006
+    },
+    {
+     "lat": 1.2830678,
+     "lon": 103.8594361
+    },
+    {
+     "lat": 1.2829907,
+     "lon": 103.8594891
+    },
+    {
+     "lat": 1.2831239,
+     "lon": 103.859623
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "air_conditioning": "yes",
+    "layer": "-1",
+    "level": "-3",
+    "location": "underground",
+    "name": "Bayfront",
+    "name:en": "Bayfront",
+    "name:ms": "Bayfront",
+    "name:ta": "\u0baa\u0bc7\u0b83\u0baa\u0bbf\u0bb0\u0ba3\u0bcd\u0b9f\u0bcd",
+    "name:th": "\u0e40\u0e1a\u0e22\u0e4c\u0e1f\u0e23\u0e2d\u0e19\u0e17\u0e4c",
+    "name:zh": "\u6d77\u6e7e\u822b",
+    "network": "Mass Rapid Transit",
+    "network:short": "MRT",
+    "network:wikidata": "Q40176",
+    "operator": "SMRT (CCL)/SBS Transit (DTL)",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "CC34;DT16",
+    "ref:colour": "#0354a6;#ff9a00",
+    "start_date": "2012-01-14",
+    "station": "subway",
+    "subway": "yes",
+    "wheelchair": "yes",
+    "wikidata": "Q1106644",
+    "wikipedia": "en:Bayfront MRT station"
    }
   },
   {
@@ -4945,6 +9622,496 @@
   },
   {
    "type": "way",
+   "id": 821764692,
+   "bounds": {
+    "minlat": 1.2831834,
+    "minlon": 103.8574241,
+    "maxlat": 1.2834774,
+    "maxlon": 103.8577184
+   },
+   "geometry": [
+    {
+     "lat": 1.2833834,
+     "lon": 103.8577088
+    },
+    {
+     "lat": 1.2834245,
+     "lon": 103.8576847
+    },
+    {
+     "lat": 1.2834557,
+     "lon": 103.8576488
+    },
+    {
+     "lat": 1.2834739,
+     "lon": 103.8576047
+    },
+    {
+     "lat": 1.2834774,
+     "lon": 103.8575612
+    },
+    {
+     "lat": 1.2834679,
+     "lon": 103.8575185
+    },
+    {
+     "lat": 1.2834464,
+     "lon": 103.8574805
+    },
+    {
+     "lat": 1.2834146,
+     "lon": 103.8574505
+    },
+    {
+     "lat": 1.2833755,
+     "lon": 103.8574312
+    },
+    {
+     "lat": 1.2833324,
+     "lon": 103.8574241
+    },
+    {
+     "lat": 1.2832891,
+     "lon": 103.8574301
+    },
+    {
+     "lat": 1.2832495,
+     "lon": 103.8574485
+    },
+    {
+     "lat": 1.2832145,
+     "lon": 103.8574808
+    },
+    {
+     "lat": 1.2831917,
+     "lon": 103.8575226
+    },
+    {
+     "lat": 1.2831834,
+     "lon": 103.8575695
+    },
+    {
+     "lat": 1.2831905,
+     "lon": 103.8576166
+    },
+    {
+     "lat": 1.2832123,
+     "lon": 103.857659
+    },
+    {
+     "lat": 1.2832465,
+     "lon": 103.8576922
+    },
+    {
+     "lat": 1.2832894,
+     "lon": 103.8577127
+    },
+    {
+     "lat": 1.2833367,
+     "lon": 103.8577184
+    },
+    {
+     "lat": 1.2833834,
+     "lon": 103.8577088
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "2",
+    "addr:postcode": "018972",
+    "addr:street": "Bayfront Avenue",
+    "addr:unit": "#B2-06",
+    "air_conditioning": "yes",
+    "brand": "Apple Store",
+    "brand:wikidata": "Q421253",
+    "brand:wikipedia": "en:Apple Store",
+    "building": "retail",
+    "building:colour": "teal",
+    "building:levels": "1",
+    "building:levels:underground": "1",
+    "building:material": "metal",
+    "height": "5",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "layer": "1",
+    "name": "Apple Marina Bay Sands",
+    "name:en": "Apple Marina Bay Sands",
+    "opening_hours": "Mo-Th 12:00-20:00; Fr-Su 12:00-21:00",
+    "operator": "Apple Inc.",
+    "payment:apple_pay": "yes",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+65 1800 407 4949",
+    "roof:colour": "teal",
+    "roof:height": "15",
+    "roof:levels": "1",
+    "roof:material": "glass",
+    "roof:shape": "dome",
+    "second_hand": "no",
+    "shop": "electronics",
+    "short_name": "Apple",
+    "start_date": "2020-09-10",
+    "stroller": "yes",
+    "website": "https://www.apple.com/sg/retail/marinabaysands/",
+    "wheelchair": "yes",
+    "wikidata": "Q122509086"
+   }
+  },
+  {
+   "type": "way",
+   "id": 821764693,
+   "bounds": {
+    "minlat": 1.2829788,
+    "minlon": 103.8574428,
+    "maxlat": 1.2832495,
+    "maxlon": 103.8577005
+   },
+   "geometry": [
+    {
+     "lat": 1.2829788,
+     "lon": 103.8577005
+    },
+    {
+     "lat": 1.2831298,
+     "lon": 103.8574933
+    },
+    {
+     "lat": 1.2831586,
+     "lon": 103.857464
+    },
+    {
+     "lat": 1.2831845,
+     "lon": 103.85745
+    },
+    {
+     "lat": 1.2832084,
+     "lon": 103.8574428
+    },
+    {
+     "lat": 1.283231,
+     "lon": 103.8574431
+    },
+    {
+     "lat": 1.2832495,
+     "lon": 103.8574485
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "lit": "yes",
+    "stroller": "yes",
+    "surface": "wood",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 823759101,
+   "bounds": {
+    "minlat": 1.3162509,
+    "minlon": 103.8915071,
+    "maxlat": 1.3187454,
+    "maxlon": 103.8938066
+   },
+   "geometry": [
+    {
+     "lat": 1.3186363,
+     "lon": 103.8921881
+    },
+    {
+     "lat": 1.3186233,
+     "lon": 103.8920826
+    },
+    {
+     "lat": 1.3183276,
+     "lon": 103.8921192
+    },
+    {
+     "lat": 1.3183312,
+     "lon": 103.8921483
+    },
+    {
+     "lat": 1.3182575,
+     "lon": 103.8921575
+    },
+    {
+     "lat": 1.3182213,
+     "lon": 103.8918339
+    },
+    {
+     "lat": 1.3182447,
+     "lon": 103.8918315
+    },
+    {
+     "lat": 1.3182412,
+     "lon": 103.8917954
+    },
+    {
+     "lat": 1.3183795,
+     "lon": 103.8917778
+    },
+    {
+     "lat": 1.3183842,
+     "lon": 103.8917936
+    },
+    {
+     "lat": 1.3187454,
+     "lon": 103.891709
+    },
+    {
+     "lat": 1.3187279,
+     "lon": 103.8916436
+    },
+    {
+     "lat": 1.3183824,
+     "lon": 103.8917265
+    },
+    {
+     "lat": 1.3182493,
+     "lon": 103.891744
+    },
+    {
+     "lat": 1.318226,
+     "lon": 103.8915572
+    },
+    {
+     "lat": 1.3181924,
+     "lon": 103.891511
+    },
+    {
+     "lat": 1.3180989,
+     "lon": 103.8915071
+    },
+    {
+     "lat": 1.3178315,
+     "lon": 103.8915747
+    },
+    {
+     "lat": 1.3178817,
+     "lon": 103.8919004
+    },
+    {
+     "lat": 1.3181233,
+     "lon": 103.8918432
+    },
+    {
+     "lat": 1.3181361,
+     "lon": 103.8919716
+    },
+    {
+     "lat": 1.3178829,
+     "lon": 103.8920324
+    },
+    {
+     "lat": 1.3168219,
+     "lon": 103.8921643
+    },
+    {
+     "lat": 1.3167005,
+     "lon": 103.8920172
+    },
+    {
+     "lat": 1.3166865,
+     "lon": 103.8916354
+    },
+    {
+     "lat": 1.3166421,
+     "lon": 103.8916377
+    },
+    {
+     "lat": 1.3166515,
+     "lon": 103.8919506
+    },
+    {
+     "lat": 1.3166223,
+     "lon": 103.8919506
+    },
+    {
+     "lat": 1.3166176,
+     "lon": 103.8918666
+    },
+    {
+     "lat": 1.3165639,
+     "lon": 103.8918689
+    },
+    {
+     "lat": 1.3165674,
+     "lon": 103.8919716
+    },
+    {
+     "lat": 1.3165289,
+     "lon": 103.8919728
+    },
+    {
+     "lat": 1.3165158,
+     "lon": 103.8920179
+    },
+    {
+     "lat": 1.3162651,
+     "lon": 103.8920312
+    },
+    {
+     "lat": 1.3162509,
+     "lon": 103.8920575
+    },
+    {
+     "lat": 1.3162532,
+     "lon": 103.8921944
+    },
+    {
+     "lat": 1.3163013,
+     "lon": 103.8922122
+    },
+    {
+     "lat": 1.3164577,
+     "lon": 103.8922063
+    },
+    {
+     "lat": 1.3164986,
+     "lon": 103.8924737
+    },
+    {
+     "lat": 1.3164531,
+     "lon": 103.8924789
+    },
+    {
+     "lat": 1.3164632,
+     "lon": 103.8925765
+    },
+    {
+     "lat": 1.3164968,
+     "lon": 103.8925725
+    },
+    {
+     "lat": 1.3164988,
+     "lon": 103.8925847
+    },
+    {
+     "lat": 1.3167106,
+     "lon": 103.8925455
+    },
+    {
+     "lat": 1.3167098,
+     "lon": 103.8925307
+    },
+    {
+     "lat": 1.317146,
+     "lon": 103.8924754
+    },
+    {
+     "lat": 1.3171567,
+     "lon": 103.8925473
+    },
+    {
+     "lat": 1.3178023,
+     "lon": 103.8926977
+    },
+    {
+     "lat": 1.3178621,
+     "lon": 103.8927875
+    },
+    {
+     "lat": 1.3180172,
+     "lon": 103.8930204
+    },
+    {
+     "lat": 1.3181144,
+     "lon": 103.8938066
+    },
+    {
+     "lat": 1.3183321,
+     "lon": 103.8937797
+    },
+    {
+     "lat": 1.3182878,
+     "lon": 103.8934207
+    },
+    {
+     "lat": 1.3182791,
+     "lon": 103.8933507
+    },
+    {
+     "lat": 1.318301,
+     "lon": 103.893348
+    },
+    {
+     "lat": 1.3181599,
+     "lon": 103.8922067
+    },
+    {
+     "lat": 1.3183362,
+     "lon": 103.8921849
+    },
+    {
+     "lat": 1.3183411,
+     "lon": 103.8922247
+    },
+    {
+     "lat": 1.3186363,
+     "lon": 103.8921881
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "layer": "-1",
+    "level": "-1",
+    "name": "Paya Lebar",
+    "name:en": "Paya Lebar",
+    "name:ms": "Paya Lebar",
+    "name:ta": "\u0baa\u0bbe\u0baf \u0bb2\u0bc7\u0baa\u0bbe\u0bb0\u0bcd",
+    "name:th": "\u0e1b\u0e32\u0e22\u0e32\u0e40\u0e25\u0e1a\u0e32\u0e23\u0e4c",
+    "name:zh": "\u5df4\u8036\u5229\u5cc7",
+    "network": "Mass Rapid Transit",
+    "network:short": "MRT",
+    "network:wikidata": "Q40176",
+    "operator": "SMRT",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "CC9;EW8",
+    "ref:colour": "#ff9a00;#009530",
+    "station": "subway",
+    "subway": "yes",
+    "wheelchair": "yes",
+    "wikidata": "Q3272113",
+    "wikipedia": "en:Paya Lebar MRT station"
+   }
+  },
+  {
+   "type": "way",
+   "id": 862677315,
+   "bounds": {
+    "minlat": 1.2824342,
+    "minlon": 103.8615858,
+    "maxlat": 1.2824516,
+    "maxlon": 103.8616283
+   },
+   "geometry": [
+    {
+     "lat": 1.2824516,
+     "lon": 103.8615858
+    },
+    {
+     "lat": 1.2824342,
+     "lon": 103.8616283
+    }
+   ],
+   "tags": {
+    "bridge": "yes",
+    "conveying": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "1",
+    "lit": "yes",
+    "mapillary": "3729508943827941",
+    "name": "Garden Bay Bridge",
+    "name:ms": "Jambatan Garden Bay"
+   }
+  },
+  {
+   "type": "way",
    "id": 864883124,
    "bounds": {
     "minlat": 1.2800946,
@@ -5174,6 +10341,220 @@
     {
      "lat": 1.3195851,
      "lon": 103.9280577
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877407818,
+   "bounds": {
+    "minlat": 1.3158981,
+    "minlon": 103.8968253,
+    "maxlat": 1.3159115,
+    "maxlon": 103.8968709
+   },
+   "geometry": [
+    {
+     "lat": 1.3159115,
+     "lon": 103.8968709
+    },
+    {
+     "lat": 1.3158981,
+     "lon": 103.8968253
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877446617,
+   "bounds": {
+    "minlat": 1.3158567,
+    "minlon": 103.8966218,
+    "maxlat": 1.3159017,
+    "maxlon": 103.896634
+   },
+   "geometry": [
+    {
+     "lat": 1.3159017,
+     "lon": 103.8966218
+    },
+    {
+     "lat": 1.3158567,
+     "lon": 103.896634
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877446620,
+   "bounds": {
+    "minlat": 1.3158315,
+    "minlon": 103.896458,
+    "maxlat": 1.3158647,
+    "maxlon": 103.8964704
+   },
+   "geometry": [
+    {
+     "lat": 1.3158647,
+     "lon": 103.896458
+    },
+    {
+     "lat": 1.3158315,
+     "lon": 103.8964704
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877446622,
+   "bounds": {
+    "minlat": 1.3157254,
+    "minlon": 103.896079,
+    "maxlat": 1.3157803,
+    "maxlon": 103.8960899
+   },
+   "geometry": [
+    {
+     "lat": 1.3157254,
+     "lon": 103.8960899
+    },
+    {
+     "lat": 1.3157803,
+     "lon": 103.896079
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877453583,
+   "bounds": {
+    "minlat": 1.3156491,
+    "minlon": 103.8956096,
+    "maxlat": 1.3156782,
+    "maxlon": 103.8956132
+   },
+   "geometry": [
+    {
+     "lat": 1.3156782,
+     "lon": 103.8956096
+    },
+    {
+     "lat": 1.3156491,
+     "lon": 103.8956132
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877534823,
+   "bounds": {
+    "minlat": 1.3166328,
+    "minlon": 103.8975629,
+    "maxlat": 1.3167119,
+    "maxlon": 103.8975804
+   },
+   "geometry": [
+    {
+     "lat": 1.3167119,
+     "lon": 103.8975629
+    },
+    {
+     "lat": 1.3166328,
+     "lon": 103.8975804
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877759073,
+   "bounds": {
+    "minlat": 1.3206572,
+    "minlon": 103.8915984,
+    "maxlat": 1.3207326,
+    "maxlon": 103.891625
+   },
+   "geometry": [
+    {
+     "lat": 1.3206572,
+     "lon": 103.891625
+    },
+    {
+     "lat": 1.3207326,
+     "lon": 103.8915984
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 877789869,
+   "bounds": {
+    "minlat": 1.3205721,
+    "minlon": 103.8912251,
+    "maxlat": 1.3207374,
+    "maxlon": 103.8912842
+   },
+   "geometry": [
+    {
+     "lat": 1.3207374,
+     "lon": 103.8912251
+    },
+    {
+     "lat": 1.3205721,
+     "lon": 103.8912842
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 878210587,
+   "bounds": {
+    "minlat": 1.3200363,
+    "minlon": 103.8910468,
+    "maxlat": 1.3200513,
+    "maxlon": 103.8910586
+   },
+   "geometry": [
+    {
+     "lat": 1.3200513,
+     "lon": 103.8910468
+    },
+    {
+     "lat": 1.3200363,
+     "lon": 103.8910586
     }
    ],
    "tags": {
@@ -6121,6 +11502,97 @@
    ],
    "tags": {
     "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1228776595,
+   "bounds": {
+    "minlat": 1.2802626,
+    "minlon": 103.8552225,
+    "maxlat": 1.2803155,
+    "maxlon": 103.8553059
+   },
+   "geometry": [
+    {
+     "lat": 1.2803155,
+     "lon": 103.8552225
+    },
+    {
+     "lat": 1.2802626,
+     "lon": 103.8553059
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1229368481,
+   "bounds": {
+    "minlat": 1.2824702,
+    "minlon": 103.8634837,
+    "maxlat": 1.2825328,
+    "maxlon": 103.8635125
+   },
+   "geometry": [
+    {
+     "lat": 1.2824702,
+     "lon": 103.8635065
+    },
+    {
+     "lat": 1.282482,
+     "lon": 103.8634901
+    },
+    {
+     "lat": 1.28251,
+     "lon": 103.8635125
+    },
+    {
+     "lat": 1.2825328,
+     "lon": 103.8634837
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "39",
+    "surface": "wood",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1236615880,
+   "bounds": {
+    "minlat": 1.2829849,
+    "minlon": 103.857607,
+    "maxlat": 1.2832891,
+    "maxlon": 103.8580073
+   },
+   "geometry": [
+    {
+     "lat": 1.2829849,
+     "lon": 103.8580073
+    },
+    {
+     "lat": 1.2832891,
+     "lon": 103.857607
+    }
+   ],
+   "tags": {
+    "highway": "corridor",
+    "indoor": "yes",
+    "level": "-1",
+    "stroller": "yes",
+    "wheelchair": "yes"
    }
   },
   {
@@ -7668,6 +13140,202 @@
   },
   {
    "type": "way",
+   "id": 1459291282,
+   "bounds": {
+    "minlat": 1.2825957,
+    "minlon": 103.8619304,
+    "maxlat": 1.2826184,
+    "maxlon": 103.8621382
+   },
+   "geometry": [
+    {
+     "lat": 1.2826184,
+     "lon": 103.8619304
+    },
+    {
+     "lat": 1.2825957,
+     "lon": 103.8621382
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no",
+    "step_count": "36",
+    "surface": "paving_stones",
+    "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1459291284,
+   "bounds": {
+    "minlat": 1.2825728,
+    "minlon": 103.8622237,
+    "maxlat": 1.2825868,
+    "maxlon": 103.8622952
+   },
+   "geometry": [
+    {
+     "lat": 1.2825868,
+     "lon": 103.8622237
+    },
+    {
+     "lat": 1.2825728,
+     "lon": 103.8622952
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no",
+    "step_count": "7",
+    "surface": "paving_stones",
+    "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1460669044,
+   "bounds": {
+    "minlat": 1.2829203,
+    "minlon": 103.8577153,
+    "maxlat": 1.2829669,
+    "maxlon": 103.8577732
+   },
+   "geometry": [
+    {
+     "lat": 1.2829669,
+     "lon": 103.8577153
+    },
+    {
+     "lat": 1.2829203,
+     "lon": 103.8577732
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "16",
+    "surface": "paving_stones",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1467038016,
+   "bounds": {
+    "minlat": 1.2828135,
+    "minlon": 103.861603,
+    "maxlat": 1.2836964,
+    "maxlon": 103.8621994
+   },
+   "geometry": [
+    {
+     "lat": 1.2836964,
+     "lon": 103.8618042
+    },
+    {
+     "lat": 1.2829559,
+     "lon": 103.861603
+    },
+    {
+     "lat": 1.2828135,
+     "lon": 103.8621452
+    },
+    {
+     "lat": 1.2829988,
+     "lon": 103.8621994
+    },
+    {
+     "lat": 1.2830354,
+     "lon": 103.8620879
+    },
+    {
+     "lat": 1.2830727,
+     "lon": 103.8620957
+    },
+    {
+     "lat": 1.2831481,
+     "lon": 103.8621141
+    },
+    {
+     "lat": 1.2831681,
+     "lon": 103.8620462
+    },
+    {
+     "lat": 1.2832033,
+     "lon": 103.8620548
+    },
+    {
+     "lat": 1.2831701,
+     "lon": 103.862167
+    },
+    {
+     "lat": 1.2832842,
+     "lon": 103.8621988
+    },
+    {
+     "lat": 1.2833249,
+     "lon": 103.862048
+    },
+    {
+     "lat": 1.2836118,
+     "lon": 103.8621199
+    },
+    {
+     "lat": 1.2836964,
+     "lon": 103.8618042
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "18",
+    "addr:postcode": "018953",
+    "addr:street": "Marina Gardens Dr",
+    "building": "yes",
+    "changing_table": "yes",
+    "contact:facebook": "IMBATheatre",
+    "contact:instagram": "be.imba",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "IMBA_Guest",
+    "name": "IMBA Theatre",
+    "not:name": "IMBA Global",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "operator": "IMBA Global",
+    "payment:alipay": "yes",
+    "payment:american_express": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:discover_card": "yes",
+    "payment:google_pay": "yes",
+    "payment:mastercard": "yes",
+    "payment:nfc": "yes",
+    "payment:paynow": "yes",
+    "payment:prepaid_ticket": "yes",
+    "payment:shopeepay": "yes",
+    "payment:singtel_dash": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "payment:wechat": "yes",
+    "start_date": "2026-02-12",
+    "toilets": "yes",
+    "toilets:wheelchair": "yes",
+    "tourism": "gallery",
+    "website": "https://imbaglobal.com/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
    "id": 1470433129,
    "bounds": {
     "minlat": 1.3251168,
@@ -7752,6 +13420,77 @@
     "ramp": "no",
     "surface": "concrete",
     "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1524329945,
+   "bounds": {
+    "minlat": 1.2825434,
+    "minlon": 103.8633867,
+    "maxlat": 1.2826932,
+    "maxlon": 103.8635035
+   },
+   "geometry": [
+    {
+     "lat": 1.2826847,
+     "lon": 103.8634252
+    },
+    {
+     "lat": 1.2826278,
+     "lon": 103.8633867
+    },
+    {
+     "lat": 1.2825869,
+     "lon": 103.8633951
+    },
+    {
+     "lat": 1.2825453,
+     "lon": 103.8634371
+    },
+    {
+     "lat": 1.2825434,
+     "lon": 103.8634541
+    },
+    {
+     "lat": 1.2825517,
+     "lon": 103.8634636
+    },
+    {
+     "lat": 1.2826059,
+     "lon": 103.8635035
+    },
+    {
+     "lat": 1.2826251,
+     "lon": 103.8635035
+    },
+    {
+     "lat": 1.2826438,
+     "lon": 103.8634939
+    },
+    {
+     "lat": 1.282686,
+     "lon": 103.8634613
+    },
+    {
+     "lat": 1.2826932,
+     "lon": 103.8634433
+    },
+    {
+     "lat": 1.2826847,
+     "lon": 103.8634252
+    }
+   ],
+   "tags": {
+    "access": "yes",
+    "amenity": "toilets",
+    "building": "yes",
+    "changing_table": "yes",
+    "fee": "no",
+    "female": "yes",
+    "male": "yes",
+    "toilets:disposal": "flush",
+    "wheelchair": "yes"
    }
   }
  ]
