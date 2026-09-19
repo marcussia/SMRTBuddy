@@ -1,45 +1,114 @@
 export type Locale = 'en' | 'zh' | 'ms' | 'ta'
+export type ScreenId = 'language' | 'profile' | 'plan' | 'voice' | 'overview' | 'sharing' | 'guide' | 'recovery' | 'wrong-way' | 'sos' | 'recording' | 'help-sent' | 'arrived' | 'family' | 'family-journey'
 
-export type ScreenId =
-  | 'language' | 'profile' | 'plan' | 'listening' | 'recognised' | 'overview'
-  | 'guide' | 'wrong-way' | 'sos' | 'recording' | 'family' | 'family-journey'
-
-export const languages: Array<{ id: Locale; label: string; code: string }> = [
-  { id: 'en', label: 'English', code: 'EN' },
-  { id: 'zh', label: '中文', code: '中' },
-  { id: 'ms', label: 'Bahasa Melayu', code: 'BM' },
-  { id: 'ta', label: 'தமிழ்', code: 'த' },
+export const languages: Array<{ id: Locale; label: string; code: string; speech: string }> = [
+  { id: 'en', label: 'English', code: 'EN', speech: 'en-SG' },
+  { id: 'zh', label: '中文', code: '中', speech: 'zh-SG' },
+  { id: 'ms', label: 'Bahasa Melayu', code: 'BM', speech: 'ms-MY' },
+  { id: 'ta', label: 'தமிழ்', code: 'த', speech: 'ta-SG' },
 ]
 
 export const screenLabels: Array<{ id: ScreenId; label: string; group: string }> = [
-  { id: 'language', label: 'Language', group: 'Pitch flow' },
-  { id: 'profile', label: 'Profile', group: 'Pitch flow' },
-  { id: 'plan', label: 'Plan journey', group: 'Pitch flow' },
-  { id: 'listening', label: 'Voice destination', group: 'Pitch flow' },
-  { id: 'recognised', label: 'Destination recognised', group: 'Pitch flow' },
-  { id: 'overview', label: 'Journey overview', group: 'Pitch flow' },
-  { id: 'guide', label: 'Direction + SOS', group: 'Pitch flow' },
-  { id: 'wrong-way', label: 'Recovery guidance', group: 'Safety' },
-  { id: 'sos', label: 'SOS confirmation', group: 'Safety' },
-  { id: 'recording', label: 'Audio message', group: 'Safety' },
-  { id: 'family', label: 'Family access', group: 'Family demo' },
-  { id: 'family-journey', label: 'Shared journey', group: 'Family demo' },
+  { id: 'language', label: 'Language', group: 'Pitch flow' }, { id: 'profile', label: 'Profile', group: 'Pitch flow' },
+  { id: 'plan', label: 'Plan journey', group: 'Pitch flow' }, { id: 'voice', label: 'Voice destination', group: 'Pitch flow' }, { id: 'overview', label: 'Journey overview', group: 'Pitch flow' },
+  { id: 'sharing', label: 'Sharing consent', group: 'Pitch flow' }, { id: 'guide', label: 'Live journey', group: 'Pitch flow' },
+  { id: 'recovery', label: 'Need help', group: 'Safety' }, { id: 'wrong-way', label: 'Simulated wrong direction', group: 'Safety' },
+  { id: 'sos', label: 'SOS confirmation', group: 'Safety' }, { id: 'recording', label: 'Audio message', group: 'Safety' },
+  { id: 'family', label: 'Family access', group: 'Family demo' }, { id: 'family-journey', label: 'Shared journey', group: 'Family demo' },
 ]
 
-export const journeySteps = [
-  { number: 1, title: 'Leave home', detail: 'Home in Bedok' },
-  { number: 2, title: 'Walk to Bedok MRT', detail: '12 min at your walking pace' },
-  { number: 3, title: 'Use the accessible entrance', detail: 'Lift and sheltered path' },
-  { number: 4, title: 'Take the East West Line', detail: 'Towards Tuas Link' },
-  { number: 5, title: 'Alight at Outram Park', detail: 'Prepare to follow the lift signs' },
-  { number: 6, title: 'Follow Exit 7', detail: 'Take the lift towards the yellow 7 sign' },
-  { number: 7, title: 'Use the sheltered SGH link', detail: 'Follow the hospital signs' },
-  { number: 8, title: 'Arrive at SGH', detail: 'Singapore General Hospital' },
-]
+const en = {
+  welcome:'Welcome!', chooseLanguage:'Choose your language.', canChange:'You can change this later in Settings.', chooseProfile:'Choose your profile', whoUses:'Who is using this app?', travelling:'I am travelling', travellingSub:'Plan and follow my own journey.', family:'I am family', familySub:'Follow journeys that are shared with me.', consent:'Location will never be shared automatically without your permission.',
+  planTitle:'Plan a journey', whereGoing:'Where are you going?', speakType:'Speak or type a place.', from:'From', to:'To', homeBedok:'Home in Bedok', enterPlace:'Enter a place', accessibleOn:'Accessible route is on', accessibleSub:'Lifts and sheltered paths preferred', showJourney:'Show my journey', enterDestination:'Enter a destination or use the microphone.',
+  voiceTitle:'Voice destination', listening:'Listening…', sayDestination:'Say where you want to go.', checkDestination:'Check destination', noSpeechYet:'Nothing heard yet.', heard:'I heard:', useDestination:'Use this destination', cancel:'Cancel', privacyMic:'Microphone is active only while this screen is open.', tryAgain:'Try again', useDemo:'Use demo destination', micUnsupported:'Live speech recognition is unavailable in this browser.', micDenied:'Microphone permission was not granted.',
+  journeyTitle:'Your journey', simpleSteps:'8 simple steps', duration:'About 48 minutes at your walking pace.', stepFree:'Step-free', sheltered:'Sheltered paths', startJourney:'Continue to journey sharing',
+  shareTitle:'Journey sharing', shareHeading:'Who can follow this journey?', shareBody:'Choose whether Hui Ling can see your location until you arrive.', shareWith:'Share with Hui Ling', shareOn:'Journey location will be shared until arrival.', shareOff:'Your location will not be shared.', locationExplain:'The app needs location to guide you through all 8 steps. You can continue with cached directions if permission is denied.', allowStart:'Allow location and start', continueCached:'Continue with cached directions', requestingLocation:'Requesting location permission…', locationDenied:'Location was not shared. Cached directions are still available.',
+  playInstruction:'Play instruction', playing:'Playing…', needHelp:'Need help?', nextStep:'Next step', arrivedAction:'I’ve arrived', locationOn:'Location on', cachedDirections:'Cached directions', sharedWith:'Shared with Hui Ling', notShared:'Not shared', demoSharing:'Prototype sharing',
+  recoveryTitle:'Journey help', recoveryHeading:'Let’s get you back on track.', recoveryBody:'Choose what would help. We will not assume you are going the wrong way.', repeatInstruction:'Repeat this instruction', showLandmark:'Show current direction', checkLocation:'Check my location', previousStep:'Go to previous step', contactFamily:'Contact Hui Ling', emergencySos:'Emergency SOS',
+  wrongTitle:'Check your direction', wrongHeading:'You may be going the wrong way.', wrongBody:'Stop somewhere safe while we check. Follow the yellow Exit 7 signs in the opposite direction.', correctDirection:'Show the correct direction', callFamily:'Contact Hui Ling', simulated:'SIMULATED EVENT',
+  getHelp:'Get help', whoCall:'Who should we contact?', noCall:'No call or message has started.', trustedFamily:'Hui Ling', trustedDetail:'Send a demo help request', emergency:'Emergency services', immediateDanger:'Call 995 for immediate danger', recordAudio:'Record an audio message', optionalRecording:'Optional; never starts automatically', privacyFooter:'Audio and location are shared only after confirmation.',
+  recordingTitle:'Audio message', recordShort:'Record a short message', nothingShared:'Nothing is shared until you confirm.', recording:'Recording…', recordPrompt:'Tell Hui Ling what happened and where you are.', messageReady:'Message ready', startRecording:'Start recording', stopRecording:'Stop recording', confirmMessage:'Confirm message', deleteTry:'Delete and try again',
+  familyAccess:'Family access', followShared:'Follow a shared journey.', shareConsent:'Mdm Lim must choose to share each active journey.', sharingCode:'Sharing code', consentFirst:'Consent comes first', sharingEnds:'Location sharing ends when the journey ends.', openDemo:'Open demo journey', familyJourney:'Mdm Lim’s journey', journeyActive:'Journey active', onWay:'On the way to SGH', updatedNow:'Updated just now · Prototype data', currentStep:'Current step', expectedArrival:'Expected arrival', direction:'Direction', rightPath:'On the right path', sharing:'Sharing', untilEnds:'Until journey ends', noHelp:'No help is needed right now. You will be alerted if Mdm Lim asks for help.', stopViewing:'Stop viewing demo',
+  helpSent:'Help request sent', helpSentBody:'Hui Ling has been notified in this prototype. Your current journey step and sharing status were included.', backJourney:'Back to journey', backendNote:'Prototype confirmation — connect the backend to deliver this notification on another device.',
+  arrivedTitle:'Journey complete', arrivedHeading:'You have arrived at SGH.', arrivedBody:'Your journey is complete and location sharing has stopped.', sharingStopped:'Sharing stopped', done:'Done',
+}
+export type UiKey = keyof typeof en
 
-export const guideCopy: Record<Locale, { station: string; step: string; title: string; instruction: string; distance: string; ahead: string; status: string; hear: string; lost: string; speechLanguage: string }> = {
-  en: { station: 'Outram Park', step: 'Step 6 of 8', title: 'Follow Exit 7', instruction: 'Take the lift towards the yellow Exit 7 sign.', distance: '28 m', ahead: 'ahead', status: 'You’re on the right path', hear: 'Play instruction', lost: 'I’m lost', speechLanguage: 'en-SG' },
-  zh: { station: '欧南园', step: '第 6 步，共 8 步', title: '前往 7 号出口', instruction: '搭电梯前往 7 号出口。寻找黄色的 7 号标志。', distance: '28 米', ahead: '前方', status: '您走对了', hear: '播放语音指示', lost: '我迷路了', speechLanguage: 'zh-SG' },
-  ms: { station: 'Outram Park', step: 'Langkah 6 daripada 8', title: 'Ikut arah ke Pintu Keluar 7', instruction: 'Naik lif menuju ke Pintu Keluar 7. Cari tanda 7 berwarna kuning.', distance: '28 m', ahead: 'di hadapan', status: 'Anda berada di laluan yang betul', hear: 'Dengar arahan', lost: 'Saya sesat', speechLanguage: 'ms-MY' },
-  ta: { station: 'ஊட்ரம் பார்க்', step: 'படி 6 / 8', title: 'வெளியேறும் வழி 7', instruction: 'மின்தூக்கியில் வெளியேறும் வழி 7-க்குச் செல்லுங்கள். மஞ்சள் 7 குறியீட்டைத் தேடுங்கள்.', distance: '28 மீ', ahead: 'முன்னால்', status: 'சரியான வழியில் உள்ளீர்கள்', hear: 'வழிகாட்டலைக் கேட்க', lost: 'வழி தெரியவில்லை', speechLanguage: 'ta-SG' },
+const zh: Record<UiKey,string> = {
+  welcome:'欢迎！', chooseLanguage:'选择您的语言。', canChange:'之后可在设置中更改。', chooseProfile:'选择您的身份', whoUses:'谁在使用这个应用？', travelling:'我是出行者', travellingSub:'规划并跟随自己的行程。', family:'我是家人', familySub:'查看与我共享的行程。', consent:'未经您的允许，绝不会自动共享位置。',
+  planTitle:'规划行程', whereGoing:'您要去哪里？', speakType:'说出或输入地点。', from:'出发地', to:'目的地', homeBedok:'勿洛的家', enterPlace:'输入地点', accessibleOn:'无障碍路线已开启', accessibleSub:'优先使用电梯和有盖通道', showJourney:'查看我的行程', enterDestination:'请输入目的地或使用麦克风。',
+  voiceTitle:'语音输入目的地', listening:'正在聆听…', sayDestination:'请说出您要去的地方。', checkDestination:'检查目的地', noSpeechYet:'还未听到内容。', heard:'我听到：', useDestination:'使用此目的地', cancel:'取消', privacyMic:'只有在此页面打开时才会使用麦克风。', tryAgain:'再试一次', useDemo:'使用演示目的地', micUnsupported:'此浏览器不支持实时语音识别。', micDenied:'未获得麦克风权限。',
+  journeyTitle:'您的行程', simpleSteps:'8 个简单步骤', duration:'按您的步行速度，约需 48 分钟。', stepFree:'无阶梯', sheltered:'有盖通道', startJourney:'继续设置行程共享',
+  shareTitle:'行程共享', shareHeading:'谁可以查看此行程？', shareBody:'选择是否让慧玲在您抵达前查看您的位置。', shareWith:'与慧玲共享', shareOn:'行程位置将共享至您抵达为止。', shareOff:'不会共享您的位置。', locationExplain:'应用需要位置权限来引导全部 8 个步骤。若权限被拒绝，仍可使用已缓存的路线。', allowStart:'允许位置并开始', continueCached:'使用缓存路线继续', requestingLocation:'正在请求位置权限…', locationDenied:'位置未共享。仍可使用缓存路线。',
+  playInstruction:'播放语音指示', playing:'正在播放…', needHelp:'需要帮助？', nextStep:'下一步', arrivedAction:'我已抵达', locationOn:'位置已开启', cachedDirections:'缓存路线', sharedWith:'已与慧玲共享', notShared:'未共享', demoSharing:'原型共享',
+  recoveryTitle:'行程帮助', recoveryHeading:'让我们帮助您重新找到路线。', recoveryBody:'请选择需要的帮助。我们不会假设您走错方向。', repeatInstruction:'重复此指示', showLandmark:'显示当前方向', checkLocation:'检查我的位置', previousStep:'返回上一步', contactFamily:'联系慧玲', emergencySos:'紧急 SOS',
+  wrongTitle:'检查方向', wrongHeading:'您可能走错方向了。', wrongBody:'请在安全处停下，让我们检查。朝相反方向跟随黄色的 7 号出口标志。', correctDirection:'显示正确方向', callFamily:'联系慧玲', simulated:'模拟事件',
+  getHelp:'获取帮助', whoCall:'我们应该联系谁？', noCall:'尚未开始通话或发送消息。', trustedFamily:'慧玲', trustedDetail:'发送演示求助请求', emergency:'紧急服务', immediateDanger:'紧急危险请拨打 995', recordAudio:'录制语音消息', optionalRecording:'可选；绝不会自动开始', privacyFooter:'只有在确认后才会共享语音和位置。',
+  recordingTitle:'语音消息', recordShort:'录制简短消息', nothingShared:'确认前不会共享任何内容。', recording:'正在录音…', recordPrompt:'告诉慧玲发生了什么以及您在哪里。', messageReady:'消息已准备好', startRecording:'开始录音', stopRecording:'停止录音', confirmMessage:'确认消息', deleteTry:'删除并重新录制',
+  familyAccess:'家人访问', followShared:'查看共享的行程。', shareConsent:'林女士必须选择共享每一次行程。', sharingCode:'共享代码', consentFirst:'以同意为先', sharingEnds:'行程结束时，位置共享也会结束。', openDemo:'打开演示行程', familyJourney:'林女士的行程', journeyActive:'行程进行中', onWay:'正在前往新加坡中央医院', updatedNow:'刚刚更新 · 原型数据', currentStep:'当前步骤', expectedArrival:'预计抵达', direction:'方向', rightPath:'路线正确', sharing:'共享', untilEnds:'直到行程结束', noHelp:'目前不需要帮助。如果林女士求助，您会收到通知。', stopViewing:'停止查看演示',
+  helpSent:'求助请求已发送', helpSentBody:'此原型已通知慧玲，并包含当前行程步骤和共享状态。', backJourney:'返回行程', backendNote:'原型确认——连接后端后可把通知发送到另一台设备。', arrivedTitle:'行程完成', arrivedHeading:'您已抵达新加坡中央医院。', arrivedBody:'行程已完成，位置共享已停止。', sharingStopped:'共享已停止', done:'完成',
+}
+
+const ms: Record<UiKey,string> = {
+  welcome:'Selamat datang!', chooseLanguage:'Pilih bahasa anda.', canChange:'Anda boleh menukarnya kemudian dalam Tetapan.', chooseProfile:'Pilih profil anda', whoUses:'Siapa yang menggunakan aplikasi ini?', travelling:'Saya sedang berjalan', travellingSub:'Rancang dan ikuti perjalanan saya.', family:'Saya ahli keluarga', familySub:'Ikuti perjalanan yang dikongsi dengan saya.', consent:'Lokasi tidak akan dikongsi secara automatik tanpa kebenaran anda.',
+  planTitle:'Rancang perjalanan', whereGoing:'Ke mana anda mahu pergi?', speakType:'Sebut atau taip tempat.', from:'Dari', to:'Ke', homeBedok:'Rumah di Bedok', enterPlace:'Masukkan tempat', accessibleOn:'Laluan mudah akses dihidupkan', accessibleSub:'Lif dan laluan berbumbung diutamakan', showJourney:'Tunjukkan perjalanan saya', enterDestination:'Masukkan destinasi atau gunakan mikrofon.',
+  voiceTitle:'Destinasi suara', listening:'Sedang mendengar…', sayDestination:'Sebut tempat yang anda mahu pergi.', checkDestination:'Semak destinasi', noSpeechYet:'Belum mendengar apa-apa.', heard:'Saya dengar:', useDestination:'Gunakan destinasi ini', cancel:'Batal', privacyMic:'Mikrofon hanya aktif semasa skrin ini dibuka.', tryAgain:'Cuba lagi', useDemo:'Gunakan destinasi demo', micUnsupported:'Pengecaman suara langsung tidak tersedia dalam pelayar ini.', micDenied:'Kebenaran mikrofon tidak diberikan.',
+  journeyTitle:'Perjalanan anda', simpleSteps:'8 langkah mudah', duration:'Kira-kira 48 minit mengikut kelajuan berjalan anda.', stepFree:'Tanpa tangga', sheltered:'Laluan berbumbung', startJourney:'Teruskan ke perkongsian perjalanan',
+  shareTitle:'Perkongsian perjalanan', shareHeading:'Siapa boleh mengikuti perjalanan ini?', shareBody:'Pilih sama ada Hui Ling boleh melihat lokasi anda sehingga anda tiba.', shareWith:'Kongsi dengan Hui Ling', shareOn:'Lokasi perjalanan akan dikongsi sehingga anda tiba.', shareOff:'Lokasi anda tidak akan dikongsi.', locationExplain:'Aplikasi memerlukan lokasi untuk membimbing anda melalui semua 8 langkah. Anda masih boleh menggunakan arahan tersimpan jika kebenaran ditolak.', allowStart:'Benarkan lokasi dan mula', continueCached:'Teruskan dengan arahan tersimpan', requestingLocation:'Meminta kebenaran lokasi…', locationDenied:'Lokasi tidak dikongsi. Arahan tersimpan masih tersedia.',
+  playInstruction:'Dengar arahan', playing:'Sedang dimainkan…', needHelp:'Perlukan bantuan?', nextStep:'Langkah seterusnya', arrivedAction:'Saya sudah tiba', locationOn:'Lokasi dihidupkan', cachedDirections:'Arahan tersimpan', sharedWith:'Dikongsi dengan Hui Ling', notShared:'Tidak dikongsi', demoSharing:'Perkongsian prototaip',
+  recoveryTitle:'Bantuan perjalanan', recoveryHeading:'Mari bantu anda kembali ke laluan.', recoveryBody:'Pilih bantuan yang diperlukan. Kami tidak akan menganggap anda tersalah arah.', repeatInstruction:'Ulang arahan ini', showLandmark:'Tunjukkan arah semasa', checkLocation:'Semak lokasi saya', previousStep:'Kembali ke langkah sebelumnya', contactFamily:'Hubungi Hui Ling', emergencySos:'SOS kecemasan',
+  wrongTitle:'Semak arah anda', wrongHeading:'Anda mungkin menuju ke arah yang salah.', wrongBody:'Berhenti di tempat yang selamat sementara kami menyemak. Ikut tanda kuning Pintu Keluar 7 dari arah bertentangan.', correctDirection:'Tunjukkan arah yang betul', callFamily:'Hubungi Hui Ling', simulated:'ACARA SIMULASI',
+  getHelp:'Dapatkan bantuan', whoCall:'Siapa yang perlu kami hubungi?', noCall:'Tiada panggilan atau mesej dimulakan.', trustedFamily:'Hui Ling', trustedDetail:'Hantar permintaan bantuan demo', emergency:'Perkhidmatan kecemasan', immediateDanger:'Hubungi 995 untuk bahaya segera', recordAudio:'Rakam mesej suara', optionalRecording:'Pilihan; tidak bermula secara automatik', privacyFooter:'Audio dan lokasi hanya dikongsi selepas pengesahan.',
+  recordingTitle:'Mesej suara', recordShort:'Rakam mesej ringkas', nothingShared:'Tiada apa dikongsi sehingga anda mengesahkan.', recording:'Sedang merakam…', recordPrompt:'Beritahu Hui Ling apa yang berlaku dan lokasi anda.', messageReady:'Mesej sedia', startRecording:'Mula merakam', stopRecording:'Berhenti merakam', confirmMessage:'Sahkan mesej', deleteTry:'Padam dan cuba lagi',
+  familyAccess:'Akses keluarga', followShared:'Ikuti perjalanan yang dikongsi.', shareConsent:'Mdm Lim mesti memilih untuk berkongsi setiap perjalanan aktif.', sharingCode:'Kod perkongsian', consentFirst:'Keizinan diutamakan', sharingEnds:'Perkongsian lokasi tamat apabila perjalanan tamat.', openDemo:'Buka perjalanan demo', familyJourney:'Perjalanan Mdm Lim', journeyActive:'Perjalanan aktif', onWay:'Dalam perjalanan ke SGH', updatedNow:'Baru dikemas kini · Data prototaip', currentStep:'Langkah semasa', expectedArrival:'Anggaran tiba', direction:'Arah', rightPath:'Di laluan yang betul', sharing:'Perkongsian', untilEnds:'Sehingga perjalanan tamat', noHelp:'Tiada bantuan diperlukan sekarang. Anda akan dimaklumkan jika Mdm Lim meminta bantuan.', stopViewing:'Berhenti melihat demo',
+  helpSent:'Permintaan bantuan dihantar', helpSentBody:'Hui Ling telah dimaklumkan dalam prototaip ini. Langkah perjalanan dan status perkongsian turut disertakan.', backJourney:'Kembali ke perjalanan', backendNote:'Pengesahan prototaip — sambungkan backend untuk menghantar pemberitahuan ke peranti lain.', arrivedTitle:'Perjalanan selesai', arrivedHeading:'Anda telah tiba di SGH.', arrivedBody:'Perjalanan selesai dan perkongsian lokasi telah dihentikan.', sharingStopped:'Perkongsian dihentikan', done:'Selesai',
+}
+
+const ta: Record<UiKey,string> = {
+  welcome:'வரவேற்கிறோம்!', chooseLanguage:'உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்.', canChange:'பின்னர் அமைப்புகளில் மாற்றலாம்.', chooseProfile:'உங்கள் சுயவிவரத்தைத் தேர்ந்தெடுக்கவும்', whoUses:'இந்த செயலியை யார் பயன்படுத்துகிறார்?', travelling:'நான் பயணம் செய்கிறேன்', travellingSub:'என் பயணத்தைத் திட்டமிட்டு பின்பற்றுவேன்.', family:'நான் குடும்ப உறுப்பினர்', familySub:'என்னுடன் பகிரப்பட்ட பயணங்களைப் பின்பற்றுவேன்.', consent:'உங்கள் அனுமதி இல்லாமல் இருப்பிடம் தானாகப் பகிரப்படாது.',
+  planTitle:'பயணத்தைத் திட்டமிடுங்கள்', whereGoing:'நீங்கள் எங்கு செல்கிறீர்கள்?', speakType:'இடத்தைச் சொல்லவும் அல்லது தட்டச்சு செய்யவும்.', from:'இருந்து', to:'செல்லும் இடம்', homeBedok:'பெடோக்கில் உள்ள வீடு', enterPlace:'இடத்தை உள்ளிடவும்', accessibleOn:'அணுகக்கூடிய பாதை இயக்கத்தில் உள்ளது', accessibleSub:'மின்தூக்கி மற்றும் மூடிய பாதைகளுக்கு முன்னுரிமை', showJourney:'என் பயணத்தைக் காட்டு', enterDestination:'செல்லும் இடத்தை உள்ளிடவும் அல்லது ஒலிவாங்கியைப் பயன்படுத்தவும்.',
+  voiceTitle:'குரல் மூலம் செல்லும் இடம்', listening:'கேட்கிறது…', sayDestination:'நீங்கள் செல்ல விரும்பும் இடத்தைச் சொல்லுங்கள்.', checkDestination:'செல்லும் இடத்தைச் சரிபார்க்கவும்', noSpeechYet:'இதுவரை எதுவும் கேட்கவில்லை.', heard:'நான் கேட்டது:', useDestination:'இந்த இடத்தைப் பயன்படுத்தவும்', cancel:'ரத்து செய்', privacyMic:'இந்தத் திரை திறந்திருக்கும் போது மட்டுமே ஒலிவாங்கி செயல்படும்.', tryAgain:'மீண்டும் முயற்சிக்கவும்', useDemo:'மாதிரி இடத்தைப் பயன்படுத்தவும்', micUnsupported:'இந்த உலாவியில் நேரடி குரல் அறிதல் இல்லை.', micDenied:'ஒலிவாங்கி அனுமதி வழங்கப்படவில்லை.',
+  journeyTitle:'உங்கள் பயணம்', simpleSteps:'8 எளிய படிகள்', duration:'உங்கள் நடை வேகத்தில் சுமார் 48 நிமிடங்கள்.', stepFree:'படிகள் இல்லை', sheltered:'மூடிய பாதைகள்', startJourney:'பயணப் பகிர்வைத் தொடரவும்',
+  shareTitle:'பயணப் பகிர்வு', shareHeading:'இந்தப் பயணத்தை யார் பின்பற்றலாம்?', shareBody:'நீங்கள் சேரும் வரை Hui Ling உங்கள் இருப்பிடத்தைப் பார்க்கலாமா என்பதைத் தேர்ந்தெடுக்கவும்.', shareWith:'Hui Ling உடன் பகிரவும்', shareOn:'நீங்கள் சேரும் வரை பயண இருப்பிடம் பகிரப்படும்.', shareOff:'உங்கள் இருப்பிடம் பகிரப்படாது.', locationExplain:'அனைத்து 8 படிகளிலும் வழிகாட்ட இருப்பிட அனுமதி தேவை. அனுமதி மறுக்கப்பட்டாலும் சேமித்த வழிகாட்டலுடன் தொடரலாம்.', allowStart:'இருப்பிடத்தை அனுமதித்து தொடங்கவும்', continueCached:'சேமித்த வழிகாட்டலுடன் தொடரவும்', requestingLocation:'இருப்பிட அனுமதி கேட்கப்படுகிறது…', locationDenied:'இருப்பிடம் பகிரப்படவில்லை. சேமித்த வழிகாட்டல் இன்னும் கிடைக்கிறது.',
+  playInstruction:'வழிகாட்டலைக் கேட்க', playing:'ஒலிக்கிறது…', needHelp:'உதவி வேண்டுமா?', nextStep:'அடுத்த படி', arrivedAction:'நான் வந்துவிட்டேன்', locationOn:'இருப்பிடம் இயக்கத்தில்', cachedDirections:'சேமித்த வழிகாட்டல்', sharedWith:'Hui Ling உடன் பகிரப்பட்டது', notShared:'பகிரப்படவில்லை', demoSharing:'மாதிரி பகிர்வு',
+  recoveryTitle:'பயண உதவி', recoveryHeading:'மீண்டும் சரியான பாதைக்கு வர உதவுவோம்.', recoveryBody:'தேவையான உதவியைத் தேர்ந்தெடுக்கவும். நீங்கள் தவறான திசையில் செல்கிறீர்கள் என்று கருதமாட்டோம்.', repeatInstruction:'இந்த வழிகாட்டலை மீண்டும் சொல்லவும்', showLandmark:'தற்போதைய திசையைக் காட்டு', checkLocation:'என் இருப்பிடத்தைச் சரிபார்', previousStep:'முந்தைய படிக்குச் செல்', contactFamily:'Hui Ling-ஐ தொடர்புகொள்', emergencySos:'அவசர SOS',
+  wrongTitle:'உங்கள் திசையைச் சரிபார்க்கவும்', wrongHeading:'நீங்கள் தவறான திசையில் செல்லக்கூடும்.', wrongBody:'நாங்கள் சரிபார்க்கும் வரை பாதுகாப்பான இடத்தில் நிற்கவும். மஞ்சள் வெளியேறும் வழி 7 குறியீடுகளை எதிர்திசையில் பின்பற்றவும்.', correctDirection:'சரியான திசையைக் காட்டு', callFamily:'Hui Ling-ஐ தொடர்புகொள்', simulated:'மாதிரி நிகழ்வு',
+  getHelp:'உதவி பெறுங்கள்', whoCall:'யாரைத் தொடர்புகொள்ள வேண்டும்?', noCall:'அழைப்பு அல்லது செய்தி இன்னும் தொடங்கவில்லை.', trustedFamily:'Hui Ling', trustedDetail:'மாதிரி உதவி கோரிக்கையை அனுப்பவும்', emergency:'அவசர சேவைகள்', immediateDanger:'உடனடி ஆபத்திற்கு 995-ஐ அழைக்கவும்', recordAudio:'குரல் செய்தியைப் பதிவு செய்யவும்', optionalRecording:'விருப்பத்தேர்வு; தானாகத் தொடங்காது', privacyFooter:'உறுதிசெய்த பிறகே ஒலி மற்றும் இருப்பிடம் பகிரப்படும்.',
+  recordingTitle:'குரல் செய்தி', recordShort:'குறுகிய செய்தியைப் பதிவு செய்யவும்', nothingShared:'நீங்கள் உறுதிசெய்யும் வரை எதுவும் பகிரப்படாது.', recording:'பதிவு செய்கிறது…', recordPrompt:'என்ன நடந்தது, நீங்கள் எங்கே இருக்கிறீர்கள் என்பதை Hui Ling-க்கு சொல்லுங்கள்.', messageReady:'செய்தி தயார்', startRecording:'பதிவைத் தொடங்கு', stopRecording:'பதிவை நிறுத்து', confirmMessage:'செய்தியை உறுதிசெய்', deleteTry:'நீக்கி மீண்டும் முயற்சி செய்',
+  familyAccess:'குடும்ப அணுகல்', followShared:'பகிரப்பட்ட பயணத்தைப் பின்பற்றவும்.', shareConsent:'ஒவ்வொரு பயணத்தையும் பகிர Mdm Lim தேர்ந்தெடுக்க வேண்டும்.', sharingCode:'பகிர்வு குறியீடு', consentFirst:'ஒப்புதல் முதன்மை', sharingEnds:'பயணம் முடிந்ததும் இருப்பிடப் பகிர்வு முடியும்.', openDemo:'மாதிரி பயணத்தைத் திறக்கவும்', familyJourney:'Mdm Lim-ன் பயணம்', journeyActive:'பயணம் செயலில்', onWay:'SGH-க்கு செல்லும் வழியில்', updatedNow:'இப்போது புதுப்பிக்கப்பட்டது · மாதிரி தரவு', currentStep:'தற்போதைய படி', expectedArrival:'எதிர்பார்க்கப்படும் வருகை', direction:'திசை', rightPath:'சரியான பாதையில்', sharing:'பகிர்வு', untilEnds:'பயணம் முடியும் வரை', noHelp:'இப்போது உதவி தேவையில்லை. Mdm Lim உதவி கேட்டால் உங்களுக்குத் தெரிவிக்கப்படும்.', stopViewing:'மாதிரி காட்சியை நிறுத்து',
+  helpSent:'உதவி கோரிக்கை அனுப்பப்பட்டது', helpSentBody:'இந்த மாதிரியில் Hui Ling-க்கு அறிவிக்கப்பட்டது. தற்போதைய பயணப் படி மற்றும் பகிர்வு நிலை சேர்க்கப்பட்டது.', backJourney:'பயணத்திற்குத் திரும்பு', backendNote:'மாதிரி உறுதிப்படுத்தல் — மற்றொரு சாதனத்திற்கு அறிவிப்பை அனுப்ப backend-ஐ இணைக்கவும்.', arrivedTitle:'பயணம் முடிந்தது', arrivedHeading:'நீங்கள் SGH-ஐ அடைந்துவிட்டீர்கள்.', arrivedBody:'பயணம் முடிந்தது; இருப்பிடப் பகிர்வு நிறுத்தப்பட்டது.', sharingStopped:'பகிர்வு நிறுத்தப்பட்டது', done:'முடிந்தது',
+}
+
+export const uiCopy: Record<Locale,Record<UiKey,string>> = { en, zh, ms, ta }
+
+export type JourneyStep = { title:string; instruction:string; place:string; distance:string }
+export const journeyCopy: Record<Locale,JourneyStep[]> = {
+  en:[
+    {title:'Leave home',instruction:'Head to the lift lobby and go downstairs.',place:'Home in Bedok',distance:'Now'},
+    {title:'Walk to Bedok MRT',instruction:'Follow the sheltered path towards Bedok MRT.',place:'Bedok',distance:'620 m'},
+    {title:'Use the accessible entrance',instruction:'Enter through the lift beside Entrance B.',place:'Bedok MRT',distance:'40 m'},
+    {title:'Take the East West Line',instruction:'Board the train towards Tuas Link.',place:'Bedok MRT',distance:'11 stops'},
+    {title:'Alight at Outram Park',instruction:'Leave the train and follow the lift signs.',place:'Outram Park',distance:'Next stop'},
+    {title:'Follow Exit 7',instruction:'Take the lift towards the yellow Exit 7 sign.',place:'Outram Park',distance:'28 m'},
+    {title:'Use the sheltered SGH link',instruction:'Follow the covered walkway and SGH signs.',place:'Outram Park Exit 7',distance:'310 m'},
+    {title:'Arrive at SGH',instruction:'The hospital entrance is ahead on your left.',place:'Singapore General Hospital',distance:'You’re here'},
+  ],
+  zh:[
+    {title:'离开家',instruction:'前往电梯大厅并下楼。',place:'勿洛的家',distance:'现在'}, {title:'步行前往勿洛地铁站',instruction:'沿着有盖通道前往勿洛地铁站。',place:'勿洛',distance:'620 米'},
+    {title:'使用无障碍入口',instruction:'从 B 入口旁的电梯进入。',place:'勿洛地铁站',distance:'40 米'}, {title:'乘搭东西线',instruction:'乘搭开往大士连路方向的列车。',place:'勿洛地铁站',distance:'11 站'},
+    {title:'在欧南园下车',instruction:'下车后跟随电梯标志。',place:'欧南园',distance:'下一站'}, {title:'前往 7 号出口',instruction:'搭电梯前往 7 号出口。寻找黄色的 7 号标志。',place:'欧南园',distance:'28 米'},
+    {title:'使用前往 SGH 的有盖通道',instruction:'沿着有盖通道和 SGH 标志前行。',place:'欧南园 7 号出口',distance:'310 米'}, {title:'抵达 SGH',instruction:'医院入口就在左前方。',place:'新加坡中央医院',distance:'您已抵达'},
+  ],
+  ms:[
+    {title:'Keluar dari rumah',instruction:'Pergi ke lobi lif dan turun ke tingkat bawah.',place:'Rumah di Bedok',distance:'Sekarang'}, {title:'Berjalan ke MRT Bedok',instruction:'Ikut laluan berbumbung menuju ke MRT Bedok.',place:'Bedok',distance:'620 m'},
+    {title:'Gunakan pintu masuk mudah akses',instruction:'Masuk melalui lif di sebelah Pintu Masuk B.',place:'MRT Bedok',distance:'40 m'}, {title:'Naik Laluan Timur Barat',instruction:'Naik kereta api menuju ke Tuas Link.',place:'MRT Bedok',distance:'11 stesen'},
+    {title:'Turun di Outram Park',instruction:'Turun dari kereta api dan ikut tanda lif.',place:'Outram Park',distance:'Stesen seterusnya'}, {title:'Ikut arah ke Pintu Keluar 7',instruction:'Naik lif menuju ke Pintu Keluar 7. Cari tanda 7 berwarna kuning.',place:'Outram Park',distance:'28 m'},
+    {title:'Gunakan laluan berbumbung ke SGH',instruction:'Ikut laluan berbumbung dan tanda SGH.',place:'Pintu Keluar 7',distance:'310 m'}, {title:'Tiba di SGH',instruction:'Pintu masuk hospital berada di hadapan sebelah kiri.',place:'Singapore General Hospital',distance:'Anda sudah tiba'},
+  ],
+  ta:[
+    {title:'வீட்டிலிருந்து புறப்படுங்கள்',instruction:'மின்தூக்கி பகுதிக்குச் சென்று கீழே செல்லுங்கள்.',place:'Bedok வீடு',distance:'இப்போது'}, {title:'Bedok MRT-க்கு நடந்து செல்லுங்கள்',instruction:'மூடிய நடைபாதையைப் பின்பற்றி Bedok MRT-க்குச் செல்லுங்கள்.',place:'Bedok',distance:'620 மீ'},
+    {title:'அணுகக்கூடிய நுழைவாயிலைப் பயன்படுத்துங்கள்',instruction:'நுழைவாயில் B அருகிலுள்ள மின்தூக்கி வழியாக நுழையுங்கள்.',place:'Bedok MRT',distance:'40 மீ'}, {title:'கிழக்கு மேற்கு பாதையில் செல்லுங்கள்',instruction:'Tuas Link நோக்கிச் செல்லும் ரயிலில் ஏறுங்கள்.',place:'Bedok MRT',distance:'11 நிலையங்கள்'},
+    {title:'Outram Park-ல் இறங்குங்கள்',instruction:'ரயிலிலிருந்து இறங்கி மின்தூக்கி குறியீடுகளைப் பின்பற்றுங்கள்.',place:'Outram Park',distance:'அடுத்த நிலையம்'}, {title:'வெளியேறும் வழி 7',instruction:'மின்தூக்கியில் வெளியேறும் வழி 7-க்குச் செல்லுங்கள். மஞ்சள் 7 குறியீட்டைத் தேடுங்கள்.',place:'ஊட்ரம் பார்க்',distance:'28 மீ'},
+    {title:'SGH மூடிய இணைப்பைப் பயன்படுத்துங்கள்',instruction:'மூடிய நடைபாதை மற்றும் SGH குறியீடுகளைப் பின்பற்றுங்கள்.',place:'வெளியேறும் வழி 7',distance:'310 மீ'}, {title:'SGH-ஐ அடையுங்கள்',instruction:'மருத்துவமனை நுழைவாயில் இடது முன்புறத்தில் உள்ளது.',place:'Singapore General Hospital',distance:'வந்துவிட்டீர்கள்'},
+  ],
 }
