@@ -117,12 +117,15 @@ def _geom(codes: list[str]) -> list[tuple[float, float]]:
 # --- leg builders --------------------------------------------------------------
 
 def _mk(mode, from_name, to_name, depart, minutes, key, locale, *, svc=None,
-        shelter, step_free, geometry, **params) -> Leg:
+        shelter, step_free, geometry, speech_key=None, **params) -> Leg:
     arrive = depart + timedelta(minutes=minutes)
     text = resolve(key, locale, **params)
+    # speech_text carries the same information as the instruction, phrased the
+    # way a person would say it aloud (leg.*.speech keys).
+    speech = resolve(speech_key, locale, **params) if speech_key else text
     return Leg(mode=mode, from_name=from_name, to_name=to_name, service=svc,
                depart=depart, arrive=arrive, instruction=text,
-               speech_text=text, i18n_key=key, shelter=shelter,
+               speech_text=speech, i18n_key=key, shelter=shelter,
                step_free=step_free, geometry=geometry)
 
 
@@ -135,7 +138,7 @@ def _walk_leg(frm_name, frm, to_name, to, depart, profile, locale,
     # tags) where OSM actually says something; "unverified" everywhere else.
     from app.routing.accessibility import classify_walk
     leg = _mk("walk", frm_name, to_name, depart, minutes,
-              "leg.walk.instruction", locale,
+              "leg.walk.instruction", locale, speech_key="leg.walk.speech",
               # shelter "exposed" is conservative: no CoveredLinkWay data yet.
               shelter="exposed", step_free=classify_walk(wr.geometry),
               geometry=wr.geometry,
@@ -155,6 +158,7 @@ def _rail_legs(path: list[str], depart: datetime, locale: str) -> list[Leg]:
         frm, to = net.BY_CODE[run[0]], net.BY_CODE[run[-1]]
         leg = _mk("mrt", frm.name, to.name, t, minutes,
                   "leg.mrt.instruction", locale, svc=line,
+                  speech_key="leg.mrt.speech",
                   # "verified" rests on LTA's barrier-free station programme
                   # (every MRT station has lift access); a live lift outage
                   # downgrades the leg to "not_step_free" in the engine.
@@ -260,6 +264,7 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
         bus = _mk("bus", board["name"], alight["name"], t,
                   BOARDING_WAIT_MIN + n_stops * BUS_HOP_MIN,
                   "leg.bus.instruction", locale, svc=b["service"],
+                  speech_key="leg.bus.speech",
                   # fleet-level basis (SG public buses are wheelchair-
                   # accessible; per-vehicle WAB check is future work)
                   shelter="partial", step_free="verified",
@@ -285,7 +290,7 @@ def plan_options(origin: str, destination: str, depart_at: datetime,
     road_m = _haversine_m(start, d_coord) * 1.4     # road detour factor
     minutes = road_m / 1000 / TAXI_SPEED_KMH * 60 + 5  # +5 hail/board
     taxi = _mk("taxi", start_name, d_name, depart_at, minutes,
-               "leg.taxi.instruction", locale,
+               "leg.taxi.instruction", locale, speech_key="leg.taxi.speech",
                shelter="covered", step_free="verified",  # door-to-door
                geometry=[start, d_coord], from_=start_name, to=d_name)
     options.append(RouteOption(

@@ -30,27 +30,60 @@ STRINGS: dict[str, dict[str, str]] = {
     "advice.alight.headline": {
         "en": "Get off at {station}, then {next_step}",
         "zh": "请在{station}下车，然后{next_step}"},
-    # --- leg instructions ---
+    # --- leg instructions (screen text) ---
     "leg.walk.instruction": {
         "en": "Walk to {to}. {landmark}",
-        "zh": "步行前往{to}。{landmark}"},
+        "zh": "步行前往{to}。{landmark}",
+        "ms": "Jalan kaki ke {to}. {landmark}",
+        "ta": "{to}க்கு நடந்து செல்லுங்கள். {landmark}"},
     "leg.mrt.instruction": {
         "en": "Take the {line} line from {from_} towards {direction}. Get off at {to} ({stops} stops).",
-        "zh": "在{from_}乘搭{line}线（{direction}方向），在{to}下车（{stops}站）。"},
+        "zh": "在{from_}乘搭{line}线（{direction}方向），在{to}下车（{stops}站）。",
+        "ms": "Naik laluan {line} dari {from_} menuju {direction}. Turun di {to} ({stops} perhentian).",
+        "ta": "{from_}லிருந்து {direction} நோக்கிச் செல்லும் {line} ரயிலில் ஏறுங்கள். {to}இல் இறங்குங்கள் ({stops} நிலையங்கள்)."},
     "leg.taxi.instruction": {
         "en": "Taxi from {from_} to {to}. Show the driver the card on screen.",
-        "zh": "从{from_}乘德士到{to}。请向司机出示屏幕上的乘车卡。"},
+        "zh": "从{from_}乘德士到{to}。请向司机出示屏幕上的乘车卡。",
+        "ms": "Naik teksi dari {from_} ke {to}. Tunjukkan kad pada skrin kepada pemandu.",
+        "ta": "{from_}லிருந்து {to}க்கு டாக்சியில் செல்லுங்கள். திரையில் உள்ள அட்டையை ஓட்டுநரிடம் காட்டுங்கள்."},
     "leg.bus.instruction": {
         "en": "Take bus {service} from {from_} to {to}.",
-        "zh": "在{from_}乘搭{service}号巴士到{to}。"},
+        "zh": "在{from_}乘搭{service}号巴士到{to}。",
+        "ms": "Naik bas {service} dari {from_} ke {to}.",
+        "ta": "{from_}இல் {service} பேருந்தில் ஏறி {to}க்குச் செல்லுங்கள்."},
+    # --- leg speech (same information, said the way a person would say it) ---
+    "leg.walk.speech": {
+        "en": "Next, walk to {to}. Take your time. {landmark}",
+        "zh": "接下来，请慢慢步行前往{to}。{landmark}",
+        "ms": "Seterusnya, jalan perlahan-lahan ke {to}. {landmark}",
+        "ta": "அடுத்து, {to}க்கு நிதானமாக நடந்து செல்லுங்கள். {landmark}"},
+    "leg.mrt.speech": {
+        "en": "You're at {from_}. Take the {line} line towards {direction}, ride {stops} stops, and get off at {to}.",
+        "zh": "您现在在{from_}。请乘搭{line}线，往{direction}方向，坐{stops}站，在{to}下车。",
+        "ms": "Anda di {from_}. Naik laluan {line} menuju {direction}, {stops} perhentian, dan turun di {to}.",
+        "ta": "நீங்கள் {from_}இல் இருக்கிறீர்கள். {direction} நோக்கி {line} ரயிலில் ஏறி, {stops} நிலையங்கள் பயணித்து, {to}இல் இறங்குங்கள்."},
+    "leg.taxi.speech": {
+        "en": "Take a taxi from {from_} to {to}. When you board, show the driver the card on your screen.",
+        "zh": "请从{from_}乘德士前往{to}。上车后，请向司机出示屏幕上的乘车卡。",
+        "ms": "Naik teksi dari {from_} ke {to}. Selepas menaiki, tunjukkan kad pada skrin anda kepada pemandu.",
+        "ta": "{from_}லிருந்து {to}க்கு டாக்சியில் செல்லுங்கள். ஏறியதும், திரையில் உள்ள அட்டையை ஓட்டுநரிடம் காட்டுங்கள்."},
+    "leg.bus.speech": {
+        "en": "Take bus {service} from {from_}. It will take you to {to}.",
+        "zh": "请在{from_}乘搭{service}号巴士，它会带您前往{to}。",
+        "ms": "Naik bas {service} dari {from_}. Ia akan membawa anda ke {to}.",
+        "ta": "{from_}இல் {service} பேருந்தில் ஏறுங்கள். அது உங்களை {to}க்கு அழைத்துச் செல்லும்."},
     # --- landmarks (station-specific, keyed) ---
     "landmark.lift": {
         "en": "Use the lift, not the escalator.",
-        "zh": "请使用电梯，不要使用扶梯。"},
+        "zh": "请使用电梯，不要使用扶梯。",
+        "ms": "Gunakan lif, bukan eskalator.",
+        "ta": "மின்தூக்கியைப் பயன்படுத்துங்கள், எஸ்கலேட்டரை அல்ல."},
     "landmark.sheltered": {
         "en": "The walkway is sheltered the whole way.",
-        "zh": "沿途步道全程有遮盖。"},
-    "landmark.none": {"en": "", "zh": ""},
+        "zh": "沿途步道全程有遮盖。",
+        "ms": "Laluan ini berbumbung sepanjang jalan.",
+        "ta": "நடைபாதை முழுவதும் மூடப்பட்டுள்ளது."},
+    "landmark.none": {"en": "", "zh": "", "ms": "", "ta": ""},
     # --- reroute summaries / short reasons ---
     "summary.take_line": {
         "en": "take the {line} line to {to}.",
