@@ -12,28 +12,117 @@ type SpeechErrorEvent = { error?: string }
 type Recognition = { lang: string; interimResults: boolean; continuous: boolean; onresult: ((event: SpeechEvent) => void) | null; onerror: ((event: SpeechErrorEvent) => void) | null; onend: (() => void) | null; start: () => void; stop: () => void }
 type LocationState = 'idle' | 'requesting' | 'active' | 'denied' | 'timeout' | 'unavailable' | 'service-error'
 const storageKey = 'mdm-lim-locale'
+const sessionKey = 'mdm-lim-app-session-v1'
+const historyKey = 'mdmLimApp'
+const validScreens = new Set<ScreenId>(screenLabels.map((item) => item.id))
+const validLocales = new Set<Locale>(languages.map((item) => item.id))
+
+type AppSession = {
+  screen: ScreenId
+  locale: Locale
+  destination: string
+  transcript: string
+  scenario: api.ScenarioId | api.StageId
+  journey: api.Journey | null
+  advice: api.Advice | null
+  corridor: api.CorridorHelp | null
+  activeStep: number
+  locationState: LocationState
+  lastLocationAt: string | null
+}
+
+type AppHistoryState = {
+  [historyKey]?: true
+  screen?: ScreenId
+  depth?: number
+}
+
+function readSession(): AppSession | null {
+  try {
+    const parsed = JSON.parse(sessionStorage.getItem(sessionKey) ?? 'null') as Partial<AppSession> | null
+    if (!parsed || !validScreens.has(parsed.screen as ScreenId) || !validLocales.has(parsed.locale as Locale)) return null
+    return {
+      screen: parsed.screen as ScreenId,
+      locale: parsed.locale as Locale,
+      destination: typeof parsed.destination === 'string' ? parsed.destination : '',
+      transcript: typeof parsed.transcript === 'string' ? parsed.transcript : '',
+      scenario: parsed.scenario ?? 'disruption_on_train',
+      journey: parsed.journey ?? null,
+      advice: parsed.advice ?? null,
+      corridor: parsed.corridor ?? null,
+      activeStep: typeof parsed.activeStep === 'number' ? parsed.activeStep : 0,
+      // A refresh stops the browser's live geolocation watcher, so never imply
+      // that sharing is still active until the traveller starts it again.
+      locationState: parsed.locationState === 'requesting' || parsed.locationState === 'active' ? 'idle' : parsed.locationState ?? 'idle',
+      lastLocationAt: typeof parsed.lastLocationAt === 'string' ? parsed.lastLocationAt : null,
+    }
+  } catch {
+    return null
+  }
+}
+
+function storedLocale(): Locale {
+  try {
+    const saved = localStorage.getItem(storageKey)
+    return validLocales.has(saved as Locale) ? saved as Locale : 'en'
+  } catch {
+    return 'en'
+  }
+}
 
 function App() {
-  const [screen, setScreen] = useState<ScreenId>('language')
-  const [locale, setLocale] = useState<Locale>(() => { const saved = localStorage.getItem(storageKey); return saved === 'zh' || saved === 'ms' || saved === 'ta' ? saved : 'en' })
-  const [destination, setDestination] = useState('')
-  const [transcript, setTranscript] = useState('')
+  const [restoredSession] = useState(readSession)
+  const [screen, setScreen] = useState<ScreenId>(restoredSession?.screen ?? 'language')
+  const [locale, setLocale] = useState<Locale>(restoredSession?.locale ?? storedLocale)
+  const [destination, setDestination] = useState(restoredSession?.destination ?? '')
+  const [transcript, setTranscript] = useState(restoredSession?.transcript ?? '')
   const [notice, setNotice] = useState('')
   const [confirm, setConfirm] = useState<{ title: string; body: string; action: string; onConfirm?: () => void } | null>(null)
   // --- live journey state (wired to the backend; see src/api.ts) ---
-  const [scenario, setScenario] = useState<api.ScenarioId | api.StageId>('disruption_on_train')
-  const [journey, setJourney] = useState<api.Journey | null>(null)
-  const [advice, setAdvice] = useState<api.Advice | null>(null)
-  const [corridor, setCorridor] = useState<api.CorridorHelp | null>(null)
+  const [scenario, setScenario] = useState<api.ScenarioId | api.StageId>(restoredSession?.scenario ?? 'disruption_on_train')
+  const [journey, setJourney] = useState<api.Journey | null>(restoredSession?.journey ?? null)
+  const [advice, setAdvice] = useState<api.Advice | null>(restoredSession?.advice ?? null)
+  const [corridor, setCorridor] = useState<api.CorridorHelp | null>(restoredSession?.corridor ?? null)
   const [busy, setBusy] = useState(false)
-  const [activeStep, setActiveStep] = useState(0)
-  const [locationState, setLocationState] = useState<LocationState>('idle')
-  const [lastLocationAt, setLastLocationAt] = useState<Date | null>(null)
+  const [activeStep, setActiveStep] = useState(restoredSession?.activeStep ?? 0)
+  const [locationState, setLocationState] = useState<LocationState>(restoredSession?.locationState ?? 'idle')
+  const [lastLocationAt, setLastLocationAt] = useState<Date | null>(() => restoredSession?.lastLocationAt ? new Date(restoredSession.lastLocationAt) : null)
   const watchRef = useRef<number | null>(null)
   const copy = uiCopy[locale]
-  useEffect(() => localStorage.setItem(storageKey, locale), [locale])
+  useEffect(() => { try { localStorage.setItem(storageKey, locale) } catch { /* storage is optional */ } }, [locale])
+  useEffect(() => {
+    const current = history.state as AppHistoryState | null
+    history.replaceState({ ...current, [historyKey]: true, screen, depth: current?.[historyKey] ? current.depth ?? 0 : 0 }, '')
+    const handlePopState = (event: PopStateEvent) => {
+      const next = (event.state as AppHistoryState | null)?.screen
+      if (!next || !validScreens.has(next)) return
+      setNotice(''); setConfirm(null); setScreen(next)
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+  useEffect(() => {
+    const saved: AppSession = {
+      screen, locale, destination, transcript, scenario, journey, advice, corridor, activeStep,
+      locationState: locationState === 'requesting' || locationState === 'active' ? 'idle' : locationState,
+      lastLocationAt: lastLocationAt?.toISOString() ?? null,
+    }
+    try { sessionStorage.setItem(sessionKey, JSON.stringify(saved)) } catch { /* keep the app usable when storage is unavailable */ }
+  }, [screen, locale, destination, transcript, scenario, journey, advice, corridor, activeStep, locationState, lastLocationAt])
   useEffect(() => () => { if (watchRef.current !== null) navigator.geolocation.clearWatch(watchRef.current) }, [])
-  const navigate = (next: ScreenId) => { setNotice(''); setConfirm(null); setScreen(next) }
+  const navigate = (next: ScreenId) => {
+    setNotice(''); setConfirm(null)
+    if (next === screen) return
+    const current = history.state as AppHistoryState | null
+    const depth = current?.[historyKey] ? current.depth ?? 0 : 0
+    history.pushState({ ...current, [historyKey]: true, screen: next, depth: depth + 1 }, '')
+    setScreen(next)
+  }
+  const goBack = (fallback: ScreenId) => {
+    const current = history.state as AppHistoryState | null
+    if (current?.[historyKey] && (current.depth ?? 0) > 0) history.back()
+    else navigate(fallback)
+  }
   const selectLocale = (next: Locale) => setLocale(next)
 
   const planJourney = async (dest: string, useScenario: api.ScenarioId | api.StageId = scenario) => {
@@ -87,20 +176,20 @@ function App() {
     <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} legCount={advice?.legs.length ?? 0} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
     <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className={`phone locale-${locale}`} data-screen={screen}>
       {screen === 'language' && <LanguageScreen locale={locale} copy={copy} selectLocale={selectLocale} next={() => navigate('profile')} />}
-      {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('profile-setup')} family={() => navigate('family')} />}
-      {screen === 'profile-setup' && <ProfileSetupScreen locale={locale} copy={copy} back={() => navigate('profile')} done={() => navigate('plan')} />}
-      {screen === 'plan' && <PlanScreen copy={copy} destination={destination} setDestination={setDestination} back={() => navigate('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
-      {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
-      {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} scenario={scenario} runStage={runStage} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
-      {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => navigate('overview')} />}
-      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => navigate('overview')} next={() => setActiveStep((step) => Math.min((advice?.legs.length ?? 1) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
-      {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
-      {screen === 'sos' && <SosScreen locale={locale} back={() => navigate('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
-      {screen === 'recording' && <RecordingScreen back={() => navigate('sos')} />}
+      {screen === 'profile' && <ProfileScreen copy={copy} back={() => goBack('language')} traveller={() => navigate('profile-setup')} family={() => navigate('family')} />}
+      {screen === 'profile-setup' && <ProfileSetupScreen locale={locale} copy={copy} back={() => goBack('profile')} done={() => navigate('plan')} />}
+      {screen === 'plan' && <PlanScreen copy={copy} destination={destination} setDestination={setDestination} back={() => goBack('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
+      {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => goBack('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
+      {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} scenario={scenario} runStage={runStage} back={() => goBack('plan')} start={() => navigate('sharing')} notice={notice} />}
+      {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => goBack('overview')} />}
+      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => goBack('overview')} next={() => setActiveStep((step) => Math.min((advice?.legs.length ?? 1) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
+      {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => goBack('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
+      {screen === 'sos' && <SosScreen locale={locale} back={() => goBack('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
+      {screen === 'recording' && <RecordingScreen back={() => goBack('sos')} />}
       {screen === 'alert' && <AlertScreen locale={locale} copy={copy} advice={advice} journey={journey} proceed={() => { setActiveStep(0); navigate(advice && advice.action === 'cancel_trip' ? 'overview' : 'guide') }} why={() => {}} />}
       {screen === 'arrived' && <ArrivedScreen copy={copy} locale={locale} journey={journey} again={newJourney} />}
-      {screen === 'family' && <FamilyAccessScreen back={() => navigate('profile')} next={() => navigate('family-journey')} />}
-      {screen === 'family-journey' && <FamilyJourneyScreen back={() => navigate('family')} />}
+      {screen === 'family' && <FamilyAccessScreen back={() => goBack('profile')} next={() => navigate('family-journey')} />}
+      {screen === 'family-journey' && <FamilyJourneyScreen back={() => goBack('family')} />}
       {notice && screen !== 'listening' && screen !== 'overview' && <div className="toast" role="status">{notice}</div>}
       {confirm && <ConfirmSheet {...confirm} cancel={copy.cancel} close={() => setConfirm(null)} />}
     </div></section>
