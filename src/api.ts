@@ -115,16 +115,37 @@ const FAMILY = 'daughter'
 // she is on the train when the disruption lands.
 const ON_TRAIN_PING = { lat: 1.3178, lon: 103.8927, accuracy_m: 25 }
 
+export type ProfileOptions = {
+  locale: 'en' | 'zh' | 'ms' | 'ta'
+  can_use_stairs: boolean
+  wheelchair: boolean
+  walking_speed_mps: number
+  max_walk_metres: number
+}
+// Mdm Lim's defaults (the persona in the brief); overwritten by the profile
+// setup screen. POST /profiles upserts, so saving again just updates.
+export const DEFAULT_PROFILE: ProfileOptions = {
+  locale: 'en', can_use_stairs: false, wheelchair: false,
+  walking_speed_mps: 0.8, max_walk_metres: 600,
+}
+let currentProfile: ProfileOptions = { ...DEFAULT_PROFILE }
 let profilesReady = false
-export async function ensureProfiles(): Promise<void> {
-  if (profilesReady) return
+
+export async function saveProfile(opts: ProfileOptions): Promise<void> {
+  currentProfile = { ...opts }
   await call('POST', '/profiles', {
-    user_id: USER, role: 'user', name: 'Mdm Lim', locale: 'en',
-    mobility: { can_use_stairs: false, wheelchair: false, walking_speed_mps: 0.8, max_walk_metres: 600 },
+    user_id: USER, role: 'user', name: 'Mdm Lim', locale: opts.locale,
+    mobility: { can_use_stairs: opts.can_use_stairs, wheelchair: opts.wheelchair,
+                walking_speed_mps: opts.walking_speed_mps, max_walk_metres: opts.max_walk_metres },
   })
   await call('POST', '/profiles', { user_id: FAMILY, role: 'family', name: 'Trusted family' })
   await call('POST', `/profiles/${FAMILY}/link`, { linked_user_id: USER })
   profilesReady = true
+}
+
+export async function ensureProfiles(): Promise<void> {
+  if (profilesReady) return
+  await saveProfile(currentProfile)
 }
 
 function arriveBy(): string {

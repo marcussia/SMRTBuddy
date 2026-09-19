@@ -69,3 +69,12 @@
 .stage-chips button { font-size: 16px; font-weight: 700; padding: 12px; min-height: 48px; border-radius: 10px; border: 2px solid #0d2136; background: #fffdfa; color: #0d2136; text-align: left; }
 .stage-chips button.active { background: #0d2136; color: #fffdfa; }
 .stage-chips button:disabled { opacity: .55; }
+
+/* profile setup */
+.setup-screen h1 { font-size: 24px; margin: 8px 0 14px; }
+.setup-field { border: 0; padding: 0; margin: 0 0 14px; }
+.setup-field legend { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.setup-pair { display: flex; gap: 8px; flex-wrap: wrap; }
+.setup-pair button { flex: 1; min-height: 52px; font-size: 16px; font-weight: 600; padding: 10px; border-radius: 10px; border: 2px solid #52606d; background: #fffdfa; color: #0d2136; }
+.setup-pair button.selected { border-color: #0d2136; background: #0d2136; color: #fffdfa; }
+.walk-options button { flex: 1 1 40%; }

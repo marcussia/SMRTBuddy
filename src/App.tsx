@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Accessibility, ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
 import { guideCopy, languages, screenLabels, type Locale, type ScreenId } from './data'
 import { legPhoto } from './legMedia'
 import L from 'leaflet'
@@ -85,7 +85,8 @@ function App() {
     <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} legCount={advice?.legs.length ?? 0} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
     <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className={`phone locale-${locale}`} data-screen={screen}>
       {screen === 'language' && <LanguageScreen locale={locale} copy={copy} selectLocale={selectLocale} next={() => navigate('profile')} />}
-      {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('plan')} family={() => navigate('family')} />}
+      {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('profile-setup')} family={() => navigate('family')} />}
+      {screen === 'profile-setup' && <ProfileSetupScreen locale={locale} copy={copy} back={() => navigate('profile')} done={() => navigate('plan')} />}
       {screen === 'plan' && <PlanScreen copy={copy} destination={destination} setDestination={setDestination} back={() => navigate('profile')} listen={() => navigate('listening')} busy={busy} corridor={corridor} tryCorridor={() => { setCorridor(null); setDestination('Singapore General Hospital'); void planJourney('Singapore General Hospital') }} next={() => { void planJourney(destination) }} />}
       {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
       {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} scenario={scenario} runStage={runStage} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
@@ -119,10 +120,45 @@ function ProfileScreen({ copy, back, traveller, family }: { copy: UiCopy; back: 
   return <div className="screen paper-screen profile-screen"><TopBar title={copy.profile.top} back={back} /><h1>{copy.profile.title}</h1><div className="role-list"><button onClick={traveller}><b>A</b><span><strong>{copy.profile.traveller}</strong><small>{copy.profile.travellerDetail}</small></span><ArrowRight /></button><button onClick={family}><b>B</b><span><strong>{copy.profile.family}</strong><small>{copy.profile.familyDetail}</small></span><ArrowRight /></button></div><p className="consent-copy">{copy.profile.consent}</p></div>
 }
 
+
+// Profile setup: every control maps 1:1 to a backend MobilityProfile field and
+// is saved via POST /profiles, so the choices genuinely change the advice.
+// Pace mapping: "slowly" = 0.8 m/s (the persona default), "average" = 1.4 m/s
+// (a typical adult walking pace; a routing parameter, not a measurement).
+function ProfileSetupScreen({ locale, copy, back, done }: { locale: Locale; copy: UiCopy; back: () => void; done: () => void }) {
+  const [stairs, setStairs] = useState(false)        // can_use_stairs
+  const [wheelchair, setWheelchair] = useState(false)
+  const [slow, setSlow] = useState(true)             // walking_speed_mps
+  const [maxWalk, setMaxWalk] = useState(600)        // max_walk_metres
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const save = async () => {
+    setSaving(true); setError('')
+    try {
+      await api.saveProfile({ locale, can_use_stairs: stairs, wheelchair,
+        walking_speed_mps: slow ? 0.8 : 1.4, max_walk_metres: maxWalk })
+      done()
+    } catch { setError(copy.setup.failed) } finally { setSaving(false) }
+  }
+  const pair = (label: string, value: boolean, set: (v: boolean) => void, yes: string, no: string) =>
+    <fieldset className="setup-field"><legend>{label}</legend><div className="setup-pair">
+      <button type="button" className={!value ? 'selected' : ''} aria-pressed={!value} onClick={() => set(false)}>{no}</button>
+      <button type="button" className={value ? 'selected' : ''} aria-pressed={value} onClick={() => set(true)}>{yes}</button>
+    </div></fieldset>
+  return <div className={`screen paper-screen setup-screen locale-${locale}`}><TopBar title={copy.setup.top} back={back} /><h1>{copy.setup.title}</h1>
+    {pair(copy.setup.stairs, stairs, setStairs, copy.setup.stairsOk, copy.setup.stairsAvoid)}
+    {pair(copy.setup.wheelchair, wheelchair, setWheelchair, copy.setup.wcYes, copy.setup.wcNo)}
+    {pair(copy.setup.pace, !slow, (v) => setSlow(!v), copy.setup.paceAvg, copy.setup.paceSlow)}
+    <fieldset className="setup-field"><legend>{copy.setup.walk}</legend><div className="setup-pair walk-options">
+      {[200, 400, 600, 800].map((m) => <button type="button" key={m} className={maxWalk === m ? 'selected' : ''} aria-pressed={maxWalk === m} onClick={() => setMaxWalk(m)}>{copy.setup.metres(m)}</button>)}
+    </div></fieldset>
+    {error && <p className="overview-notice" role="alert">{error}</p>}
+    <div className="screen-actions"><PrimaryButton onClick={() => { void save() }} disabled={saving}>{saving ? copy.setup.saving : copy.setup.save}</PrimaryButton></div></div>
+}
+
 function PlaceField({ label, value, placeholder, icon, onChange, listen }: { label: string; value: string; placeholder?: string; icon: React.ReactNode; onChange?: (value: string) => void; listen: () => void }) {
   return <label className="place-field"><span>{label}</span><div>{icon}<input value={value} placeholder={placeholder} onChange={(event) => onChange?.(event.target.value)} readOnly={!onChange} /><button onClick={listen} type="button" aria-label={`Speak ${label.toLowerCase()} location`}><Mic /></button></div></label>
 }
-function AccessibleStrip({ copy }: { copy: UiCopy }) { return <div className="accessible-strip"><Accessibility /><span><strong>{copy.plan.accessible}</strong><small>{copy.plan.accessibleDetail}</small></span></div> }
 
 function CorridorHelpCard({ copy, help, tryCorridor }: { copy: UiCopy; help: api.CorridorHelp; tryCorridor: () => void }) {
   return <div className="corridor-help" role="status">
@@ -133,7 +169,7 @@ function CorridorHelpCard({ copy, help, tryCorridor }: { copy: UiCopy; help: api
 }
 
 function PlanScreen({ copy, destination, setDestination, back, listen, next, busy, corridor, tryCorridor }: { copy: UiCopy; destination: string; setDestination: (value: string) => void; back: () => void; listen: () => void; next: () => void; busy: boolean; corridor: api.CorridorHelp | null; tryCorridor: () => void }) {
-  return <div className="screen paper-screen plan-screen"><TopBar title={copy.plan.top} back={back} /><section className="page-title"><h1>{copy.plan.title}</h1><p>{copy.plan.helper}</p></section><div className="place-fields"><PlaceField label={copy.plan.from} value={copy.plan.home} icon={<Home />} listen={listen} /><PlaceField label={copy.plan.to} value={destination} placeholder={copy.plan.placeholder} icon={<MapPin />} onChange={setDestination} listen={listen} /></div><AccessibleStrip copy={copy} />{corridor && <CorridorHelpCard copy={copy} help={corridor} tryCorridor={tryCorridor} />}<div className="screen-actions"><PrimaryButton onClick={next} disabled={busy}>{busy ? copy.plan.planning : copy.plan.show}</PrimaryButton></div></div>
+  return <div className="screen paper-screen plan-screen"><TopBar title={copy.plan.top} back={back} /><section className="page-title"><h1>{copy.plan.title}</h1><p>{copy.plan.helper}</p></section><div className="place-fields"><PlaceField label={copy.plan.from} value={copy.plan.home} icon={<Home />} listen={listen} /><PlaceField label={copy.plan.to} value={destination} placeholder={copy.plan.placeholder} icon={<MapPin />} onChange={setDestination} listen={listen} /></div>{corridor && <CorridorHelpCard copy={copy} help={corridor} tryCorridor={tryCorridor} />}<div className="screen-actions"><PrimaryButton onClick={next} disabled={busy}>{busy ? copy.plan.planning : copy.plan.show}</PrimaryButton></div></div>
 }
 
 function ListeningScreen({ locale, transcript, setTranscript, back, accept, busy }: { locale: Locale; transcript: string; setTranscript: (value: string) => void; back: () => void; accept: () => void; busy: boolean }) {

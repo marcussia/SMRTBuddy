@@ -1,7 +1,7 @@
 export type Locale = 'en' | 'zh' | 'ms' | 'ta'
 
 export type ScreenId =
-  | 'language' | 'profile' | 'plan' | 'listening' | 'overview' | 'sharing'
+  | 'language' | 'profile' | 'profile-setup' | 'plan' | 'listening' | 'overview' | 'sharing'
   | 'guide' | 'wrong-way' | 'sos' | 'recording' | 'family' | 'family-journey'
 
 export const languages: Array<{ id: Locale; label: string; code: string }> = [
@@ -14,6 +14,7 @@ export const languages: Array<{ id: Locale; label: string; code: string }> = [
 export const screenLabels: Array<{ id: ScreenId; label: string; group: string }> = [
   { id: 'language', label: 'Language', group: 'Pitch flow' },
   { id: 'profile', label: 'Profile', group: 'Pitch flow' },
+  { id: 'profile-setup', label: 'Profile setup', group: 'Pitch flow' },
   { id: 'plan', label: 'Plan journey', group: 'Pitch flow' },
   { id: 'listening', label: 'Voice destination', group: 'Pitch flow' },
   { id: 'overview', label: 'Journey overview', group: 'Pitch flow' },
