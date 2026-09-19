@@ -1,7 +1,7 @@
 # SMRTBuddy — Write-up
 
 **Team SMRTBuddy** · NEBULA X Problem Statement 2
-Repo: `github.com/marcussia/SMRTBuddy` · Demo: `[FILL: video link]`
+Repo: `github.com/marcussia/SMRTBuddy` · Demo: [https://youtu.be/NeR-BKGk7sY](https://youtu.be/NeR-BKGk7sY)
 
 ---
 
