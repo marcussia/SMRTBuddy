@@ -97,7 +97,8 @@ JID=$(curl -s -X POST $BASE/journeys -H 'Content-Type: application/json' -d '{
 # 3. She is on the train, just past Paya Lebar
 curl -s -X POST $BASE/journeys/$JID/location -H 'Content-Type: application/json' -d '{
   "lat": 1.3178, "lon": 103.8927, "accuracy_m": 25,
-  "recorded_at": "2026-09-19T08:40:00+08:00", "location_state": "on_train"}'
+  "recorded_at": "2026-09-19T08:40:00+08:00",
+  "location_state": "on_train", "set_state": true}'
 
 # 4. THE CORE CALL — what should she do, right now?
 curl -s $BASE/journeys/$JID/advice | python3 -m json.tool

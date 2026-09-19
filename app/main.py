@@ -241,7 +241,7 @@ def post_location(journey_id: str, ping: LocationPing) -> LocationAck:
     if journey is None:
         raise HTTPException(404, f"no journey '{journey_id}'")
     store.pings.setdefault(journey_id, []).append(ping)
-    if ping.location_state:
+    if ping.location_state and ping.set_state:
         journey.location_state = ping.location_state
     wrong, notified = service.check_wrong_direction(journey)
     return LocationAck(journey_id=journey_id, received_at=_now(),
