@@ -44,18 +44,23 @@ The decision engine is the product. Nine rules run in order, first match wins:
 | 4 | Disruption but route usable | wait vs reroute |
 | 5 | Platform crowding above threshold | `leave_earlier` or alternative line |
 | 6 | Bus crowded, not departed, slack allows | `wait` |
-| 7 | Rain forecast | prefer MRT, shelter required |
+| 7 | Rain forecast | prefer MRT; an exposed walk becomes `leave_earlier` for a shelter-preferring profile |
 | 8 | Road incident on a bus leg | `leave_earlier` or rail |
 | 9 | Default | `proceed` |
 
 Every response is auditable. `reason` is plain English, `triggered_by` names the data sources that fired, and `data_status` says per source whether the data was live, a labelled fixture, or unavailable. An unreachable source is reported as unavailable, never papered over. If the engine cannot name the source behind a recommendation, that is a bug.
 
 The frontend is a React app served as static files by the same FastAPI
-process, so a judge runs one command. It calls the API for journey planning,
-advice, location pings and SOS; the six replay scenarios can be switched from
-inside the app and re-request advice live. Screens outside that flow are
-labelled "design preview" on screen, and any advice built on fixture data
-carries a visible REPLAY tag.
+process, so a judge runs one command. Profile setup posts real mobility fields
+and the chosen language to the API, and journey planning, advice, location
+pings and SOS all run through it. Route legs, instructions, times, crowding
+and step-free status come from the advice response, and an OSM map draws the
+route, the alternatives and the disrupted segment. The three-stage demo runs
+from inside the app under a "Simulated disruption for demonstration" label;
+each stage re-plans and shows whatever the engine returns. Any advice built on
+fixture data carries a visible REPLAY tag. The full six-scenario set, plus the
+three stages, is on the fallback dashboard at `/app` for a judge who wants
+every case.
 
 A plainer fallback view also ships at `/app` (plain HTML/JS, no build step). It puts Leaflet on OSM tiles with ODbL attribution, draws the recommended route solid, the disrupted section dashed red and alternatives dotted, and shows crowding as three-level text badges, per-leg step-free status, a live decide-by countdown, and the per-source provenance chips. Fixtures are labelled on screen.
 
@@ -107,6 +112,8 @@ Our routing decisions are computed from live data. Our timing is not. Every tran
 | Wait for next train | 4.0 min | Chosen as plausible, no headway data consulted |
 | Delay when a line reports Status 2 | 20 min | The feed reports status, not duration. A placeholder; see Section 7 |
 | Walking speed | 0.8 m/s, configurable | Common figure for reduced-mobility adults; we cite no study and did not measure it |
+| Walking pace choices | slowly = 0.8 m/s, average = 1.4 m/s | The profile screen's plain choice maps to these values. Parameters, not measurements |
+| prefers_shelter | off by default | A real profile field. In rain, an exposed walk on the plan becomes leave-earlier advice for a shelter-preferring profile; the same inputs without the preference proceed |
 | Max walk distance | 400 m, or 200 m for wheelchair | Chosen as plausible |
 | Reroute benefit threshold | 10 min | Product judgement, not derived |
 | Wrong-direction trigger | 3 divergent pings over ≥90 s, good GPS only | Product judgement: false alarms to family are costly |
@@ -175,11 +182,13 @@ because rejecting everything unverified would rule out all walking.
 
 **Still stubbed:** `POST /journeys/{id}/precheck` (marked `X-Stub: true`). The fallback view has not been opened on a real phone browser, only 390 px emulation, and the brief scores on a real phone. It also does not render the taxi driver card.
 
-**Some screens are design previews** — language selection, profile setup,
-family access and the recording screen — labelled as such in the interface.
-Voice input uses the browser's speech API, not our backend. Exit-level
-wayfinding on the guide screen ("Follow Exit 7", "28 m ahead") is marked
-illustrative because we have no exit-level data.
+**Some screens are still static.** The family views and the recording
+screen's upload step are design previews and say so on screen; the family
+contact name is fixed copy. Voice input uses the browser's speech API, not our
+backend. Everything on the route itself now comes from the engine: legs,
+instructions, times, crowding and step-free status. The only illustrative
+content left is the landmark photos, which appear only on legs they match and
+carry an "illustrative" caption.
 
 ---
 

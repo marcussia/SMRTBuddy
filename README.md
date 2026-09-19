@@ -13,10 +13,12 @@ tells her family when it matters.
 
 > **Status:** backend real through PRD Blocks A–F + station resolution;
 > `POST /journeys/{id}/precheck` is still a stub (marked `X-Stub: true`).
-> The frontend at `/ui` is wired to the live API for the demo flow (plan →
-> advice → guidance → wrong-way → SOS, plus the six labelled replay
-> scenarios); screens showing design-only content carry a visible
-> "Design preview" label. Build log with every assumption: [`STATUS.md`](STATUS.md).
+> The frontend at `/ui` is wired to the live API end to end: profile setup,
+> planning, advice with an OSM route map, guidance from real legs, wrong-way,
+> SOS, and the three-stage demo (labelled "Simulated disruption for
+> demonstration"). The full six-scenario set lives on the fallback dashboard
+> at `/app`. Static content (family views, recording upload) says so on
+> screen. Build log with every assumption: [`STATUS.md`](STATUS.md).
 
 ---
 
@@ -46,9 +48,10 @@ Then open, on a phone browser on the same network or on the machine itself:
 
 - **<http://127.0.0.1:8000/ui/>** — the app (prebuilt frontend, committed in
   `dist/`; no npm needed). Tap through: language → profile → "I am travelling"
-  → Show my journey. Use the REPLAY DATA chips to flip between the six
-  labelled scenarios — the same journey gets a different recommendation each
-  time, live from the engine.
+  → profile setup → Show my journey. Use the three stage buttons on the
+  journey screen to run the demo (one journey, three escalating events); the
+  same journey gets a different recommendation each time, live from the
+  engine. The six individual scenarios are on the fallback dashboard below.
 - <http://127.0.0.1:8000/app> — the plain fallback view (Leaflet map, same API)
 - <http://127.0.0.1:8000/docs> — interactive API docs
 
@@ -117,7 +120,9 @@ Every scenario runs through the real rules engine on a **labelled fixture**
 those sources as `"fixture"`, never as live — the feeds are quiet most days, so
 the brief explicitly allows labelled replay). Create the journey with the
 `scenario` field; omit it for live feeds. Ready-to-paste commands for all six
-are in [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md).
+are in [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md). In the browser, the
+fallback dashboard at `/app` has buttons for all six plus the three demo
+stages; the React app at `/ui` drives the three stages.
 
 | `scenario` | Expected advice |
 |---|---|
