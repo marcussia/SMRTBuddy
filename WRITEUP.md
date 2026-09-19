@@ -51,7 +51,8 @@ The decision engine is the product. Nine rules run in order, first match wins:
 Every response is auditable. `reason` is plain English, `triggered_by` names the data sources that fired, and `data_status` says per source whether the data was live, a labelled fixture, or unavailable. An unreachable source is reported as unavailable, never papered over. If the engine cannot name the source behind a recommendation, that is a bug.
 
 The frontend is a React app served as static files by the same FastAPI
-process, so a judge runs one command. Profile setup posts real mobility fields
+process, so a judge runs one command. The same container is deployed on
+Google Cloud Run in asia-southeast1, so the app also has a public URL. Profile setup posts real mobility fields
 and the chosen language to the API, and journey planning, advice, location
 pings and SOS all run through it. Route legs, instructions, times, crowding
 and step-free status come from the advice response, localised in English,

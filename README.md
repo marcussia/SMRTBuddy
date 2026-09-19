@@ -6,7 +6,10 @@ commuter and, when something goes wrong mid-journey, **decides** what she should
 do — one recommended action, one sentence of reason, a deadline on it — and
 tells her family when it matters.
 
-- **Live app:** not required by the brief — judges run it from this README
+- **Live app:** <https://smrtbuddy-1057984221236.asia-southeast1.run.app/ui/>
+  (`/ui` is the app, `/app` the fallback dashboard, `/docs` the API). Runs on
+  Google Cloud Run in asia-southeast1. The link is in addition to the local
+  instructions below, not a replacement.
 - **Demo video:** `<TBD>`
 - **Write-up:** [`WRITEUP.md`](WRITEUP.md)
 - **API contract:** [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md)
