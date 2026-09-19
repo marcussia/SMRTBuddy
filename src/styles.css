@@ -131,3 +131,8 @@ p.exit-hint{font-size:16px;margin:8px 0 0}
 /* Language selection is one centred rectangular beige surface. */
 .language-screen{background:var(--paper)}
 .language-sheet{border-radius:0}
+
+/* Keep the destination visually separated and remove the non-essential badge. */
+.overview-heading>div>span:last-child{margin-left:23px}
+.journey-badges{display:none}
+.overview-heading h1{display:none}

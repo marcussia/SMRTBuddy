@@ -359,15 +359,10 @@ const ACTION_LABEL: Record<Locale, Record<api.Advice['action'], string>> = {
   ms: { proceed: 'Laluan selamat', wait: 'Tunggu', reroute: 'Laluan berubah', leave_earlier: 'Keluar lebih awal', take_taxi: 'Naik teksi', cancel_trip: 'Jangan teruskan' },
   ta: { proceed: 'பாதை சரியாக உள்ளது', wait: 'காத்திருக்கவும்', reroute: 'பாதை மாற்றப்பட்டது', leave_earlier: 'முன்னதாக புறப்படவும்', take_taxi: 'டாக்சியில் செல்லவும்', cancel_trip: 'பயணம் செய்ய வேண்டாம்' },
 }
-const ADVICE_SUMMARY: Record<Locale, string> = { en: 'Your journey has been updated for current travel conditions.', zh: '已根据当前交通情况更新您的行程。', ms: 'Perjalanan anda telah dikemas kini mengikut keadaan semasa.', ta: 'தற்போதைய பயண நிலைக்கு ஏற்ப உங்கள் பயணம் புதுப்பிக்கப்பட்டது.' }
-
 function AdviceBanner({ locale, copy, advice }: { locale: Locale; copy: UiCopy; advice: api.Advice }) {
-  const summary = advice.reason.split('. ')[0]
   return <div className={`advice-banner action-${advice.action}`} role="status">
     <span className="advice-action">{ACTION_LABEL[locale][advice.action]}</span>
     <strong>{locale === 'en' ? advice.headline : ACTION_LABEL[locale][advice.action]}</strong>
-    <p>{locale === 'en' ? `${summary}${summary.endsWith('.') ? '' : '.'}` : ADVICE_SUMMARY[locale]}</p>
-    {locale === 'en' && <details><summary>{copy.overview.why}</summary><p>{advice.reason}</p><small>Arrive {api.fmtTime(advice.eta_range[0])}–{api.fmtTime(advice.eta_range[1])}{advice.decide_by ? ` · decide by ${api.fmtTime(advice.decide_by)}` : ''}{advice.notify_family ? ' · family notified' : ''}</small></details>}
     {api.anyFixture(advice) && <span className="replay-tag">{copy.overview.simulated}</span>}
   </div>
 }
