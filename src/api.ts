@@ -69,6 +69,7 @@ export type Journey = {
   arrive_by: string
   scenario: string | null
   location_state: 'at_home' | 'walking' | 'on_bus' | 'on_train' | 'on_platform'
+  legs: Leg[]
 }
 
 export type LocationAck = {
@@ -193,14 +194,28 @@ export const STAGES = [
 ] as const
 export type StageId = (typeof STAGES)[number]['id']
 
+let demoJourney: Journey | null = null
+
 export async function runStage(stage: StageId): Promise<{ journey: Journey; advice: Advice }> {
   const spec = STAGES.find((s) => s.id === stage)!
-  const journey = await createJourney('Singapore General Hospital', stage)
-  if (spec.ping) {
-    await postLocation(journey.journey_id, 'on_train', spec.ping, true)
-    journey.location_state = 'on_train'   // mirrors the set_state ping just sent
+  // One journey, created at stage 1 and kept: later stages advance the
+  // scenario on the SAME journey_id instead of re-posting /journeys.
+  if (stage === 'demo_stage1_peak_crowding' || !demoJourney) {
+    demoJourney = await createJourney('Singapore General Hospital', stage)
+  } else {
+    demoJourney = await call<Journey>('POST', `/journeys/${demoJourney.journey_id}/scenario`, { scenario: stage })
   }
-  return { journey, advice: await getAdvice(journey.journey_id) }
+  if (spec.ping) {
+    // Ping times sit on the journey's own morning: 20 min after departure at
+    // Paya Lebar, 45 min after at Bayfront. The backend uses the latest ping
+    // as the simulated clock for scenario journeys.
+    const depart = demoJourney.legs[0] ? new Date(demoJourney.legs[0].depart) : new Date()
+    const offsetMin = stage === 'demo_stage2_planned_closure' ? 20 : 45
+    const recordedAt = new Date(depart.getTime() + offsetMin * 60000).toISOString()
+    await postLocation(demoJourney.journey_id, 'on_train', spec.ping, true, recordedAt)
+    demoJourney.location_state = 'on_train'
+  }
+  return { journey: demoJourney, advice: await getAdvice(demoJourney.journey_id) }
 }
 
 export function getAdvice(journeyId: string): Promise<Advice> {
@@ -210,12 +225,14 @@ export function getAdvice(journeyId: string): Promise<Advice> {
 export function postLocation(journeyId: string,
                              state: 'at_home' | 'walking' | 'on_bus' | 'on_train' | 'on_platform',
                              coords?: { lat: number; lon: number; accuracy_m?: number },
-                             setState = false): Promise<LocationAck> {
+                             setState = false,
+                             recordedAt?: string): Promise<LocationAck> {
   // Pings are transient unless setState is true (a deliberate state change,
-  // e.g. she boarded the train). See FRONTEND_CONTRACT.md.
+  // e.g. she boarded the train). recordedAt lets the staged demo place its
+  // pings on the journey's own morning. See FRONTEND_CONTRACT.md.
   const p = coords ?? ON_TRAIN_PING
   return call('POST', `/journeys/${journeyId}/location`, {
-    ...p, recorded_at: new Date().toISOString(), location_state: state, set_state: setState,
+    ...p, recorded_at: recordedAt ?? new Date().toISOString(), location_state: state, set_state: setState,
   })
 }
 

@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import FastAPI, File, HTTPException, Query, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from app import conditions as conditions_service
 from app import service, store
@@ -217,6 +218,26 @@ def get_journey(journey_id: str) -> Journey:
     journey = store.journeys.get(journey_id)
     if journey is None:
         raise HTTPException(404, f"no journey '{journey_id}'")
+    return journey
+
+
+class ScenarioUpdate(BaseModel):
+    scenario: str
+
+
+@app.post("/journeys/{journey_id}/scenario", response_model=Journey)
+def set_scenario(journey_id: str, body: ScenarioUpdate) -> Journey:
+    """REAL: advance the labelled replay scenario on an EXISTING journey, so a
+    multi-stage demo stays one journey with one id. The journey's plan and
+    history are kept; only the fixture set the advice is computed against
+    changes."""
+    journey = store.journeys.get(journey_id)
+    if journey is None:
+        raise HTTPException(404, f"no journey '{journey_id}'")
+    if conditions_service.load_fixture(body.scenario) is None:
+        raise HTTPException(422, f"unknown scenario '{body.scenario}' — no "
+                            f"fixture file")
+    journey.scenario = body.scenario
     return journey
 
 

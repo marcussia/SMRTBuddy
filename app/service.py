@@ -5,7 +5,7 @@ This is the one place the whole pipeline is wired together, so the answer to
 -> build_facts (typed, source-tagged) -> decide (first matching named rule)
 -> assemble (localised, location-aware). Family notifications are logged here
 (§7.3) when the decision says so."""
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from app import conditions, store
 from app.config import SGT
@@ -104,9 +104,22 @@ def compute_advice(journey: Journey, profile: UserProfile) -> Advice:
     boarding = journey.legs[0].depart if journey.legs else None
     facts = F.build_facts(results, boarding_time=boarding)
 
+    # The clock: real time for live journeys. A scenario journey is a
+    # labelled simulation, so its clock is simulated too — the latest ping's
+    # recorded_at (the demo's "now"), else shortly before departure. Without
+    # this, a replan at 15:00 real time would timestamp a morning demo's
+    # advice in the afternoon.
+    now = datetime.now(SGT)
+    if journey.scenario:
+        ping = store.latest_ping(journey.journey_id)
+        if ping is not None:
+            now = ping.recorded_at
+        elif journey.legs:
+            now = journey.legs[0].depart - timedelta(minutes=45)
+
     ctx = rules.Context(
         journey=journey, profile=profile, facts=facts, results=results,
-        now=datetime.now(SGT),
+        now=now,
         current_station_code=_current_station(journey))
     decision = rules.decide(ctx)
     advice = rules.assemble(ctx, decision, conditions.data_status(results))

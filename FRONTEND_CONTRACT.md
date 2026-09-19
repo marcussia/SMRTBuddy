@@ -595,9 +595,13 @@ payloads elided here — they are the raw upstream shapes):
 
 ## The three-stage demo (one journey, escalating events)
 
-One journey, Bedok to Singapore General Hospital, three moments. Each stage is
-the SAME create-journey + ping + advice flow the scenario chips already use;
-only the fixture name and ping differ. All three run through the real engine;
+One journey, Bedok to Singapore General Hospital, three moments, one morning.
+Stage 1 creates the journey; stages 2 and 3 advance the scenario on the SAME
+journey with `POST /journeys/{id}/scenario` `{"scenario": "<stage id>"}`, then
+ping and re-request advice. Place the stage pings on the journey's own
+morning: recorded_at = first leg's depart +20 min (stage 2) and +45 min
+(stage 3). For scenario journeys the engine's clock is the latest ping's
+recorded_at, so the three advice moments land in order on one morning. All three run through the real engine;
 the fixtures are labelled and the REPLAY tag shows.
 
 Journey body for every stage: `user_id: "mdm_lim"`, `origin: "Home (Bedok)"`,
