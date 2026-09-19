@@ -138,7 +138,7 @@ stages; the React app at `/ui` drives the three stages.
 
 ## How it decides
 
-`GET /journeys/{id}/advice` runs: gather sources (truthful `live` / `cached` /
+`GET /journeys/{id}/advice` runs: gather sources (truthful `live` /
 `fixture` / `unavailable` per source) → typed facts → **nine ordered rules**
 (`app/engine/rules.py`, first match wins: safety stop, mobility block, broken
 route, wait-vs-reroute, platform crowding, bus crowding, weather, road
