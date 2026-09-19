@@ -207,6 +207,8 @@ def rule_3_route_broken(ctx: Context) -> Decision | None:
     opts = _replan_literal(ctx, avoid=set(ctx.facts.broken_stations),
                            in_transit=_in_transit(ctx))
     plan_lines = {leg.service for leg in ctx.journey.legs if leg.mode == "mrt"}
+    if ctx.current_station_code and ctx.current_station_code in net.BY_CODE:
+        plan_lines.add(net.BY_CODE[ctx.current_station_code].line)
     broken_on_line = {c for c in ctx.facts.broken_stations
                       if c in net.BY_CODE and net.BY_CODE[c].line in plan_lines}
     broken = broken | broken_on_line
@@ -236,10 +238,33 @@ def rule_3_route_broken(ctx: Context) -> Decision | None:
         action="take_taxi", chosen=taxi,
         reason=f"Train service is suspended at {_names(broken)} and no "
                f"public-transport alternative fits your mobility profile."
-               f"{advisory}",
+               f"{_bus_rejection_note(ctx)}{advisory}",
         triggered_by=["train_service_alerts"], notify_family=True,
         affected_codes=broken,
         headline_params={"stand": taxi.legs[0].from_name})
+
+
+
+
+def _bus_rejection_note(ctx: Context) -> str:
+    """Why the bus alternative is not offered — real, computed reasons only.
+    Empty string when nothing true can be said."""
+    mob = ctx.profile.mobility
+    dest = net.place_for(ctx.journey.destination)
+    if mob is None or dest is None:
+        return ""
+    from app.routing.walk import walk_route
+    alight = net.BUS2["stops"][-1]
+    wr = walk_route((alight["lat"], alight["lon"]), dest)
+    if wr.distance_m <= mob.max_walk_metres:
+        return ""
+    note = (f" The bus {net.BUS2['service']} option was rejected: it ends with "
+            f"a {wr.distance_m:.0f} m walk from {alight['name']}, past your "
+            f"{mob.max_walk_metres} m limit")
+    if ctx.current_station_code and _in_transit(ctx):
+        note += (f", and it boards at {net.BUS2['board']['name']}, "
+                 f"back where you started")
+    return note + "."
 
 
 def rule_4_wait_vs_reroute(ctx: Context) -> Decision | None:
