@@ -130,13 +130,14 @@ function ProfileSetupScreen({ locale, copy, back, done }: { locale: Locale; copy
   const [wheelchair, setWheelchair] = useState(false)
   const [slow, setSlow] = useState(true)             // walking_speed_mps
   const [maxWalk, setMaxWalk] = useState(600)        // max_walk_metres
+  const [shelter, setShelter] = useState(false)      // prefers_shelter
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const save = async () => {
     setSaving(true); setError('')
     try {
       await api.saveProfile({ locale, can_use_stairs: stairs, wheelchair,
-        walking_speed_mps: slow ? 0.8 : 1.4, max_walk_metres: maxWalk })
+        walking_speed_mps: slow ? 0.8 : 1.4, max_walk_metres: maxWalk, prefers_shelter: shelter })
       done()
     } catch { setError(copy.setup.failed) } finally { setSaving(false) }
   }
@@ -146,6 +147,7 @@ function ProfileSetupScreen({ locale, copy, back, done }: { locale: Locale; copy
       <button type="button" className={value ? 'selected' : ''} aria-pressed={value} onClick={() => set(true)}>{yes}</button>
     </div></fieldset>
   return <div className={`screen paper-screen setup-screen locale-${locale}`}><TopBar title={copy.setup.top} back={back} /><h1>{copy.setup.title}</h1>
+    {pair(copy.setup.shelter, shelter, setShelter, copy.setup.shelterYes, copy.setup.shelterNo)}
     {pair(copy.setup.stairs, stairs, setStairs, copy.setup.stairsOk, copy.setup.stairsAvoid)}
     {pair(copy.setup.wheelchair, wheelchair, setWheelchair, copy.setup.wcYes, copy.setup.wcNo)}
     {pair(copy.setup.pace, !slow, (v) => setSlow(!v), copy.setup.paceAvg, copy.setup.paceSlow)}

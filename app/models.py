@@ -28,6 +28,9 @@ class MobilityProfile(BaseModel):
     wheelchair: bool
     walking_speed_mps: float = 0.8      # Q2: configurable, default 0.8
     max_walk_metres: int = 400          # Q2: wheelchair default is 200
+    # Prefers sheltered routes: in rain, the weather rule treats exposed legs
+    # as a reason to act for this profile, not just a buffer note.
+    prefers_shelter: bool = False
 
     @model_validator(mode="after")
     def _wheelchair_walk_default(self) -> "MobilityProfile":

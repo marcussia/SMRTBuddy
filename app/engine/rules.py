@@ -412,10 +412,23 @@ def rule_7_weather(ctx: Context) -> Decision | None:
                 triggered_by=["weather"],
                 extra_uncertainty_min=RAIN_ROAD_BUFFER_MIN,
                 headline_params={"summary": _summary_of(rail[0], ctx)})
-    if ctx.facts.rain_areas and not has_bus:
-        # Already on rail: no mode change, but the walk needs a buffer —
-        # fold it into timing advice rather than interrupting her (7.3).
-        return None
+    mob = ctx.profile.mobility
+    if (ctx.facts.rain_areas and not has_bus and not _in_transit(ctx)
+            and mob is not None and mob.prefers_shelter
+            and any(L.shelter == "exposed" and L.mode == "walk"
+                    for L in ctx.journey.legs)):
+        # She prefers shelter and the plan has an exposed walk in the rain:
+        # leaving earlier buys time to wait out heavy bursts under cover.
+        return Decision(
+            action="leave_earlier",
+            reason="Heavy rain is forecast and your route ends with an exposed "
+                   "walk. You prefer sheltered routes, so leave "
+                   f"{LEAVE_EARLIER_STEP_MIN:.0f} min earlier: that leaves time "
+                   "to wait out a heavy burst under cover instead of walking "
+                   "through it.",
+            triggered_by=["weather"],
+            extra_uncertainty_min=RAIN_ROAD_BUFFER_MIN,
+            headline_params={"minutes": f"{LEAVE_EARLIER_STEP_MIN:.0f}"})
     return None
 
 

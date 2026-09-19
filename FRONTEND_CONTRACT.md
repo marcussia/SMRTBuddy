@@ -69,7 +69,9 @@ must be omitted or null for `"family"`):
     "can_use_stairs": false,       // required
     "wheelchair": false,           // required
     "walking_speed_mps": 0.8,      // optional, default 0.8
-    "max_walk_metres": 600         // optional, default 400 (200 if wheelchair)
+    "max_walk_metres": 600,        // optional, default 400 (200 if wheelchair)
+    "prefers_shelter": false       // optional, default false — in rain, an
+                                   // exposed walk becomes leave_earlier advice
   },
   "linked_user_ids": []            // optional
 }

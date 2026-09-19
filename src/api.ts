@@ -121,12 +121,13 @@ export type ProfileOptions = {
   wheelchair: boolean
   walking_speed_mps: number
   max_walk_metres: number
+  prefers_shelter: boolean
 }
 // Mdm Lim's defaults (the persona in the brief); overwritten by the profile
 // setup screen. POST /profiles upserts, so saving again just updates.
 export const DEFAULT_PROFILE: ProfileOptions = {
   locale: 'en', can_use_stairs: false, wheelchair: false,
-  walking_speed_mps: 0.8, max_walk_metres: 600,
+  walking_speed_mps: 0.8, max_walk_metres: 600, prefers_shelter: false,
 }
 let currentProfile: ProfileOptions = { ...DEFAULT_PROFILE }
 let profilesReady = false
@@ -136,7 +137,8 @@ export async function saveProfile(opts: ProfileOptions): Promise<void> {
   await call('POST', '/profiles', {
     user_id: USER, role: 'user', name: 'Mdm Lim', locale: opts.locale,
     mobility: { can_use_stairs: opts.can_use_stairs, wheelchair: opts.wheelchair,
-                walking_speed_mps: opts.walking_speed_mps, max_walk_metres: opts.max_walk_metres },
+                walking_speed_mps: opts.walking_speed_mps, max_walk_metres: opts.max_walk_metres,
+                prefers_shelter: opts.prefers_shelter },
   })
   await call('POST', '/profiles', { user_id: FAMILY, role: 'family', name: 'Trusted family' })
   await call('POST', `/profiles/${FAMILY}/link`, { linked_user_id: USER })
