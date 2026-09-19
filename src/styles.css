@@ -103,3 +103,10 @@
 /* exit hints (from captured OSM entrances) */
 .exit-hint{display:block;margin-top:4px;color:#31465a;background:#eef3f8;border-radius:8px;padding:6px 9px;font-size:13.5px;line-height:1.35}
 p.exit-hint{font-size:16px;margin:8px 0 0}
+
+/* taxi driver card: big, bilingual, holdable up to a driver */
+.driver-card{margin:12px 0;padding:16px;text-align:center;background:var(--yellow,#f7c94b);border:3px solid var(--navy,#0d2136);border-radius:14px;color:var(--navy,#0d2136)}
+.driver-card-label{display:block;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.driver-card strong{display:block;font-family:"Noto Sans SC",sans-serif;font-size:34px;line-height:1.15}
+.driver-card em{display:block;font-style:normal;font-size:19px;font-weight:700;margin:4px 0 6px}
+.driver-card small{display:block;font-size:15px;font-weight:700}
