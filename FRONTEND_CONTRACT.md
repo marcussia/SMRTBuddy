@@ -586,6 +586,28 @@ payloads elided here — they are the raw upstream shapes):
 
 ---
 
+
+## The three-stage demo (one journey, escalating events)
+
+One journey, Bedok to Singapore General Hospital, three moments. Each stage is
+the SAME create-journey + ping + advice flow the scenario chips already use;
+only the fixture name and ping differ. All three run through the real engine;
+the fixtures are labelled and the REPLAY tag shows.
+
+Journey body for every stage: `user_id: "mdm_lim"`, `origin: "Home (Bedok)"`,
+`destination: "Singapore General Hospital"`, `arrive_by` in the future,
+`scenario` per stage.
+
+| Stage | `scenario` | Ping after creating (then GET advice) | Expected |
+|---|---|---|---|
+| 1 | `demo_stage1_peak_crowding` | none (she is at home) | `leave_earlier`, no family notification |
+| 2 | `demo_stage2_planned_closure` | `{"lat": 1.317585, "lon": 103.892281, "accuracy_m": 25, "recorded_at": "<now>", "location_state": "on_train", "set_state": true}` (Paya Lebar) | `reroute`, "Get off at Bugis…", family notified |
+| 3 | `demo_stage3_breakdown` | `{"lat": 1.281812, "lon": 103.859152, "accuracy_m": 25, "recorded_at": "<now>", "location_state": "on_train", "set_state": true}` (Bayfront) | `take_taxi` with driver_card, family notified; reason names the rejected bus with real distances |
+
+`set_state: true` is required on both pings (she boarded the train — a
+deliberate state change). Stage 3's `affected_segment` carries both broken
+stretches for the map.
+
 ## The six demo scenarios — paste and run
 
 Fixture-driven (labelled!), each through the real engine. Setup once:

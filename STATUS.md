@@ -358,3 +358,30 @@ the wheelchair replan) is now also positively not_step_free.
 pedestrian detail from OSM tags" and "Reading OSM stair and lift tags directly
 is the next step" are now stale — the corridor's steps/elevator/wheelchair
 tags ARE read (from a labelled capture). Flagged for the next docs pass.
+
+---
+
+## 2026-09-19 ~10:20 — Three-stage demo built (backend), commits local
+
+One journey, three escalating events, each through the real engine from her
+pinged position, nothing scripted:
+1. `demo_stage1_peak_crowding` (crowd h at EW5, forecast + realtime) →
+   leave_earlier, no notification.
+2. `demo_stage2_planned_closure` (EWL city segment closed; Message text
+   modelled on the REAL planned-works pattern seen live: the BPL renewal
+   announcement) → ping Paya Lebar on_train → "Get off at Bugis, take the
+   Downtown line", family notified.
+3. `demo_stage3_breakdown` (DTL fault DT17–19 on top of the persisting EWL
+   closure) → ping Bayfront on_train → no rail path remains → take_taxi from
+   Bayfront, EN/中文 driver card, family notified. The reason now names the
+   rejected bus with COMPUTED numbers: 1,010 m walk from New Bridge Ctr vs her
+   600 m limit, boarding stop back at Bedok. Bus crowding data was checked and
+   deliberately NOT included: BusArrival Load describes buses approaching a
+   stop she cannot reach; PCD covers stations, not buses. Nothing truthful to
+   add.
+- Rule 3 also names broken stations on the line she is currently riding, and
+  stage 3's affected_segment carries both broken stretches (7 points).
+- Verified: stages 3/3 AND the original six scenarios 6/6 after each change.
+- Frontend spec for the stages added to FRONTEND_CONTRACT.md.
+- Commits are LOCAL, not pushed: the stage-2 fixture message text is awaiting
+  the user's plausibility check.
