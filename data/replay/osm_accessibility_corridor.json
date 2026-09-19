@@ -1,0 +1,7758 @@
+{
+ "_provenance": "Captured once from Overpass on 2026-09-19 09:16 SGT (overpass-api.de 504'd; fetched from the public Kumi mirror if noted above). One query, identifying User-Agent, cached here per OSM usage policy. REPLAY DATA \u2014 real OSM data, captured, not live. \u00a9 OpenStreetMap contributors (ODbL).",
+ "_query": "[out:json][timeout:45];\n(\nnode(around:600,1.323999,103.930214)[highway=steps];way(around:600,1.323999,103.930214)[highway=steps];node(around:600,1.280319,103.839459)[highway=steps];way(around:600,1.280319,103.839459)[highway=steps];node(around:600,1.2794489,103.8362739)[highway=steps];way(around:600,1.2794489,103.8362739)[highway=steps];\nnode(around:600,1.323999,103.930214)[highway=elevator];way(around:600,1.323999,103.930214)[highway=elevator];node(around:600,1.280319,103.839459)[highway=elevator];way(around:600,1.280319,103.839459)[highway=elevator];node(around:600,1.2794489,103.8362739)[highway=elevator];way(around:600,1.2794489,103.8362739)[highway=elevator];\nnode(around:600,1.323999,103.930214)[wheelchair];way(around:600,1.323999,103.930214)[wheelchair];node(around:600,1.280319,103.839459)[wheelchair];way(around:600,1.280319,103.839459)[wheelchair];node(around:600,1.2794489,103.8362739)[wheelchair];way(around:600,1.2794489,103.8362739)[wheelchair];\nnode(around:600,1.323999,103.930214)[railway=subway_entrance];way(around:600,1.323999,103.930214)[railway=subway_entrance];node(around:600,1.280319,103.839459)[railway=subway_entrance];way(around:600,1.280319,103.839459)[railway=subway_entrance];node(around:600,1.2794489,103.8362739)[railway=subway_entrance];way(around:600,1.2794489,103.8362739)[railway=subway_entrance];\n);\nout tags geom;",
+ "_radius_m": 600,
+ "_anchors": {
+  "bedok_stn": [
+   1.323999,
+   103.930214
+  ],
+  "outram_park_stn": [
+   1.280319,
+   103.839459
+  ],
+  "sgh": [
+   1.2794489,
+   103.8362739
+  ]
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 207725957,
+   "lat": 1.3239666,
+   "lon": 103.9302175,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "315",
+    "addr:postcode": "467347",
+    "addr:street": "New Upper Changi Road",
+    "name": "Bedok",
+    "name:en": "Bedok",
+    "name:ms": "Bedok",
+    "name:ta": "\u0baa\u0bbf\u0b9f\u0bcb\u0b95\u0bcd",
+    "name:th": "\u0e40\u0e1a\u0e2d\u0e14\u0e01",
+    "name:zh": "\u52ff\u6d1b",
+    "network": "Mass Rapid Transit",
+    "network:short": "MRT",
+    "network:wikidata": "Q40176",
+    "operator": "SMRT",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "EW5",
+    "ref:colour": "#009530",
+    "start_date": "1989-11-04",
+    "station": "subway",
+    "subway": "yes",
+    "wheelchair": "yes",
+    "wikidata": "Q3272378",
+    "wikipedia": "en:Bedok MRT station"
+   }
+  },
+  {
+   "type": "node",
+   "id": 409638801,
+   "lat": 1.276278,
+   "lon": 103.8349297,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 409638803,
+   "lat": 1.2759856,
+   "lon": 103.8349938,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410467875,
+   "lat": 1.3233425,
+   "lon": 103.9250948,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "New Upper Changi Road",
+    "name": "Blk 32",
+    "public_transport": "platform",
+    "ref": "84021",
+    "route_ref": "2;2A;7;24;25;28;30;30e;32;33;40;67;222;222B;229;401;854",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410467876,
+   "lat": 1.3229288,
+   "lon": 103.9251788,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2026-02-06",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "New Upper Changi Road",
+    "name": "Opposite Blk 32",
+    "public_transport": "platform",
+    "ref": "84029",
+    "route_ref": "2;7;7A;24;25;28;30;30e;32;33;33B;40;67;222;222B;229;401;854",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 410487306,
+   "lat": 1.3246211,
+   "lon": 103.9292769,
+   "tags": {
+    "amenity": "bus_station",
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "location": "Bedok North Drive",
+    "name": "Bedok Interchange",
+    "name:ms": "Pusat Pertukaran Bas Bedok",
+    "name:zh": "\u52ff\u6d1b\u8f6c\u6362\u7ad9",
+    "network": "Land Transport Authority",
+    "network:short": "LTA",
+    "network:wikidata": "Q3299279",
+    "operator": "Land Transport Authority",
+    "public_transport": "platform",
+    "ref": "84009",
+    "route_ref": "7;7A;9;9A;14;14A;16;16M;17;17A;18;26;30;30e;32;33;33B;35;35M;38;40;60;60T;69;87;155;168;196;196A;197;222;222A;225G;225W;228;229;401;854;854e",
+    "shelter": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 598051932,
+   "lat": 1.3246655,
+   "lon": 103.9305678,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "208B",
+    "addr:postcode": "462208",
+    "addr:street": "New Upper Changi Road",
+    "amenity": "food_court",
+    "name": "Bedok Interchange Hawker Centre",
+    "name:ms": "Pusat Penjaja Bedok Interchange",
+    "name:zh": "\u52ff\u6d1b\u8f6c\u6362\u7ad9\u719f\u98df\u4e2d\u5fc3",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1315774069,
+   "lat": 1.3257807,
+   "lon": 103.9316518,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "212",
+    "addr:postcode": "460212",
+    "addr:street": "Bedok North Street 1",
+    "air_conditioning": "yes",
+    "branch": "Bedok North",
+    "brand": "NTUC FairPrice",
+    "brand:wikidata": "Q6955519",
+    "level": "0,1",
+    "name": "FairPrice",
+    "name:en": "FairPrice",
+    "name:zh-Hans": "\u804c\u603b\u5e73\u4ef7\u8d85\u5e02",
+    "name:zh-Hant": "\u8077\u7e3d\u5e73\u50f9\u8d85\u5e02",
+    "opening_hours": "24/7",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:nets": "yes",
+    "phone": "+65 64438038",
+    "shop": "supermarket",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1315774131,
+   "lat": 1.3244941,
+   "lon": 103.9310939,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "209",
+    "addr:level": "1,2",
+    "addr:postcode": "460209",
+    "addr:street": "New Upper Changi Road",
+    "addr:unit": "#01-631;#02-631",
+    "air_conditioning": "yes",
+    "brand": "Sheng Siong",
+    "brand:wikidata": "Q3481878",
+    "internet_access": "no",
+    "level": "0,1",
+    "level:ref": "1,2",
+    "name": "Sheng Siong",
+    "name:zh": "\u6607\u83d8\u8d85\u5e02",
+    "opening_hours": "24/7",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+65 62422824",
+    "self_checkout": "yes",
+    "shop": "supermarket",
+    "stroller": "limited",
+    "website": "https://www.shengsiong.com.sg",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1315774139,
+   "lat": 1.3266655,
+   "lon": 103.9334511,
+   "tags": {
+    "name": "Ban Keng Florist & Trading",
+    "shop": "florist",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614173,
+   "lat": 1.2815327,
+   "lon": 103.8392251,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "2",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614174,
+   "lat": 1.2790287,
+   "lon": 103.8394996,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "5",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614175,
+   "lat": 1.2790118,
+   "lon": 103.8385209,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "6",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614176,
+   "lat": 1.2809499,
+   "lon": 103.8387238,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "7"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614177,
+   "lat": 1.280273,
+   "lon": 103.8404076,
+   "tags": {
+    "level": "1;-1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "4"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1839614178,
+   "lat": 1.2807896,
+   "lon": 103.8398784,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "3"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1847853678,
+   "lat": 1.3242208,
+   "lon": 103.9299737,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2026-02-06",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "New Upper Changi Road",
+    "name": "Bedok Station Exit B",
+    "public_transport": "platform",
+    "ref": "84031",
+    "route_ref": "2;2A;9;9A;24;25;28;31;35;35M;67;137;137A;222;222B",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1907922855,
+   "lat": 1.3235254,
+   "lon": 103.928831,
+   "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "New Upper Changi Road",
+    "name": "Bedok Station Exit A",
+    "public_transport": "platform",
+    "ref": "84039",
+    "route_ref": "2;4N;9;24;25;28;31;35;35M;67;137;222;222A;222B",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2486375836,
+   "lat": 1.280386,
+   "lon": 103.8406437,
+   "tags": {
+    "amenity": "taxi",
+    "capacity": "2",
+    "description": "Teo Hong Road near Outram MRT Station Exit H",
+    "ref": "D01",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2511049756,
+   "lat": 1.2799695,
+   "lon": 103.8436879,
+   "tags": {
+    "admin_level": "7",
+    "alt_name": "Chinatown Singapore",
+    "name": "Chinatown",
+    "name:en": "Chinatown",
+    "name:ru": "\u0420\u0430\u0439\u043e\u043d \u0427\u0430\u0439\u043d\u0430-\u0442\u0430\u0443\u043d",
+    "name:th": "\u0e44\u0e0a\u0e19\u0e32\u0e17\u0e32\u0e27\u0e19\u0e4c",
+    "name:zh": "\u725b\u8f66\u6c34",
+    "place": "neighbourhood",
+    "tourism": "attraction",
+    "type": "boundary",
+    "wheelchair": "no",
+    "wikidata": "Q1318670",
+    "wikipedia": "en:Chinatown, Singapore"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2750398062,
+   "lat": 1.2838806,
+   "lon": 103.8435094,
+   "tags": {
+    "colour": "purple",
+    "name": "Chinatown (A)",
+    "railway": "subway_entrance",
+    "ref": "A",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3557719046,
+   "lat": 1.3257047,
+   "lon": 103.9320408,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "214",
+    "addr:postcode": "460214",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Neo Smiles Dental Studio",
+    "phone": "+65 6481 0800",
+    "website": "https://neosmiles.com.sg/",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3756845512,
+   "lat": 1.2832104,
+   "lon": 103.8434499,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "57",
+    "addr:postcode": "058602",
+    "addr:street": "Temple Street",
+    "amenity": "restaurant",
+    "changing_table": "no",
+    "cuisine": "chinese;Sichuan",
+    "level": "0",
+    "microbrewery": "no",
+    "name": "\u8700\u90f7\u574a",
+    "name:en": "Shuxiangfang",
+    "name:zh": "\u8700\u90f7\u574a",
+    "outdoor_seating": "no",
+    "self_service": "no",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "toilets:disposal": "flush",
+    "toilets:position": "seated",
+    "toilets:wheelchair": "no",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3756845516,
+   "lat": 1.283155,
+   "lon": 103.8435344,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "53",
+    "addr:postcode": "058598",
+    "addr:street": "Temple Street",
+    "amenity": "restaurant",
+    "changing_table": "no",
+    "cuisine": "chinese",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "level": "0",
+    "name": "Tiantian Xiangshang",
+    "name:zh": "\u5929\u5929\u6e58\u4e0a",
+    "outdoor_seating": "yes",
+    "smoking": "no",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "toilets:disposal": "flush",
+    "toilets:position": "seated",
+    "toilets:wheelchair": "no",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3756853415,
+   "lat": 1.2776835,
+   "lon": 103.842743,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "11",
+    "addr:postcode": "089671",
+    "addr:street": "Craig Road",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "email": "info@pastabrava.com.sg",
+    "name": "Pasta Brava",
+    "phone": "+65 6227 7550",
+    "website": "https://pastabrava.com.sg/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3800199333,
+   "lat": 1.2817564,
+   "lon": 103.8416986,
+   "tags": {
+    "amenity": "taxi",
+    "capacity": "2",
+    "description": "Kreta Ayer Road opposite Oriental Plaza",
+    "ref": "D04",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3800199349,
+   "lat": 1.2835191,
+   "lon": 103.8423101,
+   "tags": {
+    "amenity": "taxi",
+    "description": "Park Crescent outside People's Park Complex",
+    "ref": "D05",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3800199444,
+   "lat": 1.2812828,
+   "lon": 103.8443583,
+   "tags": {
+    "amenity": "taxi",
+    "capacity": "5",
+    "description": "Sago Lane Beside Buddha Tooth Relic Temple & Museum",
+    "ref": "D17",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3800199677,
+   "lat": 1.2828867,
+   "lon": 103.8440633,
+   "tags": {
+    "amenity": "taxi",
+    "capacity": "1",
+    "description": "Temple Street infront of Grand Court Restaurant",
+    "ref": "D18",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4072894921,
+   "lat": 1.3263698,
+   "lon": 103.9330211,
+   "tags": {
+    "amenity": "bank",
+    "name": "POSB",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4072894922,
+   "lat": 1.3262037,
+   "lon": 103.9300443,
+   "tags": {
+    "amenity": "bank",
+    "brand": "OCBC Bank",
+    "brand:en": "OCBC Bank",
+    "brand:wikidata": "Q2042423",
+    "brand:zh": "\u534e\u4fa8\u94f6\u884c",
+    "name": "OCBC Bank",
+    "name:en": "OCBC Bank",
+    "name:zh": "\u534e\u4fa8\u94f6\u884c",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4302905937,
+   "lat": 1.2803281,
+   "lon": 103.8419212,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "12",
+    "addr:postcode": "088387",
+    "addr:street": "Teck Lim Road",
+    "addr:unit": "12/14/16",
+    "contact:instagram": "https://www.instagram.com/hotelsoloha/",
+    "email": "enquiries@solohahotels.com",
+    "facebook": "https://www.facebook.com/hotelsoloha/",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Soloha",
+    "phone": "+65 6222 8881",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://solohahotels.com/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4443927247,
+   "lat": 1.3244802,
+   "lon": 103.9288247,
+   "tags": {
+    "branch": "Finest",
+    "brand": "NTUC FairPrice",
+    "brand:wikidata": "Q6955519",
+    "name": "FairPrice",
+    "name:en": "FairPrice",
+    "name:zh": "\u804c\u603b\u5e73\u4ef7\u8d85\u5e02",
+    "shop": "supermarket",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4629107275,
+   "lat": 1.280495,
+   "lon": 103.8447984,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "069184",
+    "addr:street": "Kadayanallur Street",
+    "addr:unit": "#10/#11",
+    "air_conditioning": "no",
+    "amenity": "fast_food",
+    "check_date": "2025-08-10",
+    "cuisine": "chinese",
+    "fast_food": "cafeteria",
+    "indoor_seating": "yes",
+    "level": "0",
+    "name": "\u5929\u5929\u6d77\u5357\u96de\u98ef Tian Tian Hainanese Chicken Rice",
+    "name:en": "Tian Tian Hainanese Chicken Rice",
+    "name:zh-Hans": "\u5929\u5929\u6d77\u5357\u9e21\u996d",
+    "name:zh-Hant": "\u5929\u5929\u6d77\u5357\u96de\u98ef",
+    "opening_hours": "Tu-Su 10:00-16:00",
+    "outdoor_seating": "yes",
+    "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4675868326,
+   "lat": 1.3243472,
+   "lon": 103.9291499,
+   "tags": {
+    "addr:street": "New Upper Changi Road",
+    "amenity": "fast_food",
+    "brand": "McDonald's",
+    "brand:en": "McDonald's",
+    "brand:wikidata": "Q38076",
+    "brand:wikipedia": "en:McDonald's",
+    "brand:zh": "\u9ea6\u5f53\u52b3",
+    "brand:zh-Hans": "\u9ea6\u5f53\u52b3",
+    "cuisine": "burger",
+    "level": "1",
+    "name": "McDonald's",
+    "name:en": "McDonald's",
+    "name:zh": "\u9ea6\u5f53\u52b3",
+    "name:zh-Hans": "\u9ea6\u5f53\u52b3",
+    "opening_hours": "Mo-Su,PH 06:00-24:00",
+    "source": "Kaart Ground Survey 2017",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4675868327,
+   "lat": 1.3245025,
+   "lon": 103.9297975,
+   "tags": {
+    "addr:street": "New Upper Changi Road",
+    "amenity": "fast_food",
+    "brand": "Pepper Lunch",
+    "brand:wikidata": "Q1016072",
+    "cuisine": "teppanyaki",
+    "level": "1",
+    "name": "Pepper Lunch",
+    "source": "Kaart Ground Survey 2017",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4697476922,
+   "lat": 1.2773807,
+   "lon": 103.8318569,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "149",
+    "addr:postcode": "160149",
+    "addr:street": "Silat Avenue",
+    "addr:unit": "01-54",
+    "amenity": "doctors",
+    "fax": "+65 6275 4935",
+    "healthcare": "doctor",
+    "name": "Mao Medical Center & Surgery",
+    "opening_hours": "Mo-Fr 09:00-12:30,14:00-16:30,18:30-20:30; Sa,Su 09:00-12:30; PH off",
+    "payment:coins": "yes",
+    "payment:cryptocurrencies": "no",
+    "payment:electronic_purses": "no",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "+65 6278 1910",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869132421,
+   "lat": 1.3246047,
+   "lon": 103.9300235,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housename": "Bedok Bus Interchange",
+    "addr:housenumber": "12",
+    "addr:postcode": "465492",
+    "addr:street": "Bedok North Drive",
+    "amenity": "atm",
+    "branch": "Bedok Bus Interchange",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4869134351,
+   "lat": 1.324312,
+   "lon": 103.9288693,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "311",
+    "addr:postcode": "467360",
+    "addr:street": "New Upper Changi Road",
+    "amenity": "atm",
+    "branch": "Bedok Mall - FairPrice",
+    "brand": "UOB",
+    "brand:en": "UOB",
+    "brand:wikidata": "Q2064074",
+    "brand:zh": "\u5927\u534e\u94f6\u884c",
+    "operator": "UOB",
+    "operator:wikidata": "Q2064074",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5206479111,
+   "lat": 1.3266193,
+   "lon": 103.9317435,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "library",
+    "name": "Bedok Public Library",
+    "name:ms": "Perpustakaan Awam Bedok",
+    "name:zh": "\u52ff\u6d1b\u516c\u5171\u56fe\u4e66\u9986",
+    "wheelchair": "yes",
+    "wikidata": "Q4879343",
+    "wikipedia": "en:Bedok Public Library"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5239383692,
+   "lat": 1.3267159,
+   "lon": 103.9323136,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "community_centre",
+    "name": "Kampung Chai Chee Community Club",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5404774847,
+   "lat": 1.2834211,
+   "lon": 103.8432546,
+   "tags": {
+    "amenity": "taxi",
+    "capacity": "1",
+    "description": "Temple Street beside Lucky Chinatown",
+    "ref": "D21",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5721660225,
+   "lat": 1.3271234,
+   "lon": 103.9319684,
+   "tags": {
+    "access": "yes",
+    "leisure": "playground",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6138741607,
+   "lat": 1.326427,
+   "lon": 103.9308572,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "206",
+    "addr:postcode": "460206",
+    "addr:street": "Bedok North Street 1",
+    "name": "East Coast-Fengshan Town Council",
+    "name:en": "East Coast-Fengshan Town Council",
+    "name:ms": "Majlis Bandaran East Coast-Fengshan",
+    "office": "estate_agent",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6187831294,
+   "lat": 1.3259389,
+   "lon": 103.9301524,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "204 #01-393",
+    "addr:postcode": "460204",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "food_court",
+    "name": "Hao Lai Ke (in food court)",
+    "opening_hours": "Mo-Su 10:30-22:00",
+    "operator": "Ex-Din Tai Fund chef",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6433352300,
+   "lat": 1.279053,
+   "lon": 103.8408499,
+   "tags": {
+    "amenity": "restaurant",
+    "contact:website": "https://www.humpback.sg/",
+    "cuisine": "seafood",
+    "name": "Humpback",
+    "opening_hours": "Mo-Sa 17:00-00:00; Su 11:00-15:00",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6515369229,
+   "lat": 1.3271035,
+   "lon": 103.9311572,
+   "tags": {
+    "artwork_type": "installation",
+    "image": "https://images.mapillary.com/lWi-yFfCLwGskEl9Rg6sbQ/thumb-2048.jpg",
+    "mapillary": "5441637792573903",
+    "name": "Bedok",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6715392260,
+   "lat": 1.3244043,
+   "lon": 103.9288298,
+   "tags": {
+    "brand": "Uniqlo",
+    "brand:wikidata": "Q26070",
+    "brand:wikipedia": "en:Uniqlo",
+    "name": "Uniqlo",
+    "name:zh": "\u4f18\u8863\u5e93",
+    "shop": "clothes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6798157580,
+   "lat": 1.3244617,
+   "lon": 103.929078,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#B1-21/22",
+    "addr:postcode": "467360",
+    "addr:street": "311 New Upper Changi Road, Bedok Mall",
+    "brand": "Bata",
+    "brand:wikidata": "Q688082",
+    "brand:wikipedia": "en:Bata (company)",
+    "name": "Bata",
+    "shop": "shoes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6798919706,
+   "lat": 1.3242793,
+   "lon": 103.9288668,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#01-12",
+    "addr:postcode": "467360",
+    "addr:street": "311 New Upper Changi Rd, Bedok Mall",
+    "amenity": "cafe",
+    "brand": "Ya Kun Kaya Toast",
+    "brand:wikidata": "Q8046237",
+    "cuisine": "coffee_shop",
+    "level": "1",
+    "name": "Ya Kun Kaya Toast",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6815742183,
+   "lat": 1.3245238,
+   "lon": 103.9290116,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "#B2-25/26",
+    "addr:postcode": "467360",
+    "addr:street": "311 New Upper Changi Rd, Bedok Mall",
+    "amenity": "cafe",
+    "brand": "Toast Box",
+    "brand:wikidata": "Q100285490",
+    "cuisine": "coffee_shop",
+    "name": "Toast Box",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7111373286,
+   "lat": 1.2785923,
+   "lon": 103.8416918,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "89",
+    "addr:postcode": "088849",
+    "addr:street": "Neil Road",
+    "addr:unit": "#01-01",
+    "amenity": "fast_food",
+    "branch": "Neil Road",
+    "brand": "Shake Shack",
+    "brand:wikidata": "Q1058722",
+    "brand:wikipedia": "en:Shake Shack",
+    "cuisine": "burger",
+    "currency:SGD": "yes",
+    "level": "0",
+    "name": "Shake Shack",
+    "opening_hours": "Mo-Su 11:00-21:00",
+    "takeaway": "yes",
+    "website": "https://www.shakeshack.com/",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7202567685,
+   "lat": 1.3258831,
+   "lon": 103.9301943,
+   "tags": {
+    "addr:postcode": "460204",
+    "amenity": "restaurant",
+    "name": "Happy Hawker",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7457517320,
+   "lat": 1.3255152,
+   "lon": 103.9302589,
+   "tags": {
+    "alt_name": "Kentucky Fried Chicken",
+    "amenity": "fast_food",
+    "brand": "KFC",
+    "brand:en": "KFC",
+    "brand:wikidata": "Q524757",
+    "brand:wikipedia": "en:KFC",
+    "brand:zh": "\u80af\u5fb7\u57fa",
+    "cuisine": "chicken",
+    "level": "1",
+    "name": "KFC",
+    "name:en": "KFC",
+    "name:zh": "\u80af\u5fb7\u57fa",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7457517321,
+   "lat": 1.3247841,
+   "lon": 103.9299662,
+   "tags": {
+    "alt_name": "Kentucky Fried Chicken",
+    "amenity": "fast_food",
+    "brand": "KFC",
+    "brand:en": "KFC",
+    "brand:wikidata": "Q524757",
+    "brand:wikipedia": "en:KFC",
+    "brand:zh": "\u80af\u5fb7\u57fa",
+    "cuisine": "chicken",
+    "level": "-2",
+    "name": "KFC",
+    "name:en": "KFC",
+    "name:zh": "\u80af\u5fb7\u57fa",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7500655193,
+   "lat": 1.3268344,
+   "lon": 103.9310834,
+   "tags": {
+    "artwork_type": "installation",
+    "name": "COMMON GROUND creating whole communities",
+    "tourism": "artwork",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7616935715,
+   "lat": 1.3252947,
+   "lon": 103.9298481,
+   "tags": {
+    "amenity": "restaurant",
+    "level": "1",
+    "name": "Swensen's",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8982593127,
+   "lat": 1.324034,
+   "lon": 103.9295377,
+   "tags": {
+    "name": "C",
+    "railway": "subway_entrance",
+    "ref": "C",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8982649282,
+   "lat": 1.3236088,
+   "lon": 103.9293869,
+   "tags": {
+    "name": "A",
+    "railway": "subway_entrance",
+    "ref": "A"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8982649283,
+   "lat": 1.3241677,
+   "lon": 103.9296676,
+   "tags": {
+    "name": "B",
+    "railway": "subway_entrance",
+    "ref": "B",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9022555517,
+   "lat": 1.2809956,
+   "lon": 103.8441847,
+   "tags": {
+    "railway": "subway_entrance",
+    "ref": "1"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9022555518,
+   "lat": 1.2809313,
+   "lon": 103.8447957,
+   "tags": {
+    "railway": "subway_entrance",
+    "ref": "2"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9022555549,
+   "lat": 1.2801758,
+   "lon": 103.8431078,
+   "tags": {
+    "railway": "subway_entrance",
+    "ref": "3"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9662684251,
+   "lat": 1.2823067,
+   "lon": 103.8381681,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "8",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9721941999,
+   "lat": 1.327057,
+   "lon": 103.930691,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "location": "Bedok North Street 1",
+    "name": "After Heartbeat @ Bedok",
+    "network": "Land Transport Authority",
+    "network:short": "LTA",
+    "network:wikidata": "Q3299279",
+    "operator": "Land Transport Authority",
+    "public_transport": "platform",
+    "ref": "84651",
+    "route_ref": "14;18;69;155;168;222;225G;228",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10086493008,
+   "lat": 1.2815121,
+   "lon": 103.8389878,
+   "tags": {
+    "level": "1",
+    "name": "Outram Park",
+    "railway": "subway_entrance",
+    "ref": "1",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10278674828,
+   "lat": 1.2844286,
+   "lon": 103.842491,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "02-67",
+    "addr:postcode": "059108",
+    "addr:street": "1 Park Rd",
+    "air_conditioning": "yes",
+    "description": "1) Herbal Steam for your legs $38 2) Traditional Pedicure $30+ 3) Dry Cupping $30 4) Bian Stone Scraping (Guasha) $30 5) Visual Ear Picking $30 ( Ear Wax Removal with head and ear massage) 6) Foot Soak with herbs $10 7) Foot Reflexology $15 for 30 mins",
+    "level": "02-67",
+    "name": "Yu Zu Spa Pte Ltd #02-67",
+    "opening_hours": "09:30-21:30",
+    "operator": "Hu Yang +6598079777",
+    "payment:cash": "yes",
+    "payment:paynow": "yes",
+    "payment:wechat": "yes",
+    "phone": "+6598079777",
+    "shop": "massage",
+    "start_date": "2022-12-05",
+    "stroller": "yes",
+    "toilets": "yes",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10885700512,
+   "lat": 1.3265634,
+   "lon": 103.9315983,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "11",
+    "addr:postcode": "469662",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "restaurant",
+    "brand": "Sushi Express",
+    "brand:wikidata": "Q15920674",
+    "cuisine": "sushi",
+    "level": "0",
+    "name": "Sushi Express",
+    "opening_hours": "Mo-Su 11:00-21:30",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11293429386,
+   "lat": 1.2804496,
+   "lon": 103.8445095,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "069184",
+    "addr:street": "Kadayanallur Street",
+    "addr:unit": "#86",
+    "amenity": "fast_food",
+    "check_date": "2025-08-10",
+    "cuisine": "kebab;turkish",
+    "fast_food": "cafeteria",
+    "indoor_seating": "yes",
+    "level": "0",
+    "name": "Sultan Kebab",
+    "outdoor_seating": "yes",
+    "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11293429413,
+   "lat": 1.2804064,
+   "lon": 103.8445478,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "069184",
+    "addr:street": "Kadayanallur Street",
+    "addr:unit": "#88",
+    "amenity": "cafe",
+    "check_date": "2025-08-10",
+    "indoor_seating": "yes",
+    "level": "0",
+    "name": "Coffee Queen",
+    "outdoor_seating": "yes",
+    "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11293429421,
+   "lat": 1.2804718,
+   "lon": 103.8444898,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "069184",
+    "addr:street": "Kadayanallur Street",
+    "addr:unit": "#85",
+    "amenity": "fast_food",
+    "check_date": "2025-08-10",
+    "cuisine": "thai",
+    "fast_food": "cafeteria",
+    "indoor_seating": "yes",
+    "level": "0",
+    "name": "Sisaket Thai Food",
+    "outdoor_seating": "yes",
+    "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11293429423,
+   "lat": 1.2804265,
+   "lon": 103.84453,
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "1",
+    "addr:postcode": "069184",
+    "addr:street": "Kadayanallur Street",
+    "addr:unit": "#87",
+    "amenity": "fast_food",
+    "check_date": "2025-08-10",
+    "cuisine": "chinese;sichuan",
+    "fast_food": "cafeteria",
+    "indoor_seating": "yes",
+    "level": "0",
+    "name": "\u56db\u5ddd\u83dc\u9986 Sichuan Cuisine",
+    "name:en": "Sichuan Cuisine",
+    "name:zh-Hans": "\u56db\u5ddd\u83dc\u9986",
+    "name:zh-Hant": "\u56db\u5ddd\u83dc\u9928",
+    "outdoor_seating": "yes",
+    "takeaway": "only",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12206384510,
+   "lat": 1.325481,
+   "lon": 103.9301705,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Makisan",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12206384511,
+   "lat": 1.325418,
+   "lon": 103.9300914,
+   "tags": {
+    "amenity": "restaurant",
+    "branch": "Hotpot",
+    "brand": "XiaoLongKan",
+    "brand:en": "XiaoLongKan",
+    "brand:wikidata": "Q108212427",
+    "brand:zh": "\u5c0f\u9f99\u574e\u706b\u9505",
+    "cuisine": "chinese;hot_pot",
+    "name": "XiaoLongKan",
+    "name:en": "XiaoLongKan",
+    "name:zh": "\u5c0f\u9f99\u574e\u706b\u9505",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464813377,
+   "lat": 1.2801625,
+   "lon": 103.8403615,
+   "tags": {
+    "highway": "elevator",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464861109,
+   "lat": 1.2804631,
+   "lon": 103.8400379,
+   "tags": {
+    "highway": "elevator",
+    "level": "-3"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464861110,
+   "lat": 1.2801199,
+   "lon": 103.8398632,
+   "tags": {
+    "highway": "elevator",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464861266,
+   "lat": 1.2792457,
+   "lon": 103.8388292,
+   "tags": {
+    "highway": "elevator",
+    "level": "-3;1"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464861315,
+   "lat": 1.2815294,
+   "lon": 103.839358,
+   "tags": {
+    "highway": "elevator",
+    "level": "-1;-2;-3"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12464861394,
+   "lat": 1.2812394,
+   "lon": 103.8393979,
+   "tags": {
+    "highway": "elevator",
+    "level": "-2;-3;1"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12536784764,
+   "lat": 1.3267759,
+   "lon": 103.933587,
+   "tags": {
+    "amenity": "fast_food",
+    "name": "Common Grill by Collin's",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12536784766,
+   "lat": 1.3265995,
+   "lon": 103.9321427,
+   "tags": {
+    "name": "RedMan by Phoon Huat",
+    "shop": "houseware",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13032605752,
+   "lat": 1.275998,
+   "lon": 103.8329384,
+   "tags": {
+    "amenity": "toilets",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13039345025,
+   "lat": 1.2822343,
+   "lon": 103.838204,
+   "tags": {
+    "capacity": "15",
+    "highway": "elevator",
+    "level:ref": "street;\"ticket concourse\"",
+    "maxweight": "1020"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13039498281,
+   "lat": 1.2815537,
+   "lon": 103.8394852,
+   "tags": {
+    "capacity": "15",
+    "highway": "elevator",
+    "level:ref": "street;\"ticket concourse\"",
+    "maxweight": "1020"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13800501480,
+   "lat": 1.2811336,
+   "lon": 103.8385006,
+   "tags": {
+    "highway": "elevator"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13987546459,
+   "lat": 1.2740785,
+   "lon": 103.8359776,
+   "tags": {
+    "level": "1",
+    "name": "Cantonment (CCL)",
+    "railway": "subway_entrance",
+    "ref": "2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 32340671,
+   "bounds": {
+    "minlat": 1.2824264,
+    "minlon": 103.840055,
+    "maxlat": 1.2827089,
+    "maxlon": 103.8401804
+   },
+   "geometry": [
+    {
+     "lat": 1.2827089,
+     "lon": 103.840055
+    },
+    {
+     "lat": 1.2826435,
+     "lon": 103.8400642
+    },
+    {
+     "lat": 1.2825846,
+     "lon": 103.8400739
+    },
+    {
+     "lat": 1.2825224,
+     "lon": 103.8401003
+    },
+    {
+     "lat": 1.2824264,
+     "lon": 103.8401804
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 34915781,
+   "bounds": {
+    "minlat": 1.283297,
+    "minlon": 103.8422734,
+    "maxlat": 1.2833634,
+    "maxlon": 103.8423594
+   },
+   "geometry": [
+    {
+     "lat": 1.2833634,
+     "lon": 103.8423594
+    },
+    {
+     "lat": 1.283297,
+     "lon": 103.842302
+    },
+    {
+     "lat": 1.283324,
+     "lon": 103.8422734
+    },
+    {
+     "lat": 1.2833525,
+     "lon": 103.8422962
+    },
+    {
+     "lat": 1.2833407,
+     "lon": 103.8423086
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 47298635,
+   "bounds": {
+    "minlat": 1.2812129,
+    "minlon": 103.8438577,
+    "maxlat": 1.2817778,
+    "maxlon": 103.8446035
+   },
+   "geometry": [
+    {
+     "lat": 1.2814901,
+     "lon": 103.8445207
+    },
+    {
+     "lat": 1.2817778,
+     "lon": 103.843994
+    },
+    {
+     "lat": 1.2816612,
+     "lon": 103.8439303
+    },
+    {
+     "lat": 1.2815284,
+     "lon": 103.8438577
+    },
+    {
+     "lat": 1.2812426,
+     "lon": 103.844381
+    },
+    {
+     "lat": 1.281264,
+     "lon": 103.8443927
+    },
+    {
+     "lat": 1.2812129,
+     "lon": 103.8444862
+    },
+    {
+     "lat": 1.2813269,
+     "lon": 103.8445461
+    },
+    {
+     "lat": 1.2814276,
+     "lon": 103.8446035
+    },
+    {
+     "lat": 1.2814768,
+     "lon": 103.8445134
+    },
+    {
+     "lat": 1.2814901,
+     "lon": 103.8445207
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "288",
+    "addr:postcode": "058840",
+    "addr:street": "South Bridge Road",
+    "amenity": "place_of_worship",
+    "building": "temple",
+    "height": "30",
+    "image": "https://images.mapillary.com/5ll79x4xGRDoD05RsjlgBg/thumb-2048.jpg",
+    "mapillary": "216782643572916",
+    "name": "Buddha Tooth Relic Temple",
+    "name:ko": "\ubd88\uc544\uc0ac \uc6a9\ud654\uc6d0",
+    "name:ms": "Kuil Buddha Tooth Relic",
+    "name:zh": "\u4f5b\u7259\u5bfa\u9f8d\u83ef\u9662",
+    "opening_hours": "07:00-17:00",
+    "religion": "buddhist",
+    "start_date": "2007",
+    "wheelchair": "yes",
+    "wikidata": "Q839965",
+    "wikipedia": "en:Buddha Tooth Relic Temple and Museum"
+   }
+  },
+  {
+   "type": "way",
+   "id": 128869359,
+   "bounds": {
+    "minlat": 1.2843295,
+    "minlon": 103.8402334,
+    "maxlat": 1.2850928,
+    "maxlon": 103.8406117
+   },
+   "geometry": [
+    {
+     "lat": 1.2850928,
+     "lon": 103.8402334
+    },
+    {
+     "lat": 1.284843,
+     "lon": 103.8404012
+    },
+    {
+     "lat": 1.2847266,
+     "lon": 103.8404992
+    },
+    {
+     "lat": 1.284536,
+     "lon": 103.8405903
+    },
+    {
+     "lat": 1.284415,
+     "lon": 103.8406089
+    },
+    {
+     "lat": 1.2843295,
+     "lon": 103.8406117
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 149965100,
+   "bounds": {
+    "minlat": 1.2782683,
+    "minlon": 103.8413541,
+    "maxlat": 1.2783828,
+    "maxlon": 103.8414278
+   },
+   "geometry": [
+    {
+     "lat": 1.2782683,
+     "lon": 103.8414278
+    },
+    {
+     "lat": 1.2783828,
+     "lon": 103.8413541
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes",
+    "surface": "paving_stones"
+   }
+  },
+  {
+   "type": "way",
+   "id": 170268951,
+   "bounds": {
+    "minlat": 1.2760127,
+    "minlon": 103.835019,
+    "maxlat": 1.2760909,
+    "maxlon": 103.8353092
+   },
+   "geometry": [
+    {
+     "lat": 1.2760127,
+     "lon": 103.835019
+    },
+    {
+     "lat": 1.2760464,
+     "lon": 103.8351491
+    },
+    {
+     "lat": 1.2760909,
+     "lon": 103.8353092
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 170269331,
+   "bounds": {
+    "minlat": 1.2773824,
+    "minlon": 103.8320002,
+    "maxlat": 1.2774623,
+    "maxlon": 103.8320713
+   },
+   "geometry": [
+    {
+     "lat": 1.2773972,
+     "lon": 103.8320002
+    },
+    {
+     "lat": 1.2773824,
+     "lon": 103.8320284
+    },
+    {
+     "lat": 1.2774623,
+     "lon": 103.8320713
+    }
+   ],
+   "tags": {
+    "check_date:ramp": "2026-02-10",
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "surface": "concrete",
+    "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 170958481,
+   "bounds": {
+    "minlat": 1.2840584,
+    "minlon": 103.8429992,
+    "maxlat": 1.2841884,
+    "maxlon": 103.8430985
+   },
+   "geometry": [
+    {
+     "lat": 1.2841884,
+     "lon": 103.8430985
+    },
+    {
+     "lat": 1.2840584,
+     "lon": 103.8429992
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172241900,
+   "bounds": {
+    "minlat": 1.2819044,
+    "minlon": 103.8313381,
+    "maxlat": 1.2825823,
+    "maxlon": 103.83199
+   },
+   "geometry": [
+    {
+     "lat": 1.2825823,
+     "lon": 103.8316326
+    },
+    {
+     "lat": 1.2823417,
+     "lon": 103.8313381
+    },
+    {
+     "lat": 1.2819044,
+     "lon": 103.8316954
+    },
+    {
+     "lat": 1.2821449,
+     "lon": 103.83199
+    },
+    {
+     "lat": 1.2825823,
+     "lon": 103.8316326
+    }
+   ],
+   "tags": {
+    "addr:street": "Peng Nguan Street",
+    "building": "yes",
+    "building:levels": "5",
+    "name": "Peng Nguan",
+    "office": "company",
+    "source": "Kaart Ground Survey 2017",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172264400,
+   "bounds": {
+    "minlat": 1.2790806,
+    "minlon": 103.8387263,
+    "maxlat": 1.2794962,
+    "maxlon": 103.8391787
+   },
+   "geometry": [
+    {
+     "lat": 1.2790806,
+     "lon": 103.8387263
+    },
+    {
+     "lat": 1.2791339,
+     "lon": 103.8388333
+    },
+    {
+     "lat": 1.2792698,
+     "lon": 103.8389647
+    },
+    {
+     "lat": 1.2794504,
+     "lon": 103.8391787
+    },
+    {
+     "lat": 1.2794715,
+     "lon": 103.8391539
+    },
+    {
+     "lat": 1.2794962,
+     "lon": 103.8391248
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 172264413,
+   "bounds": {
+    "minlat": 1.2780941,
+    "minlon": 103.8372609,
+    "maxlat": 1.2787998,
+    "maxlon": 103.8383526
+   },
+   "geometry": [
+    {
+     "lat": 1.2787998,
+     "lon": 103.8383526
+    },
+    {
+     "lat": 1.27853,
+     "lon": 103.8379175
+    },
+    {
+     "lat": 1.2785116,
+     "lon": 103.8378896
+    },
+    {
+     "lat": 1.2780941,
+     "lon": 103.8372609
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 184299949,
+   "bounds": {
+    "minlat": 1.2838639,
+    "minlon": 103.8433785,
+    "maxlat": 1.2839558,
+    "maxlon": 103.8435661
+   },
+   "geometry": [
+    {
+     "lat": 1.2839151,
+     "lon": 103.8433785
+    },
+    {
+     "lat": 1.2839558,
+     "lon": 103.8434145
+    },
+    {
+     "lat": 1.2838639,
+     "lon": 103.8435661
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 214317723,
+   "bounds": {
+    "minlat": 1.3252862,
+    "minlon": 103.9264168,
+    "maxlat": 1.3257171,
+    "maxlon": 103.9266944
+   },
+   "geometry": [
+    {
+     "lat": 1.3257171,
+     "lon": 103.9264168
+    },
+    {
+     "lat": 1.3256614,
+     "lon": 103.9266944
+    },
+    {
+     "lat": 1.3255398,
+     "lon": 103.9266663
+    },
+    {
+     "lat": 1.3254543,
+     "lon": 103.9266481
+    },
+    {
+     "lat": 1.3254067,
+     "lon": 103.9265777
+    },
+    {
+     "lat": 1.3252862,
+     "lon": 103.9265529
+    },
+    {
+     "lat": 1.3252973,
+     "lon": 103.9264976
+    },
+    {
+     "lat": 1.3253107,
+     "lon": 103.9264305
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "paved",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 288729672,
+   "bounds": {
+    "minlat": 1.2849493,
+    "minlon": 103.83803,
+    "maxlat": 1.2850271,
+    "maxlon": 103.8381853
+   },
+   "geometry": [
+    {
+     "lat": 1.2850271,
+     "lon": 103.8381853
+    },
+    {
+     "lat": 1.2849493,
+     "lon": 103.83803
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 289140726,
+   "bounds": {
+    "minlat": 1.2854402,
+    "minlon": 103.8386442,
+    "maxlat": 1.2854884,
+    "maxlon": 103.8387622
+   },
+   "geometry": [
+    {
+     "lat": 1.2854402,
+     "lon": 103.8386442
+    },
+    {
+     "lat": 1.2854884,
+     "lon": 103.8387622
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 289975765,
+   "bounds": {
+    "minlat": 1.284887,
+    "minlon": 103.8381853,
+    "maxlat": 1.2850271,
+    "maxlon": 103.838454
+   },
+   "geometry": [
+    {
+     "lat": 1.284887,
+     "lon": 103.838454
+    },
+    {
+     "lat": 1.2850271,
+     "lon": 103.8381853
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 298087579,
+   "bounds": {
+    "minlat": 1.2800428,
+    "minlon": 103.8427679,
+    "maxlat": 1.2812019,
+    "maxlon": 103.8449953
+   },
+   "geometry": [
+    {
+     "lat": 1.2803024,
+     "lon": 103.8429253
+    },
+    {
+     "lat": 1.2801532,
+     "lon": 103.8427679
+    },
+    {
+     "lat": 1.2800428,
+     "lon": 103.8428193
+    },
+    {
+     "lat": 1.2800953,
+     "lon": 103.8429914
+    },
+    {
+     "lat": 1.2800627,
+     "lon": 103.842999
+    },
+    {
+     "lat": 1.2801029,
+     "lon": 103.8431518
+    },
+    {
+     "lat": 1.2801522,
+     "lon": 103.8433393
+    },
+    {
+     "lat": 1.2802704,
+     "lon": 103.8433135
+    },
+    {
+     "lat": 1.2805459,
+     "lon": 103.844426
+    },
+    {
+     "lat": 1.2806567,
+     "lon": 103.8444014
+    },
+    {
+     "lat": 1.2807939,
+     "lon": 103.8448845
+    },
+    {
+     "lat": 1.2809753,
+     "lon": 103.8449953
+    },
+    {
+     "lat": 1.2810459,
+     "lon": 103.8448808
+    },
+    {
+     "lat": 1.2811202,
+     "lon": 103.8449263
+    },
+    {
+     "lat": 1.2811973,
+     "lon": 103.8448073
+    },
+    {
+     "lat": 1.280944,
+     "lon": 103.8444668
+    },
+    {
+     "lat": 1.2809117,
+     "lon": 103.8442394
+    },
+    {
+     "lat": 1.2811108,
+     "lon": 103.8444115
+    },
+    {
+     "lat": 1.2811693,
+     "lon": 103.8442648
+    },
+    {
+     "lat": 1.2812019,
+     "lon": 103.8441701
+    },
+    {
+     "lat": 1.2809332,
+     "lon": 103.8440212
+    },
+    {
+     "lat": 1.2808573,
+     "lon": 103.8440398
+    },
+    {
+     "lat": 1.2808184,
+     "lon": 103.8438926
+    },
+    {
+     "lat": 1.2807973,
+     "lon": 103.8438969
+    },
+    {
+     "lat": 1.2806898,
+     "lon": 103.8439979
+    },
+    {
+     "lat": 1.2805242,
+     "lon": 103.84337
+    },
+    {
+     "lat": 1.2803024,
+     "lon": 103.8429253
+    }
+   ],
+   "tags": {
+    "building:levels:underground": "4",
+    "name": "Maxwell",
+    "name:ta": "\u0bae\u0bc6\u0b9a\u0bcd\u0bb8\u0bcd\u0bb5\u0bc6\u0bb2\u0bcd",
+    "name:th": "\u0e41\u0e21\u0e01\u0e0b\u0e4c\u0e40\u0e27\u0e25\u0e25\u0e4c",
+    "name:zh": "\u9ea6\u58eb\u5a01",
+    "network": "Mass Rapid Transit",
+    "network:short": "MRT",
+    "network:wikidata": "Q40176",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "TE18",
+    "ref:colour": "#734538",
+    "station": "subway",
+    "subway": "yes",
+    "underground": "station",
+    "wheelchair": "yes",
+    "wikidata": "Q6796128",
+    "wikipedia": "en:Maxwell MRT station"
+   }
+  },
+  {
+   "type": "way",
+   "id": 303339289,
+   "bounds": {
+    "minlat": 1.2847752,
+    "minlon": 103.8417161,
+    "maxlat": 1.284784,
+    "maxlon": 103.8421078
+   },
+   "geometry": [
+    {
+     "lat": 1.284784,
+     "lon": 103.8421078
+    },
+    {
+     "lat": 1.2847752,
+     "lon": 103.8417161
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up"
+   }
+  },
+  {
+   "type": "way",
+   "id": 303339894,
+   "bounds": {
+    "minlat": 1.2836999,
+    "minlon": 103.8408838,
+    "maxlat": 1.2838244,
+    "maxlon": 103.8412295
+   },
+   "geometry": [
+    {
+     "lat": 1.2838244,
+     "lon": 103.8412295
+    },
+    {
+     "lat": 1.283772,
+     "lon": 103.8411606
+    },
+    {
+     "lat": 1.2837158,
+     "lon": 103.8410756
+    },
+    {
+     "lat": 1.2837007,
+     "lon": 103.8410333
+    },
+    {
+     "lat": 1.2836999,
+     "lon": 103.8409883
+    },
+    {
+     "lat": 1.2837137,
+     "lon": 103.8409455
+    },
+    {
+     "lat": 1.2837405,
+     "lon": 103.8409094
+    },
+    {
+     "lat": 1.2837775,
+     "lon": 103.8408838
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 303340719,
+   "bounds": {
+    "minlat": 1.2841758,
+    "minlon": 103.8430985,
+    "maxlat": 1.2842306,
+    "maxlon": 103.8431967
+   },
+   "geometry": [
+    {
+     "lat": 1.2841884,
+     "lon": 103.8430985
+    },
+    {
+     "lat": 1.2842306,
+     "lon": 103.8431374
+    },
+    {
+     "lat": 1.2841758,
+     "lon": 103.8431967
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 310320761,
+   "bounds": {
+    "minlat": 1.2764626,
+    "minlon": 103.8425846,
+    "maxlat": 1.2765512,
+    "maxlon": 103.8426821
+   },
+   "geometry": [
+    {
+     "lat": 1.2764626,
+     "lon": 103.8426821
+    },
+    {
+     "lat": 1.2765512,
+     "lon": 103.8425846
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 340861415,
+   "bounds": {
+    "minlat": 1.2801241,
+    "minlon": 103.8294155,
+    "maxlat": 1.2818396,
+    "maxlon": 103.8313551
+   },
+   "geometry": [
+    {
+     "lat": 1.2810887,
+     "lon": 103.8296488
+    },
+    {
+     "lat": 1.2808774,
+     "lon": 103.8295377
+    },
+    {
+     "lat": 1.2807666,
+     "lon": 103.8297419
+    },
+    {
+     "lat": 1.2802345,
+     "lon": 103.8294356
+    },
+    {
+     "lat": 1.2801619,
+     "lon": 103.8294155
+    },
+    {
+     "lat": 1.2801262,
+     "lon": 103.8294168
+    },
+    {
+     "lat": 1.2801241,
+     "lon": 103.8294981
+    },
+    {
+     "lat": 1.2814649,
+     "lon": 103.8313551
+    },
+    {
+     "lat": 1.2818396,
+     "lon": 103.8309836
+    },
+    {
+     "lat": 1.2815457,
+     "lon": 103.8305815
+    },
+    {
+     "lat": 1.2816542,
+     "lon": 103.8304207
+    },
+    {
+     "lat": 1.2813317,
+     "lon": 103.8302349
+    },
+    {
+     "lat": 1.2815025,
+     "lon": 103.8299046
+    },
+    {
+     "lat": 1.2815573,
+     "lon": 103.8298
+    },
+    {
+     "lat": 1.2814381,
+     "lon": 103.8297472
+    },
+    {
+     "lat": 1.2811542,
+     "lon": 103.8302472
+    },
+    {
+     "lat": 1.2808924,
+     "lon": 103.8301111
+    },
+    {
+     "lat": 1.2809794,
+     "lon": 103.8299377
+    },
+    {
+     "lat": 1.2809429,
+     "lon": 103.8299177
+    },
+    {
+     "lat": 1.2810887,
+     "lon": 103.8296488
+    }
+   ],
+   "tags": {
+    "leisure": "park",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 372153152,
+   "bounds": {
+    "minlat": 1.2769177,
+    "minlon": 103.8418148,
+    "maxlat": 1.277149,
+    "maxlon": 103.8420775
+   },
+   "geometry": [
+    {
+     "lat": 1.277149,
+     "lon": 103.8420098
+    },
+    {
+     "lat": 1.2770987,
+     "lon": 103.8420361
+    },
+    {
+     "lat": 1.2770196,
+     "lon": 103.8420775
+    },
+    {
+     "lat": 1.2769177,
+     "lon": 103.8418824
+    },
+    {
+     "lat": 1.2770472,
+     "lon": 103.8418148
+    },
+    {
+     "lat": 1.277149,
+     "lon": 103.8420098
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "1",
+    "addr:postcode": "080001",
+    "addr:street": "Cantonment Road",
+    "amenity": "restaurant",
+    "building": "yes",
+    "ele": "-2",
+    "name": "Essen @ The Pinnacle",
+    "opening_hours": "10:30-23:00",
+    "phone": "+65 6727 6066",
+    "smoking": "separated",
+    "source": "https://www.facebook.com/EssenThePinnacle/",
+    "start_date": "2009",
+    "website": "https://www.facebook.com/EssenThePinnacle/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 455093515,
+   "bounds": {
+    "minlat": 1.2850928,
+    "minlon": 103.8402334,
+    "maxlat": 1.2864078,
+    "maxlon": 103.8408201
+   },
+   "geometry": [
+    {
+     "lat": 1.2864078,
+     "lon": 103.8408201
+    },
+    {
+     "lat": 1.286262,
+     "lon": 103.8407417
+    },
+    {
+     "lat": 1.2859308,
+     "lon": 103.8405821
+    },
+    {
+     "lat": 1.2855876,
+     "lon": 103.8404614
+    },
+    {
+     "lat": 1.2850928,
+     "lon": 103.8402334
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 455093517,
+   "bounds": {
+    "minlat": 1.2832511,
+    "minlon": 103.8394953,
+    "maxlat": 1.283488,
+    "maxlon": 103.8396168
+   },
+   "geometry": [
+    {
+     "lat": 1.283488,
+     "lon": 103.8396168
+    },
+    {
+     "lat": 1.2832511,
+     "lon": 103.8394953
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "incline": "up",
+    "surface": "concrete"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560323,
+   "bounds": {
+    "minlat": 1.282918,
+    "minlon": 103.8404037,
+    "maxlat": 1.2832865,
+    "maxlon": 103.8413212
+   },
+   "geometry": [
+    {
+     "lat": 1.282918,
+     "lon": 103.8404037
+    },
+    {
+     "lat": 1.2830253,
+     "lon": 103.840578
+    },
+    {
+     "lat": 1.2830776,
+     "lon": 103.8406625
+    },
+    {
+     "lat": 1.2832332,
+     "lon": 103.8407966
+    },
+    {
+     "lat": 1.2832224,
+     "lon": 103.8409013
+    },
+    {
+     "lat": 1.2832425,
+     "lon": 103.8409911
+    },
+    {
+     "lat": 1.2832318,
+     "lon": 103.8410931
+    },
+    {
+     "lat": 1.2832831,
+     "lon": 103.8412326
+    },
+    {
+     "lat": 1.2832865,
+     "lon": 103.8412769
+    },
+    {
+     "lat": 1.283225,
+     "lon": 103.8413212
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no",
+    "surface": "asphalt"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560326,
+   "bounds": {
+    "minlat": 1.2847194,
+    "minlon": 103.8404992,
+    "maxlat": 1.2847266,
+    "maxlon": 103.8407629
+   },
+   "geometry": [
+    {
+     "lat": 1.2847194,
+     "lon": 103.8407629
+    },
+    {
+     "lat": 1.2847266,
+     "lon": 103.8404992
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560333,
+   "bounds": {
+    "minlat": 1.2833289,
+    "minlon": 103.8405191,
+    "maxlat": 1.2833613,
+    "maxlon": 103.840536
+   },
+   "geometry": [
+    {
+     "lat": 1.2833613,
+     "lon": 103.8405191
+    },
+    {
+     "lat": 1.2833289,
+     "lon": 103.840536
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560334,
+   "bounds": {
+    "minlat": 1.2837117,
+    "minlon": 103.8396543,
+    "maxlat": 1.2838224,
+    "maxlon": 103.8396962
+   },
+   "geometry": [
+    {
+     "lat": 1.2838224,
+     "lon": 103.8396543
+    },
+    {
+     "lat": 1.2837117,
+     "lon": 103.8396962
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560337,
+   "bounds": {
+    "minlat": 1.2839074,
+    "minlon": 103.8405988,
+    "maxlat": 1.2841382,
+    "maxlon": 103.840708
+   },
+   "geometry": [
+    {
+     "lat": 1.2841382,
+     "lon": 103.8405988
+    },
+    {
+     "lat": 1.2840316,
+     "lon": 103.84069
+    },
+    {
+     "lat": 1.2839074,
+     "lon": 103.840708
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560356,
+   "bounds": {
+    "minlat": 1.2837688,
+    "minlon": 103.840841,
+    "maxlat": 1.2837775,
+    "maxlon": 103.8408838
+   },
+   "geometry": [
+    {
+     "lat": 1.2837775,
+     "lon": 103.8408838
+    },
+    {
+     "lat": 1.2837688,
+     "lon": 103.840841
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560357,
+   "bounds": {
+    "minlat": 1.2837775,
+    "minlon": 103.8408706,
+    "maxlat": 1.2838609,
+    "maxlon": 103.8408838
+   },
+   "geometry": [
+    {
+     "lat": 1.2837775,
+     "lon": 103.8408838
+    },
+    {
+     "lat": 1.2838609,
+     "lon": 103.8408706
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560358,
+   "bounds": {
+    "minlat": 1.2850928,
+    "minlon": 103.8397363,
+    "maxlat": 1.2855953,
+    "maxlon": 103.8402334
+   },
+   "geometry": [
+    {
+     "lat": 1.2855953,
+     "lon": 103.8397363
+    },
+    {
+     "lat": 1.2854225,
+     "lon": 103.8398229
+    },
+    {
+     "lat": 1.2853438,
+     "lon": 103.8398974
+    },
+    {
+     "lat": 1.2852093,
+     "lon": 103.8399739
+    },
+    {
+     "lat": 1.2851928,
+     "lon": 103.8400735
+    },
+    {
+     "lat": 1.2851491,
+     "lon": 103.8401596
+    },
+    {
+     "lat": 1.2850928,
+     "lon": 103.8402334
+    }
+   ],
+   "tags": {
+    "foot": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560361,
+   "bounds": {
+    "minlat": 1.2848525,
+    "minlon": 103.8406788,
+    "maxlat": 1.2849932,
+    "maxlon": 103.8407304
+   },
+   "geometry": [
+    {
+     "lat": 1.2849932,
+     "lon": 103.8406788
+    },
+    {
+     "lat": 1.2849061,
+     "lon": 103.840711
+    },
+    {
+     "lat": 1.2848525,
+     "lon": 103.8407304
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560363,
+   "bounds": {
+    "minlat": 1.2849932,
+    "minlon": 103.8406359,
+    "maxlat": 1.2850468,
+    "maxlon": 103.8406788
+   },
+   "geometry": [
+    {
+     "lat": 1.2850468,
+     "lon": 103.8406359
+    },
+    {
+     "lat": 1.2849932,
+     "lon": 103.8406788
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 462560364,
+   "bounds": {
+    "minlat": 1.2849932,
+    "minlon": 103.8406788,
+    "maxlat": 1.2850522,
+    "maxlon": 103.8408532
+   },
+   "geometry": [
+    {
+     "lat": 1.2850522,
+     "lon": 103.8408532
+    },
+    {
+     "lat": 1.2850509,
+     "lon": 103.8407968
+    },
+    {
+     "lat": 1.2849932,
+     "lon": 103.8406788
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 474480035,
+   "bounds": {
+    "minlat": 1.3214787,
+    "minlon": 103.9277792,
+    "maxlat": 1.3215576,
+    "maxlon": 103.927811
+   },
+   "geometry": [
+    {
+     "lat": 1.3215144,
+     "lon": 103.9277865
+    },
+    {
+     "lat": 1.3215543,
+     "lon": 103.9277792
+    },
+    {
+     "lat": 1.3215576,
+     "lon": 103.9277969
+    },
+    {
+     "lat": 1.3214787,
+     "lon": 103.927811
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 474480038,
+   "bounds": {
+    "minlat": 1.3213966,
+    "minlon": 103.9274435,
+    "maxlat": 1.3214545,
+    "maxlon": 103.9275436
+   },
+   "geometry": [
+    {
+     "lat": 1.3214161,
+     "lon": 103.9275407
+    },
+    {
+     "lat": 1.3213966,
+     "lon": 103.9274488
+    },
+    {
+     "lat": 1.3214289,
+     "lon": 103.9274435
+    },
+    {
+     "lat": 1.3214545,
+     "lon": 103.9275436
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 479249688,
+   "bounds": {
+    "minlat": 1.2761804,
+    "minlon": 103.8348821,
+    "maxlat": 1.276278,
+    "maxlon": 103.8349297
+   },
+   "geometry": [
+    {
+     "lat": 1.276278,
+     "lon": 103.8349297
+    },
+    {
+     "lat": 1.2762663,
+     "lon": 103.8348821
+    },
+    {
+     "lat": 1.2762364,
+     "lon": 103.8348894
+    },
+    {
+     "lat": 1.2761804,
+     "lon": 103.8349031
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "surface": "concrete"
+   }
+  },
+  {
+   "type": "way",
+   "id": 479249910,
+   "bounds": {
+    "minlat": 1.2776237,
+    "minlon": 103.8321625,
+    "maxlat": 1.2777345,
+    "maxlon": 103.8322124
+   },
+   "geometry": [
+    {
+     "lat": 1.2777345,
+     "lon": 103.832173
+    },
+    {
+     "lat": 1.2777136,
+     "lon": 103.8322124
+    },
+    {
+     "lat": 1.2776627,
+     "lon": 103.832184
+    },
+    {
+     "lat": 1.2776237,
+     "lon": 103.8321625
+    }
+   ],
+   "tags": {
+    "check_date:ramp": "2026-02-03",
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "surface": "concrete",
+    "tactile_paving": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 481596154,
+   "bounds": {
+    "minlat": 1.2753748,
+    "minlon": 103.8411029,
+    "maxlat": 1.2755035,
+    "maxlon": 103.8411288
+   },
+   "geometry": [
+    {
+     "lat": 1.2753748,
+     "lon": 103.8411288
+    },
+    {
+     "lat": 1.2755035,
+     "lon": 103.8411029
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 505550445,
+   "bounds": {
+    "minlat": 1.2807729,
+    "minlon": 103.8411987,
+    "maxlat": 1.2808298,
+    "maxlon": 103.8412638
+   },
+   "geometry": [
+    {
+     "lat": 1.2807729,
+     "lon": 103.8412638
+    },
+    {
+     "lat": 1.2808298,
+     "lon": 103.8411987
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 505550446,
+   "bounds": {
+    "minlat": 1.2802779,
+    "minlon": 103.8411849,
+    "maxlat": 1.2803023,
+    "maxlon": 103.8412622
+   },
+   "geometry": [
+    {
+     "lat": 1.2803023,
+     "lon": 103.8411849
+    },
+    {
+     "lat": 1.2802779,
+     "lon": 103.8412622
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 505550450,
+   "bounds": {
+    "minlat": 1.2803718,
+    "minlon": 103.8410871,
+    "maxlat": 1.2803999,
+    "maxlon": 103.8411538
+   },
+   "geometry": [
+    {
+     "lat": 1.2803999,
+     "lon": 103.8410871
+    },
+    {
+     "lat": 1.2803718,
+     "lon": 103.8411538
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 505551443,
+   "bounds": {
+    "minlat": 1.279163,
+    "minlon": 103.8411564,
+    "maxlat": 1.2791682,
+    "maxlon": 103.8412418
+   },
+   "geometry": [
+    {
+     "lat": 1.2791682,
+     "lon": 103.8412418
+    },
+    {
+     "lat": 1.279163,
+     "lon": 103.8411564
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 528890989,
+   "bounds": {
+    "minlat": 1.2772543,
+    "minlon": 103.8367993,
+    "maxlat": 1.2773593,
+    "maxlon": 103.8370021
+   },
+   "geometry": [
+    {
+     "lat": 1.2772543,
+     "lon": 103.8370021
+    },
+    {
+     "lat": 1.2772555,
+     "lon": 103.836954
+    },
+    {
+     "lat": 1.277293,
+     "lon": 103.8369444
+    },
+    {
+     "lat": 1.2773379,
+     "lon": 103.8369378
+    },
+    {
+     "lat": 1.2773317,
+     "lon": 103.8368184
+    },
+    {
+     "lat": 1.2773593,
+     "lon": 103.8367993
+    }
+   ],
+   "tags": {
+    "footway": "crossing",
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "asphalt",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 610397185,
+   "bounds": {
+    "minlat": 1.2753036,
+    "minlon": 103.8321266,
+    "maxlat": 1.2763077,
+    "maxlon": 103.835019
+   },
+   "geometry": [
+    {
+     "lat": 1.2760127,
+     "lon": 103.835019
+    },
+    {
+     "lat": 1.2760156,
+     "lon": 103.8349997
+    },
+    {
+     "lat": 1.275988,
+     "lon": 103.8348425
+    },
+    {
+     "lat": 1.2759862,
+     "lon": 103.8346549
+    },
+    {
+     "lat": 1.276005,
+     "lon": 103.8345164
+    },
+    {
+     "lat": 1.2760565,
+     "lon": 103.8343192
+    },
+    {
+     "lat": 1.2761123,
+     "lon": 103.8341668
+    },
+    {
+     "lat": 1.2761943,
+     "lon": 103.833883
+    },
+    {
+     "lat": 1.2762148,
+     "lon": 103.8337916
+    },
+    {
+     "lat": 1.2763077,
+     "lon": 103.8333787
+    },
+    {
+     "lat": 1.2762505,
+     "lon": 103.8332255
+    },
+    {
+     "lat": 1.2762176,
+     "lon": 103.8330534
+    },
+    {
+     "lat": 1.2761933,
+     "lon": 103.8326925
+    },
+    {
+     "lat": 1.2761712,
+     "lon": 103.8323275
+    },
+    {
+     "lat": 1.2761622,
+     "lon": 103.8322486
+    },
+    {
+     "lat": 1.2761375,
+     "lon": 103.8322015
+    },
+    {
+     "lat": 1.276082,
+     "lon": 103.8321484
+    },
+    {
+     "lat": 1.2760345,
+     "lon": 103.8321306
+    },
+    {
+     "lat": 1.2759799,
+     "lon": 103.8321266
+    },
+    {
+     "lat": 1.275912,
+     "lon": 103.8321364
+    },
+    {
+     "lat": 1.2758547,
+     "lon": 103.8321689
+    },
+    {
+     "lat": 1.2754611,
+     "lon": 103.8325527
+    },
+    {
+     "lat": 1.2753036,
+     "lon": 103.8327892
+    },
+    {
+     "lat": 1.2753157,
+     "lon": 103.8328022
+    }
+   ],
+   "tags": {
+    "footway": "sidewalk",
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798949,
+   "bounds": {
+    "minlat": 1.2783917,
+    "minlon": 103.8414132,
+    "maxlat": 1.2784646,
+    "maxlon": 103.8414679
+   },
+   "geometry": [
+    {
+     "lat": 1.2783917,
+     "lon": 103.8414132
+    },
+    {
+     "lat": 1.2784319,
+     "lon": 103.8414679
+    },
+    {
+     "lat": 1.2784646,
+     "lon": 103.841451
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798953,
+   "bounds": {
+    "minlat": 1.2779995,
+    "minlon": 103.8406103,
+    "maxlat": 1.2781098,
+    "maxlon": 103.8406504
+   },
+   "geometry": [
+    {
+     "lat": 1.2779995,
+     "lon": 103.8406504
+    },
+    {
+     "lat": 1.2780669,
+     "lon": 103.8406263
+    },
+    {
+     "lat": 1.2781098,
+     "lon": 103.8406103
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798955,
+   "bounds": {
+    "minlat": 1.2781098,
+    "minlon": 103.8405366,
+    "maxlat": 1.278123,
+    "maxlon": 103.8406103
+   },
+   "geometry": [
+    {
+     "lat": 1.2781098,
+     "lon": 103.8406103
+    },
+    {
+     "lat": 1.278123,
+     "lon": 103.8405366
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798956,
+   "bounds": {
+    "minlat": 1.2780296,
+    "minlon": 103.8402331,
+    "maxlat": 1.278123,
+    "maxlon": 103.8405366
+   },
+   "geometry": [
+    {
+     "lat": 1.278123,
+     "lon": 103.8405366
+    },
+    {
+     "lat": 1.278099,
+     "lon": 103.8404585
+    },
+    {
+     "lat": 1.2780625,
+     "lon": 103.8403401
+    },
+    {
+     "lat": 1.2780296,
+     "lon": 103.8402331
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798957,
+   "bounds": {
+    "minlat": 1.278123,
+    "minlon": 103.8398058,
+    "maxlat": 1.2797886,
+    "maxlon": 103.8405366
+   },
+   "geometry": [
+    {
+     "lat": 1.278123,
+     "lon": 103.8405366
+    },
+    {
+     "lat": 1.2783159,
+     "lon": 103.8404382
+    },
+    {
+     "lat": 1.2793675,
+     "lon": 103.8399015
+    },
+    {
+     "lat": 1.279417,
+     "lon": 103.8398762
+    },
+    {
+     "lat": 1.2795267,
+     "lon": 103.8398199
+    },
+    {
+     "lat": 1.279648,
+     "lon": 103.8398058
+    },
+    {
+     "lat": 1.2796904,
+     "lon": 103.8398216
+    },
+    {
+     "lat": 1.2797886,
+     "lon": 103.839806
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798958,
+   "bounds": {
+    "minlat": 1.2779421,
+    "minlon": 103.8406207,
+    "maxlat": 1.2779995,
+    "maxlon": 103.8406504
+   },
+   "geometry": [
+    {
+     "lat": 1.2779995,
+     "lon": 103.8406504
+    },
+    {
+     "lat": 1.2779421,
+     "lon": 103.8406207
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798959,
+   "bounds": {
+    "minlat": 1.2778714,
+    "minlon": 103.8403545,
+    "maxlat": 1.2779421,
+    "maxlon": 103.8406207
+   },
+   "geometry": [
+    {
+     "lat": 1.2779421,
+     "lon": 103.8406207
+    },
+    {
+     "lat": 1.2779203,
+     "lon": 103.8405391
+    },
+    {
+     "lat": 1.2778886,
+     "lon": 103.8404193
+    },
+    {
+     "lat": 1.2778774,
+     "lon": 103.8403772
+    },
+    {
+     "lat": 1.2778714,
+     "lon": 103.8403545
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798960,
+   "bounds": {
+    "minlat": 1.2778714,
+    "minlon": 103.8402891,
+    "maxlat": 1.2778974,
+    "maxlon": 103.8403545
+   },
+   "geometry": [
+    {
+     "lat": 1.2778714,
+     "lon": 103.8403545
+    },
+    {
+     "lat": 1.2778974,
+     "lon": 103.8402891
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641798962,
+   "bounds": {
+    "minlat": 1.2778974,
+    "minlon": 103.8402331,
+    "maxlat": 1.2780296,
+    "maxlon": 103.8402891
+   },
+   "geometry": [
+    {
+     "lat": 1.2778974,
+     "lon": 103.8402891
+    },
+    {
+     "lat": 1.2779617,
+     "lon": 103.8402619
+    },
+    {
+     "lat": 1.2780296,
+     "lon": 103.8402331
+    }
+   ],
+   "tags": {
+    "crossing": "marked",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 641799683,
+   "bounds": {
+    "minlat": 1.2763023,
+    "minlon": 103.8419899,
+    "maxlat": 1.2763247,
+    "maxlon": 103.8420223
+   },
+   "geometry": [
+    {
+     "lat": 1.2763023,
+     "lon": 103.8420223
+    },
+    {
+     "lat": 1.2763097,
+     "lon": 103.8420088
+    },
+    {
+     "lat": 1.2763247,
+     "lon": 103.8419899
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 655161487,
+   "bounds": {
+    "minlat": 1.3249581,
+    "minlon": 103.9300874,
+    "maxlat": 1.325544,
+    "maxlon": 103.9306171
+   },
+   "geometry": [
+    {
+     "lat": 1.3253611,
+     "lon": 103.9305892
+    },
+    {
+     "lat": 1.3253824,
+     "lon": 103.9306057
+    },
+    {
+     "lat": 1.3254159,
+     "lon": 103.9306171
+    },
+    {
+     "lat": 1.3254461,
+     "lon": 103.9306171
+    },
+    {
+     "lat": 1.3254823,
+     "lon": 103.9306104
+    },
+    {
+     "lat": 1.3255038,
+     "lon": 103.9305869
+    },
+    {
+     "lat": 1.3255406,
+     "lon": 103.9304837
+    },
+    {
+     "lat": 1.3255423,
+     "lon": 103.930474
+    },
+    {
+     "lat": 1.325544,
+     "lon": 103.9304642
+    },
+    {
+     "lat": 1.3255312,
+     "lon": 103.9304387
+    },
+    {
+     "lat": 1.3254769,
+     "lon": 103.9303254
+    },
+    {
+     "lat": 1.3253844,
+     "lon": 103.9301115
+    },
+    {
+     "lat": 1.325363,
+     "lon": 103.9300941
+    },
+    {
+     "lat": 1.3253409,
+     "lon": 103.9300874
+    },
+    {
+     "lat": 1.3252475,
+     "lon": 103.9301061
+    },
+    {
+     "lat": 1.3250801,
+     "lon": 103.9301397
+    },
+    {
+     "lat": 1.3250684,
+     "lon": 103.9301467
+    },
+    {
+     "lat": 1.3250566,
+     "lon": 103.9301538
+    },
+    {
+     "lat": 1.3250392,
+     "lon": 103.9301705
+    },
+    {
+     "lat": 1.3249987,
+     "lon": 103.9302882
+    },
+    {
+     "lat": 1.3249581,
+     "lon": 103.9304059
+    },
+    {
+     "lat": 1.3249614,
+     "lon": 103.930434
+    },
+    {
+     "lat": 1.3249722,
+     "lon": 103.9304521
+    },
+    {
+     "lat": 1.3249882,
+     "lon": 103.9304589
+    },
+    {
+     "lat": 1.3253611,
+     "lon": 103.9305892
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:country": "SG",
+    "addr:housenumber": "208C",
+    "addr:postcode": "463208",
+    "addr:street": "New Upper Changi Road",
+    "amenity": "theatre",
+    "building": "roof",
+    "building:levels": "1",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 659646055,
+   "bounds": {
+    "minlat": 1.3265648,
+    "minlon": 103.9331704,
+    "maxlat": 1.3273151,
+    "maxlon": 103.9335014
+   },
+   "geometry": [
+    {
+     "lat": 1.3266237,
+     "lon": 103.9334787
+    },
+    {
+     "lat": 1.3265648,
+     "lon": 103.9331704
+    },
+    {
+     "lat": 1.327261,
+     "lon": 103.93319
+    },
+    {
+     "lat": 1.3273151,
+     "lon": 103.9335014
+    },
+    {
+     "lat": 1.3266237,
+     "lon": 103.9334787
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "addr:housenumber": "216",
+    "addr:postcode": "460216",
+    "addr:street": "Bedok North Street 1",
+    "amenity": "marketplace",
+    "name": "Bedok 216 Wet.Market",
+    "operator": "National Environment Agency",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 663306740,
+   "bounds": {
+    "minlat": 1.2753145,
+    "minlon": 103.8408146,
+    "maxlat": 1.2754465,
+    "maxlon": 103.8408397
+   },
+   "geometry": [
+    {
+     "lat": 1.2754465,
+     "lon": 103.8408146
+    },
+    {
+     "lat": 1.2753145,
+     "lon": 103.8408397
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 663976333,
+   "bounds": {
+    "minlat": 1.2788409,
+    "minlon": 103.8383565,
+    "maxlat": 1.2788942,
+    "maxlon": 103.83844
+   },
+   "geometry": [
+    {
+     "lat": 1.2788942,
+     "lon": 103.83844
+    },
+    {
+     "lat": 1.2788409,
+     "lon": 103.8383565
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 663985348,
+   "bounds": {
+    "minlat": 1.2793597,
+    "minlon": 103.8394419,
+    "maxlat": 1.2797971,
+    "maxlon": 103.8398058
+   },
+   "geometry": [
+    {
+     "lat": 1.2797971,
+     "lon": 103.8394419
+    },
+    {
+     "lat": 1.2796827,
+     "lon": 103.8394777
+    },
+    {
+     "lat": 1.2794703,
+     "lon": 103.8395463
+    },
+    {
+     "lat": 1.2793597,
+     "lon": 103.8395961
+    },
+    {
+     "lat": 1.2794436,
+     "lon": 103.839652
+    },
+    {
+     "lat": 1.279589,
+     "lon": 103.839763
+    },
+    {
+     "lat": 1.279648,
+     "lon": 103.8398058
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 663985349,
+   "bounds": {
+    "minlat": 1.2794715,
+    "minlon": 103.8391539,
+    "maxlat": 1.2801238,
+    "maxlon": 103.839806
+   },
+   "geometry": [
+    {
+     "lat": 1.2794715,
+     "lon": 103.8391539
+    },
+    {
+     "lat": 1.279532,
+     "lon": 103.8392048
+    },
+    {
+     "lat": 1.279603,
+     "lon": 103.8392504
+    },
+    {
+     "lat": 1.2796386,
+     "lon": 103.8392798
+    },
+    {
+     "lat": 1.2798066,
+     "lon": 103.8393293
+    },
+    {
+     "lat": 1.279789,
+     "lon": 103.839404
+    },
+    {
+     "lat": 1.2797971,
+     "lon": 103.8394419
+    },
+    {
+     "lat": 1.2798719,
+     "lon": 103.8395037
+    },
+    {
+     "lat": 1.2799735,
+     "lon": 103.8395983
+    },
+    {
+     "lat": 1.2801238,
+     "lon": 103.8397065
+    },
+    {
+     "lat": 1.2799961,
+     "lon": 103.8397489
+    },
+    {
+     "lat": 1.2797886,
+     "lon": 103.839806
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "surface": "asphalt",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 678784442,
+   "bounds": {
+    "minlat": 1.2787998,
+    "minlon": 103.8383526,
+    "maxlat": 1.2788409,
+    "maxlon": 103.8383565
+   },
+   "geometry": [
+    {
+     "lat": 1.2788409,
+     "lon": 103.8383565
+    },
+    {
+     "lat": 1.2787998,
+     "lon": 103.8383526
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "surface": "concrete",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 678784444,
+   "bounds": {
+    "minlat": 1.2781624,
+    "minlon": 103.8381241,
+    "maxlat": 1.2782056,
+    "maxlon": 103.8381905
+   },
+   "geometry": [
+    {
+     "lat": 1.2782056,
+     "lon": 103.8381905
+    },
+    {
+     "lat": 1.2781624,
+     "lon": 103.8381241
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 678784445,
+   "bounds": {
+    "minlat": 1.2781806,
+    "minlon": 103.8381127,
+    "maxlat": 1.2782229,
+    "maxlon": 103.8381905
+   },
+   "geometry": [
+    {
+     "lat": 1.2781806,
+     "lon": 103.8381127
+    },
+    {
+     "lat": 1.2782229,
+     "lon": 103.8381777
+    },
+    {
+     "lat": 1.2782056,
+     "lon": 103.8381905
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 678784446,
+   "bounds": {
+    "minlat": 1.2784861,
+    "minlon": 103.8378983,
+    "maxlat": 1.2785452,
+    "maxlon": 103.8379829
+   },
+   "geometry": [
+    {
+     "lat": 1.2784991,
+     "lon": 103.8378983
+    },
+    {
+     "lat": 1.2785452,
+     "lon": 103.8379724
+    },
+    {
+     "lat": 1.2785282,
+     "lon": 103.8379829
+    },
+    {
+     "lat": 1.2784861,
+     "lon": 103.837915
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 722105628,
+   "bounds": {
+    "minlat": 1.281765,
+    "minlon": 103.8309473,
+    "maxlat": 1.2823754,
+    "maxlon": 103.8315745
+   },
+   "geometry": [
+    {
+     "lat": 1.281765,
+     "lon": 103.8315745
+    },
+    {
+     "lat": 1.2823754,
+     "lon": 103.8309473
+    }
+   ],
+   "tags": {
+    "footway": "sidewalk",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 722105632,
+   "bounds": {
+    "minlat": 1.2822008,
+    "minlon": 103.831034,
+    "maxlat": 1.282877,
+    "maxlon": 103.8321283
+   },
+   "geometry": [
+    {
+     "lat": 1.2824416,
+     "lon": 103.831034
+    },
+    {
+     "lat": 1.2826513,
+     "lon": 103.8312817
+    },
+    {
+     "lat": 1.282877,
+     "lon": 103.8315484
+    },
+    {
+     "lat": 1.2822008,
+     "lon": 103.8320687
+    },
+    {
+     "lat": 1.2822358,
+     "lon": 103.8321283
+    }
+   ],
+   "tags": {
+    "footway": "sidewalk",
+    "highway": "footway",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 739513986,
+   "bounds": {
+    "minlat": 1.2780043,
+    "minlon": 103.8423628,
+    "maxlat": 1.2781167,
+    "maxlon": 103.8425596
+   },
+   "geometry": [
+    {
+     "lat": 1.2780043,
+     "lon": 103.8423628
+    },
+    {
+     "lat": 1.2780274,
+     "lon": 103.8424032
+    },
+    {
+     "lat": 1.2780403,
+     "lon": 103.8424258
+    },
+    {
+     "lat": 1.2780736,
+     "lon": 103.8424841
+    },
+    {
+     "lat": 1.2780873,
+     "lon": 103.8425082
+    },
+    {
+     "lat": 1.2781167,
+     "lon": 103.8425596
+    }
+   ],
+   "tags": {
+    "bicycle": "yes",
+    "covered": "yes",
+    "foot": "yes",
+    "highway": "steps",
+    "motor_vehicle": "private",
+    "name": "Duxton Hill",
+    "sidewalk": "both"
+   }
+  },
+  {
+   "type": "way",
+   "id": 743599219,
+   "bounds": {
+    "minlat": 1.2831491,
+    "minlon": 103.8420736,
+    "maxlat": 1.2862262,
+    "maxlon": 103.8461972
+   },
+   "geometry": [
+    {
+     "lat": 1.283372,
+     "lon": 103.8420736
+    },
+    {
+     "lat": 1.2836293,
+     "lon": 103.8422865
+    },
+    {
+     "lat": 1.2834575,
+     "lon": 103.8424953
+    },
+    {
+     "lat": 1.2843306,
+     "lon": 103.8431936
+    },
+    {
+     "lat": 1.2843482,
+     "lon": 103.8431727
+    },
+    {
+     "lat": 1.2846523,
+     "lon": 103.8427976
+    },
+    {
+     "lat": 1.2847717,
+     "lon": 103.842902
+    },
+    {
+     "lat": 1.2847539,
+     "lon": 103.8429289
+    },
+    {
+     "lat": 1.2847382,
+     "lon": 103.8429643
+    },
+    {
+     "lat": 1.2844956,
+     "lon": 103.8432539
+    },
+    {
+     "lat": 1.2845022,
+     "lon": 103.8432594
+    },
+    {
+     "lat": 1.2844794,
+     "lon": 103.8432866
+    },
+    {
+     "lat": 1.2846728,
+     "lon": 103.8434488
+    },
+    {
+     "lat": 1.2846985,
+     "lon": 103.8435059
+    },
+    {
+     "lat": 1.2849632,
+     "lon": 103.8437369
+    },
+    {
+     "lat": 1.2851413,
+     "lon": 103.8435327
+    },
+    {
+     "lat": 1.2851627,
+     "lon": 103.8434728
+    },
+    {
+     "lat": 1.285187,
+     "lon": 103.8434419
+    },
+    {
+     "lat": 1.2852716,
+     "lon": 103.8433344
+    },
+    {
+     "lat": 1.2853356,
+     "lon": 103.8432532
+    },
+    {
+     "lat": 1.2854162,
+     "lon": 103.8431508
+    },
+    {
+     "lat": 1.2854384,
+     "lon": 103.8431237
+    },
+    {
+     "lat": 1.2857127,
+     "lon": 103.8428015
+    },
+    {
+     "lat": 1.2857435,
+     "lon": 103.8428216
+    },
+    {
+     "lat": 1.285891,
+     "lon": 103.8426433
+    },
+    {
+     "lat": 1.2860398,
+     "lon": 103.8425427
+    },
+    {
+     "lat": 1.2862262,
+     "lon": 103.8428029
+    },
+    {
+     "lat": 1.286009,
+     "lon": 103.8429477
+    },
+    {
+     "lat": 1.2857797,
+     "lon": 103.8431462
+    },
+    {
+     "lat": 1.2859084,
+     "lon": 103.8432468
+    },
+    {
+     "lat": 1.2857582,
+     "lon": 103.8434305
+    },
+    {
+     "lat": 1.2856375,
+     "lon": 103.8433415
+    },
+    {
+     "lat": 1.2853286,
+     "lon": 103.8436384
+    },
+    {
+     "lat": 1.2851665,
+     "lon": 103.8438264
+    },
+    {
+     "lat": 1.2851402,
+     "lon": 103.8438825
+    },
+    {
+     "lat": 1.2854955,
+     "lon": 103.8441815
+    },
+    {
+     "lat": 1.2852465,
+     "lon": 103.8444771
+    },
+    {
+     "lat": 1.285203,
+     "lon": 103.8445267
+    },
+    {
+     "lat": 1.2851857,
+     "lon": 103.8445356
+    },
+    {
+     "lat": 1.2849333,
+     "lon": 103.8443452
+    },
+    {
+     "lat": 1.2848193,
+     "lon": 103.8443667
+    },
+    {
+     "lat": 1.2842657,
+     "lon": 103.8453515
+    },
+    {
+     "lat": 1.2841976,
+     "lon": 103.8454656
+    },
+    {
+     "lat": 1.2841727,
+     "lon": 103.8455073
+    },
+    {
+     "lat": 1.2839361,
+     "lon": 103.8459169
+    },
+    {
+     "lat": 1.2839925,
+     "lon": 103.8459504
+    },
+    {
+     "lat": 1.2840005,
+     "lon": 103.8460135
+    },
+    {
+     "lat": 1.2840515,
+     "lon": 103.8460497
+    },
+    {
+     "lat": 1.283963,
+     "lon": 103.8461972
+    },
+    {
+     "lat": 1.2838812,
+     "lon": 103.8461114
+    },
+    {
+     "lat": 1.2838208,
+     "lon": 103.8461141
+    },
+    {
+     "lat": 1.2838074,
+     "lon": 103.8461328
+    },
+    {
+     "lat": 1.2836965,
+     "lon": 103.8460724
+    },
+    {
+     "lat": 1.283583,
+     "lon": 103.846005
+    },
+    {
+     "lat": 1.2835218,
+     "lon": 103.8459773
+    },
+    {
+     "lat": 1.2835433,
+     "lon": 103.8459518
+    },
+    {
+     "lat": 1.2836103,
+     "lon": 103.8459893
+    },
+    {
+     "lat": 1.2847232,
+     "lon": 103.8440555
+    },
+    {
+     "lat": 1.2840193,
+     "lon": 103.8434573
+    },
+    {
+     "lat": 1.2839837,
+     "lon": 103.8434568
+    },
+    {
+     "lat": 1.2837699,
+     "lon": 103.8437939
+    },
+    {
+     "lat": 1.2836881,
+     "lon": 103.843747
+    },
+    {
+     "lat": 1.2838865,
+     "lon": 103.843397
+    },
+    {
+     "lat": 1.2838758,
+     "lon": 103.843346
+    },
+    {
+     "lat": 1.2833046,
+     "lon": 103.8428579
+    },
+    {
+     "lat": 1.2833636,
+     "lon": 103.8427841
+    },
+    {
+     "lat": 1.2831491,
+     "lon": 103.8425977
+    },
+    {
+     "lat": 1.2834146,
+     "lon": 103.8422664
+    },
+    {
+     "lat": 1.2832912,
+     "lon": 103.8421619
+    },
+    {
+     "lat": 1.283372,
+     "lon": 103.8420736
+    }
+   ],
+   "tags": {
+    "addr:city": "Singapore",
+    "level": "-1",
+    "name": "Chinatown",
+    "name:en": "Chinatown",
+    "name:ms": "Chinatown",
+    "name:ta": "\u0b9a\u0bc8\u0ba9\u0bbe\u0b9f\u0bb5\u0bc1\u0ba9\u0bcd",
+    "name:th": "\u0e44\u0e0a\u0e19\u0e32\u0e17\u0e32\u0e27\u0e19\u0e4c",
+    "name:zh": "\u725b\u8f66\u6c34",
+    "network": "Mass Rapid Transit",
+    "network:short": "MRT",
+    "network:wikidata": "Q40176",
+    "operator": "SBS Transit",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "NE4;DT19",
+    "ref:colour": "#9016b2;#0354a6",
+    "station": "subway",
+    "subway": "yes",
+    "wheelchair": "yes",
+    "wikidata": "Q3234439",
+    "wikipedia": "en:Chinatown MRT station"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759496406,
+   "bounds": {
+    "minlat": 1.2744766,
+    "minlon": 103.8363549,
+    "maxlat": 1.2745232,
+    "maxlon": 103.8363787
+   },
+   "geometry": [
+    {
+     "lat": 1.2744766,
+     "lon": 103.8363787
+    },
+    {
+     "lat": 1.2745232,
+     "lon": 103.8363549
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759511421,
+   "bounds": {
+    "minlat": 1.2760909,
+    "minlon": 103.8353092,
+    "maxlat": 1.2761428,
+    "maxlon": 103.835368
+   },
+   "geometry": [
+    {
+     "lat": 1.2760909,
+     "lon": 103.8353092
+    },
+    {
+     "lat": 1.276128,
+     "lon": 103.8353511
+    },
+    {
+     "lat": 1.2761428,
+     "lon": 103.835368
+    }
+   ],
+   "tags": {
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "asphalt",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759519045,
+   "bounds": {
+    "minlat": 1.2765307,
+    "minlon": 103.8366808,
+    "maxlat": 1.2765307,
+    "maxlon": 103.836709
+   },
+   "geometry": [
+    {
+     "lat": 1.2765307,
+     "lon": 103.8366808
+    },
+    {
+     "lat": 1.2765307,
+     "lon": 103.836709
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759737766,
+   "bounds": {
+    "minlat": 1.2768122,
+    "minlon": 103.8383619,
+    "maxlat": 1.2768625,
+    "maxlon": 103.8383773
+   },
+   "geometry": [
+    {
+     "lat": 1.2768122,
+     "lon": 103.8383773
+    },
+    {
+     "lat": 1.2768625,
+     "lon": 103.8383619
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759754296,
+   "bounds": {
+    "minlat": 1.2767318,
+    "minlon": 103.8384725,
+    "maxlat": 1.27677,
+    "maxlon": 103.8384819
+   },
+   "geometry": [
+    {
+     "lat": 1.27677,
+     "lon": 103.8384725
+    },
+    {
+     "lat": 1.2767318,
+     "lon": 103.8384819
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759761865,
+   "bounds": {
+    "minlat": 1.2749388,
+    "minlon": 103.8395729,
+    "maxlat": 1.2749457,
+    "maxlon": 103.8395925
+   },
+   "geometry": [
+    {
+     "lat": 1.2749388,
+     "lon": 103.8395729
+    },
+    {
+     "lat": 1.2749457,
+     "lon": 103.8395925
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759781007,
+   "bounds": {
+    "minlat": 1.2776562,
+    "minlon": 103.8390727,
+    "maxlat": 1.2777105,
+    "maxlon": 103.8390854
+   },
+   "geometry": [
+    {
+     "lat": 1.2777105,
+     "lon": 103.8390727
+    },
+    {
+     "lat": 1.2776562,
+     "lon": 103.8390854
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "surface": "concrete"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759781009,
+   "bounds": {
+    "minlat": 1.2776797,
+    "minlon": 103.8394864,
+    "maxlat": 1.2777534,
+    "maxlon": 103.8395085
+   },
+   "geometry": [
+    {
+     "lat": 1.2777534,
+     "lon": 103.8394864
+    },
+    {
+     "lat": 1.2776797,
+     "lon": 103.8395085
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759781701,
+   "bounds": {
+    "minlat": 1.2775563,
+    "minlon": 103.8387877,
+    "maxlat": 1.277622,
+    "maxlon": 103.8388078
+   },
+   "geometry": [
+    {
+     "lat": 1.277622,
+     "lon": 103.8387877
+    },
+    {
+     "lat": 1.2775563,
+     "lon": 103.8388078
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759781879,
+   "bounds": {
+    "minlat": 1.2775,
+    "minlon": 103.838492,
+    "maxlat": 1.2775657,
+    "maxlon": 103.838502
+   },
+   "geometry": [
+    {
+     "lat": 1.2775657,
+     "lon": 103.838492
+    },
+    {
+     "lat": 1.2775,
+     "lon": 103.838502
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 759792815,
+   "bounds": {
+    "minlat": 1.2759142,
+    "minlon": 103.8353029,
+    "maxlat": 1.2759689,
+    "maxlon": 103.8354497
+   },
+   "geometry": [
+    {
+     "lat": 1.2759689,
+     "lon": 103.8354497
+    },
+    {
+     "lat": 1.2759142,
+     "lon": 103.8353029
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 762767555,
+   "bounds": {
+    "minlat": 1.2773286,
+    "minlon": 103.8364842,
+    "maxlat": 1.2774983,
+    "maxlon": 103.8367457
+   },
+   "geometry": [
+    {
+     "lat": 1.2773286,
+     "lon": 103.8367457
+    },
+    {
+     "lat": 1.2773767,
+     "lon": 103.8366716
+    },
+    {
+     "lat": 1.2774392,
+     "lon": 103.8365754
+    },
+    {
+     "lat": 1.2774983,
+     "lon": 103.8364842
+    }
+   ],
+   "tags": {
+    "crossing": "traffic_signals",
+    "footway": "crossing",
+    "highway": "footway",
+    "lit": "yes",
+    "surface": "asphalt",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 770996699,
+   "bounds": {
+    "minlat": 1.3253207,
+    "minlon": 103.9255783,
+    "maxlat": 1.3254812,
+    "maxlon": 103.9263805
+   },
+   "geometry": [
+    {
+     "lat": 1.3253207,
+     "lon": 103.9263805
+    },
+    {
+     "lat": 1.3253526,
+     "lon": 103.9262213
+    },
+    {
+     "lat": 1.325373,
+     "lon": 103.9261193
+    },
+    {
+     "lat": 1.3254565,
+     "lon": 103.9256999
+    },
+    {
+     "lat": 1.3254812,
+     "lon": 103.9255783
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "paved",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 770996700,
+   "bounds": {
+    "minlat": 1.325373,
+    "minlon": 103.9261193,
+    "maxlat": 1.3254028,
+    "maxlon": 103.9261252
+   },
+   "geometry": [
+    {
+     "lat": 1.3254028,
+     "lon": 103.9261252
+    },
+    {
+     "lat": 1.325373,
+     "lon": 103.9261193
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "footway",
+    "surface": "paved",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 796348087,
+   "bounds": {
+    "minlat": 1.3275132,
+    "minlon": 103.9290651,
+    "maxlat": 1.3276435,
+    "maxlon": 103.9290927
+   },
+   "geometry": [
+    {
+     "lat": 1.3275132,
+     "lon": 103.9290927
+    },
+    {
+     "lat": 1.3276435,
+     "lon": 103.9290651
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 796348090,
+   "bounds": {
+    "minlat": 1.3272848,
+    "minlon": 103.9284306,
+    "maxlat": 1.3273717,
+    "maxlon": 103.9285174
+   },
+   "geometry": [
+    {
+     "lat": 1.3273717,
+     "lon": 103.9284306
+    },
+    {
+     "lat": 1.3272848,
+     "lon": 103.9285174
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 796348091,
+   "bounds": {
+    "minlat": 1.3274705,
+    "minlon": 103.9298518,
+    "maxlat": 1.3274914,
+    "maxlon": 103.9299602
+   },
+   "geometry": [
+    {
+     "lat": 1.3274705,
+     "lon": 103.9298518
+    },
+    {
+     "lat": 1.3274914,
+     "lon": 103.9299602
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 796348094,
+   "bounds": {
+    "minlat": 1.3266327,
+    "minlon": 103.9292488,
+    "maxlat": 1.3269726,
+    "maxlon": 103.9293743
+   },
+   "geometry": [
+    {
+     "lat": 1.3266327,
+     "lon": 103.9292488
+    },
+    {
+     "lat": 1.3267194,
+     "lon": 103.9292545
+    },
+    {
+     "lat": 1.3269726,
+     "lon": 103.9293743
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 813971307,
+   "bounds": {
+    "minlat": 1.2798608,
+    "minlon": 103.8391818,
+    "maxlat": 1.2798726,
+    "maxlon": 103.8393163
+   },
+   "geometry": [
+    {
+     "lat": 1.2798726,
+     "lon": 103.8391818
+    },
+    {
+     "lat": 1.2798608,
+     "lon": 103.8393163
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "no",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 864883124,
+   "bounds": {
+    "minlat": 1.2800946,
+    "minlon": 103.8340033,
+    "maxlat": 1.2801122,
+    "maxlon": 103.8340477
+   },
+   "geometry": [
+    {
+     "lat": 1.2800946,
+     "lon": 103.8340477
+    },
+    {
+     "lat": 1.2801122,
+     "lon": 103.8340033
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "ramp": "no",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 866151273,
+   "bounds": {
+    "minlat": 1.3196231,
+    "minlon": 103.9279664,
+    "maxlat": 1.3196505,
+    "maxlon": 103.927986
+   },
+   "geometry": [
+    {
+     "lat": 1.3196231,
+     "lon": 103.9279664
+    },
+    {
+     "lat": 1.3196505,
+     "lon": 103.927986
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "ramp": "separate",
+    "ramp:wheelchair": "separate",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 866151275,
+   "bounds": {
+    "minlat": 1.3193264,
+    "minlon": 103.9281237,
+    "maxlat": 1.3193279,
+    "maxlon": 103.9281892
+   },
+   "geometry": [
+    {
+     "lat": 1.3193264,
+     "lon": 103.9281237
+    },
+    {
+     "lat": 1.3193279,
+     "lon": 103.9281892
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up"
+   }
+  },
+  {
+   "type": "way",
+   "id": 866151277,
+   "bounds": {
+    "minlat": 1.3194246,
+    "minlon": 103.9280237,
+    "maxlat": 1.3195851,
+    "maxlon": 103.9281509
+   },
+   "geometry": [
+    {
+     "lat": 1.3194323,
+     "lon": 103.9281509
+    },
+    {
+     "lat": 1.3194298,
+     "lon": 103.9281428
+    },
+    {
+     "lat": 1.3194276,
+     "lon": 103.9281356
+    },
+    {
+     "lat": 1.319426,
+     "lon": 103.9281282
+    },
+    {
+     "lat": 1.319425,
+     "lon": 103.9281207
+    },
+    {
+     "lat": 1.3194246,
+     "lon": 103.9281132
+    },
+    {
+     "lat": 1.3194249,
+     "lon": 103.9281057
+    },
+    {
+     "lat": 1.3194258,
+     "lon": 103.9280982
+    },
+    {
+     "lat": 1.3194274,
+     "lon": 103.9280908
+    },
+    {
+     "lat": 1.3194296,
+     "lon": 103.9280836
+    },
+    {
+     "lat": 1.3194323,
+     "lon": 103.9280765
+    },
+    {
+     "lat": 1.3194357,
+     "lon": 103.9280698
+    },
+    {
+     "lat": 1.3194396,
+     "lon": 103.9280633
+    },
+    {
+     "lat": 1.319444,
+     "lon": 103.9280572
+    },
+    {
+     "lat": 1.319449,
+     "lon": 103.9280516
+    },
+    {
+     "lat": 1.3194544,
+     "lon": 103.9280463
+    },
+    {
+     "lat": 1.3194602,
+     "lon": 103.9280415
+    },
+    {
+     "lat": 1.3194665,
+     "lon": 103.9280372
+    },
+    {
+     "lat": 1.319473,
+     "lon": 103.9280335
+    },
+    {
+     "lat": 1.3194799,
+     "lon": 103.9280304
+    },
+    {
+     "lat": 1.319487,
+     "lon": 103.9280278
+    },
+    {
+     "lat": 1.3194942,
+     "lon": 103.9280258
+    },
+    {
+     "lat": 1.3195017,
+     "lon": 103.9280245
+    },
+    {
+     "lat": 1.3195092,
+     "lon": 103.9280238
+    },
+    {
+     "lat": 1.3195167,
+     "lon": 103.9280237
+    },
+    {
+     "lat": 1.3195242,
+     "lon": 103.9280243
+    },
+    {
+     "lat": 1.3195317,
+     "lon": 103.9280255
+    },
+    {
+     "lat": 1.319539,
+     "lon": 103.9280273
+    },
+    {
+     "lat": 1.3195461,
+     "lon": 103.9280298
+    },
+    {
+     "lat": 1.319553,
+     "lon": 103.9280328
+    },
+    {
+     "lat": 1.3195597,
+     "lon": 103.9280364
+    },
+    {
+     "lat": 1.319566,
+     "lon": 103.9280406
+    },
+    {
+     "lat": 1.3195719,
+     "lon": 103.9280453
+    },
+    {
+     "lat": 1.3195774,
+     "lon": 103.9280505
+    },
+    {
+     "lat": 1.3195851,
+     "lon": 103.9280577
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344651,
+   "bounds": {
+    "minlat": 1.3250018,
+    "minlon": 103.9327713,
+    "maxlat": 1.3250041,
+    "maxlon": 103.932788
+   },
+   "geometry": [
+    {
+     "lat": 1.3250018,
+     "lon": 103.9327713
+    },
+    {
+     "lat": 1.3250041,
+     "lon": 103.932788
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344654,
+   "bounds": {
+    "minlat": 1.3251429,
+    "minlon": 103.9327498,
+    "maxlat": 1.3251439,
+    "maxlon": 103.9327612
+   },
+   "geometry": [
+    {
+     "lat": 1.3251429,
+     "lon": 103.9327498
+    },
+    {
+     "lat": 1.3251439,
+     "lon": 103.9327612
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344657,
+   "bounds": {
+    "minlat": 1.3252243,
+    "minlon": 103.9327374,
+    "maxlat": 1.3252247,
+    "maxlon": 103.9327505
+   },
+   "geometry": [
+    {
+     "lat": 1.3252243,
+     "lon": 103.9327374
+    },
+    {
+     "lat": 1.3252247,
+     "lon": 103.9327505
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344660,
+   "bounds": {
+    "minlat": 1.32534,
+    "minlon": 103.9327257,
+    "maxlat": 1.3253423,
+    "maxlon": 103.9327431
+   },
+   "geometry": [
+    {
+     "lat": 1.3253423,
+     "lon": 103.9327257
+    },
+    {
+     "lat": 1.32534,
+     "lon": 103.9327431
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344663,
+   "bounds": {
+    "minlat": 1.3254288,
+    "minlon": 103.9327917,
+    "maxlat": 1.3254382,
+    "maxlon": 103.9328004
+   },
+   "geometry": [
+    {
+     "lat": 1.3254382,
+     "lon": 103.9327917
+    },
+    {
+     "lat": 1.3254288,
+     "lon": 103.9328004
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885344666,
+   "bounds": {
+    "minlat": 1.3254814,
+    "minlon": 103.9330288,
+    "maxlat": 1.3254999,
+    "maxlon": 103.9330348
+   },
+   "geometry": [
+    {
+     "lat": 1.3254999,
+     "lon": 103.9330288
+    },
+    {
+     "lat": 1.3254814,
+     "lon": 103.9330348
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885737920,
+   "bounds": {
+    "minlat": 1.3267514,
+    "minlon": 103.9276372,
+    "maxlat": 1.3268158,
+    "maxlon": 103.9276573
+   },
+   "geometry": [
+    {
+     "lat": 1.3268158,
+     "lon": 103.9276573
+    },
+    {
+     "lat": 1.3267514,
+     "lon": 103.9276372
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885737922,
+   "bounds": {
+    "minlat": 1.3266777,
+    "minlon": 103.9280556,
+    "maxlat": 1.3267434,
+    "maxlon": 103.9280757
+   },
+   "geometry": [
+    {
+     "lat": 1.3267434,
+     "lon": 103.9280757
+    },
+    {
+     "lat": 1.3266777,
+     "lon": 103.9280556
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885737924,
+   "bounds": {
+    "minlat": 1.3265892,
+    "minlon": 103.9284499,
+    "maxlat": 1.3266522,
+    "maxlon": 103.9284673
+   },
+   "geometry": [
+    {
+     "lat": 1.3266522,
+     "lon": 103.9284673
+    },
+    {
+     "lat": 1.3265892,
+     "lon": 103.9284499
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885946684,
+   "bounds": {
+    "minlat": 1.3276182,
+    "minlon": 103.9338639,
+    "maxlat": 1.327656,
+    "maxlon": 103.9338646
+   },
+   "geometry": [
+    {
+     "lat": 1.327656,
+     "lon": 103.9338646
+    },
+    {
+     "lat": 1.3276182,
+     "lon": 103.9338639
+    }
+   ],
+   "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "4",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 885946687,
+   "bounds": {
+    "minlat": 1.327638,
+    "minlon": 103.9341304,
+    "maxlat": 1.3276665,
+    "maxlon": 103.9341308
+   },
+   "geometry": [
+    {
+     "lat": 1.3276665,
+     "lon": 103.9341304
+    },
+    {
+     "lat": 1.327638,
+     "lon": 103.9341308
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "ramp": "separate",
+    "ramp:wheelchair": "separate",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886070590,
+   "bounds": {
+    "minlat": 1.3245895,
+    "minlon": 103.9252936,
+    "maxlat": 1.3246109,
+    "maxlon": 103.9253633
+   },
+   "geometry": [
+    {
+     "lat": 1.3245895,
+     "lon": 103.9253633
+    },
+    {
+     "lat": 1.3246109,
+     "lon": 103.9252936
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886107493,
+   "bounds": {
+    "minlat": 1.3277777,
+    "minlon": 103.9268855,
+    "maxlat": 1.3277808,
+    "maxlon": 103.9269073
+   },
+   "geometry": [
+    {
+     "lat": 1.3277777,
+     "lon": 103.9268855
+    },
+    {
+     "lat": 1.3277808,
+     "lon": 103.9269073
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886107494,
+   "bounds": {
+    "minlat": 1.3277756,
+    "minlon": 103.9268667,
+    "maxlat": 1.3277777,
+    "maxlon": 103.9268855
+   },
+   "geometry": [
+    {
+     "lat": 1.3277756,
+     "lon": 103.9268667
+    },
+    {
+     "lat": 1.3277777,
+     "lon": 103.9268855
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886160091,
+   "bounds": {
+    "minlat": 1.3276166,
+    "minlon": 103.9265304,
+    "maxlat": 1.3276236,
+    "maxlon": 103.9265817
+   },
+   "geometry": [
+    {
+     "lat": 1.3276236,
+     "lon": 103.9265817
+    },
+    {
+     "lat": 1.3276166,
+     "lon": 103.9265304
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886613057,
+   "bounds": {
+    "minlat": 1.3269666,
+    "minlon": 103.9329523,
+    "maxlat": 1.3269778,
+    "maxlon": 103.9329783
+   },
+   "geometry": [
+    {
+     "lat": 1.3269666,
+     "lon": 103.9329523
+    },
+    {
+     "lat": 1.3269778,
+     "lon": 103.9329783
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886613059,
+   "bounds": {
+    "minlat": 1.3264944,
+    "minlon": 103.9329622,
+    "maxlat": 1.3265302,
+    "maxlon": 103.93299
+   },
+   "geometry": [
+    {
+     "lat": 1.3264944,
+     "lon": 103.9329622
+    },
+    {
+     "lat": 1.3265302,
+     "lon": 103.93299
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 886613062,
+   "bounds": {
+    "minlat": 1.3263472,
+    "minlon": 103.9319179,
+    "maxlat": 1.3263899,
+    "maxlon": 103.9319311
+   },
+   "geometry": [
+    {
+     "lat": 1.3263899,
+     "lon": 103.9319311
+    },
+    {
+     "lat": 1.3263472,
+     "lon": 103.9319179
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889432764,
+   "bounds": {
+    "minlat": 1.3279256,
+    "minlon": 103.9268473,
+    "maxlat": 1.3279276,
+    "maxlon": 103.9268677
+   },
+   "geometry": [
+    {
+     "lat": 1.3279256,
+     "lon": 103.9268473
+    },
+    {
+     "lat": 1.3279276,
+     "lon": 103.9268677
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441082,
+   "bounds": {
+    "minlat": 1.3287896,
+    "minlon": 103.9289095,
+    "maxlat": 1.3288707,
+    "maxlon": 103.9289101
+   },
+   "geometry": [
+    {
+     "lat": 1.3288707,
+     "lon": 103.9289101
+    },
+    {
+     "lat": 1.3287896,
+     "lon": 103.9289095
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441084,
+   "bounds": {
+    "minlat": 1.3288412,
+    "minlon": 103.9291207,
+    "maxlat": 1.3289166,
+    "maxlon": 103.929122
+   },
+   "geometry": [
+    {
+     "lat": 1.3289166,
+     "lon": 103.9291207
+    },
+    {
+     "lat": 1.3288412,
+     "lon": 103.929122
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441085,
+   "bounds": {
+    "minlat": 1.3288671,
+    "minlon": 103.929274,
+    "maxlat": 1.3289596,
+    "maxlon": 103.9292794
+   },
+   "geometry": [
+    {
+     "lat": 1.3289596,
+     "lon": 103.929274
+    },
+    {
+     "lat": 1.3288671,
+     "lon": 103.9292794
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441088,
+   "bounds": {
+    "minlat": 1.3288799,
+    "minlon": 103.9294899,
+    "maxlat": 1.3289104,
+    "maxlon": 103.9296294
+   },
+   "geometry": [
+    {
+     "lat": 1.3288799,
+     "lon": 103.9294899
+    },
+    {
+     "lat": 1.3289104,
+     "lon": 103.9296294
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441090,
+   "bounds": {
+    "minlat": 1.3283282,
+    "minlon": 103.9295737,
+    "maxlat": 1.328357,
+    "maxlon": 103.9297521
+   },
+   "geometry": [
+    {
+     "lat": 1.3283282,
+     "lon": 103.9295737
+    },
+    {
+     "lat": 1.328357,
+     "lon": 103.9297521
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441092,
+   "bounds": {
+    "minlat": 1.327818,
+    "minlon": 103.9297206,
+    "maxlat": 1.3278571,
+    "maxlon": 103.9298706
+   },
+   "geometry": [
+    {
+     "lat": 1.327818,
+     "lon": 103.9297206
+    },
+    {
+     "lat": 1.3278571,
+     "lon": 103.9298706
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441098,
+   "bounds": {
+    "minlat": 1.3272581,
+    "minlon": 103.9306547,
+    "maxlat": 1.3273146,
+    "maxlon": 103.9306568
+   },
+   "geometry": [
+    {
+     "lat": 1.3272581,
+     "lon": 103.9306568
+    },
+    {
+     "lat": 1.3273146,
+     "lon": 103.9306547
+    }
+   ],
+   "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "3",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889441101,
+   "bounds": {
+    "minlat": 1.3271483,
+    "minlon": 103.9304113,
+    "maxlat": 1.3272287,
+    "maxlon": 103.9304294
+   },
+   "geometry": [
+    {
+     "lat": 1.3271483,
+     "lon": 103.9304294
+    },
+    {
+     "lat": 1.3272287,
+     "lon": 103.9304113
+    }
+   ],
+   "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "ramp": "no",
+    "step_count": "6",
+    "surface": "concrete",
+    "tactile_paving": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889451703,
+   "bounds": {
+    "minlat": 1.3289335,
+    "minlon": 103.9283768,
+    "maxlat": 1.3289757,
+    "maxlon": 103.9283862
+   },
+   "geometry": [
+    {
+     "lat": 1.3289335,
+     "lon": 103.9283862
+    },
+    {
+     "lat": 1.3289757,
+     "lon": 103.9283768
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889986441,
+   "bounds": {
+    "minlat": 1.3293625,
+    "minlon": 103.9301699,
+    "maxlat": 1.3294396,
+    "maxlon": 103.9301913
+   },
+   "geometry": [
+    {
+     "lat": 1.3294396,
+     "lon": 103.9301699
+    },
+    {
+     "lat": 1.3293625,
+     "lon": 103.9301913
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889992234,
+   "bounds": {
+    "minlat": 1.3279464,
+    "minlon": 103.9293525,
+    "maxlat": 1.3279762,
+    "maxlon": 103.9293568
+   },
+   "geometry": [
+    {
+     "lat": 1.3279464,
+     "lon": 103.9293568
+    },
+    {
+     "lat": 1.3279762,
+     "lon": 103.9293525
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps",
+    "lit": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 889994728,
+   "bounds": {
+    "minlat": 1.3292526,
+    "minlon": 103.9312313,
+    "maxlat": 1.3292627,
+    "maxlon": 103.9312702
+   },
+   "geometry": [
+    {
+     "lat": 1.3292627,
+     "lon": 103.9312702
+    },
+    {
+     "lat": 1.3292526,
+     "lon": 103.9312313
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1065816828,
+   "bounds": {
+    "minlat": 1.2790753,
+    "minlon": 103.835995,
+    "maxlat": 1.2791201,
+    "maxlon": 103.8360268
+   },
+   "geometry": [
+    {
+     "lat": 1.2791201,
+     "lon": 103.8360268
+    },
+    {
+     "lat": 1.2790753,
+     "lon": 103.835995
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1065816910,
+   "bounds": {
+    "minlat": 1.2793783,
+    "minlon": 103.8359191,
+    "maxlat": 1.2795072,
+    "maxlon": 103.8359321
+   },
+   "geometry": [
+    {
+     "lat": 1.2795072,
+     "lon": 103.8359191
+    },
+    {
+     "lat": 1.2793783,
+     "lon": 103.8359321
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "layer": "-1",
+    "level": "1;-1",
+    "tunnel": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1065816914,
+   "bounds": {
+    "minlat": 1.2782998,
+    "minlon": 103.8344552,
+    "maxlat": 1.2784178,
+    "maxlon": 103.8344633
+   },
+   "geometry": [
+    {
+     "lat": 1.2784178,
+     "lon": 103.8344552
+    },
+    {
+     "lat": 1.2782998,
+     "lon": 103.8344633
+    }
+   ],
+   "tags": {
+    "bridge": "yes",
+    "covered": "yes",
+    "highway": "steps",
+    "layer": "1",
+    "level": "1;3",
+    "surface": "paving_stones"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1092494662,
+   "bounds": {
+    "minlat": 1.2782526,
+    "minlon": 103.8413023,
+    "maxlat": 1.278358,
+    "maxlon": 103.8413127
+   },
+   "geometry": [
+    {
+     "lat": 1.2782526,
+     "lon": 103.8413023
+    },
+    {
+     "lat": 1.278358,
+     "lon": 103.8413127
+    }
+   ],
+   "tags": {
+    "access": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "surface": "paved"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1174586416,
+   "bounds": {
+    "minlat": 1.2830296,
+    "minlon": 103.8423086,
+    "maxlat": 1.2833407,
+    "maxlon": 103.842691
+   },
+   "geometry": [
+    {
+     "lat": 1.2833407,
+     "lon": 103.8423086
+    },
+    {
+     "lat": 1.2830296,
+     "lon": 103.842691
+    }
+   ],
+   "tags": {
+    "bridge": "yes",
+    "covered": "yes",
+    "highway": "footway",
+    "layer": "1",
+    "lit": "yes",
+    "tactile_paving": "no",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1174586417,
+   "bounds": {
+    "minlat": 1.2829254,
+    "minlon": 103.84276,
+    "maxlat": 1.2830086,
+    "maxlon": 103.8428275
+   },
+   "geometry": [
+    {
+     "lat": 1.2830086,
+     "lon": 103.8428275
+    },
+    {
+     "lat": 1.2829254,
+     "lon": 103.84276
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1217526087,
+   "bounds": {
+    "minlat": 1.2817578,
+    "minlon": 103.8315853,
+    "maxlat": 1.2817966,
+    "maxlon": 103.8316133
+   },
+   "geometry": [
+    {
+     "lat": 1.2817966,
+     "lon": 103.8315853
+    },
+    {
+     "lat": 1.2817578,
+     "lon": 103.8316133
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1302009993,
+   "bounds": {
+    "minlat": 1.2784864,
+    "minlon": 103.841269,
+    "maxlat": 1.2785246,
+    "maxlon": 103.8413232
+   },
+   "geometry": [
+    {
+     "lat": 1.2785246,
+     "lon": 103.8413232
+    },
+    {
+     "lat": 1.2784864,
+     "lon": 103.841269
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519800,
+   "bounds": {
+    "minlat": 1.2822249,
+    "minlon": 103.8382061,
+    "maxlat": 1.2822916,
+    "maxlon": 103.8383034
+   },
+   "geometry": [
+    {
+     "lat": 1.2822916,
+     "lon": 103.8382061
+    },
+    {
+     "lat": 1.2822249,
+     "lon": 103.8383034
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519801,
+   "bounds": {
+    "minlat": 1.2822145,
+    "minlon": 103.8381991,
+    "maxlat": 1.2822792,
+    "maxlon": 103.8382983
+   },
+   "geometry": [
+    {
+     "lat": 1.2822145,
+     "lon": 103.8382983
+    },
+    {
+     "lat": 1.2822792,
+     "lon": 103.8381991
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519803,
+   "bounds": {
+    "minlat": 1.2815508,
+    "minlon": 103.8388348,
+    "maxlat": 1.2816175,
+    "maxlon": 103.838932
+   },
+   "geometry": [
+    {
+     "lat": 1.2816175,
+     "lon": 103.8388348
+    },
+    {
+     "lat": 1.2815508,
+     "lon": 103.838932
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519804,
+   "bounds": {
+    "minlat": 1.2815404,
+    "minlon": 103.8388277,
+    "maxlat": 1.2816051,
+    "maxlon": 103.838927
+   },
+   "geometry": [
+    {
+     "lat": 1.2815404,
+     "lon": 103.838927
+    },
+    {
+     "lat": 1.2816051,
+     "lon": 103.8388277
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519805,
+   "bounds": {
+    "minlat": 1.2804327,
+    "minlon": 103.8400193,
+    "maxlat": 1.2805134,
+    "maxlon": 103.8400213
+   },
+   "geometry": [
+    {
+     "lat": 1.2805134,
+     "lon": 103.8400213
+    },
+    {
+     "lat": 1.2804327,
+     "lon": 103.8400193
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519817,
+   "bounds": {
+    "minlat": 1.2790445,
+    "minlon": 103.8393998,
+    "maxlat": 1.2791492,
+    "maxlon": 103.8395125
+   },
+   "geometry": [
+    {
+     "lat": 1.2791492,
+     "lon": 103.8393998
+    },
+    {
+     "lat": 1.2790445,
+     "lon": 103.8395125
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519818,
+   "bounds": {
+    "minlat": 1.2790151,
+    "minlon": 103.8393736,
+    "maxlat": 1.2791207,
+    "maxlon": 103.8394851
+   },
+   "geometry": [
+    {
+     "lat": 1.2790151,
+     "lon": 103.8394851
+    },
+    {
+     "lat": 1.2791207,
+     "lon": 103.8393736
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519819,
+   "bounds": {
+    "minlat": 1.2790295,
+    "minlon": 103.8393866,
+    "maxlat": 1.2791342,
+    "maxlon": 103.8394993
+   },
+   "geometry": [
+    {
+     "lat": 1.2791342,
+     "lon": 103.8393866
+    },
+    {
+     "lat": 1.2790295,
+     "lon": 103.8394993
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519820,
+   "bounds": {
+    "minlat": 1.2792017,
+    "minlon": 103.8392177,
+    "maxlat": 1.2792725,
+    "maxlon": 103.8392835
+   },
+   "geometry": [
+    {
+     "lat": 1.2792017,
+     "lon": 103.8392835
+    },
+    {
+     "lat": 1.2792725,
+     "lon": 103.8392177
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519821,
+   "bounds": {
+    "minlat": 1.2792161,
+    "minlon": 103.8392308,
+    "maxlat": 1.2792859,
+    "maxlon": 103.8392978
+   },
+   "geometry": [
+    {
+     "lat": 1.2792859,
+     "lon": 103.8392308
+    },
+    {
+     "lat": 1.2792161,
+     "lon": 103.8392978
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519822,
+   "bounds": {
+    "minlat": 1.2792309,
+    "minlon": 103.8392441,
+    "maxlat": 1.2793008,
+    "maxlon": 103.8393111
+   },
+   "geometry": [
+    {
+     "lat": 1.2793008,
+     "lon": 103.8392441
+    },
+    {
+     "lat": 1.2792309,
+     "lon": 103.8393111
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519823,
+   "bounds": {
+    "minlat": 1.2794018,
+    "minlon": 103.8391858,
+    "maxlat": 1.2794576,
+    "maxlon": 103.8392395
+   },
+   "geometry": [
+    {
+     "lat": 1.2794018,
+     "lon": 103.8391858
+    },
+    {
+     "lat": 1.2794576,
+     "lon": 103.8392395
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519824,
+   "bounds": {
+    "minlat": 1.2793879,
+    "minlon": 103.8392006,
+    "maxlat": 1.279445,
+    "maxlon": 103.8392533
+   },
+   "geometry": [
+    {
+     "lat": 1.279445,
+     "lon": 103.8392533
+    },
+    {
+     "lat": 1.2793879,
+     "lon": 103.8392006
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519825,
+   "bounds": {
+    "minlat": 1.279375,
+    "minlon": 103.8392159,
+    "maxlat": 1.2794321,
+    "maxlon": 103.8392686
+   },
+   "geometry": [
+    {
+     "lat": 1.2794321,
+     "lon": 103.8392686
+    },
+    {
+     "lat": 1.279375,
+     "lon": 103.8392159
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519826,
+   "bounds": {
+    "minlat": 1.2795627,
+    "minlon": 103.8393357,
+    "maxlat": 1.2796185,
+    "maxlon": 103.8393894
+   },
+   "geometry": [
+    {
+     "lat": 1.2795627,
+     "lon": 103.8393357
+    },
+    {
+     "lat": 1.2796185,
+     "lon": 103.8393894
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519827,
+   "bounds": {
+    "minlat": 1.2795488,
+    "minlon": 103.8393504,
+    "maxlat": 1.2796059,
+    "maxlon": 103.8394032
+   },
+   "geometry": [
+    {
+     "lat": 1.2796059,
+     "lon": 103.8394032
+    },
+    {
+     "lat": 1.2795488,
+     "lon": 103.8393504
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519828,
+   "bounds": {
+    "minlat": 1.2795359,
+    "minlon": 103.8393657,
+    "maxlat": 1.279593,
+    "maxlon": 103.8394185
+   },
+   "geometry": [
+    {
+     "lat": 1.279593,
+     "lon": 103.8394185
+    },
+    {
+     "lat": 1.2795359,
+     "lon": 103.8393657
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519829,
+   "bounds": {
+    "minlat": 1.2801915,
+    "minlon": 103.8399154,
+    "maxlat": 1.2802473,
+    "maxlon": 103.8399691
+   },
+   "geometry": [
+    {
+     "lat": 1.2801915,
+     "lon": 103.8399154
+    },
+    {
+     "lat": 1.2802473,
+     "lon": 103.8399691
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519830,
+   "bounds": {
+    "minlat": 1.2801776,
+    "minlon": 103.8399301,
+    "maxlat": 1.2802347,
+    "maxlon": 103.8399829
+   },
+   "geometry": [
+    {
+     "lat": 1.2802347,
+     "lon": 103.8399829
+    },
+    {
+     "lat": 1.2801776,
+     "lon": 103.8399301
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519831,
+   "bounds": {
+    "minlat": 1.2801647,
+    "minlon": 103.8399454,
+    "maxlat": 1.2802218,
+    "maxlon": 103.8399982
+   },
+   "geometry": [
+    {
+     "lat": 1.2802218,
+     "lon": 103.8399982
+    },
+    {
+     "lat": 1.2801647,
+     "lon": 103.8399454
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519832,
+   "bounds": {
+    "minlat": 1.279883,
+    "minlon": 103.8396277,
+    "maxlat": 1.2799388,
+    "maxlon": 103.8396815
+   },
+   "geometry": [
+    {
+     "lat": 1.279883,
+     "lon": 103.8396277
+    },
+    {
+     "lat": 1.2799388,
+     "lon": 103.8396815
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519833,
+   "bounds": {
+    "minlat": 1.2798726,
+    "minlon": 103.8396515,
+    "maxlat": 1.2799262,
+    "maxlon": 103.8396953
+   },
+   "geometry": [
+    {
+     "lat": 1.2799262,
+     "lon": 103.8396953
+    },
+    {
+     "lat": 1.2798726,
+     "lon": 103.8396515
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519834,
+   "bounds": {
+    "minlat": 1.2798562,
+    "minlon": 103.8396578,
+    "maxlat": 1.2799133,
+    "maxlon": 103.8397106
+   },
+   "geometry": [
+    {
+     "lat": 1.2799133,
+     "lon": 103.8397106
+    },
+    {
+     "lat": 1.2798562,
+     "lon": 103.8396578
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3;-4"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519840,
+   "bounds": {
+    "minlat": 1.2804421,
+    "minlon": 103.8400039,
+    "maxlat": 1.2805227,
+    "maxlon": 103.8400059
+   },
+   "geometry": [
+    {
+     "lat": 1.2805227,
+     "lon": 103.8400059
+    },
+    {
+     "lat": 1.2804421,
+     "lon": 103.8400039
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519841,
+   "bounds": {
+    "minlat": 1.2804654,
+    "minlon": 103.8399716,
+    "maxlat": 1.2805461,
+    "maxlon": 103.8399736
+   },
+   "geometry": [
+    {
+     "lat": 1.2805461,
+     "lon": 103.8399736
+    },
+    {
+     "lat": 1.2804654,
+     "lon": 103.8399716
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519842,
+   "bounds": {
+    "minlat": 1.280454,
+    "minlon": 103.8399889,
+    "maxlat": 1.2805352,
+    "maxlon": 103.8399897
+   },
+   "geometry": [
+    {
+     "lat": 1.280454,
+     "lon": 103.8399897
+    },
+    {
+     "lat": 1.2805352,
+     "lon": 103.8399889
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "layer": "-1",
+    "level": "-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519845,
+   "bounds": {
+    "minlat": 1.2809435,
+    "minlon": 103.838649,
+    "maxlat": 1.2810102,
+    "maxlon": 103.8387058
+   },
+   "geometry": [
+    {
+     "lat": 1.2809435,
+     "lon": 103.8387058
+    },
+    {
+     "lat": 1.2810102,
+     "lon": 103.838649
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519846,
+   "bounds": {
+    "minlat": 1.2809535,
+    "minlon": 103.8386614,
+    "maxlat": 1.2810202,
+    "maxlon": 103.8387182
+   },
+   "geometry": [
+    {
+     "lat": 1.2809535,
+     "lon": 103.8387182
+    },
+    {
+     "lat": 1.2810202,
+     "lon": 103.8386614
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519847,
+   "bounds": {
+    "minlat": 1.2809639,
+    "minlon": 103.8386749,
+    "maxlat": 1.2810315,
+    "maxlon": 103.8387302
+   },
+   "geometry": [
+    {
+     "lat": 1.2810315,
+     "lon": 103.8386749
+    },
+    {
+     "lat": 1.2809639,
+     "lon": 103.8387302
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519852,
+   "bounds": {
+    "minlat": 1.2802145,
+    "minlon": 103.8403264,
+    "maxlat": 1.280282,
+    "maxlon": 103.8403912
+   },
+   "geometry": [
+    {
+     "lat": 1.2802145,
+     "lon": 103.8403264
+    },
+    {
+     "lat": 1.280282,
+     "lon": 103.8403912
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519853,
+   "bounds": {
+    "minlat": 1.2801914,
+    "minlon": 103.8403538,
+    "maxlat": 1.2802582,
+    "maxlon": 103.84042
+   },
+   "geometry": [
+    {
+     "lat": 1.2802582,
+     "lon": 103.84042
+    },
+    {
+     "lat": 1.2801914,
+     "lon": 103.8403538
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519857,
+   "bounds": {
+    "minlat": 1.2800972,
+    "minlon": 103.8400835,
+    "maxlat": 1.2801663,
+    "maxlon": 103.84015
+   },
+   "geometry": [
+    {
+     "lat": 1.2801663,
+     "lon": 103.84015
+    },
+    {
+     "lat": 1.2800972,
+     "lon": 103.8400835
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519858,
+   "bounds": {
+    "minlat": 1.2801221,
+    "minlon": 103.8400576,
+    "maxlat": 1.2801912,
+    "maxlon": 103.8401242
+   },
+   "geometry": [
+    {
+     "lat": 1.2801221,
+     "lon": 103.8400576
+    },
+    {
+     "lat": 1.2801912,
+     "lon": 103.8401242
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519859,
+   "bounds": {
+    "minlat": 1.2801106,
+    "minlon": 103.8400696,
+    "maxlat": 1.2801797,
+    "maxlon": 103.8401361
+   },
+   "geometry": [
+    {
+     "lat": 1.2801797,
+     "lon": 103.8401361
+    },
+    {
+     "lat": 1.2801106,
+     "lon": 103.8400696
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519860,
+   "bounds": {
+    "minlat": 1.2801492,
+    "minlon": 103.8400295,
+    "maxlat": 1.2802183,
+    "maxlon": 103.840096
+   },
+   "geometry": [
+    {
+     "lat": 1.2802183,
+     "lon": 103.840096
+    },
+    {
+     "lat": 1.2801492,
+     "lon": 103.8400295
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519861,
+   "bounds": {
+    "minlat": 1.2801647,
+    "minlon": 103.8400134,
+    "maxlat": 1.2802338,
+    "maxlon": 103.8400799
+   },
+   "geometry": [
+    {
+     "lat": 1.2802338,
+     "lon": 103.8400799
+    },
+    {
+     "lat": 1.2801647,
+     "lon": 103.8400134
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519862,
+   "bounds": {
+    "minlat": 1.28018,
+    "minlon": 103.8399975,
+    "maxlat": 1.2802491,
+    "maxlon": 103.840064
+   },
+   "geometry": [
+    {
+     "lat": 1.28018,
+     "lon": 103.8399975
+    },
+    {
+     "lat": 1.2802491,
+     "lon": 103.840064
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519863,
+   "bounds": {
+    "minlat": 1.2806885,
+    "minlon": 103.8397847,
+    "maxlat": 1.280791,
+    "maxlon": 103.8398794
+   },
+   "geometry": [
+    {
+     "lat": 1.280791,
+     "lon": 103.8398794
+    },
+    {
+     "lat": 1.2806885,
+     "lon": 103.8397847
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519864,
+   "bounds": {
+    "minlat": 1.2807134,
+    "minlon": 103.8397581,
+    "maxlat": 1.2808137,
+    "maxlon": 103.8398546
+   },
+   "geometry": [
+    {
+     "lat": 1.2807134,
+     "lon": 103.8397581
+    },
+    {
+     "lat": 1.2808137,
+     "lon": 103.8398546
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519865,
+   "bounds": {
+    "minlat": 1.2806655,
+    "minlon": 103.8398121,
+    "maxlat": 1.2807679,
+    "maxlon": 103.8399068
+   },
+   "geometry": [
+    {
+     "lat": 1.2807679,
+     "lon": 103.8399068
+    },
+    {
+     "lat": 1.2806655,
+     "lon": 103.8398121
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519867,
+   "bounds": {
+    "minlat": 1.2810933,
+    "minlon": 103.8395275,
+    "maxlat": 1.28116,
+    "maxlon": 103.8396247
+   },
+   "geometry": [
+    {
+     "lat": 1.28116,
+     "lon": 103.8395275
+    },
+    {
+     "lat": 1.2810933,
+     "lon": 103.8396247
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519868,
+   "bounds": {
+    "minlat": 1.2810829,
+    "minlon": 103.8395204,
+    "maxlat": 1.2811476,
+    "maxlon": 103.8396197
+   },
+   "geometry": [
+    {
+     "lat": 1.2810829,
+     "lon": 103.8396197
+    },
+    {
+     "lat": 1.2811476,
+     "lon": 103.8395204
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519874,
+   "bounds": {
+    "minlat": 1.2814985,
+    "minlon": 103.839365,
+    "maxlat": 1.2815572,
+    "maxlon": 103.8394545
+   },
+   "geometry": [
+    {
+     "lat": 1.2815572,
+     "lon": 103.839365
+    },
+    {
+     "lat": 1.2814985,
+     "lon": 103.8394545
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519875,
+   "bounds": {
+    "minlat": 1.2814902,
+    "minlon": 103.839356,
+    "maxlat": 1.2815468,
+    "maxlon": 103.8394475
+   },
+   "geometry": [
+    {
+     "lat": 1.2814902,
+     "lon": 103.8394475
+    },
+    {
+     "lat": 1.2815468,
+     "lon": 103.839356
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519876,
+   "bounds": {
+    "minlat": 1.2816574,
+    "minlon": 103.8391162,
+    "maxlat": 1.2817161,
+    "maxlon": 103.8392058
+   },
+   "geometry": [
+    {
+     "lat": 1.2817161,
+     "lon": 103.8391162
+    },
+    {
+     "lat": 1.2816574,
+     "lon": 103.8392058
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519877,
+   "bounds": {
+    "minlat": 1.2816464,
+    "minlon": 103.8391052,
+    "maxlat": 1.281703,
+    "maxlon": 103.8391967
+   },
+   "geometry": [
+    {
+     "lat": 1.2816464,
+     "lon": 103.8391967
+    },
+    {
+     "lat": 1.281703,
+     "lon": 103.8391052
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519884,
+   "bounds": {
+    "minlat": 1.2813807,
+    "minlon": 103.8390919,
+    "maxlat": 1.2814474,
+    "maxlon": 103.8391892
+   },
+   "geometry": [
+    {
+     "lat": 1.2814474,
+     "lon": 103.8390919
+    },
+    {
+     "lat": 1.2813807,
+     "lon": 103.8391892
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519885,
+   "bounds": {
+    "minlat": 1.2813703,
+    "minlon": 103.8390849,
+    "maxlat": 1.281435,
+    "maxlon": 103.8391841
+   },
+   "geometry": [
+    {
+     "lat": 1.2813703,
+     "lon": 103.8391841
+    },
+    {
+     "lat": 1.281435,
+     "lon": 103.8390849
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-2;-3"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519886,
+   "bounds": {
+    "minlat": 1.2812827,
+    "minlon": 103.8392465,
+    "maxlat": 1.2813442,
+    "maxlon": 103.8393387
+   },
+   "geometry": [
+    {
+     "lat": 1.2813442,
+     "lon": 103.8392465
+    },
+    {
+     "lat": 1.2812827,
+     "lon": 103.8393387
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519887,
+   "bounds": {
+    "minlat": 1.2812817,
+    "minlon": 103.8392475,
+    "maxlat": 1.2813432,
+    "maxlon": 103.8393397
+   },
+   "geometry": [
+    {
+     "lat": 1.2813432,
+     "lon": 103.8392475
+    },
+    {
+     "lat": 1.2812817,
+     "lon": 103.8393397
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519888,
+   "bounds": {
+    "minlat": 1.2812723,
+    "minlon": 103.8392395,
+    "maxlat": 1.2813318,
+    "maxlon": 103.8393337
+   },
+   "geometry": [
+    {
+     "lat": 1.2812723,
+     "lon": 103.8393337
+    },
+    {
+     "lat": 1.2813318,
+     "lon": 103.8392395
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519889,
+   "bounds": {
+    "minlat": 1.2812733,
+    "minlon": 103.8392385,
+    "maxlat": 1.2813328,
+    "maxlon": 103.8393327
+   },
+   "geometry": [
+    {
+     "lat": 1.2812733,
+     "lon": 103.8393327
+    },
+    {
+     "lat": 1.2813328,
+     "lon": 103.8392385
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519890,
+   "bounds": {
+    "minlat": 1.281464,
+    "minlon": 103.838952,
+    "maxlat": 1.2815207,
+    "maxlon": 103.8390435
+   },
+   "geometry": [
+    {
+     "lat": 1.281464,
+     "lon": 103.8390435
+    },
+    {
+     "lat": 1.2815207,
+     "lon": 103.838952
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519891,
+   "bounds": {
+    "minlat": 1.2814734,
+    "minlon": 103.83896,
+    "maxlat": 1.2815321,
+    "maxlon": 103.8390495
+   },
+   "geometry": [
+    {
+     "lat": 1.2815321,
+     "lon": 103.83896
+    },
+    {
+     "lat": 1.2814734,
+     "lon": 103.8390495
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "-1;-2"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519892,
+   "bounds": {
+    "minlat": 1.2814724,
+    "minlon": 103.838961,
+    "maxlat": 1.2815311,
+    "maxlon": 103.8390505
+   },
+   "geometry": [
+    {
+     "lat": 1.2815311,
+     "lon": 103.838961
+    },
+    {
+     "lat": 1.2814724,
+     "lon": 103.8390505
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519893,
+   "bounds": {
+    "minlat": 1.281463,
+    "minlon": 103.838953,
+    "maxlat": 1.2815197,
+    "maxlon": 103.8390445
+   },
+   "geometry": [
+    {
+     "lat": 1.281463,
+     "lon": 103.8390445
+    },
+    {
+     "lat": 1.2815197,
+     "lon": 103.838953
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347519897,
+   "bounds": {
+    "minlat": 1.2802048,
+    "minlon": 103.8403422,
+    "maxlat": 1.2802692,
+    "maxlon": 103.8404065
+   },
+   "geometry": [
+    {
+     "lat": 1.2802692,
+     "lon": 103.8404065
+    },
+    {
+     "lat": 1.2802048,
+     "lon": 103.8403422
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347521408,
+   "bounds": {
+    "minlat": 1.2790287,
+    "minlon": 103.8385107,
+    "maxlat": 1.279112,
+    "maxlon": 103.8386401
+   },
+   "geometry": [
+    {
+     "lat": 1.2790287,
+     "lon": 103.8385107
+    },
+    {
+     "lat": 1.279112,
+     "lon": 103.8386401
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347521409,
+   "bounds": {
+    "minlat": 1.2789962,
+    "minlon": 103.8385318,
+    "maxlat": 1.2790781,
+    "maxlon": 103.8386618
+   },
+   "geometry": [
+    {
+     "lat": 1.2790781,
+     "lon": 103.8386618
+    },
+    {
+     "lat": 1.2789962,
+     "lon": 103.8385318
+    }
+   ],
+   "tags": {
+    "conveying": "yes",
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1347521410,
+   "bounds": {
+    "minlat": 1.2790121,
+    "minlon": 103.838522,
+    "maxlat": 1.2790955,
+    "maxlon": 103.8386513
+   },
+   "geometry": [
+    {
+     "lat": 1.2790121,
+     "lon": 103.838522
+    },
+    {
+     "lat": 1.2790955,
+     "lon": 103.8386513
+    }
+   ],
+   "tags": {
+    "highway": "steps",
+    "level": "1;-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1426764385,
+   "bounds": {
+    "minlat": 1.3243538,
+    "minlon": 103.9309899,
+    "maxlat": 1.3243901,
+    "maxlon": 103.930997
+   },
+   "geometry": [
+    {
+     "lat": 1.3243901,
+     "lon": 103.9309899
+    },
+    {
+     "lat": 1.3243538,
+     "lon": 103.930997
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1470433129,
+   "bounds": {
+    "minlat": 1.3251168,
+    "minlon": 103.9269545,
+    "maxlat": 1.3251673,
+    "maxlon": 103.9269601
+   },
+   "geometry": [
+    {
+     "lat": 1.3251168,
+     "lon": 103.9269601
+    },
+    {
+     "lat": 1.3251673,
+     "lon": 103.9269545
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1513973665,
+   "bounds": {
+    "minlat": 1.2759907,
+    "minlon": 103.8343087,
+    "maxlat": 1.2760565,
+    "maxlon": 103.8343966
+   },
+   "geometry": [
+    {
+     "lat": 1.2760565,
+     "lon": 103.8343192
+    },
+    {
+     "lat": 1.2760142,
+     "lon": 103.8343087
+    },
+    {
+     "lat": 1.2759907,
+     "lon": 103.8343966
+    }
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1513973666,
+   "bounds": {
+    "minlat": 1.2759712,
+    "minlon": 103.834917,
+    "maxlat": 1.2760127,
+    "maxlon": 103.835019
+   },
+   "geometry": [
+    {
+     "lat": 1.2759856,
+     "lon": 103.8349938
+    },
+    {
+     "lat": 1.2759712,
+     "lon": 103.8349213
+    },
+    {
+     "lat": 1.2759894,
+     "lon": 103.834917
+    },
+    {
+     "lat": 1.2760127,
+     "lon": 103.835019
+    }
+   ],
+   "tags": {
+    "covered": "yes",
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "ramp": "no",
+    "surface": "concrete",
+    "tactile_paving": "yes"
+   }
+  }
+ ]
+}

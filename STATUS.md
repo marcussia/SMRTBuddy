@@ -320,3 +320,41 @@ horizontal scroll. Still not tested on a physical phone.
   untouched per instruction (frontend work is separate); it doesn't render
   the field, so nothing breaks, but the type should be updated.
 - All six scenarios re-run: 6/6 pass.
+
+---
+
+## 2026-09-19 ~09:35 — Part B: step-free from real OSM data (25 min, under limit)
+
+**Capture:** one Overpass query (steps / elevators / wheelchair=* /
+subway entrances within 600 m of Bedok stn, Outram Park stn and SGH) →
+`data/replay/osm_accessibility_corridor.json` with provenance + the query
+itself. overpass-api.de 504'd once; one polite retry succeeded. 284 elements:
+164 steps ways, 11 elevators, 87 wheelchair=yes, 9 wheelchair=no,
+5 wheelchair=limited, 16 subway entrances.
+
+**Classifier:** `app/routing/accessibility.py`, wired into walk-leg creation.
+First cut ("within 15 m of steps") wrongly flagged Outram→SGH as
+not_step_free — the diagnostic showed that route never comes closer than
+4.3 m to any steps way (it passes stair entrances), while Chinatown→SGH has
+points at 0.0 m and 1.2 m (it genuinely runs ON a steps way, nearest lift
+480 m). Threshold set to TRAVERSAL = 3 m, which separates the two cleanly on
+this corridor. verified requires ≥60% of points within 12 m of
+wheelchair=yes ways; lift within 60 m of traversed steps keeps it unverified.
+Geometric matching (OSRM gives geometry, not way ids) — thresholds are
+assumptions, stated here.
+
+**What OSM actually knew (the four distinct demo walk routes):**
+- verified: 0
+- not_step_free: 1 — Chinatown stn → SGH (traverses steps, no lift within 480 m)
+- unverified: 3 — Outram Park → SGH, Home (Bedok) → bus stop 84039,
+  New Bridge Ctr → SGH (no traversed steps, but wheelchair=yes coverage below
+  the 60% bar). Most segments staying unverified is the honest outcome.
+
+**Six scenarios re-run: 6/6, NO action changes vs the Part A baseline.**
+The one real effect: the Chinatown→SGH walk (already rejected on distance in
+the wheelchair replan) is now also positively not_step_free.
+
+**Note for WRITEUP.md (not edited here):** §7's "we do not read the
+pedestrian detail from OSM tags" and "Reading OSM stair and lift tags directly
+is the next step" are now stale — the corridor's steps/elevator/wheelchair
+tags ARE read (from a labelled capture). Flagged for the next docs pass.

@@ -131,12 +131,14 @@ def _walk_leg(frm_name, frm, to_name, to, depart, profile, locale,
     """Returns (leg, source) — source says osm_foot or straightline_estimate."""
     wr = walk_route(frm, to)
     minutes = walk_minutes(wr.distance_m, profile.walking_speed_mps)
+    # step_free comes from captured OSM data (steps / elevators / wheelchair
+    # tags) where OSM actually says something; "unverified" everywhere else.
+    from app.routing.accessibility import classify_walk
     leg = _mk("walk", frm_name, to_name, depart, minutes,
               "leg.walk.instruction", locale,
               # shelter "exposed" is conservative: no CoveredLinkWay data yet.
-              # step_free "unverified": OSM foot routing does not tell us the
-              # path avoids steps, and we do not assert what we have not checked.
-              shelter="exposed", step_free="unverified", geometry=wr.geometry,
+              shelter="exposed", step_free=classify_walk(wr.geometry),
+              geometry=wr.geometry,
               to=to_name, landmark=resolve(landmark_key, locale))
     return leg, wr.source
 
