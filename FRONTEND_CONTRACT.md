@@ -612,7 +612,7 @@ Journey body for every stage: `user_id: "mdm_lim"`, `origin: "Home (Bedok)"`,
 |---|---|---|---|
 | 1 | `demo_stage1_peak_crowding` | none (she is at home) | `leave_earlier`, no family notification |
 | 2 | `demo_stage2_planned_closure` | `{"lat": 1.317585, "lon": 103.892281, "accuracy_m": 25, "recorded_at": "<now>", "location_state": "on_train", "set_state": true}` (Paya Lebar) | `reroute`, "Get off at Bugis…", family notified |
-| 3 | `demo_stage3_breakdown` | `{"lat": 1.281812, "lon": 103.859152, "accuracy_m": 25, "recorded_at": "<now>", "location_state": "on_train", "set_state": true}` (Bayfront) | `take_taxi` with driver_card, family notified; reason names the rejected bus with real distances |
+| 3 | `demo_stage3_breakdown` | `{"lat": 1.300433, "lon": 103.855685, "accuracy_m": 25, "recorded_at": "<now>", "location_state": "on_train", "set_state": true}` (Bugis) | `take_taxi` with driver_card, family notified; reason names the rejected bus with real distances |
 
 `set_state: true` is required on both pings (she boarded the train — a
 deliberate state change). Stage 3's `affected_segment` carries both broken

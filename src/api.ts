@@ -190,7 +190,7 @@ export const STAGES = [
   { id: 'demo_stage2_planned_closure',
     ping: { lat: 1.317585, lon: 103.892281, accuracy_m: 25 } },  // Paya Lebar
   { id: 'demo_stage3_breakdown',
-    ping: { lat: 1.281812, lon: 103.859152, accuracy_m: 25 } },  // Bayfront
+    ping: { lat: 1.300433, lon: 103.855685, accuracy_m: 25 } },  // Bugis
 ] as const
 export type StageId = (typeof STAGES)[number]['id']
 
@@ -207,7 +207,7 @@ export async function runStage(stage: StageId): Promise<{ journey: Journey; advi
   }
   if (spec.ping) {
     // Ping times sit on the journey's own morning: 20 min after departure at
-    // Paya Lebar, 45 min after at Bayfront. The backend uses the latest ping
+    // Paya Lebar, 45 min after at Bugis. The backend uses the latest ping
     // as the simulated clock for scenario journeys.
     const depart = demoJourney.legs[0] ? new Date(demoJourney.legs[0].depart) : new Date()
     const offsetMin = stage === 'demo_stage2_planned_closure' ? 20 : 45
