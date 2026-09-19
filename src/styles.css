@@ -78,3 +78,24 @@
 .setup-pair button { flex: 1; min-height: 52px; font-size: 16px; font-weight: 600; padding: 10px; border-radius: 10px; border: 2px solid #52606d; background: #fffdfa; color: #0d2136; }
 .setup-pair button.selected { border-color: #0d2136; background: #0d2136; color: #fffdfa; }
 .walk-options button { flex: 1 1 40%; }
+
+/* UI fixes: language sheet fills the frame on desktop */
+@media(min-width:801px){.language-sheet{top:120px;height:auto}}
+/* profile setup gutter to match the other paper screens */
+.setup-screen h1{padding:0 28px;font-size:24px;margin:8px 0 14px}
+.setup-screen .setup-field{margin:0 28px 14px}
+.setup-screen .overview-notice{margin:0 28px}
+/* overview scrolls everywhere; the map keeps a real height */
+.overview-screen{overflow-y:auto}
+.route-map{flex:0 0 auto;height:260px;min-height:260px}
+/* guide without a matching landmark photo: collapse the empty area */
+.guide-screen.no-photo .guide-photo,.guide-screen.no-photo .photo-shade{display:none}
+.guide-screen.no-photo .guide-sheet{top:96px;bottom:0;height:auto}
+.guide-screen.no-photo .floating-sos{top:88px;bottom:auto;transform:none}
+@media(max-width:800px){.guide-screen.no-photo .guide-sheet{height:auto}}
+/* arrival screen */
+.arrived-screen{align-items:center;text-align:center;padding:0 28px}
+.arrived-screen .arrived-mark{width:96px;height:96px;display:grid;place-items:center;margin:96px auto 18px;color:var(--paper);background:var(--green);border-radius:50%}
+.arrived-screen .arrived-mark svg{width:52px;height:52px}
+.arrived-screen h1{font-size:38px;margin:0 0 8px}
+.arrived-screen p{color:var(--slate);font-size:19px;margin:0 0 6px}
