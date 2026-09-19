@@ -124,10 +124,22 @@ const SCENARIOS = [
   { id: "rain",                label: "2 · Heavy rain", prefer: "bus" },
   { id: "disruption_on_train", label: "3 · Disruption (on train)",
     ping: { lat: 1.3178, lon: 103.8927, accuracy_m: 25,
-            recorded_at: "2026-09-19T08:40:00+08:00", location_state: "on_train" } },
+            recorded_at: "2026-09-19T08:40:00+08:00",
+            location_state: "on_train", set_state: true } },
   { id: "lift_outage",         label: "4 · Lift out (wheelchair)", user: "wc_user" },
   { id: "flood_destination",   label: "5 · Flood at destination" },
   { id: "crowding_forecast",   label: "6 · Crowding forecast" },
+  // The three-stage demo: one journey, escalating events (see
+  // FRONTEND_CONTRACT.md). Same engine, labelled replay fixtures.
+  { id: "demo_stage1_peak_crowding",  label: "Demo 1 · Peak crowds" },
+  { id: "demo_stage2_planned_closure", label: "Demo 2 · Planned closure",
+    ping: { lat: 1.317585, lon: 103.892281, accuracy_m: 25,
+            recorded_at: "2026-09-19T08:40:00+08:00",
+            location_state: "on_train", set_state: true } },
+  { id: "demo_stage3_breakdown",      label: "Demo 3 · Breakdown ahead",
+    ping: { lat: 1.281812, lon: 103.859152, accuracy_m: 25,
+            recorded_at: "2026-09-19T09:14:00+08:00",
+            location_state: "on_train", set_state: true } },
 ];
 
 const map = L.map("map").setView([1.30, 103.885], 12);
