@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Local Codex and design-working files
+.agents/
+.codex/
+.impeccable/
+
+# Local environment files
+.env
+.env.*
+!.env.example

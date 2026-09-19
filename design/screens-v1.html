@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Commuter Companion — Screen Direction V1</title>
+  <link rel="stylesheet" href="screens-v1.css">
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+  <header class="board-header">
+    <div>
+      <p>Static HTML/CSS design review</p>
+      <h1>One journey. One clear action at a time.</h1>
+    </div>
+    <div class="board-note">
+      <strong>Reference:</strong> approved Step 6<br>
+      <span>Unverified route details remain visibly unresolved.</span>
+    </div>
+  </header>
+
+  <main class="board">
+    <section class="flow-group" aria-labelledby="setup-title">
+      <header class="group-heading">
+        <span>First use</span>
+        <h2 id="setup-title">Set up once, then stay out of the way.</h2>
+      </header>
+      <div class="frames">
+        <figure>
+          <div class="phone welcome-screen">
+            <div class="signal-window" aria-hidden="true">
+              <span class="signal-seven">7</span>
+              <i></i><i></i><i></i>
+            </div>
+            <section class="welcome-copy">
+              <p class="step-label">Welcome</p>
+              <h3>Choose your language.</h3>
+              <p>You can change this at any time.</p>
+              <div class="language-list">
+                <button class="selected"><span>English</span><b>EN</b></button>
+                <button><span>中文</span><b>中</b></button>
+                <button><span>Bahasa Melayu</span><b>BM</b></button>
+                <button><span>தமிழ்</span><b>த</b></button>
+              </div>
+              <button class="primary-action">Continue <span aria-hidden="true">→</span></button>
+            </section>
+          </div>
+          <figcaption><strong>01 · Language</strong><span>Recognisable choices; no dropdown.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone role-screen">
+            <header class="simple-top"><button aria-label="Back">←</button><span>Set up your profile</span></header>
+            <section class="role-copy">
+              <p class="step-label">Who is using this app?</p>
+              <h3>Choose one.</h3>
+            </section>
+            <div class="role-choice traveller">
+              <span class="role-symbol" aria-hidden="true">A</span>
+              <div><strong>I am travelling</strong><p>Plan and follow my own journey.</p></div>
+              <span aria-hidden="true">→</span>
+            </div>
+            <div class="role-choice family">
+              <span class="role-symbol" aria-hidden="true">B</span>
+              <div><strong>I am family</strong><p>Follow a journey that was shared with me.</p></div>
+              <span aria-hidden="true">→</span>
+            </div>
+            <p class="plain-note">Location is never shared automatically.</p>
+          </div>
+          <figcaption><strong>02 · Role</strong><span>Two large paths; consent stated immediately.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone mobility-screen">
+            <header class="simple-top"><button aria-label="Back">←</button><span>Your mobility needs</span></header>
+            <section class="mobility-copy">
+              <p class="step-label">We will remember this</p>
+              <h3>What makes a journey easier?</h3>
+              <p>Select everything that applies.</p>
+            </section>
+            <div class="choice-lines">
+              <button class="chosen"><span class="choice-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v16H8zM5 7h3M5 17h3M16 7h3M16 17h3M11 8l2-2 2 2M13 6v12M11 16l2 2 2-2"/></svg></span><span><strong>Use lifts</strong><small>Avoid stairs when possible</small></span><b>✓</b></button>
+              <button class="chosen"><span class="choice-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4zM8 20v-6h8v6"/></svg></span><span><strong>Use sheltered paths</strong><small>Prefer covered walking routes</small></span><b>✓</b></button>
+              <button><span class="choice-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="5" r="2"/><path d="M10 8v5h5l3 5M10 10H7M7 10l-2 5M15 15a6 6 0 1 1-5-7"/></svg></span><span><strong>Wheelchair access</strong><small>Use step-free routes only</small></span><b></b></button>
+              <button class="chosen"><span class="choice-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18c1-4 3-7 7-7h7M9 7h.01M12 5h.01M15 7h.01"/></svg></span><span><strong>I walk slowly</strong><small>Add more time to my journey</small></span><b>✓</b></button>
+            </div>
+            <div class="anchored-action"><button class="primary-action">Save preferences</button></div>
+          </div>
+          <figcaption><strong>03 · Mobility</strong><span>Concrete needs, applied automatically later.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="flow-group" aria-labelledby="before-title">
+      <header class="group-heading">
+        <span>Before the journey</span>
+        <h2 id="before-title">The route is prepared before Mdm Lim leaves.</h2>
+      </header>
+      <div class="frames">
+        <figure>
+          <div class="phone home-screen">
+            <header class="home-top"><span class="mini-signal" aria-hidden="true"></span><strong>Mdm Lim</strong><button aria-label="Profile">○</button></header>
+            <section class="home-hero">
+              <p>Your saved journey</p>
+              <h3>Bedok to Singapore General Hospital</h3>
+            </section>
+            <div class="home-route" aria-label="Bedok to Singapore General Hospital">
+              <div><span>HOME</span><strong>Bedok</strong></div>
+              <i><b></b></i>
+              <div><span>DESTINATION</span><strong>Singapore General Hospital</strong></div>
+            </div>
+            <p class="unresolved">No departure time has been set.</p>
+            <button class="primary-action home-primary">Plan this journey <span>→</span></button>
+            <div class="mobility-confirm"><span>✓</span><p><strong>Your preferences are on.</strong><br>Lifts, sheltered paths and your walking pace will be used.</p></div>
+            <button class="sos-dot"><strong>SOS</strong><small>Get help</small></button>
+          </div>
+          <figcaption><strong>04 · Home</strong><span>One saved journey and one obvious action.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone plan-screen">
+            <header class="simple-top"><button aria-label="Back">←</button><span>Plan a journey</span></header>
+            <section class="plan-heading">
+              <h3>Where are you going?</h3>
+              <p>Speak or type a place.</p>
+            </section>
+            <div class="route-inputs">
+              <label><span>FROM</span><div><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 11 8-7 8 7v9H4zM9 20v-6h6v6"/></svg></b><strong>Home in Bedok</strong><button aria-label="Speak origin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button></div></label>
+              <i aria-hidden="true"></i>
+              <label><span>TO</span><div><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></b><strong>Singapore General Hospital</strong><button aria-label="Speak destination"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button></div></label>
+            </div>
+            <div class="pace-line"><span>↕</span><p><strong>Accessible route is on</strong><br>Lifts and sheltered paths preferred</p><b>✓</b></div>
+            <div class="anchored-action"><button class="primary-action">Show my journey <span>→</span></button></div>
+          </div>
+          <figcaption><strong>05 · Plan</strong><span>Two fields only; voice remains secondary.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone update-screen-static">
+            <section class="update-signal">
+              <p>SIMULATED DISRUPTION</p>
+              <span class="lift-mark" aria-hidden="true">↕</span>
+              <h3>Your journey is already updated.</h3>
+            </section>
+            <section class="update-sheet">
+              <p class="update-reason">The usual lift route is unavailable in this demo.</p>
+              <h4>Follow Exit 7 at Outram Park.</h4>
+              <div class="update-facts">
+                <span>✓ No stairs</span>
+                <span>✓ Sheltered connection included</span>
+              </div>
+              <p class="automatic-note"><strong>You do not need to choose again.</strong><br>Your saved mobility needs were applied automatically.</p>
+              <div class="anchored-action update-actions">
+                <button class="primary-action">View updated journey <span>→</span></button>
+                <button class="secondary-action">◖ Hear update</button>
+              </div>
+            </section>
+          </div>
+          <figcaption><strong>06 · Automatic update</strong><span>No “safer route” decision; the work is already done.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone overview-screen-static">
+            <header class="simple-top"><button aria-label="Back">←</button><span>Your journey</span><button aria-label="Hear journey">◖</button></header>
+            <section class="overview-heading">
+              <h3>Bedok <span>→</span> SGH</h3>
+              <p>8 clear steps</p>
+            </section>
+            <ol class="journey-timeline">
+              <li><b>1</b><span><strong>Leave home</strong><small>Time not set</small></span></li>
+              <li><b>2</b><span><strong>Walk to Bedok MRT</strong><small>Landmark not yet verified</small></span></li>
+              <li><b>3</b><span><strong>Enter Bedok station</strong><small>Entrance not yet verified</small></span></li>
+              <li><b>4</b><span><strong>Take the East West Line</strong><small>Towards Tuas Link</small></span></li>
+              <li><b>5</b><span><strong>Alight at Outram Park</strong><small>Prepare to follow lift signs</small></span></li>
+              <li class="active"><b>6</b><span><strong>Follow Exit 7</strong><small>Landmark instruction ready</small></span><em>→</em></li>
+              <li><b>7</b><span><strong>Continue to SGH</strong><small>Connection not yet verified</small></span></li>
+              <li><b>8</b><span><strong>Arrive at SGH</strong><small>Building not yet supplied</small></span></li>
+            </ol>
+          </div>
+          <figcaption><strong>07 · Journey overview</strong><span>Truthful status for every step; no invented data.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="flow-group" aria-labelledby="during-title">
+      <header class="group-heading">
+        <span>During the journey</span>
+        <h2 id="during-title">The interface becomes a piece of wayfinding.</h2>
+      </header>
+      <div class="frames">
+        <figure>
+          <div class="phone landmark-screen">
+            <img class="landmark-photo" src="../.impeccable/mocks/source/outram-exit-7.jpg" alt="The illuminated yellow Exit 7 sign at Outram Park MRT">
+            <div class="landmark-shade"></div>
+            <header class="landmark-top"><button aria-label="Back">‹</button><strong>Outram Park</strong></header>
+            <section class="landmark-sheet">
+              <div class="landmark-progress"><span>Step 6 of 8</span><i><b></b></i></div>
+              <h3>Follow Exit 7</h3>
+              <p>Take the lift towards Exit 7. Look for the yellow 7 sign.</p>
+              <div class="distance-line"><strong>28 m</strong><span>ahead</span></div>
+              <div class="right-way">✓ <span>You’re going the right way</span></div>
+              <div class="landmark-actions"><button>◖ <span>Hear instruction</span></button><button>? <span>I’m lost</span></button></div>
+            </section>
+          </div>
+          <figcaption><strong>08 · Step 6 — approved reference</strong><span>This frame sets the quality and hierarchy for the entire app.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone wrong-screen">
+            <section class="wrong-signal">
+              <header><button aria-label="Back">←</button><span>Check your direction</span></header>
+              <div class="turn-symbol" aria-hidden="true"><svg viewBox="0 0 220 220"><path d="M68 63 29 102l39 39M32 102h82c40 0 67 23 67 60v23"/></svg></div>
+            </section>
+            <section class="wrong-sheet">
+              <h3>Stop.<br>Turn around.</h3>
+              <p>Follow the yellow Exit 7 signs in the opposite direction.</p>
+              <div class="sensor-caution"><span>⌖</span><p>This appears only after more than one location reading.</p></div>
+              <div class="anchored-action update-actions">
+                <button class="primary-action">Show the correct direction</button>
+                <button class="secondary-action">Call my family</button>
+              </div>
+            </section>
+          </div>
+          <figcaption><strong>09 · Wrong direction</strong><span>A physical command first; sensor caveat remains visible.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone sos-screen-static">
+            <header class="sos-top"><button aria-label="Back">←</button><span>Get help</span></header>
+            <section class="sos-heading">
+              <span>SOS</span>
+              <h3>Who should we call?</h3>
+              <p>No call or recording has started.</p>
+            </section>
+            <div class="help-lines">
+              <button><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l2 5-2 2a15 15 0 0 0 4 4l2-2 5 2v3c0 2-2 4-4 4C9 20 4 15 3 7c0-2 2-4 4-4Z"/></svg></span><div><strong>Trusted family</strong><small>Contact not yet supplied</small></div><b>→</b></button>
+              <button><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg></span><div><strong>Emergency services</strong><small>Use for immediate danger</small></div><b>→</b></button>
+              <button><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span><div><strong>Record an audio message</strong><small>Optional; never starts automatically</small></div><b>→</b></button>
+            </div>
+            <div class="consent-band"><span>✓</span><p>Audio and location are shared only after confirmation.</p></div>
+          </div>
+          <figcaption><strong>10 · SOS confirmation</strong><span>Calm, unmistakable and resistant to accidental activation.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="flow-group" aria-labelledby="family-title">
+      <header class="group-heading">
+        <span>Reassurance</span>
+        <h2 id="family-title">Family sees progress, not permanent surveillance.</h2>
+      </header>
+      <div class="frames">
+        <figure>
+          <div class="phone family-screen-static">
+            <header class="simple-top light"><span class="family-avatar">ML</span><span>Shared journey</span><button aria-label="More options">•••</button></header>
+            <section class="family-hero">
+              <p>DEMO JOURNEY · SHARING IS ON</p>
+              <h3>Mdm Lim is following Exit 7.</h3>
+              <div class="family-progress"><span>6</span><i><b></b></i><span>8</span></div>
+            </section>
+            <div class="family-landmark">
+              <img src="../.impeccable/mocks/source/outram-exit-7-sign-crop.jpg" alt="Yellow Exit 7 sign at Outram Park MRT">
+              <div><span>CURRENT STEP</span><strong>Outram Park</strong><p>Last update time not available</p></div>
+            </div>
+            <dl class="family-details">
+              <div><dt>Destination</dt><dd>Singapore General Hospital</dd></div>
+              <div><dt>Arrival estimate</dt><dd>Not available</dd></div>
+              <div><dt>Location sharing</dt><dd>Ends when the journey ends</dd></div>
+            </dl>
+            <div class="anchored-action"><button class="secondary-action">Call Mdm Lim</button></div>
+          </div>
+          <figcaption><strong>11 · Family awareness</strong><span>Step-level reassurance with explicit consent status.</span></figcaption>
+        </figure>
+
+        <figure>
+          <div class="phone arrival-screen">
+            <div class="arrival-mark" aria-hidden="true">✓</div>
+            <section>
+              <p class="step-label">Journey complete</p>
+              <h3>You have arrived at Singapore General Hospital.</h3>
+              <p>The exact building or clinic has not been supplied.</p>
+            </section>
+            <div class="sharing-ended"><span>○</span><p><strong>Location sharing has ended.</strong><br>Your family can see that you arrived.</p></div>
+            <div class="anchored-action"><button class="primary-action">Finish journey</button></div>
+          </div>
+          <figcaption><strong>12 · Arrival</strong><span>A clear ending and an equally clear privacy state.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
