@@ -10,7 +10,7 @@ tells her family when it matters.
   (`/ui` is the app, `/app` the fallback dashboard, `/docs` the API). Runs on
   Google Cloud Run in asia-southeast1. The link is in addition to the local
   instructions below, not a replacement.
-- **Demo video:** `<TBD>`
+- **Demo video:** `https://youtu.be/NeR-BKGk7sY`
 - **Write-up:** [`WRITEUP.md`](WRITEUP.md)
 - **API contract:** [`FRONTEND_CONTRACT.md`](FRONTEND_CONTRACT.md)
 
