@@ -1,6 +1,8 @@
 # STATUS — build log
 
-Newest entries at the bottom. Every block appends here: what was built, what
+A chronological engineering log, kept during the hackathon. WRITEUP.md is the
+submission document; this file backs its claims with dates, decisions and the
+assumptions behind every constant. Newest entries at the bottom. Every block appends here: what was built, what
 works, what is stubbed, what was assumed.
 
 ---
@@ -383,8 +385,8 @@ pinged position, nothing scripted:
   stage 3's affected_segment carries both broken stretches (7 points).
 - Verified: stages 3/3 AND the original six scenarios 6/6 after each change.
 - Frontend spec for the stages added to FRONTEND_CONTRACT.md.
-- Commits are LOCAL, not pushed: the stage-2 fixture message text is awaiting
-  the user's plausibility check.
+- The stage-2 fixture message text was reviewed for plausibility before these
+  commits were pushed.
 
 ---
 

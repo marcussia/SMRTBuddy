@@ -1,5 +1,8 @@
 # SMRTBuddy — PS2 Backend PRD (v2)
 
+This is the internal build spec the backend was written against, kept for
+transparency. WRITEUP.md is the submission document.
+
 **Scope: backend only.** UI/UX is owned separately and will connect to these APIs.
 Where this document and the organisers' brief disagree, THE BRIEF WINS — flag it,
 don't guess.

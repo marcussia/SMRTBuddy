@@ -1,7 +1,5 @@
 # Product
 
-<!-- impeccable:product-schema 1 -->
-
 ## Platform
 
 web
@@ -77,15 +75,15 @@ Unlike a generic journey planner that optimises primarily for average travel tim
 - Underground connectivity is unreliable. Cache the current route, essential landmarks, next actions, emergency information, and last-known status.
 - Credentials must remain outside the repository. External data use must respect licensing, attribution, and rate limits.
 - Product name is undecided. “SMRTBuddy” is only the current repository name and is not yet a confirmed public brand.
-- Deployment target is undecided.
+- Deployed on Google Cloud Run in asia-southeast1.
 
 ## Evidence on Hand
 
-- Hackathon challenge brief: `/Users/germaine/.codex/attachments/d6014352-955c-4c3a-9bde-9b39f05e3da4/pasted-text.txt`.
+- Hackathon challenge brief: `PS2_README.md` in the organisers' repository.
 - The brief identifies LTA DataMall, data.gov.sg, OneMap, and OpenStreetMap as relevant sources and requires OpenStreetMap as the geospatial base.
 - The brief specifically identifies LTA's `v2/FacilitiesMaintenance`, `TrainStationExit`, and `CoveredLinkWay` data as relevant to Mdm Lim.
 - The team's confirmed feature list is recorded in this document.
-- There is no implemented application, validated user research, production data, logo, public product name, or approved brand system yet. Future work must not fabricate these as evidence.
+- There is no validated user research, production data, logo, or approved brand system. Nothing here fabricates them as evidence.
 
 ## Product Principles
 
