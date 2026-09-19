@@ -167,6 +167,14 @@ coverage around SGH never reached our 60% threshold for any route. The one
 positive finding is real — the Chinatown to SGH walk runs along a steps way,
 with the nearest lift 480 m away.
 
+The named entrances in the same capture drive an exit hint on walk legs that
+leave a station: the exit nearest to the actual route, with its OSM wheelchair
+tag stated as yes, no, or not tagged. A profile that needs step-free access is
+steered to a wheelchair=yes exit over a nearer unconfirmed one, and the hint
+says which nearer exit was passed over and why. The hint is skipped when two
+entrances are too close to call. We never imply step-free where OSM does not
+say so.
+
 **Step-free status is declared, not asserted.** Walk legs are unverified
 unless OSM says otherwise. Known lift outages downgrade affected legs to
 not step-free. We block routing on not step-free but allow unverified,

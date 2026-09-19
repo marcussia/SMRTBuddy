@@ -99,3 +99,7 @@
 .arrived-screen .arrived-mark svg{width:52px;height:52px}
 .arrived-screen h1{font-size:38px;margin:0 0 8px}
 .arrived-screen p{color:var(--slate);font-size:19px;margin:0 0 6px}
+
+/* exit hints (from captured OSM entrances) */
+.exit-hint{display:block;margin-top:4px;color:#31465a;background:#eef3f8;border-radius:8px;padding:6px 9px;font-size:13.5px;line-height:1.35}
+p.exit-hint{font-size:16px;margin:8px 0 0}

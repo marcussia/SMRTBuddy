@@ -84,6 +84,32 @@ STRINGS: dict[str, dict[str, str]] = {
         "ms": "Laluan ini berbumbung sepanjang jalan.",
         "ta": "நடைபாதை முழுவதும் மூடப்பட்டுள்ளது."},
     "landmark.none": {"en": "", "zh": "", "ms": "", "ta": ""},
+    # --- station exit hints (from captured OSM entrances) ---
+    "exit.nearest.yes": {
+        "en": "Exit {ref} is nearest to this route and OSM tags it step-free.",
+        "zh": "{ref} 号出口离这条路线最近，OSM 标注为无障碍。",
+        "ms": "Pintu keluar {ref} paling dekat dengan laluan ini dan OSM menandakannya bebas tangga.",
+        "ta": "வெளியேறும் வழி {ref} இந்தப் பாதைக்கு மிக அருகில் உள்ளது; OSM இதை படிக்கட்டு இல்லாதது எனக் குறித்துள்ளது."},
+    "exit.nearest.no": {
+        "en": "Exit {ref} is nearest to this route. OSM tags it as not wheelchair-accessible.",
+        "zh": "{ref} 号出口离这条路线最近。OSM 标注为不适合轮椅。",
+        "ms": "Pintu keluar {ref} paling dekat dengan laluan ini. OSM menandakannya tidak sesuai untuk kerusi roda.",
+        "ta": "வெளியேறும் வழி {ref} இந்தப் பாதைக்கு மிக அருகில் உள்ளது. OSM இதை சக்கர நாற்காலிக்கு ஏற்றதல்ல எனக் குறித்துள்ளது."},
+    "exit.nearest.untagged": {
+        "en": "Exit {ref} is nearest to this route (OpenStreetMap; wheelchair access not tagged).",
+        "zh": "{ref} 号出口离这条路线最近（OpenStreetMap；未标注轮椅通行情况）。",
+        "ms": "Pintu keluar {ref} paling dekat dengan laluan ini (OpenStreetMap; akses kerusi roda tidak ditanda).",
+        "ta": "வெளியேறும் வழி {ref} இந்தப் பாதைக்கு மிக அருகில் உள்ளது (OpenStreetMap; சக்கர நாற்காலி அணுகல் குறிக்கப்படவில்லை)."},
+    "exit.preferred.untagged": {
+        "en": "Exit {ref} is tagged step-free (OpenStreetMap). It is slightly further than Exit {other}, which has no accessibility tag.",
+        "zh": "{ref} 号出口标注为无障碍（OpenStreetMap）。它比 {other} 号出口稍远，后者没有无障碍标注。",
+        "ms": "Pintu keluar {ref} ditanda bebas tangga (OpenStreetMap). Ia sedikit lebih jauh daripada pintu keluar {other}, yang tiada tanda kebolehcapaian.",
+        "ta": "வெளியேறும் வழி {ref} படிக்கட்டு இல்லாதது எனக் குறிக்கப்பட்டுள்ளது (OpenStreetMap). இது {other}-ஐ விட சற்று தொலைவில் உள்ளது; {other}-க்கு அணுகல் குறியீடு இல்லை."},
+    "exit.preferred.no": {
+        "en": "Exit {ref} is tagged step-free (OpenStreetMap). It is slightly further than Exit {other}, which OSM tags as not wheelchair-accessible.",
+        "zh": "{ref} 号出口标注为无障碍（OpenStreetMap）。它比 {other} 号出口稍远，后者被 OSM 标注为不适合轮椅。",
+        "ms": "Pintu keluar {ref} ditanda bebas tangga (OpenStreetMap). Ia sedikit lebih jauh daripada pintu keluar {other}, yang ditanda OSM sebagai tidak sesuai untuk kerusi roda.",
+        "ta": "வெளியேறும் வழி {ref} படிக்கட்டு இல்லாதது எனக் குறிக்கப்பட்டுள்ளது (OpenStreetMap). இது {other}-ஐ விட சற்று தொலைவில் உள்ளது; {other}-ஐ OSM சக்கர நாற்காலிக்கு ஏற்றதல்ல எனக் குறித்துள்ளது."},
     # --- reroute summaries / short reasons ---
     "summary.take_line": {
         "en": "take the {line} line to {to}.",

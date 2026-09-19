@@ -136,13 +136,35 @@ def _walk_leg(frm_name, frm, to_name, to, depart, profile, locale,
     minutes = walk_minutes(wr.distance_m, profile.walking_speed_mps)
     # step_free comes from captured OSM data (steps / elevators / wheelchair
     # tags) where OSM actually says something; "unverified" everywhere else.
-    from app.routing.accessibility import classify_walk
+    from app.routing.accessibility import classify_walk, nearest_exit
     leg = _mk("walk", frm_name, to_name, depart, minutes,
               "leg.walk.instruction", locale, speech_key="leg.walk.speech",
               # shelter "exposed" is conservative: no CoveredLinkWay data yet.
               shelter="exposed", step_free=classify_walk(wr.geometry),
               geometry=wr.geometry,
               to=to_name, landmark=resolve(landmark_key, locale))
+    # Nearest-exit hint, only when the walk leaves a corridor station and the
+    # captured OSM entrances answer unambiguously. A step-free-needing profile
+    # (wheelchair, or cannot use stairs — the engine's own definition) is
+    # steered to a wheelchair=yes exit over a nearer unconfirmed one: pointing
+    # such a commuter at an unconfirmed exit is the wrong direction to be
+    # wrong in.
+    if net.station_for(frm_name):
+        needs_step_free = profile.wheelchair or not profile.can_use_stairs
+        hint = nearest_exit(wr.geometry, prefer_wheelchair=needs_step_free)
+        if hint:
+            from app.models import ExitHint
+            if hint["nearer_ref"]:
+                text = resolve(f"exit.preferred.{hint['nearer_wheelchair']}",
+                               locale, ref=hint["ref"], other=hint["nearer_ref"])
+            else:
+                text = resolve(f"exit.nearest.{hint['wheelchair']}", locale,
+                               ref=hint["ref"])
+            leg.exit_hint = ExitHint(station=frm_name, ref=hint["ref"],
+                                     wheelchair=hint["wheelchair"],
+                                     nearer_ref=hint["nearer_ref"],
+                                     nearer_wheelchair=hint["nearer_wheelchair"],
+                                     text=text)
     return leg, wr.source
 
 

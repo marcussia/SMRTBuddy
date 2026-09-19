@@ -224,7 +224,11 @@ for readability; the API returns every point):
 provenance, not a boolean; SHOW `unverified` as a caveat and `not_step_free`
 as a warning — never render an unverified walk as step-free),
 `geometry` (`[lat, lon][]`), `crowding` (`low|medium|high` or null —
-populated on advice legs, null on journey creation).
+populated on advice legs, null on journey creation), and `exit_hint` (null, or
+`{station, ref, wheelchair: "yes"|"no"|"untagged", text, source}` on walk legs
+leaving a station — the nearest exit from captured OSM entrances, with the
+localised `text` ready to render; a step-free-needing profile is steered to a
+wheelchair=yes exit and the text says so).
 
 ## GET /journeys/{journey_id}/advice — THE CORE CALL
 

@@ -55,6 +55,22 @@ class UserProfile(BaseModel):
         return self
 
 
+class ExitHint(BaseModel):
+    """Nearest station exit to a walk leg, derived from captured OSM
+    subway_entrance nodes (data/replay/osm_accessibility_corridor.json).
+    Never implies step-free access where OSM does not say so."""
+    station: str
+    ref: str
+    wheelchair: Literal["yes", "no", "untagged"]
+    # set when a step-free-needing profile is steered to a wheelchair=yes exit
+    # that is slightly further than the nearest one; carries that nearer
+    # exit's actual OSM status so the text never misstates a tag
+    nearer_ref: str | None = None
+    nearer_wheelchair: Literal["no", "untagged"] | None = None
+    text: str = ""            # localised, provenance included
+    source: str = "OpenStreetMap"
+
+
 class Leg(BaseModel):
     mode: Literal["walk", "bus", "mrt", "taxi"]
     from_name: str
@@ -75,6 +91,7 @@ class Leg(BaseModel):
     step_free: Literal["verified", "unverified", "not_step_free"]
     geometry: list[tuple[float, float]] = []   # WGS84 (lat, lon) polyline
     crowding: Literal["low", "medium", "high"] | None = None
+    exit_hint: "ExitHint | None" = None        # walk legs leaving a station
 
 
 class Advice(BaseModel):

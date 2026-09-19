@@ -40,6 +40,8 @@ export type Leg = {
   step_free: 'verified' | 'unverified' | 'not_step_free'
   geometry: [number, number][]
   crowding: 'low' | 'medium' | 'high' | null
+  // nearest station exit from captured OSM entrances; text carries provenance
+  exit_hint: { station: string; ref: string; wheelchair: 'yes' | 'no' | 'untagged'; text: string; source: string } | null
 }
 
 export type Advice = {

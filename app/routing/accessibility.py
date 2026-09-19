@@ -91,6 +91,62 @@ def _load() -> dict[str, list[Line]]:
     return out
 
 
+AMBIGUOUS_M = 15.0
+ENTRANCE_NEAR_STATION_M = 300.0
+
+
+@lru_cache(maxsize=1)
+def _entrances() -> list[dict]:
+    if not _REPLAY.exists():
+        return []
+    data = json.loads(_REPLAY.read_text())
+    out = []
+    for el in data.get("elements", []):
+        tags = el.get("tags", {})
+        if tags.get("railway") != "subway_entrance" or el.get("type") != "node":
+            continue
+        ref = tags.get("ref")
+        if not ref:
+            continue
+        wc = tags.get("wheelchair")
+        out.append({"ref": ref, "pos": (el["lat"], el["lon"]),
+                    "wheelchair": wc if wc in ("yes", "no") else "untagged"})
+    return out
+
+
+def nearest_exit(geometry: Line, prefer_wheelchair: bool
+                 ) -> dict | None:
+    """The station exit nearest to the START of a walk leg, from captured OSM.
+    Returns {ref, wheelchair, nearer_untagged_ref} or None when OSM has no
+    entrance nearby or two are ambiguous (within AMBIGUOUS_M of each other).
+    With prefer_wheelchair, a wheelchair=yes exit wins over a nearer exit that
+    is untagged or tagged no; the skipped exit's ref AND its actual status are
+    reported so the text never misstates a tag."""
+    if len(geometry) < 2:
+        return None
+    start_pts = geometry[:6]
+    cands = []
+    for e in _entrances():
+        d = min(_pt_seg_m(p, e["pos"], e["pos"]) for p in start_pts)
+        if d <= ENTRANCE_NEAR_STATION_M:
+            cands.append((d, e))
+    if not cands:
+        return None
+    cands.sort(key=lambda t: t[0])
+    best_d, best = cands[0]
+    if prefer_wheelchair and best["wheelchair"] != "yes":
+        tagged = [(d, e) for d, e in cands if e["wheelchair"] == "yes"]
+        if tagged:
+            _d2, chosen = tagged[0]
+            return {"ref": chosen["ref"], "wheelchair": "yes",
+                    "nearer_ref": best["ref"],
+                    "nearer_wheelchair": best["wheelchair"]}
+    if len(cands) > 1 and cands[1][0] - best_d < AMBIGUOUS_M:
+        return None
+    return {"ref": best["ref"], "wheelchair": best["wheelchair"],
+            "nearer_ref": None, "nearer_wheelchair": None}
+
+
 def classify_walk(geometry: Line) -> Literal["verified", "unverified", "not_step_free"]:
     if len(geometry) < 2:
         return "unverified"
