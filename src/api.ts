@@ -37,7 +37,7 @@ export type Leg = {
   instruction: string
   speech_text: string
   shelter: 'covered' | 'partial' | 'exposed'
-  step_free: boolean
+  step_free: 'verified' | 'unverified' | 'not_step_free'
   geometry: [number, number][]
   crowding: 'low' | 'medium' | 'high' | null
 }

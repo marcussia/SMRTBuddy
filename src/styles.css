@@ -49,3 +49,14 @@
 .corridor-help p { font-size: 14px; margin: 6px 0; color: #52606d; }
 .corridor-help .corridor-why { font-size: 12.5px; }
 .guide-sheet .scenario-bar .scenario-chips button { background: transparent; }
+
+/* real-leg rendering */
+.stepfree-badge { display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 8px; border: 1.5px solid; font-size: 12.5px; font-weight: 700; width: fit-content; }
+.stepfree-badge.verified { color: #0a6b28; border-color: #0a6b28; }
+.stepfree-badge.unverified { color: #8a5a00; border-color: #8a5a00; background: #fff4dd; }
+.stepfree-badge.not_step_free { color: #a11212; border-color: #a11212; }
+.leg-times { display: block; font-weight: 600; }
+.leg-photo { position: relative; display: block; }
+.leg-photo i, .photo-note { display: block; font-style: normal; font-size: 11.5px; font-weight: 700; color: #8a5a00; background: #fff7e6; border-radius: 6px; padding: 2px 6px; width: fit-content; margin-top: 2px; }
+.guide-photo-none { display: flex; align-items: center; justify-content: center; background: #0d2136; color: #f5f1e8; }
+.guide-photo-none svg { width: 64px; height: 64px; opacity: .5; }

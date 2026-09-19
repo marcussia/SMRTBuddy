@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Accessibility, ArrowLeft, ArrowRight, Check, ChevronRight, CircleHelp, HeartHandshake, Home, LocateFixed, LockKeyhole, MapPin, Mic, Navigation, Pause, Phone, RotateCcw, ShieldCheck, Square, Trash2, UserRound, Volume2, X } from 'lucide-react'
 import { guideCopy, languages, screenLabels, type Locale, type ScreenId } from './data'
-import { routeSteps } from './routeSteps'
+import { legPhoto } from './legMedia'
 import { uiCopy, type UiCopy } from './uiCopy'
 import * as api from './api'
 
@@ -69,7 +69,7 @@ function App() {
   const continueWithoutSharing = () => { setLocationState('idle'); setActiveStep(0); navigate('guide') }
   const finishJourney = () => { if (watchRef.current !== null) navigator.geolocation.clearWatch(watchRef.current); watchRef.current = null; setLocationState('idle'); navigate('overview') }
   return <main className="prototype-shell">
-    <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
+    <PrototypeNav screen={screen} locale={locale} activeStep={activeStep} legCount={advice?.legs.length ?? 0} navigate={navigate} selectLocale={selectLocale} setActiveStep={setActiveStep} />
     <section className="device-stage" aria-label="Mdm Lim commuter companion prototype"><div className={`phone locale-${locale}`} data-screen={screen}>
       {screen === 'language' && <LanguageScreen locale={locale} copy={copy} selectLocale={selectLocale} next={() => navigate('profile')} />}
       {screen === 'profile' && <ProfileScreen copy={copy} back={() => navigate('language')} traveller={() => navigate('plan')} family={() => navigate('family')} />}
@@ -77,7 +77,7 @@ function App() {
       {screen === 'listening' && <ListeningScreen locale={locale} transcript={transcript} setTranscript={setTranscript} back={() => navigate('plan')} accept={() => { setDestination(transcript); void planJourney(transcript) }} busy={busy} />}
       {screen === 'overview' && <OverviewScreen locale={locale} copy={copy} advice={advice} journey={journey} busy={busy} back={() => navigate('plan')} start={() => navigate('sharing')} notice={notice} />}
       {screen === 'sharing' && <SharingScreen copy={copy} state={locationState} start={() => { void startJourney() }} continueWithout={continueWithoutSharing} back={() => navigate('overview')} />}
-      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} locationState={locationState} lastLocationAt={lastLocationAt} back={() => navigate('overview')} next={() => setActiveStep((step) => Math.min(7, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
+      {screen === 'guide' && <GuideScreen locale={locale} activeStep={activeStep} advice={advice} locationState={locationState} lastLocationAt={lastLocationAt} back={() => navigate('overview')} next={() => setActiveStep((step) => Math.min((advice?.legs.length ?? 1) - 1, step + 1))} finish={finishJourney} lost={() => navigate('wrong-way')} sos={() => navigate('sos')} />}
       {screen === 'wrong-way' && <WrongWayScreen locale={locale} journey={journey} back={() => navigate('guide')} correct={() => navigate('guide')} call={() => navigate('sos')} />}
       {screen === 'sos' && <SosScreen locale={locale} back={() => navigate('guide')} record={() => navigate('recording')} confirm={setConfirm} setNotice={setNotice} />}
       {screen === 'recording' && <RecordingScreen back={() => navigate('sos')} />}
@@ -89,8 +89,8 @@ function App() {
   </main>
 }
 
-function PrototypeNav({ screen, locale, activeStep, navigate, selectLocale, setActiveStep }: { screen: ScreenId; locale: Locale; activeStep: number; navigate: (screen: ScreenId) => void; selectLocale: (locale: Locale) => void; setActiveStep: (step: number) => void }) {
-  return <aside className="prototype-nav" aria-label="Pitch demo navigation"><div className="prototype-brand"><span className="signal-mark"><i /><i /><i /></span><div><strong>Mdm Lim</strong><span>Commuter companion</span></div></div><p className="prototype-note">Jump to any judging moment. This panel is hidden on phones.</p><nav>{screenLabels.map((item, index) => <div key={item.id}>{item.group !== screenLabels[index - 1]?.group && <span className="nav-group">{item.group}</span>}<button className={screen === item.id ? 'active' : ''} onClick={() => navigate(item.id)}><span>{item.label}</span><ChevronRight size={18} /></button></div>)}</nav><span className="nav-group">Live step</span><div className="nav-step-grid">{routeSteps(locale).map((_, index) => <button key={index} className={screen === 'guide' && activeStep === index ? 'active' : ''} onClick={() => { setActiveStep(index); navigate('guide') }}>{index + 1}</button>)}</div><div className="nav-languages"><span className="nav-group">Step language</span><div>{languages.map((item) => <button key={item.id} className={locale === item.id ? 'active' : ''} onClick={() => selectLocale(item.id)}>{item.code}</button>)}</div></div></aside>
+function PrototypeNav({ screen, locale, activeStep, legCount, navigate, selectLocale, setActiveStep }: { screen: ScreenId; locale: Locale; activeStep: number; legCount: number; navigate: (screen: ScreenId) => void; selectLocale: (locale: Locale) => void; setActiveStep: (step: number) => void }) {
+  return <aside className="prototype-nav" aria-label="Pitch demo navigation"><div className="prototype-brand"><span className="signal-mark"><i /><i /><i /></span><div><strong>Mdm Lim</strong><span>Commuter companion</span></div></div><p className="prototype-note">Jump to any judging moment. This panel is hidden on phones.</p><nav>{screenLabels.map((item, index) => <div key={item.id}>{item.group !== screenLabels[index - 1]?.group && <span className="nav-group">{item.group}</span>}<button className={screen === item.id ? 'active' : ''} onClick={() => navigate(item.id)}><span>{item.label}</span><ChevronRight size={18} /></button></div>)}</nav>{legCount > 0 && <><span className="nav-group">Live step</span><div className="nav-step-grid">{Array.from({ length: legCount }).map((_, index) => <button key={index} className={screen === 'guide' && activeStep === index ? 'active' : ''} onClick={() => { setActiveStep(index); navigate('guide') }}>{index + 1}</button>)}</div></>}<div className="nav-languages"><span className="nav-group">Step language</span><div>{languages.map((item) => <button key={item.id} className={locale === item.id ? 'active' : ''} onClick={() => selectLocale(item.id)}>{item.code}</button>)}</div></div></aside>
 }
 
 function BackButton({ onClick, light = false, label = 'Go back' }: { onClick: () => void; light?: boolean; label?: string }) { return <button className={`back-button${light ? ' light' : ''}`} onClick={onClick} aria-label={label}><ArrowLeft /></button> }
@@ -161,6 +161,17 @@ function ListeningScreen({ locale, transcript, setTranscript, back, accept, busy
   return <div className={`screen paper-screen listening-screen locale-${locale}`}><TopBar title={copy.voice.top} back={back} /><section className="listening-title"><h1>{heading}</h1><p>{message}</p></section><div className="capture-card real-capture"><button className={`big-mic${state === 'listening' ? ' active' : ''}`} onClick={() => { void begin() }} disabled={state === 'requesting'} aria-label={state === 'listening' ? copy.voice.listening : copy.voice.tap}><Mic /></button><div className="voice-meter" aria-hidden="true">{[.55,.8,1,.7,.45].map((weight, index) => <i key={index} style={{ transform: `scaleY(${state === 'listening' ? Math.max(.15, level * weight) : .15})` }} />)}</div><span>{transcript ? copy.voice.heard : state === 'listening' ? copy.voice.micLive : copy.voice.nothing}</span><strong>{transcript || '—'}</strong></div><div className="privacy-strip"><ShieldCheck /><span>{copy.voice.privacy}</span></div><div className="screen-actions voice-actions"><PrimaryButton onClick={accept} disabled={!transcript || busy}>{busy ? copy.plan.planning : copy.voice.use}</PrimaryButton><SecondaryButton onClick={() => { void begin() }}>{state === 'idle' ? copy.voice.tap : copy.voice.retry}</SecondaryButton><button className="plain-action" onClick={back}>{copy.voice.type}</button></div></div>
 }
 
+
+function StepFreeBadge({ copy, leg }: { copy: UiCopy; leg: api.Leg }) {
+  return <span className={`stepfree-badge ${leg.step_free}`}>{copy.legs.stepFree[leg.step_free]}</span>
+}
+function LegTimes({ copy, leg }: { copy: UiCopy; leg: api.Leg }) {
+  return <small className="leg-times">{api.fmtTime(leg.depart)}–{api.fmtTime(leg.arrive)}{leg.crowding ? ` · ${copy.legs.crowd[leg.crowding]}` : ''}</small>
+}
+function legTitle(copy: UiCopy, leg: api.Leg): string {
+  return `${copy.legs.modes[leg.mode]}${leg.service ? ` ${leg.service}` : ''}: ${leg.from_name} → ${leg.to_name}`
+}
+
 const ACTION_LABEL: Record<Locale, Record<api.Advice['action'], string>> = {
   en: { proceed: 'All clear', wait: 'Wait', reroute: 'Change of plan', leave_earlier: 'Leave earlier', take_taxi: 'Take a taxi', cancel_trip: 'Do not travel' },
   zh: { proceed: '路线正常', wait: '请稍候', reroute: '路线已更改', leave_earlier: '请提前出发', take_taxi: '建议乘出租车', cancel_trip: '请勿出行' },
@@ -175,7 +186,7 @@ function AdviceBanner({ locale, copy, advice }: { locale: Locale; copy: UiCopy; 
     <span className="advice-action">{ACTION_LABEL[locale][advice.action]}</span>
     <strong>{locale === 'en' ? advice.headline : ACTION_LABEL[locale][advice.action]}</strong>
     <p>{locale === 'en' ? `${summary}${summary.endsWith('.') ? '' : '.'}` : ADVICE_SUMMARY[locale]}</p>
-    {locale === 'en' && <details><summary>{copy.overview.why}</summary><p>{advice.reason}</p><small>Arrive {api.fmtTime(advice.eta_range[0])}–{api.fmtTime(advice.eta_range[1])}</small></details>}
+    {locale === 'en' && <details><summary>{copy.overview.why}</summary><p>{advice.reason}</p><small>Arrive {api.fmtTime(advice.eta_range[0])}–{api.fmtTime(advice.eta_range[1])}{advice.decide_by ? ` · decide by ${api.fmtTime(advice.decide_by)}` : ''}{advice.notify_family ? ' · family notified' : ''}</small></details>}
     {api.anyFixture(advice) && <span className="replay-tag">{copy.overview.simulated}</span>}
   </div>
 }
@@ -184,8 +195,7 @@ function OverviewScreen({ locale, copy, advice, journey, busy, back, start, noti
   if (!advice || !journey) return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><h1>{busy ? copy.overview.planning : copy.overview.empty}</h1><p>{busy ? copy.overview.checking : copy.overview.emptyDetail}</p></section></div>
   const legs = advice.legs
   const total = Math.round((new Date(legs[legs.length - 1]?.arrive ?? journey.arrive_by).getTime() - new Date(legs[0]?.depart ?? journey.arrive_by).getTime()) / 60000)
-  const steps = routeSteps(locale)
-  return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{copy.overview.title}</h1><p>{copy.overview.about(total)}</p></section><div className="journey-badges"><span><Accessibility /> {copy.overview.stepFree}</span><span><LocateFixed /> {copy.overview.landmarks}</span></div><AdviceBanner locale={locale} copy={copy} advice={advice} /><ol className="journey-list photo-list">{steps.map((step, index) => <li key={index}><img src={step.image} alt="" /><b>{index + 1}</b><span><strong>{step.title}</strong><small>{step.instruction}</small></span></li>)}</ol>{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> {copy.overview.start}</PrimaryButton></div></div>
+  return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><div><span>{journey.origin}</span><ArrowRight /><span>{journey.destination}</span></div><h1>{copy.overview.title(legs.length)}</h1><p>{copy.overview.about(total)}</p></section><div className="journey-badges"><span><LocateFixed /> {copy.overview.landmarks}</span></div><AdviceBanner locale={locale} copy={copy} advice={advice} /><ol className="journey-list photo-list">{legs.map((leg, index) => { const photo = legPhoto(leg); return <li key={index}>{photo && <span className="leg-photo"><img src={photo.image} alt={photo.alt} /><i>{copy.legs.illustrative}</i></span>}<b>{index + 1}</b><span><strong>{legTitle(copy, leg)}</strong><LegTimes copy={copy} leg={leg} /><small>{leg.instruction}</small><StepFreeBadge copy={copy} leg={leg} /></span></li> })}</ol>{notice && <p className="overview-notice" role="status">{notice}</p>}<div className="screen-actions"><PrimaryButton onClick={start}><Navigation /> {copy.overview.start}</PrimaryButton></div></div>
 }
 
 function SharingScreen({ copy, state, start, continueWithout, back }: { copy: UiCopy; state: LocationState; start: () => void; continueWithout: () => void; back: () => void }) {
@@ -194,13 +204,19 @@ function SharingScreen({ copy, state, start, continueWithout, back }: { copy: Ui
   return <div className="screen paper-screen sharing-screen"><TopBar title={copy.sharing.top} back={back} /><section className="sharing-heading"><span><HeartHandshake /></span><h1>{copy.sharing.title}</h1><p>{message}</p></section><div className="sharing-details"><div><LocateFixed /><span><strong>{copy.sharing.location}</strong><small>{copy.sharing.locationDetail}</small></span></div><div><ShieldCheck /><span><strong>{copy.sharing.control}</strong><small>{copy.sharing.controlDetail}</small></span></div></div><div className="screen-actions two"><PrimaryButton onClick={start} disabled={state === 'requesting'}><LocateFixed />{state === 'requesting' ? copy.sharing.request : failed ? copy.sharing.retry : copy.sharing.start}</PrimaryButton><SecondaryButton onClick={continueWithout}>{copy.sharing.skip}</SecondaryButton></div></div>
 }
 
-function GuideScreen({ locale, activeStep, locationState, lastLocationAt, back, next, finish, lost, sos }: { locale: Locale; activeStep: number; locationState: LocationState; lastLocationAt: Date | null; back: () => void; next: () => void; finish: () => void; lost: () => void; sos: () => void }) {
-  const step = routeSteps(locale)[activeStep]; const copy = uiCopy[locale]; const [speaking, setSpeaking] = useState(false)
-  const spokenText = `${step.title}. ${step.instruction}. ${step.distance}.`
+function GuideScreen({ locale, activeStep, advice, locationState, lastLocationAt, back, next, finish, lost, sos }: { locale: Locale; activeStep: number; advice: api.Advice | null; locationState: LocationState; lastLocationAt: Date | null; back: () => void; next: () => void; finish: () => void; lost: () => void; sos: () => void }) {
+  const copy = uiCopy[locale]; const [speaking, setSpeaking] = useState(false)
+  const legs = advice?.legs ?? []
+  const index = Math.min(activeStep, Math.max(0, legs.length - 1))
+  const leg = legs[index]
+  const photo = leg ? legPhoto(leg) : null
+  const spokenText = leg ? leg.speech_text : ''
   const speak = () => { if (!('speechSynthesis' in window)) return; if (speaking) { speechSynthesis.cancel(); setSpeaking(false); return }; const utterance = new SpeechSynthesisUtterance(spokenText); utterance.lang = guideCopy[locale].speechLanguage; utterance.rate = .72; utterance.onend = () => setSpeaking(false); utterance.onerror = () => setSpeaking(false); speechSynthesis.cancel(); speechSynthesis.speak(utterance); setSpeaking(true) }
   useEffect(() => () => window.speechSynthesis?.cancel(), [])
   const time = lastLocationAt?.toLocaleTimeString(locale === 'zh' ? 'zh-SG' : locale === 'ms' ? 'ms-SG' : locale === 'ta' ? 'ta-SG' : 'en-SG', { hour: '2-digit', minute: '2-digit' })
-  return <div className={`screen guide-screen locale-${locale}`}><img src={step.image} alt={step.alt} className={`guide-photo${activeStep === 6 ? ' route-visual' : ''}`} /><div className="photo-shade" /><div className="guide-top"><BackButton onClick={back} light label={copy.back} /><strong>{step.place}</strong><span /></div><button className="floating-sos" onClick={sos}>SOS</button><section className="guide-sheet multi-step-sheet"><div className="progress-row"><strong>{copy.guide.step(activeStep + 1)}</strong><span style={{ '--progress': `${((activeStep + 1) / 8) * 100}%` } as React.CSSProperties}><i /></span></div><h1>{step.title}</h1><p className="instruction">{step.instruction}</p><div className="distance"><strong>{step.distance}</strong></div><div className="sharing-status"><LocateFixed /><span><strong>{locationState === 'active' ? copy.guide.sharing : copy.guide.saved}</strong><small>{locationState === 'active' && time ? copy.guide.updated(time) : copy.guide.notShared}</small></span></div><div className="guide-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? copy.guide.playing : copy.guide.play}</span></button><button onClick={lost}><CircleHelp /><span>{copy.guide.help}</span></button></div><PrimaryButton onClick={activeStep === 7 ? finish : next}>{activeStep === 7 ? copy.guide.finish : copy.guide.next}<ArrowRight /></PrimaryButton></section></div>
+  if (!leg) return <div className={`screen paper-screen overview-screen locale-${locale}`}><TopBar title={copy.overview.top} back={back} /><section className="overview-heading"><h1>{copy.overview.empty}</h1><p>{copy.overview.emptyDetail}</p></section></div>
+  const last = index === legs.length - 1
+  return <div className={`screen guide-screen locale-${locale}`}>{photo ? <img src={photo.image} alt={photo.alt} className="guide-photo" /> : <div className="guide-photo guide-photo-none" aria-hidden="true"><Navigation /></div>}<div className="photo-shade" /><div className="guide-top"><BackButton onClick={back} light label={copy.back} /><strong>{leg.to_name}</strong><span /></div><button className="floating-sos" onClick={sos}>SOS</button><section className="guide-sheet multi-step-sheet"><div className="progress-row"><strong>{copy.guide.step(index + 1, legs.length)}</strong><span style={{ '--progress': `${((index + 1) / legs.length) * 100}%` } as React.CSSProperties}><i /></span></div><h1>{legTitle(copy, leg)}</h1><p className="instruction">{leg.instruction}</p><div className="distance"><LegTimes copy={copy} leg={leg} /><StepFreeBadge copy={copy} leg={leg} /></div>{photo && <p className="photo-note">{copy.legs.illustrative}</p>}<div className="sharing-status"><LocateFixed /><span><strong>{locationState === 'active' ? copy.guide.sharing : copy.guide.saved}</strong><small>{locationState === 'active' && time ? copy.guide.updated(time) : copy.guide.notShared}</small></span></div><div className="guide-actions"><button className={speaking ? 'speaking' : ''} onClick={speak}>{speaking ? <Pause /> : <Volume2 />}<span>{speaking ? copy.guide.playing : copy.guide.play}</span></button><button onClick={lost}><CircleHelp /><span>{copy.guide.help}</span></button></div><PrimaryButton onClick={last ? finish : next}>{last ? copy.guide.finish : copy.guide.next}<ArrowRight /></PrimaryButton></section></div>
 }
 
 function WrongWayScreen({ locale, journey, back, correct, call }: { locale: Locale; journey: api.Journey | null; back: () => void; correct: () => void; call: () => void }) {
