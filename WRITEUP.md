@@ -54,7 +54,9 @@ The frontend is a React app served as static files by the same FastAPI
 process, so a judge runs one command. Profile setup posts real mobility fields
 and the chosen language to the API, and journey planning, advice, location
 pings and SOS all run through it. Route legs, instructions, times, crowding
-and step-free status come from the advice response, and an OSM map draws the
+and step-free status come from the advice response, localised in English,
+Chinese, Malay and Tamil, with separate spoken phrasing for the voice button.
+An OSM map draws the
 route, the alternatives and the disrupted segment. The three-stage demo runs
 from inside the app under a "Simulated disruption for demonstration" label;
 each stage re-plans and shows whatever the engine returns. Any advice built on
@@ -121,6 +123,8 @@ Our routing decisions are computed from live data. Our timing is not. Every tran
 | Station → weather-area mapping | hand-made table | Our reading of a map, unverified |
 | Steps-proximity threshold | 3 m | Measured on this corridor. A 15 m radius produced false positives near the SGH campus, where routes pass stair entrances constantly without climbing them. Routes that actually traverse a steps way touch it at 0–1.2 m; routes that merely pass stay 4 m or more |
 | Verified-coverage bar | 60% of route length | Chosen as plausible, not derived |
+| Exit-hint ambiguity threshold | 15 m | Chosen as plausible: two entrances closer than this are too close to call, so no hint is shown |
+| Exit-hint search | entrances within 300 m of the walk's first geometry points | Chosen as plausible, not derived |
 
 Walk legs are the only durations that come from real geometry. They are routed over OSM footways, so the distance is measured even though the speed is assumed. Nearly every other threshold in the system (flood radii, matching distances, fuzzy floors, notification throttles) was chosen as a plausible value and is listed in `STATUS.md`. The steps threshold above is the exception: that one we measured.
 
@@ -172,7 +176,7 @@ leave a station: the exit nearest to the actual route, with its OSM wheelchair
 tag stated as yes, no, or not tagged. A profile that needs step-free access is
 steered to a wheelchair=yes exit over a nearer unconfirmed one, and the hint
 says which nearer exit was passed over and why. The hint is skipped when two
-entrances are too close to call. We never imply step-free where OSM does not
+entrances are within 15 m of each other. We never imply step-free where OSM does not
 say so.
 
 **Step-free status is declared, not asserted.** Walk legs are unverified
